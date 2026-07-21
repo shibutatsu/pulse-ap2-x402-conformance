@@ -51,7 +51,7 @@
   "dependencies": {
     "@x402/core": "2.19.0",
     "@x402/evm": "2.19.0",
-    "canonicalize": "2.1.0",
+    "canonicalize": "3.0.0",
     "commander": "12.1.0",
     "jose": "6.2.3",
     "viem": "2.55.4",
