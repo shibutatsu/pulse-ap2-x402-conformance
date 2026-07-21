@@ -1,5 +1,5 @@
 # Direct runtime and test dependencies declared by the pinned AP2 Python SDK.
-cryptography==46.0.5
+cryptography==48.0.1
 jwcrypto==1.5.6
 pydantic==2.12.5
 sd-jwt==0.10.4
