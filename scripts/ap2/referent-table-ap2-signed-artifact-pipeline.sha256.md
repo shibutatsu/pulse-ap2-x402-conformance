@@ -8,3 +8,6 @@
 
 - 記録時点: 公開版で要求元の表現を一般化した完成版
 - SHA-256: `92a7eb9fd4e7d2307af0142c35695ce12176b6071c43f16ded0049b5b0aebe1f`
+
+- 記録時点: advisory 解消済み固定依存と再現出力 hash set の役割を定義した完成版
+- SHA-256: `c851a199ffa2bee16205dfa8187de800c7140c975efa5facf6a4ba57e3a2bccb`

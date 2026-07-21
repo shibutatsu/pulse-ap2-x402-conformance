@@ -50,3 +50,27 @@ updates:
     commit-message:
       prefix: ci
       include: scope
+
+  - package-ecosystem: pip
+    directory: /scripts/ap2
+    schedule:
+      interval: weekly
+      day: monday
+      time: "10:00"
+      timezone: Asia/Tokyo
+    versioning-strategy: increase
+    open-pull-requests-limit: 3
+    groups:
+      python-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
+    commit-message:
+      prefix: build
+      include: scope
