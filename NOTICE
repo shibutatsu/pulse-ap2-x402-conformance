@@ -1,0 +1,7 @@
+Pulse AP2-x402 Conformance Verifier
+Copyright 2026 Prime Beat
+
+This product records protocol field names from the AP2 and x402 projects for
+interoperability testing. It contains no copied upstream implementation code.
+AP2 and x402 are the property of their respective contributors; their names do
+not imply endorsement of this experimental, non-normative profile.

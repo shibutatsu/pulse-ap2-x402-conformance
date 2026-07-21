@@ -1,0 +1,2732 @@
+{
+  "generatedAt": "2026-07-21T00:00:00Z",
+  "recordVersion": "ap2-normalized-verification-records/0.1",
+  "records": [
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-01",
+          "name": "Synthetic Merchant 01",
+          "website": "https://merchant-01.example"
+        },
+        "payment_amount": {
+          "amount": 1000101,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-base-sepolia-01",
+          "type": "x402",
+          "x402": {
+            "amount": "1000101",
+            "ap2PayeeId": "merchant-01",
+            "ap2PaymentAmount": {
+              "amount": 1000101,
+              "currency": "USD"
+            },
+            "asset": "0x8d606a9d14d2ad15af1bd911da452d1b16f9b1b8",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:84532",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0x6713d0aeeeb35972523a6b6285b35e73963d3007",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "NzsOOLhaDA4lBDiNBcuJUWDmQxpaOjNywMC49sj0fV0",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-base-sepolia-01",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "NzsOOLhaDA4lBDiNBcuJUWDmQxpaOjNywMC49sj0fV0",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-base-sepolia-01",
+                "type": "x402",
+                "x402": {
+                  "amount": "1000101",
+                  "ap2PayeeId": "merchant-01",
+                  "ap2PaymentAmount": {
+                    "amount": 1000101,
+                    "currency": "USD"
+                  },
+                  "asset": "0x8d606a9d14d2ad15af1bd911da452d1b16f9b1b8",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:84532",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0x6713d0aeeeb35972523a6b6285b35e73963d3007",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1000101,
+            "min": 1000101,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-01",
+                "name": "Synthetic Merchant 01",
+                "website": "https://merchant-01.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0xd7e8c03abb96857376a5af61bcf3758de56b166c2e75435214558fc5306a11a8",
+        "payment_id": "payment-valid-base-sepolia-01",
+        "psp_confirmation_id": "psp-valid-base-sepolia-01",
+        "reference": "KSowQCO9tU2OUL45faC9Eg4_rkHxumtuhHCxNu42iVY",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "TFr1u-JS--oQNFbH-OUWgBMgr-TGk7_3ZuqNw_KORLM",
+        "closedMandateReference": "KSowQCO9tU2OUL45faC9Eg4_rkHxumtuhHCxNu42iVY",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "NzsOOLhaDA4lBDiNBcuJUWDmQxpaOjNywMC49sj0fV0",
+        "openMandateClaimsHash": "69QWWcU4ahXGHC7MZWrfzufO2EoFBeZac-lgJowVYQw",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-02",
+          "name": "Synthetic Merchant 02",
+          "website": "https://merchant-02.example"
+        },
+        "payment_amount": {
+          "amount": 1000202,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-base-sepolia-02",
+          "type": "x402",
+          "x402": {
+            "amount": "1000202",
+            "ap2PayeeId": "merchant-02",
+            "ap2PaymentAmount": {
+              "amount": 1000202,
+              "currency": "USD"
+            },
+            "asset": "0xf133d8d623935dddbaa589b571dd22fc7c0c4bba",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:84532",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0xc7f767fc458f72d10aa4efcfdee71aa1b7d81729",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "l1Sn8h2lrZWf4WvjV-28rN9FKnqtI2GN2buoB-sUhJ0",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-base-sepolia-02",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "l1Sn8h2lrZWf4WvjV-28rN9FKnqtI2GN2buoB-sUhJ0",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-base-sepolia-02",
+                "type": "x402",
+                "x402": {
+                  "amount": "1000202",
+                  "ap2PayeeId": "merchant-02",
+                  "ap2PaymentAmount": {
+                    "amount": 1000202,
+                    "currency": "USD"
+                  },
+                  "asset": "0xf133d8d623935dddbaa589b571dd22fc7c0c4bba",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:84532",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0xc7f767fc458f72d10aa4efcfdee71aa1b7d81729",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1000202,
+            "min": 1000202,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-02",
+                "name": "Synthetic Merchant 02",
+                "website": "https://merchant-02.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x5986c11367b344288693bfd346e519fa78a776b9729c505c12d05ee0cc90475e",
+        "payment_id": "payment-valid-base-sepolia-02",
+        "psp_confirmation_id": "psp-valid-base-sepolia-02",
+        "reference": "wcEuzACkLJFPv49sw4gr2MsmosqWCKV-k_po8jF9-DI",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "jWkRMufeP30hTaxjg9GgfEIDKYobMT60_Kyse7j9mKc",
+        "closedMandateReference": "wcEuzACkLJFPv49sw4gr2MsmosqWCKV-k_po8jF9-DI",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "l1Sn8h2lrZWf4WvjV-28rN9FKnqtI2GN2buoB-sUhJ0",
+        "openMandateClaimsHash": "FTC4K7hBI_0MJfJMP5KNhL40qIBINfAHc9TjqHGfokk",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-03",
+          "name": "Synthetic Merchant 03",
+          "website": "https://merchant-03.example"
+        },
+        "payment_amount": {
+          "amount": 1000303,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-base-sepolia-03",
+          "type": "x402",
+          "x402": {
+            "amount": "1000303",
+            "ap2PayeeId": "merchant-03",
+            "ap2PaymentAmount": {
+              "amount": 1000303,
+              "currency": "USD"
+            },
+            "asset": "0x1c4e453989ba81e7d0ee0272566f6fb13cb9491d",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:84532",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0x3809277267f51ec6499ba3a54e3cad92e2bcdb11",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "LDkgFt8pXtiQpXF3h1GgASlWvKaTDlGbvpDF-H25Avg",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-base-sepolia-03",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "LDkgFt8pXtiQpXF3h1GgASlWvKaTDlGbvpDF-H25Avg",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-base-sepolia-03",
+                "type": "x402",
+                "x402": {
+                  "amount": "1000303",
+                  "ap2PayeeId": "merchant-03",
+                  "ap2PaymentAmount": {
+                    "amount": 1000303,
+                    "currency": "USD"
+                  },
+                  "asset": "0x1c4e453989ba81e7d0ee0272566f6fb13cb9491d",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:84532",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0x3809277267f51ec6499ba3a54e3cad92e2bcdb11",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1000303,
+            "min": 1000303,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-03",
+                "name": "Synthetic Merchant 03",
+                "website": "https://merchant-03.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x83c95bfe0aee5768c1fe7a31b776eed308ce4063ddde09b918a1a7f15ad4bc47",
+        "payment_id": "payment-valid-base-sepolia-03",
+        "psp_confirmation_id": "psp-valid-base-sepolia-03",
+        "reference": "n9asS4BZBtDZi9KYOrP8uetN3RzqhVAKE8ucoqYk6kA",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "kVCFewKhb6gc-BhElQWL4ZUVTjRvtUdyewILGc-W6g0",
+        "closedMandateReference": "n9asS4BZBtDZi9KYOrP8uetN3RzqhVAKE8ucoqYk6kA",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "LDkgFt8pXtiQpXF3h1GgASlWvKaTDlGbvpDF-H25Avg",
+        "openMandateClaimsHash": "MzVX0LyKinQsxaicsvCVIhkoRa9p28pZT1TgFJNfpoc",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-04",
+          "name": "Synthetic Merchant 04",
+          "website": "https://merchant-04.example"
+        },
+        "payment_amount": {
+          "amount": 1000404,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-base-sepolia-04",
+          "type": "x402",
+          "x402": {
+            "amount": "1000404",
+            "ap2PayeeId": "merchant-04",
+            "ap2PaymentAmount": {
+              "amount": 1000404,
+              "currency": "USD"
+            },
+            "asset": "0x68744187ae5cb117cd1ba66ee16ee4452dcc2c52",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:84532",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0x539fd3c4f764318054ae7ed8eff26f52bbc7a6e7",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "HUd6QxTcwstxI9KSYqcdBAx4T5gUT6ZOUHDOy-Qi0gc",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-base-sepolia-04",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "HUd6QxTcwstxI9KSYqcdBAx4T5gUT6ZOUHDOy-Qi0gc",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-base-sepolia-04",
+                "type": "x402",
+                "x402": {
+                  "amount": "1000404",
+                  "ap2PayeeId": "merchant-04",
+                  "ap2PaymentAmount": {
+                    "amount": 1000404,
+                    "currency": "USD"
+                  },
+                  "asset": "0x68744187ae5cb117cd1ba66ee16ee4452dcc2c52",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:84532",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0x539fd3c4f764318054ae7ed8eff26f52bbc7a6e7",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1000404,
+            "min": 1000404,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-04",
+                "name": "Synthetic Merchant 04",
+                "website": "https://merchant-04.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x496fab27861d470a317a81fa27579161fcdc6d58fec13a2f4061c29577543d6a",
+        "payment_id": "payment-valid-base-sepolia-04",
+        "psp_confirmation_id": "psp-valid-base-sepolia-04",
+        "reference": "OPRueVHkW88vBT1LA0ILKQQ-kAsAgI_yGTZ5cjvEcWw",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "u-hIPdRKIZcX6I-uUwUmlXFMqJFzCmayzQWx4k5wNcY",
+        "closedMandateReference": "OPRueVHkW88vBT1LA0ILKQQ-kAsAgI_yGTZ5cjvEcWw",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "HUd6QxTcwstxI9KSYqcdBAx4T5gUT6ZOUHDOy-Qi0gc",
+        "openMandateClaimsHash": "jO0DhNbYvXcFvubzAbb9g3riSAhcXjpOdvhKp91lMKE",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-05",
+          "name": "Synthetic Merchant 05",
+          "website": "https://merchant-05.example"
+        },
+        "payment_amount": {
+          "amount": 1000505,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-base-sepolia-05",
+          "type": "x402",
+          "x402": {
+            "amount": "1000505",
+            "ap2PayeeId": "merchant-05",
+            "ap2PaymentAmount": {
+              "amount": 1000505,
+              "currency": "USD"
+            },
+            "asset": "0xdfcf98716c8d82456ae505d277cf0f0655f76054",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:84532",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0x79531e1a71699e3f10bb9904ceacfd07f0bba7ef",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "qM3-IbEbfekc22hmd_Rg7lpgD7_EKBd6vB6xk36fOlg",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-base-sepolia-05",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "qM3-IbEbfekc22hmd_Rg7lpgD7_EKBd6vB6xk36fOlg",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-base-sepolia-05",
+                "type": "x402",
+                "x402": {
+                  "amount": "1000505",
+                  "ap2PayeeId": "merchant-05",
+                  "ap2PaymentAmount": {
+                    "amount": 1000505,
+                    "currency": "USD"
+                  },
+                  "asset": "0xdfcf98716c8d82456ae505d277cf0f0655f76054",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:84532",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0x79531e1a71699e3f10bb9904ceacfd07f0bba7ef",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1000505,
+            "min": 1000505,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-05",
+                "name": "Synthetic Merchant 05",
+                "website": "https://merchant-05.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x5be4b511ee4d5315c6553c7deae989901f278dfa0764b2936faaa08ee5af0158",
+        "payment_id": "payment-valid-base-sepolia-05",
+        "psp_confirmation_id": "psp-valid-base-sepolia-05",
+        "reference": "CaW0nGRfooLHqHtzoUh7wJuBKusE1YDW7Wg1FG3afek",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "Z2CCMwccH7o_KcT4uK565f23IiDb8OMVuQUpkJytcbQ",
+        "closedMandateReference": "CaW0nGRfooLHqHtzoUh7wJuBKusE1YDW7Wg1FG3afek",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "qM3-IbEbfekc22hmd_Rg7lpgD7_EKBd6vB6xk36fOlg",
+        "openMandateClaimsHash": "vYEcUMdp4ma2IddLFlHKn0GCH28N0eBQsmuYvqFxqBY",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-06",
+          "name": "Synthetic Merchant 06",
+          "website": "https://merchant-06.example"
+        },
+        "payment_amount": {
+          "amount": 1000606,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-base-sepolia-06",
+          "type": "x402",
+          "x402": {
+            "amount": "1000606",
+            "ap2PayeeId": "merchant-06",
+            "ap2PaymentAmount": {
+              "amount": 1000606,
+              "currency": "USD"
+            },
+            "asset": "0x7208c0d779e3a15a2c18bec9236d138b542f300d",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:84532",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0xda5b2c2d8aec7b7224da177c4b844a1002b68f41",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "f8UWraMehY8-cDr7GxiEc8d3fnKlEXVVr_53g_Tv318",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-base-sepolia-06",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "f8UWraMehY8-cDr7GxiEc8d3fnKlEXVVr_53g_Tv318",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-base-sepolia-06",
+                "type": "x402",
+                "x402": {
+                  "amount": "1000606",
+                  "ap2PayeeId": "merchant-06",
+                  "ap2PaymentAmount": {
+                    "amount": 1000606,
+                    "currency": "USD"
+                  },
+                  "asset": "0x7208c0d779e3a15a2c18bec9236d138b542f300d",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:84532",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0xda5b2c2d8aec7b7224da177c4b844a1002b68f41",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1000606,
+            "min": 1000606,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-06",
+                "name": "Synthetic Merchant 06",
+                "website": "https://merchant-06.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0xd6b4a242034e648380e53e05c35e8cb665468769300d4ae8e36e4b53a831cf09",
+        "payment_id": "payment-valid-base-sepolia-06",
+        "psp_confirmation_id": "psp-valid-base-sepolia-06",
+        "reference": "aW2XLLUTPkt12yCq1SYGFiPsOZqgXMQEQbBoJCo1I1E",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "wWuD8dz7h_TuPhjoMyjF0e6rml5g-TZX2FcBGXdYdQE",
+        "closedMandateReference": "aW2XLLUTPkt12yCq1SYGFiPsOZqgXMQEQbBoJCo1I1E",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "f8UWraMehY8-cDr7GxiEc8d3fnKlEXVVr_53g_Tv318",
+        "openMandateClaimsHash": "x-DJZ3-3YOm0sTwnJw4eSxqViHqPUEJs2CwvFwk-NBA",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-07",
+          "name": "Synthetic Merchant 07",
+          "website": "https://merchant-07.example"
+        },
+        "payment_amount": {
+          "amount": 1000707,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-base-sepolia-07",
+          "type": "x402",
+          "x402": {
+            "amount": "1000707",
+            "ap2PayeeId": "merchant-07",
+            "ap2PaymentAmount": {
+              "amount": 1000707,
+              "currency": "USD"
+            },
+            "asset": "0xfce0a9e12586ba467e47da8aad75000aacce5fdf",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:84532",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0xfb306fbf11d880374e8925ece4ab54e91cef21d1",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "gdFrLMVvNHylw6jkDmVFu2trGQXSXS721LLYz8A4GoI",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-base-sepolia-07",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "gdFrLMVvNHylw6jkDmVFu2trGQXSXS721LLYz8A4GoI",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-base-sepolia-07",
+                "type": "x402",
+                "x402": {
+                  "amount": "1000707",
+                  "ap2PayeeId": "merchant-07",
+                  "ap2PaymentAmount": {
+                    "amount": 1000707,
+                    "currency": "USD"
+                  },
+                  "asset": "0xfce0a9e12586ba467e47da8aad75000aacce5fdf",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:84532",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0xfb306fbf11d880374e8925ece4ab54e91cef21d1",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1000707,
+            "min": 1000707,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-07",
+                "name": "Synthetic Merchant 07",
+                "website": "https://merchant-07.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x8b5a534a3e145e236652c50d8c37f8196b758f83755f04aec3ee6673d3a3ea7e",
+        "payment_id": "payment-valid-base-sepolia-07",
+        "psp_confirmation_id": "psp-valid-base-sepolia-07",
+        "reference": "_5UXgyeWr5xjfG5P7QXAdK_TvvBSuhoEMbCfaLwQm6M",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "2Tj8kQwl60iIq2sjnzUYUF0_rodsufRUN1hf28APjik",
+        "closedMandateReference": "_5UXgyeWr5xjfG5P7QXAdK_TvvBSuhoEMbCfaLwQm6M",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "gdFrLMVvNHylw6jkDmVFu2trGQXSXS721LLYz8A4GoI",
+        "openMandateClaimsHash": "Y05ngBlvx0dBUF3P_1kIyGMGf0b9q_wpSfJcHHd4Mr0",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-08",
+          "name": "Synthetic Merchant 08",
+          "website": "https://merchant-08.example"
+        },
+        "payment_amount": {
+          "amount": 1000808,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-base-sepolia-08",
+          "type": "x402",
+          "x402": {
+            "amount": "1000808",
+            "ap2PayeeId": "merchant-08",
+            "ap2PaymentAmount": {
+              "amount": 1000808,
+              "currency": "USD"
+            },
+            "asset": "0x0a79cdef3e69c503ebdcb6a1540a1abc29bc8a14",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:84532",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0x7b4e83f802ee7bcd56cf77110a7f31e1d8ece842",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "Z2Hq_dKK1Rkxe9ID2QAoi4cm4QoD6As5JNJac5Xtqko",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-base-sepolia-08",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "Z2Hq_dKK1Rkxe9ID2QAoi4cm4QoD6As5JNJac5Xtqko",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-base-sepolia-08",
+                "type": "x402",
+                "x402": {
+                  "amount": "1000808",
+                  "ap2PayeeId": "merchant-08",
+                  "ap2PaymentAmount": {
+                    "amount": 1000808,
+                    "currency": "USD"
+                  },
+                  "asset": "0x0a79cdef3e69c503ebdcb6a1540a1abc29bc8a14",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:84532",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0x7b4e83f802ee7bcd56cf77110a7f31e1d8ece842",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1000808,
+            "min": 1000808,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-08",
+                "name": "Synthetic Merchant 08",
+                "website": "https://merchant-08.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x37f9256e226ce45ac1e155a8d120a1686d7538f7663018fbcdb3808edc6fdd7c",
+        "payment_id": "payment-valid-base-sepolia-08",
+        "psp_confirmation_id": "psp-valid-base-sepolia-08",
+        "reference": "94qW5UV57tw3QyamQun8RhGZc36CQK7VOhaWPaMLGhk",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "cXQBrbGJVpJEyGoIsQ6gID0GuhtcGlHCnMjpYzn4s_k",
+        "closedMandateReference": "94qW5UV57tw3QyamQun8RhGZc36CQK7VOhaWPaMLGhk",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "Z2Hq_dKK1Rkxe9ID2QAoi4cm4QoD6As5JNJac5Xtqko",
+        "openMandateClaimsHash": "cxTOhIPthbTAAYPc9iHs1rJTTSIKDTyGbqlltrvUZPg",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-09",
+          "name": "Synthetic Merchant 09",
+          "website": "https://merchant-09.example"
+        },
+        "payment_amount": {
+          "amount": 1000909,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-base-sepolia-09",
+          "type": "x402",
+          "x402": {
+            "amount": "1000909",
+            "ap2PayeeId": "merchant-09",
+            "ap2PaymentAmount": {
+              "amount": 1000909,
+              "currency": "USD"
+            },
+            "asset": "0x07de432d183932dff6309c81dc51d1b7d4bce2b8",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:84532",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0x7bc8b71ff764c2fc4c7eff2d3aa7d43ff100e4a8",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "hTpZzIhTZYGvD1YoxoW1HvGm1CJB7kM7jJYZpyIRGUc",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-base-sepolia-09",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "hTpZzIhTZYGvD1YoxoW1HvGm1CJB7kM7jJYZpyIRGUc",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-base-sepolia-09",
+                "type": "x402",
+                "x402": {
+                  "amount": "1000909",
+                  "ap2PayeeId": "merchant-09",
+                  "ap2PaymentAmount": {
+                    "amount": 1000909,
+                    "currency": "USD"
+                  },
+                  "asset": "0x07de432d183932dff6309c81dc51d1b7d4bce2b8",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:84532",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0x7bc8b71ff764c2fc4c7eff2d3aa7d43ff100e4a8",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1000909,
+            "min": 1000909,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-09",
+                "name": "Synthetic Merchant 09",
+                "website": "https://merchant-09.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x5c49cf038a2b2c2fa759eac1f01721e919f341d37a3b1f7388b0bff89d80eda2",
+        "payment_id": "payment-valid-base-sepolia-09",
+        "psp_confirmation_id": "psp-valid-base-sepolia-09",
+        "reference": "_IpJXZnOtkCS5pdIr2f9k07wdcfsCBOWhFPvMfA7KKA",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "e6ehEy49GBVN1HZDMcq3NDceVGSJNg5kkRjVxp0q1VI",
+        "closedMandateReference": "_IpJXZnOtkCS5pdIr2f9k07wdcfsCBOWhFPvMfA7KKA",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "hTpZzIhTZYGvD1YoxoW1HvGm1CJB7kM7jJYZpyIRGUc",
+        "openMandateClaimsHash": "D8WuBsRatN_rIEbthd6k4Irku0PhUtZnLAJMYx21R7M",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-10",
+          "name": "Synthetic Merchant 10",
+          "website": "https://merchant-10.example"
+        },
+        "payment_amount": {
+          "amount": 1001010,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-base-sepolia-10",
+          "type": "x402",
+          "x402": {
+            "amount": "1001010",
+            "ap2PayeeId": "merchant-10",
+            "ap2PaymentAmount": {
+              "amount": 1001010,
+              "currency": "USD"
+            },
+            "asset": "0x2766903ca56b210dce2be5092fae1e55b44b1c62",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:84532",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0xfc9187e215b0e44656c568077b87ddbff30af658",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "8Iqid54il-d3YHYGE2Sm210ows7VVSA71E4HkchNDoA",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-base-sepolia-10",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "8Iqid54il-d3YHYGE2Sm210ows7VVSA71E4HkchNDoA",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-base-sepolia-10",
+                "type": "x402",
+                "x402": {
+                  "amount": "1001010",
+                  "ap2PayeeId": "merchant-10",
+                  "ap2PaymentAmount": {
+                    "amount": 1001010,
+                    "currency": "USD"
+                  },
+                  "asset": "0x2766903ca56b210dce2be5092fae1e55b44b1c62",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:84532",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0xfc9187e215b0e44656c568077b87ddbff30af658",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1001010,
+            "min": 1001010,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-10",
+                "name": "Synthetic Merchant 10",
+                "website": "https://merchant-10.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0xc897adfa5517cac8afaf58fd845726f5a6c1da652b3e1aabe5b89466cb657ff5",
+        "payment_id": "payment-valid-base-sepolia-10",
+        "psp_confirmation_id": "psp-valid-base-sepolia-10",
+        "reference": "znmts9rRI8hRaNHGpfBDepTV22NyLb332ZLDLptJYTE",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "OESNWJITVXP84zRHW_t3lN-_m9HAVct5V879-i7pSAw",
+        "closedMandateReference": "znmts9rRI8hRaNHGpfBDepTV22NyLb332ZLDLptJYTE",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "8Iqid54il-d3YHYGE2Sm210ows7VVSA71E4HkchNDoA",
+        "openMandateClaimsHash": "wDNbuSI2pzCvifY4b1KMeGph4lqJxqjAwfxWNBH2QE8",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-11",
+          "name": "Synthetic Merchant 11",
+          "website": "https://merchant-11.example"
+        },
+        "payment_amount": {
+          "amount": 1001111,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-local-31337-11",
+          "type": "x402",
+          "x402": {
+            "amount": "1001111",
+            "ap2PayeeId": "merchant-11",
+            "ap2PaymentAmount": {
+              "amount": 1001111,
+              "currency": "USD"
+            },
+            "asset": "0xcbc008963ecb3c3aecc5bbbddb0cef1e61c3aa14",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:31337",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0x0f0529848ef10ad037f13ba3d26c89fd628b4d18",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "HMumlqyPNGlUJEEsOLGE702R2RS3KxEFdx0jFTywsDs",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-local-31337-11",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "HMumlqyPNGlUJEEsOLGE702R2RS3KxEFdx0jFTywsDs",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-local-31337-11",
+                "type": "x402",
+                "x402": {
+                  "amount": "1001111",
+                  "ap2PayeeId": "merchant-11",
+                  "ap2PaymentAmount": {
+                    "amount": 1001111,
+                    "currency": "USD"
+                  },
+                  "asset": "0xcbc008963ecb3c3aecc5bbbddb0cef1e61c3aa14",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:31337",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0x0f0529848ef10ad037f13ba3d26c89fd628b4d18",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1001111,
+            "min": 1001111,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-11",
+                "name": "Synthetic Merchant 11",
+                "website": "https://merchant-11.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x5e5be33f96917e34c09255973c96a65c809935c7efeaa4cf6e7568f7ce9df104",
+        "payment_id": "payment-valid-local-31337-11",
+        "psp_confirmation_id": "psp-valid-local-31337-11",
+        "reference": "VFgN99yvZicu2EEpu4w2HjEuZYqsSeiUltytRCl0YTU",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "ROc9ktw-jYr-uT4IjMMiZAbcCqU5WJIozqnemy8Ty48",
+        "closedMandateReference": "VFgN99yvZicu2EEpu4w2HjEuZYqsSeiUltytRCl0YTU",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "HMumlqyPNGlUJEEsOLGE702R2RS3KxEFdx0jFTywsDs",
+        "openMandateClaimsHash": "9UmqyMk3rL1HBfEsUqOkqkyXqCmWIbpIC1T8fmnsQto",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-12",
+          "name": "Synthetic Merchant 12",
+          "website": "https://merchant-12.example"
+        },
+        "payment_amount": {
+          "amount": 1001212,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-local-31337-12",
+          "type": "x402",
+          "x402": {
+            "amount": "1001212",
+            "ap2PayeeId": "merchant-12",
+            "ap2PaymentAmount": {
+              "amount": 1001212,
+              "currency": "USD"
+            },
+            "asset": "0x75c2c1fee5245b154900ed961d99544bfc52e39f",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:31337",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0xa2a933ba79b58b4942dfca4135d770be15182b02",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "O6HHFV3S0Ea7xC5LHAh1n5h-ie78di2s_ftWy1A9PWI",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-local-31337-12",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "O6HHFV3S0Ea7xC5LHAh1n5h-ie78di2s_ftWy1A9PWI",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-local-31337-12",
+                "type": "x402",
+                "x402": {
+                  "amount": "1001212",
+                  "ap2PayeeId": "merchant-12",
+                  "ap2PaymentAmount": {
+                    "amount": 1001212,
+                    "currency": "USD"
+                  },
+                  "asset": "0x75c2c1fee5245b154900ed961d99544bfc52e39f",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:31337",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0xa2a933ba79b58b4942dfca4135d770be15182b02",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1001212,
+            "min": 1001212,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-12",
+                "name": "Synthetic Merchant 12",
+                "website": "https://merchant-12.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x8d3390125bf429cc34481d72d2b328ca262707332ec38963601afd5dfe77f381",
+        "payment_id": "payment-valid-local-31337-12",
+        "psp_confirmation_id": "psp-valid-local-31337-12",
+        "reference": "2fyp5-aNtznvtzGM-_N8O7K9FfUskVIFFb7oIprJyTI",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "0DaHC6-KZnkLf_4zyaRKN_deWTGR6F-aP_d_2zKqkL0",
+        "closedMandateReference": "2fyp5-aNtznvtzGM-_N8O7K9FfUskVIFFb7oIprJyTI",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "O6HHFV3S0Ea7xC5LHAh1n5h-ie78di2s_ftWy1A9PWI",
+        "openMandateClaimsHash": "hOQq2NzCPesq7znflYPwcuHdWu7RdcfdlFhIiqZ4UV4",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-13",
+          "name": "Synthetic Merchant 13",
+          "website": "https://merchant-13.example"
+        },
+        "payment_amount": {
+          "amount": 1001313,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-local-31337-13",
+          "type": "x402",
+          "x402": {
+            "amount": "1001313",
+            "ap2PayeeId": "merchant-13",
+            "ap2PaymentAmount": {
+              "amount": 1001313,
+              "currency": "USD"
+            },
+            "asset": "0x2c091315d7b2871a5313c10dca02cbbd48861e39",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:31337",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0xc64dd3e76f380f7d2cc972bc742a8e19014cf1a1",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "uegAjLrXJEjaPhaKbTbDm59yrBYbC3M9RIQMiy8U74Y",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-local-31337-13",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "uegAjLrXJEjaPhaKbTbDm59yrBYbC3M9RIQMiy8U74Y",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-local-31337-13",
+                "type": "x402",
+                "x402": {
+                  "amount": "1001313",
+                  "ap2PayeeId": "merchant-13",
+                  "ap2PaymentAmount": {
+                    "amount": 1001313,
+                    "currency": "USD"
+                  },
+                  "asset": "0x2c091315d7b2871a5313c10dca02cbbd48861e39",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:31337",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0xc64dd3e76f380f7d2cc972bc742a8e19014cf1a1",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1001313,
+            "min": 1001313,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-13",
+                "name": "Synthetic Merchant 13",
+                "website": "https://merchant-13.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x05b7aa5f4a538a7a52dea2a67c073a87a216e35d5ecf5ea0731d962665d943c7",
+        "payment_id": "payment-valid-local-31337-13",
+        "psp_confirmation_id": "psp-valid-local-31337-13",
+        "reference": "PzRwdt9UDfQAqbncMcEqkoJRbMPvs-rokUV6nQi8kUE",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "S1zqeNY8y27gQewh_AZmk4BlQXfooO0evXQZEBVnkQg",
+        "closedMandateReference": "PzRwdt9UDfQAqbncMcEqkoJRbMPvs-rokUV6nQi8kUE",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "uegAjLrXJEjaPhaKbTbDm59yrBYbC3M9RIQMiy8U74Y",
+        "openMandateClaimsHash": "1zDMs-RSj3ArmQJQ-UDAlA1pMUPH-ubltMcCcbv2yvU",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-14",
+          "name": "Synthetic Merchant 14",
+          "website": "https://merchant-14.example"
+        },
+        "payment_amount": {
+          "amount": 1001414,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-local-31337-14",
+          "type": "x402",
+          "x402": {
+            "amount": "1001414",
+            "ap2PayeeId": "merchant-14",
+            "ap2PaymentAmount": {
+              "amount": 1001414,
+              "currency": "USD"
+            },
+            "asset": "0xf5c7c220d943c735196f2c87523c01da09dea5f9",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:31337",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0xd15eb78751b9a3750a2f2921e386b1bff1635f9e",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "qbQPTmpPrOBuR8_AQSPgw_5ltG0pU_yv_c9H-SPKl9Q",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-local-31337-14",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "qbQPTmpPrOBuR8_AQSPgw_5ltG0pU_yv_c9H-SPKl9Q",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-local-31337-14",
+                "type": "x402",
+                "x402": {
+                  "amount": "1001414",
+                  "ap2PayeeId": "merchant-14",
+                  "ap2PaymentAmount": {
+                    "amount": 1001414,
+                    "currency": "USD"
+                  },
+                  "asset": "0xf5c7c220d943c735196f2c87523c01da09dea5f9",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:31337",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0xd15eb78751b9a3750a2f2921e386b1bff1635f9e",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1001414,
+            "min": 1001414,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-14",
+                "name": "Synthetic Merchant 14",
+                "website": "https://merchant-14.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0xc39d920a20576618de99f48013e1ffece2c90dfb3c0f13a1e926001f2426e7ec",
+        "payment_id": "payment-valid-local-31337-14",
+        "psp_confirmation_id": "psp-valid-local-31337-14",
+        "reference": "nPKS_8iD7hwnpDsING78dKo0v5gB346OjDl3axn-cwc",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "BzCYKsAk0mJ0UrsmzAFO_ueL4uPAr72D28Gndplq-lY",
+        "closedMandateReference": "nPKS_8iD7hwnpDsING78dKo0v5gB346OjDl3axn-cwc",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "qbQPTmpPrOBuR8_AQSPgw_5ltG0pU_yv_c9H-SPKl9Q",
+        "openMandateClaimsHash": "3eaRYLS4Ns-IRtYsGydF1x6AWcFAirdgZp8rP2kQ1kY",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-15",
+          "name": "Synthetic Merchant 15",
+          "website": "https://merchant-15.example"
+        },
+        "payment_amount": {
+          "amount": 1001515,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-local-31337-15",
+          "type": "x402",
+          "x402": {
+            "amount": "1001515",
+            "ap2PayeeId": "merchant-15",
+            "ap2PaymentAmount": {
+              "amount": 1001515,
+              "currency": "USD"
+            },
+            "asset": "0x6953140cdd4cc9ef5834ff279d0a1ce7c1640cfb",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:31337",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0x97cec93750fa700208c22c6d7ca591a1a91ee1f2",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "7lP25ertATmdz_gypwwsN1JlEu4N8R_QqvqBSjPFyec",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-local-31337-15",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "7lP25ertATmdz_gypwwsN1JlEu4N8R_QqvqBSjPFyec",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-local-31337-15",
+                "type": "x402",
+                "x402": {
+                  "amount": "1001515",
+                  "ap2PayeeId": "merchant-15",
+                  "ap2PaymentAmount": {
+                    "amount": 1001515,
+                    "currency": "USD"
+                  },
+                  "asset": "0x6953140cdd4cc9ef5834ff279d0a1ce7c1640cfb",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:31337",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0x97cec93750fa700208c22c6d7ca591a1a91ee1f2",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1001515,
+            "min": 1001515,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-15",
+                "name": "Synthetic Merchant 15",
+                "website": "https://merchant-15.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0xdd3b9ac4cfa1f14c9d3565305630f36a245e02f7bc512d89a1fd5998c653e9a2",
+        "payment_id": "payment-valid-local-31337-15",
+        "psp_confirmation_id": "psp-valid-local-31337-15",
+        "reference": "BLvdwelhCjz7E1H8VirolZrUAYHcW1z-Kb1t8xgoOPc",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "PwFNbXpGcyBMj81NzOhiy9Nmpb960n-Iyz0M_M_yDKY",
+        "closedMandateReference": "BLvdwelhCjz7E1H8VirolZrUAYHcW1z-Kb1t8xgoOPc",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "7lP25ertATmdz_gypwwsN1JlEu4N8R_QqvqBSjPFyec",
+        "openMandateClaimsHash": "xVZ4hqDtJ8yOAT1ROhUdxkyyXcOf7BEngjFfbVBMUmg",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-16",
+          "name": "Synthetic Merchant 16",
+          "website": "https://merchant-16.example"
+        },
+        "payment_amount": {
+          "amount": 1001616,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-local-31337-16",
+          "type": "x402",
+          "x402": {
+            "amount": "1001616",
+            "ap2PayeeId": "merchant-16",
+            "ap2PaymentAmount": {
+              "amount": 1001616,
+              "currency": "USD"
+            },
+            "asset": "0x2d6e4c013c51edca9041d8da8bcc88d5c23e82fe",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:31337",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0x8607d0d1a1e207f3c24a6872af6d586d98e1f558",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "zenkwCcDpyC0sNQKZQCWE1or9NP1aAiINsma4OU6rio",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-local-31337-16",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "zenkwCcDpyC0sNQKZQCWE1or9NP1aAiINsma4OU6rio",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-local-31337-16",
+                "type": "x402",
+                "x402": {
+                  "amount": "1001616",
+                  "ap2PayeeId": "merchant-16",
+                  "ap2PaymentAmount": {
+                    "amount": 1001616,
+                    "currency": "USD"
+                  },
+                  "asset": "0x2d6e4c013c51edca9041d8da8bcc88d5c23e82fe",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:31337",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0x8607d0d1a1e207f3c24a6872af6d586d98e1f558",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1001616,
+            "min": 1001616,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-16",
+                "name": "Synthetic Merchant 16",
+                "website": "https://merchant-16.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x783148e5741b3075945ce0ae3a3c6847535afac0db5aefea44eb2ebafda38893",
+        "payment_id": "payment-valid-local-31337-16",
+        "psp_confirmation_id": "psp-valid-local-31337-16",
+        "reference": "T9vDoj7u7DDIg65I9TYHN9mh9ZUqzfXjHyVFeLtSJuw",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "pr20Hks-6HrpjtiXYWKMUgAYxdH93m5TRLlX-TV5Vqo",
+        "closedMandateReference": "T9vDoj7u7DDIg65I9TYHN9mh9ZUqzfXjHyVFeLtSJuw",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "zenkwCcDpyC0sNQKZQCWE1or9NP1aAiINsma4OU6rio",
+        "openMandateClaimsHash": "H9XFFbZ2LUrewATz8DJ_z4d73JrdxlezOLiR37gfl6A",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-17",
+          "name": "Synthetic Merchant 17",
+          "website": "https://merchant-17.example"
+        },
+        "payment_amount": {
+          "amount": 1001717,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-local-31337-17",
+          "type": "x402",
+          "x402": {
+            "amount": "1001717",
+            "ap2PayeeId": "merchant-17",
+            "ap2PaymentAmount": {
+              "amount": 1001717,
+              "currency": "USD"
+            },
+            "asset": "0x3ddff08df72223b0a04e17abbe3a1b9420d2dea3",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:31337",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0xeba4342fe6195cfb544be975931c22e198e1a20a",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "08Zn6IVWX0rrJx0hek3INDbBQVEBdcm12Enb-Bdom-g",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-local-31337-17",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "08Zn6IVWX0rrJx0hek3INDbBQVEBdcm12Enb-Bdom-g",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-local-31337-17",
+                "type": "x402",
+                "x402": {
+                  "amount": "1001717",
+                  "ap2PayeeId": "merchant-17",
+                  "ap2PaymentAmount": {
+                    "amount": 1001717,
+                    "currency": "USD"
+                  },
+                  "asset": "0x3ddff08df72223b0a04e17abbe3a1b9420d2dea3",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:31337",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0xeba4342fe6195cfb544be975931c22e198e1a20a",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1001717,
+            "min": 1001717,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-17",
+                "name": "Synthetic Merchant 17",
+                "website": "https://merchant-17.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x33f2dc4e090a715f1fdb9db194ac6b7818fa3e8cdae193bdf229134178cf5bde",
+        "payment_id": "payment-valid-local-31337-17",
+        "psp_confirmation_id": "psp-valid-local-31337-17",
+        "reference": "jsdZQO7HgtqC5ILUAygijpr7oRbN4RrNhKl6ayEXalc",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "uNFqUjv7PHiI5nAE5ftLCkFm-zrSgEhWxZWkpC3Dyqc",
+        "closedMandateReference": "jsdZQO7HgtqC5ILUAygijpr7oRbN4RrNhKl6ayEXalc",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "08Zn6IVWX0rrJx0hek3INDbBQVEBdcm12Enb-Bdom-g",
+        "openMandateClaimsHash": "Fq99by6Q3IWX-nMLgBoq3izaGQi8uZjH35Au1qOrVC0",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-18",
+          "name": "Synthetic Merchant 18",
+          "website": "https://merchant-18.example"
+        },
+        "payment_amount": {
+          "amount": 1001818,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-local-31337-18",
+          "type": "x402",
+          "x402": {
+            "amount": "1001818",
+            "ap2PayeeId": "merchant-18",
+            "ap2PaymentAmount": {
+              "amount": 1001818,
+              "currency": "USD"
+            },
+            "asset": "0x5e9cdf4b56d32b8ddd50301afd2bb8b875498846",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:31337",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0xd4c785f632e13234d4fbafe9c478a2d8e248101a",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "TjhI2cDtKuuNcrQOZDMCozUTkpl3Mxn4rx1CNeunqYs",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-local-31337-18",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "TjhI2cDtKuuNcrQOZDMCozUTkpl3Mxn4rx1CNeunqYs",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-local-31337-18",
+                "type": "x402",
+                "x402": {
+                  "amount": "1001818",
+                  "ap2PayeeId": "merchant-18",
+                  "ap2PaymentAmount": {
+                    "amount": 1001818,
+                    "currency": "USD"
+                  },
+                  "asset": "0x5e9cdf4b56d32b8ddd50301afd2bb8b875498846",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:31337",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0xd4c785f632e13234d4fbafe9c478a2d8e248101a",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1001818,
+            "min": 1001818,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-18",
+                "name": "Synthetic Merchant 18",
+                "website": "https://merchant-18.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0xd3f485f89883356cf39290b9e45ffad9fefca23f7d7bdd7f57a595a76c475192",
+        "payment_id": "payment-valid-local-31337-18",
+        "psp_confirmation_id": "psp-valid-local-31337-18",
+        "reference": "XKxvDE47ORGUDfaXltQFUZwD-11WdtPMKT2RnT4AmAE",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "0xNSNwu8_E1P5fixUE3hRBNUFaGUuqi5wM65APoZ-LU",
+        "closedMandateReference": "XKxvDE47ORGUDfaXltQFUZwD-11WdtPMKT2RnT4AmAE",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "TjhI2cDtKuuNcrQOZDMCozUTkpl3Mxn4rx1CNeunqYs",
+        "openMandateClaimsHash": "pWN4Ykrf93eB_hkE4yCp5-RlYXCm1puudwnEyGbWkCs",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-19",
+          "name": "Synthetic Merchant 19",
+          "website": "https://merchant-19.example"
+        },
+        "payment_amount": {
+          "amount": 1001919,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-local-31337-19",
+          "type": "x402",
+          "x402": {
+            "amount": "1001919",
+            "ap2PayeeId": "merchant-19",
+            "ap2PaymentAmount": {
+              "amount": 1001919,
+              "currency": "USD"
+            },
+            "asset": "0x68d896b500d91a0c3d8357f45b60617946e27c2c",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:31337",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0xb20b3f152a2912237ef53512c682e629355b81ff",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "zC_u2U6SEMfNVlGZrYl-pnrwK3lKsQfMAqjsV7OyOFU",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-local-31337-19",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "zC_u2U6SEMfNVlGZrYl-pnrwK3lKsQfMAqjsV7OyOFU",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-local-31337-19",
+                "type": "x402",
+                "x402": {
+                  "amount": "1001919",
+                  "ap2PayeeId": "merchant-19",
+                  "ap2PaymentAmount": {
+                    "amount": 1001919,
+                    "currency": "USD"
+                  },
+                  "asset": "0x68d896b500d91a0c3d8357f45b60617946e27c2c",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:31337",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0xb20b3f152a2912237ef53512c682e629355b81ff",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1001919,
+            "min": 1001919,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-19",
+                "name": "Synthetic Merchant 19",
+                "website": "https://merchant-19.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0xca6617d0446f769a4c51e73fdee188ab0d2c0d3e0df3f82d952f241584d3f363",
+        "payment_id": "payment-valid-local-31337-19",
+        "psp_confirmation_id": "psp-valid-local-31337-19",
+        "reference": "HuyPsfolatTSXrsNr8N37DdnzdngPuQJKvkezTJLu-c",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "zjpFk_aTNAWKt8uHyXDgKlWpsX1j06SG3geGj1aX7pQ",
+        "closedMandateReference": "HuyPsfolatTSXrsNr8N37DdnzdngPuQJKvkezTJLu-c",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "zC_u2U6SEMfNVlGZrYl-pnrwK3lKsQfMAqjsV7OyOFU",
+        "openMandateClaimsHash": "FRZzEBFl8d0jKmk4hTAWh1S9YrDhP0sn8aPr4rpNPvc",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    },
+    {
+      "closedMandate": {
+        "execution_date": "2026-07-21T00:00:00Z",
+        "exp": 1784592300,
+        "iat": 1784591880,
+        "payee": {
+          "id": "merchant-20",
+          "name": "Synthetic Merchant 20",
+          "website": "https://merchant-20.example"
+        },
+        "payment_amount": {
+          "amount": 1002020,
+          "currency": "USD"
+        },
+        "payment_instrument": {
+          "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+          "id": "x402-eip3009-local-31337-20",
+          "type": "x402",
+          "x402": {
+            "amount": "1002020",
+            "ap2PayeeId": "merchant-20",
+            "ap2PaymentAmount": {
+              "amount": 1002020,
+              "currency": "USD"
+            },
+            "asset": "0xd72565c9365db325bdfd11dc3074937aebdcdd98",
+            "eip712Domain": {
+              "name": "Synthetic USD",
+              "version": "2"
+            },
+            "maxTimeoutSeconds": 300,
+            "network": "eip155:31337",
+            "nonceBinding": "base64url-decode-ap2-mandate-reference",
+            "payTo": "0x9f7d031741dec9641de45a88b5d29dc34fb5eeb3",
+            "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+            "scheme": "exact",
+            "version": 2
+          }
+        },
+        "transaction_id": "NU0iMAwnThmpy8al_RoLSWgSS8KSe--F8MbQeuaBWvY",
+        "vct": "mandate.payment.1"
+      },
+      "id": "valid-local-31337-20",
+      "openMandate": {
+        "cnf": {
+          "jwk": {
+            "alg": "ES256",
+            "crv": "P-256",
+            "kid": "ap2-fixture-terminal-holder-v1",
+            "kty": "EC",
+            "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+            "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+          }
+        },
+        "constraints": [
+          {
+            "conditional_transaction_id": "NU0iMAwnThmpy8al_RoLSWgSS8KSe--F8MbQeuaBWvY",
+            "type": "payment.reference"
+          },
+          {
+            "allowed": [
+              {
+                "description": "Synthetic x402 exact EIP-3009 fixture instrument",
+                "id": "x402-eip3009-local-31337-20",
+                "type": "x402",
+                "x402": {
+                  "amount": "1002020",
+                  "ap2PayeeId": "merchant-20",
+                  "ap2PaymentAmount": {
+                    "amount": 1002020,
+                    "currency": "USD"
+                  },
+                  "asset": "0xd72565c9365db325bdfd11dc3074937aebdcdd98",
+                  "eip712Domain": {
+                    "name": "Synthetic USD",
+                    "version": "2"
+                  },
+                  "maxTimeoutSeconds": 300,
+                  "network": "eip155:31337",
+                  "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                  "payTo": "0x9f7d031741dec9641de45a88b5d29dc34fb5eeb3",
+                  "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                  "scheme": "exact",
+                  "version": 2
+                }
+              }
+            ],
+            "type": "payment.allowed_payment_instruments"
+          },
+          {
+            "currency": "USD",
+            "max": 1002020,
+            "min": 1002020,
+            "type": "payment.amount_range"
+          },
+          {
+            "allowed": [
+              {
+                "id": "merchant-20",
+                "name": "Synthetic Merchant 20",
+                "website": "https://merchant-20.example"
+              }
+            ],
+            "type": "payment.allowed_payees"
+          }
+        ],
+        "exp": 1784592300,
+        "iat": 1784591820,
+        "vct": "mandate.payment.open.1"
+      },
+      "paymentReceipt": {
+        "error": null,
+        "error_description": null,
+        "iat": 1784592000,
+        "iss": "synthetic-facilitator.example",
+        "network_confirmation_id": "0x462139e5ae372a9df03cc7d34f8d3ada99ea6303371f3a768a600056ef4739bc",
+        "payment_id": "payment-valid-local-31337-20",
+        "psp_confirmation_id": "psp-valid-local-31337-20",
+        "reference": "Fwfq0eneXSam3Oj_A4EWcxtN_D0vu78gbuupyVos65w",
+        "status": "Success"
+      },
+      "verification": {
+        "checkoutBindingVerified": true,
+        "clockSkewSeconds": 0,
+        "closedMandateClaimsHash": "Cj5b583063kvy_76Vf3HEdHPTCQo_bJZfgS1NNfO65c",
+        "closedMandateReference": "Fwfq0eneXSam3Oj_A4EWcxtN_D0vu78gbuupyVos65w",
+        "closedMandateSignatureVerified": true,
+        "keyBindingVerified": true,
+        "openCheckoutReference": "NU0iMAwnThmpy8al_RoLSWgSS8KSe--F8MbQeuaBWvY",
+        "openMandateClaimsHash": "_m7FBnvUOODl2t8NrRc87N_pSiNJjXps1W6jUI9odBc",
+        "openMandateSignatureVerified": true,
+        "receiptSignatureVerified": true,
+        "verifiedAtEpochSeconds": 1784592000,
+        "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1"
+      }
+    }
+  ],
+  "sourceArtifactSha256": "132b4236b98ec47af353491d35271046bfad9d8da4b359e25aec878b3ebad363",
+  "sourcePins": {
+    "ap2Commit": "e1ea56db72a6385bce3e5c1112b3a56ce60acb43",
+    "ap2PackageVersion": "0.1",
+    "mandatePySha256": "6251ec83622192805cd3cd8a4830f9ab922260c3089d4ff9323b9eb2ec27b1f5"
+  }
+}

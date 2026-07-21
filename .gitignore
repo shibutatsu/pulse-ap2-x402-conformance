@@ -1,0 +1,15 @@
+node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+dist/
+coverage/
+reports/
+.stryker-tmp/
+*.log
+.DS_Store
+.env
+.env.*
+*.key
+*.pem

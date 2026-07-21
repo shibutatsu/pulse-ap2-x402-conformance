@@ -1,0 +1,131 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Node ${{ matrix.node-version }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ["22", "24"]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Verify deterministic checked-in fixtures
+        shell: bash
+        run: |
+          npm run test:x402-producer
+          npm run fixtures:generate
+          git diff --exit-code -- fixtures/v0.1/cases.json
+          first_hash="$(sha256sum fixtures/v0.1/cases.json | cut -d ' ' -f 1)"
+          npm run fixtures:generate
+          second_hash="$(sha256sum fixtures/v0.1/cases.json | cut -d ' ' -f 1)"
+          test "$first_hash" = "$second_hash"
+
+      - name: Run repository checks
+        run: npm run ci
+
+  ap2-artifacts:
+    name: Pinned AP2 artifact verification
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      UV_VERSION: 0.10.11
+      AP2_SIGNED_EXPECTED_SHA256: 132b4236b98ec47af353491d35271046bfad9d8da4b359e25aec878b3ebad363
+      AP2_NORMALIZED_EXPECTED_SHA256: 52a0fc04a9fd19914f725e701c6f0fcc36d8f60ca46d195e7844617129a388cc
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: "3.12"
+
+      - name: Set up locked uv
+        uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990 # v8.3.2
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+          cache-dependency-glob: scripts/ap2/requirements.lock.txt
+
+      - name: Confirm pinned toolchain and committed artifact hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python_version="$(python --version)"
+          case "$python_version" in
+            "Python 3.12."*) ;;
+            *) echo "Expected Python 3.12.x, got $python_version" >&2; exit 1 ;;
+          esac
+          test "$(uv --version | awk '{print $2}')" = "$UV_VERSION"
+          echo "$AP2_SIGNED_EXPECTED_SHA256  fixtures/v0.1/ap2-signed-artifacts.json" | sha256sum --check --strict
+          echo "$AP2_NORMALIZED_EXPECTED_SHA256  fixtures/v0.1/ap2-normalized-records.json" | sha256sum --check --strict
+
+      - name: Regenerate and independently verify pinned AP2 artifacts twice
+        shell: bash
+        env:
+          AP2_PIPELINE_CACHE_DIR: ${{ runner.temp }}/pulse-ap2-pinned
+        run: |
+          set -euo pipefail
+          sh scripts/ap2/run-pinned.sh
+          git diff --exit-code -- \
+            fixtures/v0.1/ap2-signed-artifacts.json \
+            fixtures/v0.1/ap2-normalized-records.json
+          first_signed_hash="$(sha256sum fixtures/v0.1/ap2-signed-artifacts.json | cut -d ' ' -f 1)"
+          first_normalized_hash="$(sha256sum fixtures/v0.1/ap2-normalized-records.json | cut -d ' ' -f 1)"
+          test "$first_signed_hash" = "$AP2_SIGNED_EXPECTED_SHA256"
+          test "$first_normalized_hash" = "$AP2_NORMALIZED_EXPECTED_SHA256"
+
+          sh scripts/ap2/run-pinned.sh
+          second_signed_hash="$(sha256sum fixtures/v0.1/ap2-signed-artifacts.json | cut -d ' ' -f 1)"
+          second_normalized_hash="$(sha256sum fixtures/v0.1/ap2-normalized-records.json | cut -d ' ' -f 1)"
+          test "$second_signed_hash" = "$first_signed_hash"
+          test "$second_normalized_hash" = "$first_normalized_hash"
+          git diff --exit-code -- \
+            fixtures/v0.1/ap2-signed-artifacts.json \
+            fixtures/v0.1/ap2-normalized-records.json
+
+  ci-required:
+    name: Required CI result
+    if: always()
+    needs: [verify, ap2-artifacts]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Require every Node.js and AP2 job to pass
+        env:
+          MATRIX_RESULT: ${{ needs.verify.result }}
+          AP2_RESULT: ${{ needs.ap2-artifacts.result }}
+        run: |
+          test "$MATRIX_RESULT" = "success"
+          test "$AP2_RESULT" = "success"
