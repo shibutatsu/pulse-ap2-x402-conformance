@@ -1,5 +1,8 @@
 # Pulse AP2–x402 conformance verifier
 
+[![CI](https://github.com/shibutatsu/pulse-ap2-x402-conformance/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/shibutatsu/pulse-ap2-x402-conformance/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/shibutatsu/pulse-ap2-x402-conformance/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/shibutatsu/pulse-ap2-x402-conformance/actions/workflows/codeql.yml)
+
 This repository contains an experimental, non-normative conformance profile for checking whether
 a verified AP2 v0.2 Payment Mandate still describes the same payment that an x402 v2 EVM payload
 authorized and a facilitator reported as settled.

@@ -6,9 +6,8 @@ No production version is supported yet. Security fixes are applied to `main` dur
 
 ## Reporting
 
-Use GitHub private vulnerability reporting after the public repository enables it. Until then,
-contact the repository owner privately and do not include working secrets or customer data in an
-issue.
+Use this repository's GitHub private vulnerability reporting form. Do not include working secrets
+or customer data in a public issue.
 
 ## Security boundary
 
