@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    - cron: "17 4 * * *"
   workflow_dispatch:
 
 permissions:
@@ -129,3 +131,57 @@ jobs:
         run: |
           test "$MATRIX_RESULT" = "success"
           test "$AP2_RESULT" = "success"
+
+  scheduled-evidence:
+    name: Record daily Required CI evidence
+    if: always() && github.event_name == 'schedule'
+    needs: [verify, ap2-artifacts, ci-required]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Write machine-readable evidence and run summary
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          COMMIT_SHA: ${{ github.sha }}
+          NODE_RESULT: ${{ needs.verify.result }}
+          AP2_RESULT: ${{ needs.ap2-artifacts.result }}
+          REQUIRED_RESULT: ${{ needs.ci-required.result }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p reports/ci-evidence
+          jq -n \
+            --arg runUrl "$RUN_URL" \
+            --arg commitSha "$COMMIT_SHA" \
+            --arg recordedAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --arg nodeResult "$NODE_RESULT" \
+            --arg ap2Result "$AP2_RESULT" \
+            --arg requiredResult "$REQUIRED_RESULT" \
+            '{
+              runUrl: $runUrl,
+              commitSha: $commitSha,
+              recordedAt: $recordedAt,
+              jobs: {
+                nodeMatrix: $nodeResult,
+                pinnedAp2Artifacts: $ap2Result,
+                requiredCi: $requiredResult
+              }
+            }' > reports/ci-evidence/required-ci.json
+
+          {
+            echo "## Daily Required CI evidence"
+            echo
+            echo "- Run: [$RUN_URL]($RUN_URL)"
+            echo "- Commit: \`$COMMIT_SHA\`"
+            echo "- Node matrix: \`$NODE_RESULT\`"
+            echo "- Pinned AP2 artifacts: \`$AP2_RESULT\`"
+            echo "- Required CI: \`$REQUIRED_RESULT\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload daily evidence record
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: required-ci-evidence-${{ github.run_id }}
+          path: reports/ci-evidence/required-ci.json
+          if-no-files-found: error
+          retention-days: 30
