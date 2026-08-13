@@ -109,4 +109,5 @@ See [`docs/source-pins.md`](docs/source-pins.md) and [`docs/field-mapping.md`](d
 
 `0.0.0` is an implementation preview. The package remains intentionally marked `private`; a tagged
 `v0.1` release requires external implementer feedback, upstream review, an independent security
-review, and a sustained green-CI window. Apache-2.0 applies to this repository's original code.
+review, and a sustained green-CI window. The scheduled evidence and counting rule are documented in
+[`docs/ci-evidence.md`](docs/ci-evidence.md). Apache-2.0 applies to this repository's original code.
