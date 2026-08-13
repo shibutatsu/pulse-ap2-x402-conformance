@@ -16,6 +16,11 @@ verification booleans. Production integrators must supply authenticated trust an
 expected audience, nonce, Checkout reference, and verification time. The fixture's synthetic Open
 Checkout reference is context input, not a separately verified Checkout Mandate chain.
 
+The optional evidence command in [`external-evidence.md`](external-evidence.md) is outside this
+offline boundary. It performs read-only public RPC calls and matches a successful receipt plus
+`Transfer` and `AuthorizationUsed` events to one accepted case. It does not sign or submit a
+transaction, and it does not make the other cases live-chain evidence.
+
 Fixture-generation tests exercise the pinned `@x402/core` `x402Client` and `@x402/evm`
 `ExactEvmScheme`. An explicit after-payment-creation hook replaces the standard producer's random
 nonce and time window with the AP2-derived nonce and deterministic fixture times, then re-signs the
