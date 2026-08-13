@@ -97,6 +97,11 @@ Verify another bundle:
 npx tsx src/cli.ts path/to/cases.json
 ```
 
+Validate an independent reproduction or review record, or compare an accepted case with a public
+EVM receipt, using the separate evidence commands in
+[`docs/external-evidence.md`](docs/external-evidence.md). The online command is read-only and does
+not change the offline verifier's no-network boundary.
+
 The committed corpus under `fixtures/v0.1` contains 20 cryptographically consistent cases and 60
 fail-closed mutation cases spanning Base Sepolia and a local EVM fixture. Here, `v0.1` identifies
 the fixture-format revision; it is not a project, package, tag, or grant-ready release. Every case

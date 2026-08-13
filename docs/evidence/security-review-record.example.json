@@ -1,0 +1,30 @@
+{
+  "recordVersion": "pulse-independent-security-review/0.1",
+  "reviewedCommit": "3333333333333333333333333333333333333333",
+  "reviewedAt": "2026-08-13T11:00:00Z",
+  "reviewer": {
+    "name": "A. Reviewer",
+    "organization": "Example Security Lab",
+    "profileUrl": "https://example.com/reviewer",
+    "independentOfPrimeBeat": true
+  },
+  "scope": [
+    "AP2 mandate and receipt verification",
+    "EIP-3009 signature, nonce, and replay boundary",
+    "Fail-closed schema and input handling"
+  ],
+  "method": ["Manual code review", "Adversarial fixture review"],
+  "findings": [
+    {
+      "id": "SEC-1",
+      "severity": "low",
+      "title": "Example resolved finding",
+      "status": "resolved",
+      "publicSummary": "The reviewed boundary is now explicit.",
+      "remediation": "Documentation and a regression test were added."
+    }
+  ],
+  "remediationSummary": "All reported findings were addressed in the reviewed commit.",
+  "residualRisk": "The review does not establish production deployment security.",
+  "publishedUrl": "https://example.com/reviews/pulse-ap2-x402"
+}
