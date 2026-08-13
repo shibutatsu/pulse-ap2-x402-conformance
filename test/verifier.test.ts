@@ -6,7 +6,8 @@ import { canonicalSha256Base64Url, conformanceInputHash } from "../src/canonical
 import type { ConformanceBundle, ConformanceCase } from "../src/types.js";
 import { verifyConformanceBundle, verifyConformanceCase } from "../src/verifier.js";
 
-const fixtureUrl = new URL("../fixtures/v0.1/cases.json", import.meta.url);
+const fixtureUrl = new URL("../fixtures/v0.2/cases.json", import.meta.url);
+const archivedFixtureUrl = new URL("../fixtures/v0.1/cases.json", import.meta.url);
 const fixturePayer = privateKeyToAccount(
   keccak256(stringToHex("pulse-ap2-x402-conformance/public-fixture-payer/v1")),
 );
@@ -50,6 +51,18 @@ async function resignAuthorization(conformanceCase: ConformanceCase): Promise<vo
 }
 
 describe("the committed conformance corpus", () => {
+  it("keeps the archived v0.1 corpus verifiable under its original source pins", async () => {
+    const archived = JSON.parse(
+      await readFile(fileURLToPath(archivedFixtureUrl), "utf8"),
+    ) as ConformanceBundle;
+    await expect(verifyConformanceBundle(archived)).resolves.toMatchObject({
+      allExpectationsMatched: true,
+      total: 80,
+      passedExpectations: 80,
+      failedExpectations: 0,
+    });
+  });
+
   it("contains 20 accepted and 60 fail-closed cases whose expectations all match", async () => {
     const bundle = await readBundle();
     expect(bundle.cases).toHaveLength(80);
@@ -66,7 +79,7 @@ describe("the committed conformance corpus", () => {
       passedExpectations: 80,
       failedExpectations: 0,
     });
-    expect(canonicalSha256Base64Url(report)).toBe("ozerbBdqoBy8Z8cC5N6UR2olbegAX62DXW43nbaeyFM");
+    expect(canonicalSha256Base64Url(report)).toBe("uazJwRKQ5wCFeo-EdTWKt2JB7cXA-Qlp5pNKgmY7H9I");
   });
 
   it("recovers the payer for every accepted ECDSA fixture", async () => {
@@ -459,5 +472,19 @@ describe("the committed conformance corpus", () => {
       ap2Commit: "0000000000000000000000000000000000000000",
     };
     await expect(verifyConformanceBundle(changed)).rejects.toThrow();
+  });
+
+  it("rejects a case copied between fixture versions", async () => {
+    const [current, archived] = await Promise.all([
+      readBundle(),
+      readFile(fileURLToPath(archivedFixtureUrl), "utf8").then(
+        (raw) => JSON.parse(raw) as ConformanceBundle,
+      ),
+    ]);
+    const changed = structuredClone(current);
+    changed.cases[0] = archived.cases[0];
+    await expect(verifyConformanceBundle(changed)).rejects.toThrow(
+      "Case version and source pins must match the bundle version",
+    );
   });
 });

@@ -62,7 +62,7 @@ function parseChainId(network: string): number {
 
 /**
  * Creates a standard x402 v2 EVM-exact payload and binds its EIP-3009 authorization
- * to the verified AP2 closed-mandate reference at the public client hook boundary.
+ * to the verified AP2 closed-mandate reference at the client-extension boundary.
  */
 export async function createAp2BoundX402PaymentPayload({
   paymentRequired,
@@ -98,38 +98,44 @@ export async function createAp2BoundX402PaymentPayload({
   const nonce = deriveEip3009Nonce(closedMandateReference);
 
   const client = registerExactEvmScheme(new x402Client(), { signer: fixtureSigner });
-  client.onAfterPaymentCreation(async ({ paymentPayload }) => {
-    const originalPayload = Eip3009AuthorizationRecordSchema.parse(paymentPayload.payload);
-    const originalAuthorization = originalPayload.authorization;
-    const reboundAuthorization = {
-      ...originalAuthorization,
-      validAfter,
-      validBefore,
-      nonce,
-    };
-    const signature = await fixtureSigner.signTypedData({
-      domain: {
-        name: selectedRequirement.extra.name,
-        version: selectedRequirement.extra.version,
-        chainId,
-        verifyingContract,
-      },
-      types: TRANSFER_WITH_AUTHORIZATION_TYPES,
-      primaryType: "TransferWithAuthorization",
-      message: {
-        from: getAddress(reboundAuthorization.from) as Address,
-        to: getAddress(reboundAuthorization.to) as Address,
-        value: parseUnsignedInteger(reboundAuthorization.value, "authorization.value"),
-        validAfter: validAfterValue,
-        validBefore: validBeforeValue,
+  client.registerExtension({
+    key: "org.ethereum.ap2",
+    enrichPaymentPayload: async (paymentPayload) => {
+      const originalPayload = Eip3009AuthorizationRecordSchema.parse(paymentPayload.payload);
+      const originalAuthorization = originalPayload.authorization;
+      const reboundAuthorization = {
+        ...originalAuthorization,
+        validAfter,
+        validBefore,
         nonce,
-      },
-    });
+      };
+      const signature = await fixtureSigner.signTypedData({
+        domain: {
+          name: selectedRequirement.extra.name,
+          version: selectedRequirement.extra.version,
+          chainId,
+          verifyingContract,
+        },
+        types: TRANSFER_WITH_AUTHORIZATION_TYPES,
+        primaryType: "TransferWithAuthorization",
+        message: {
+          from: getAddress(reboundAuthorization.from) as Address,
+          to: getAddress(reboundAuthorization.to) as Address,
+          value: parseUnsignedInteger(reboundAuthorization.value, "authorization.value"),
+          validAfter: validAfterValue,
+          validBefore: validBeforeValue,
+          nonce,
+        },
+      });
 
-    paymentPayload.payload = {
-      authorization: reboundAuthorization,
-      signature,
-    };
+      return {
+        ...paymentPayload,
+        payload: {
+          authorization: reboundAuthorization,
+          signature,
+        },
+      };
+    },
   });
 
   const paymentPayload = await client.createPaymentPayload(

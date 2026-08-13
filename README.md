@@ -44,9 +44,9 @@ In particular:
   AP2 commerce amount.
 - Fixture generation exercises the pinned `@x402/core` `x402Client` with the pinned `@x402/evm`
   `ExactEvmScheme`. The public producer first requires one exact/EIP-3009 requirement whose AP2
-  reference and nonce-derivation rule match the verified input. An explicit after-payment-creation
-  hook then replaces the producer's random nonce and time window with the AP2-derived nonce and
-  deterministic fixture times and re-signs the modified EIP-3009 message.
+  reference and nonce-derivation rule match the verified input. A registered client extension then
+  replaces the producer's random nonce and time window with the AP2-derived nonce and deterministic
+  fixture times and re-signs the modified EIP-3009 message.
 - The resulting x402 `PaymentPayload` includes the producer-supplied `resource`; its `accepted`
   requirements and EIP-3009 authorization match the checked payment fields.
 - A standard exact/EIP-3009 `SettleResponse` may report only `success`, `transaction`, `network`,
@@ -102,13 +102,15 @@ EVM receipt, using the separate evidence commands in
 [`docs/external-evidence.md`](docs/external-evidence.md). The online command is read-only and does
 not change the offline verifier's no-network boundary.
 
-The committed corpus under `fixtures/v0.1` contains 20 cryptographically consistent cases and 60
-fail-closed mutation cases spanning Base Sepolia and a local EVM fixture. Here, `v0.1` identifies
-the fixture-format revision; it is not a project, package, tag, or grant-ready release. Every case
-uses public, deterministic test identities. Runtime verification performs no network request; only
-the separate reproduction script downloads the pinned AP2 source when no local checkout is
-supplied. The reproduction and `tsx` commands above target a Git source checkout; the private
-package preview is not a self-contained source distribution.
+The current corpus under `fixtures/v0.2` contains 20 cryptographically consistent cases and 60
+fail-closed mutation cases spanning Base Sepolia and a local EVM fixture. The archived
+`fixtures/v0.1/cases.json` remains verifiable with its original x402 2.19.0 source pin and is not
+regenerated. Here, `v0.2` identifies the fixture-format revision; it is not a project, package, tag,
+or grant-ready release. Every case uses public, deterministic test identities. Runtime verification
+performs no network request; only the separate reproduction script downloads the pinned AP2 source
+when no local checkout is supplied. The reproduction and `tsx` commands above target a Git source
+checkout; the private package preview is not a self-contained source distribution. See
+[`docs/fixture-versions.md`](docs/fixture-versions.md) for the byte hashes and compatibility rule.
 
 ## Source pins
 

@@ -44,11 +44,13 @@ jobs:
         shell: bash
         run: |
           npm run test:x402-producer
+          archived_hash="$(sha256sum fixtures/v0.1/cases.json | cut -d ' ' -f 1)"
+          test "$archived_hash" = "4ff061cfa709b043662e67335bf4abd0e8dcf8cb45d32ee333992e3789d95a80"
           npm run fixtures:generate
-          git diff --exit-code -- fixtures/v0.1/cases.json
-          first_hash="$(sha256sum fixtures/v0.1/cases.json | cut -d ' ' -f 1)"
+          git diff --exit-code -- fixtures/v0.2/cases.json
+          first_hash="$(sha256sum fixtures/v0.2/cases.json | cut -d ' ' -f 1)"
           npm run fixtures:generate
-          second_hash="$(sha256sum fixtures/v0.1/cases.json | cut -d ' ' -f 1)"
+          second_hash="$(sha256sum fixtures/v0.2/cases.json | cut -d ' ' -f 1)"
           test "$first_hash" = "$second_hash"
 
       - name: Run repository checks

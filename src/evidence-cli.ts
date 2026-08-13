@@ -31,7 +31,7 @@ const program = new Command()
 program
   .command("reproduction")
   .description("Validate an independent 80-case reproduction record")
-  .argument("<bundle>", "path to fixtures/v0.1/cases.json")
+  .argument("<bundle>", "path to a versioned fixture bundle")
   .argument("<record>", "path to the independent reproduction record")
   .action(async (bundlePath: string, recordPath: string) => {
     const [bundleRaw, record] = await Promise.all([
@@ -56,7 +56,7 @@ program
 program
   .command("evm")
   .description("Verify an accepted case against a public EVM transaction receipt")
-  .argument("<bundle>", "path to fixtures/v0.1/cases.json")
+  .argument("<bundle>", "path to a versioned fixture bundle")
   .requiredOption("--case <id>", "accepted fixture case id")
   .option("--min-confirmations <count>", "minimum block confirmations", positiveInteger, 1n)
   .option("--output <path>", "write the evidence record to this path")
