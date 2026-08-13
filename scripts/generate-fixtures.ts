@@ -29,9 +29,20 @@ const BASE_SEPOLIA_NETWORK = "eip155:84532";
 const LOCAL_NETWORK = "eip155:31337";
 const SOURCE_PINS = {
   ap2Commit: "e1ea56db72a6385bce3e5c1112b3a56ce60acb43",
-  x402Commit: "67b1ba0a7abbd7907a28fa624670872532e0eae9",
-  x402PackageVersion: "2.19.0",
+  x402Commit: "c8247c4cd15f29498474404d94636e7dbb894e86",
+  x402PackageVersion: "2.22.0",
 } as const;
+
+const PackageManifestSchema = z.object({
+  dependencies: z.object({
+    "@x402/core": z.string(),
+    "@x402/evm": z.string(),
+  }),
+});
+
+const InstalledPackageManifestSchema = z.object({
+  version: z.string(),
+});
 
 const TRANSFER_WITH_AUTHORIZATION_TYPES = {
   TransferWithAuthorization: [
@@ -259,7 +270,7 @@ async function createValidCase(
   );
 
   const conformanceCase: ConformanceCase = {
-    caseVersion: "ap2-x402-conformance/0.1",
+    caseVersion: "ap2-x402-conformance/0.2",
     sourcePins: SOURCE_PINS,
     id: normalized.id,
     description: `Cryptographically signed AP2 to x402 EIP-3009 consistency fixture ${normalized.id}.`,
@@ -756,13 +767,39 @@ async function createInvalidCases(validCases: ConformanceCase[]): Promise<Confor
 
 async function main(): Promise<void> {
   const scriptDirectory = dirname(fileURLToPath(import.meta.url));
-  const fixtureDirectory = resolve(scriptDirectory, "../fixtures/v0.1");
-  const [normalizedInput, signedInput] = await Promise.all([
-    readFile(resolve(fixtureDirectory, "ap2-normalized-records.json"), "utf8"),
-    readFile(resolve(fixtureDirectory, "ap2-signed-artifacts.json"), "utf8"),
+  const ap2FixtureDirectory = resolve(scriptDirectory, "../fixtures/v0.1");
+  const [
+    normalizedInput,
+    signedInput,
+    packageManifestInput,
+    installedCoreManifestInput,
+    installedEvmManifestInput,
+  ] = await Promise.all([
+    readFile(resolve(ap2FixtureDirectory, "ap2-normalized-records.json"), "utf8"),
+    readFile(resolve(ap2FixtureDirectory, "ap2-signed-artifacts.json"), "utf8"),
+    readFile(resolve(scriptDirectory, "../package.json"), "utf8"),
+    readFile(resolve(scriptDirectory, "../node_modules/@x402/core/package.json"), "utf8"),
+    readFile(resolve(scriptDirectory, "../node_modules/@x402/evm/package.json"), "utf8"),
   ]);
   const normalizedBundle = NormalizedBundleSchema.parse(JSON.parse(normalizedInput));
   const signedBundle = SignedArtifactBundleSchema.parse(JSON.parse(signedInput));
+  const packageManifest = PackageManifestSchema.parse(JSON.parse(packageManifestInput));
+  const installedCoreManifest = InstalledPackageManifestSchema.parse(
+    JSON.parse(installedCoreManifestInput),
+  );
+  const installedEvmManifest = InstalledPackageManifestSchema.parse(
+    JSON.parse(installedEvmManifestInput),
+  );
+  if (
+    packageManifest.dependencies["@x402/core"] !== SOURCE_PINS.x402PackageVersion ||
+    packageManifest.dependencies["@x402/evm"] !== SOURCE_PINS.x402PackageVersion ||
+    installedCoreManifest.version !== SOURCE_PINS.x402PackageVersion ||
+    installedEvmManifest.version !== SOURCE_PINS.x402PackageVersion
+  ) {
+    throw new Error(
+      "The declared and installed x402 packages do not match the fixture source pin.",
+    );
+  }
   const signedById = new Map(signedBundle.cases.map((item) => [item.id, item] as const));
   const validCases = await Promise.all(
     normalizedBundle.records.map((normalized) => {
@@ -787,7 +824,7 @@ async function main(): Promise<void> {
   }
 
   const bundle: ConformanceBundle = ConformanceBundleSchema.parse({
-    bundleVersion: "ap2-x402-conformance-bundle/0.1",
+    bundleVersion: "ap2-x402-conformance-bundle/0.2",
     generatedAt: GENERATED_AT,
     sourcePins: SOURCE_PINS,
     cases,
@@ -799,7 +836,7 @@ async function main(): Promise<void> {
     );
   }
 
-  const outputPath = resolve(scriptDirectory, "../fixtures/v0.1/cases.json");
+  const outputPath = resolve(scriptDirectory, "../fixtures/v0.2/cases.json");
   await mkdir(dirname(outputPath), { recursive: true });
   await writeFile(outputPath, `${JSON.stringify(bundle, null, 2)}\n`, "utf8");
   process.stdout.write(

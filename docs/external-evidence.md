@@ -25,7 +25,7 @@ or compiled output. The published record has this shape:
   },
   "fixture": {
     "repositoryCommit": "2222222222222222222222222222222222222222",
-    "path": "fixtures/v0.1/cases.json",
+    "path": "fixtures/v0.2/cases.json",
     "sha256": "<lowercase SHA-256 of the exact fixture bytes>",
     "caseCount": 80
   },
@@ -50,12 +50,15 @@ or compiled output. The published record has this shape:
 failure codes in fixture order. Validate the published record against the exact fixture checkout:
 
 ```bash
-npm run evidence:reproduction -- fixtures/v0.1/cases.json path/to/reproduction.json
+npm run evidence:reproduction -- fixtures/v0.2/cases.json path/to/reproduction.json
 ```
 
 The command checks the raw fixture SHA-256, case coverage, decisions, and failure codes. A successful
 result is still subject to human confirmation that the implementation and publisher are genuinely
 independent. Two qualifying outside implementations are required by issue #17.
+
+The fixture path must match the bundle version. New reproduction work should use v0.2; v0.1 is
+retained only so already-published records can still be checked against their original bytes.
 
 ## Record an independent security review
 

@@ -339,15 +339,23 @@ export const ExpectedResultSchema = z.strictObject({
   failureCodes: z.array(z.enum(CONFORMANCE_FAILURE_CODES)),
 });
 
-export const SourcePinsSchema = z.strictObject({
-  ap2Commit: z.literal("e1ea56db72a6385bce3e5c1112b3a56ce60acb43"),
+const Ap2SourcePinSchema = z.literal("e1ea56db72a6385bce3e5c1112b3a56ce60acb43");
+
+export const SourcePinsV01Schema = z.strictObject({
+  ap2Commit: Ap2SourcePinSchema,
   x402Commit: z.literal("67b1ba0a7abbd7907a28fa624670872532e0eae9"),
   x402PackageVersion: z.literal("2.19.0"),
 });
 
-export const ConformanceCaseSchema = z.strictObject({
-  caseVersion: z.literal("ap2-x402-conformance/0.1"),
-  sourcePins: SourcePinsSchema,
+export const SourcePinsV02Schema = z.strictObject({
+  ap2Commit: Ap2SourcePinSchema,
+  x402Commit: z.literal("c8247c4cd15f29498474404d94636e7dbb894e86"),
+  x402PackageVersion: z.literal("2.22.0"),
+});
+
+export const SourcePinsSchema = z.union([SourcePinsV01Schema, SourcePinsV02Schema]);
+
+const ConformanceCaseFields = {
   id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
   description: z.string().min(1),
   nowEpochSeconds: z.number().int().positive(),
@@ -355,14 +363,60 @@ export const ConformanceCaseSchema = z.strictObject({
   x402: X402PaymentRecordSchema,
   inputHash: base64UrlSha256,
   expected: ExpectedResultSchema,
+} as const;
+
+const ConformanceCaseV01Schema = z.strictObject({
+  caseVersion: z.literal("ap2-x402-conformance/0.1"),
+  sourcePins: SourcePinsV01Schema,
+  ...ConformanceCaseFields,
 });
 
-export const ConformanceBundleSchema = z.strictObject({
-  bundleVersion: z.literal("ap2-x402-conformance-bundle/0.1"),
-  generatedAt: z.string().datetime({ offset: true }),
-  sourcePins: SourcePinsSchema,
-  cases: z.array(z.unknown()).length(80),
+const ConformanceCaseV02Schema = z.strictObject({
+  caseVersion: z.literal("ap2-x402-conformance/0.2"),
+  sourcePins: SourcePinsV02Schema,
+  ...ConformanceCaseFields,
 });
+
+export const ConformanceCaseSchema = z.discriminatedUnion("caseVersion", [
+  ConformanceCaseV01Schema,
+  ConformanceCaseV02Schema,
+]);
+
+const ConformanceBundleFields = {
+  generatedAt: z.string().datetime({ offset: true }),
+  cases: z.array(z.unknown()).length(80),
+} as const;
+
+const ConformanceBundleV01Schema = z.strictObject({
+  bundleVersion: z.literal("ap2-x402-conformance-bundle/0.1"),
+  sourcePins: SourcePinsV01Schema,
+  ...ConformanceBundleFields,
+});
+
+const ConformanceBundleV02Schema = z.strictObject({
+  bundleVersion: z.literal("ap2-x402-conformance-bundle/0.2"),
+  sourcePins: SourcePinsV02Schema,
+  ...ConformanceBundleFields,
+});
+
+export const ConformanceBundleSchema = z
+  .discriminatedUnion("bundleVersion", [ConformanceBundleV01Schema, ConformanceBundleV02Schema])
+  .superRefine((bundle, context) => {
+    const expectedCaseVersion =
+      bundle.bundleVersion === "ap2-x402-conformance-bundle/0.1"
+        ? "ap2-x402-conformance/0.1"
+        : "ap2-x402-conformance/0.2";
+    for (const [index, rawCase] of bundle.cases.entries()) {
+      const parsedCase = ConformanceCaseSchema.safeParse(rawCase);
+      if (parsedCase.success && parsedCase.data.caseVersion !== expectedCaseVersion) {
+        context.addIssue({
+          code: "custom",
+          path: ["cases", index, "caseVersion"],
+          message: "Case version and source pins must match the bundle version.",
+        });
+      }
+    }
+  });
 
 export interface ConformanceReport {
   caseId: string | null;

@@ -42,8 +42,8 @@
     "test:unit": "vitest run --config vitest.mutation.config.ts",
     "test:x402-producer": "vitest run --config vitest.mutation.config.ts test/x402-producer.test.ts",
     "fixtures:generate": "tsx scripts/generate-fixtures.ts",
-    "fixtures:verify": "tsx src/cli.ts fixtures/v0.1/cases.json",
-    "fixtures:hash": "shasum -a 256 fixtures/v0.1/cases.json",
+    "fixtures:verify": "tsx src/cli.ts fixtures/v0.2/cases.json",
+    "fixtures:hash": "shasum -a 256 fixtures/v0.2/cases.json",
     "evidence:reproduction": "tsx src/evidence-cli.ts reproduction",
     "evidence:review": "tsx src/evidence-cli.ts review",
     "evidence:evm": "tsx src/evidence-cli.ts evm",
@@ -57,8 +57,8 @@
     "@x402/evm": "2.22.0",
     "canonicalize": "2.1.0",
     "commander": "12.1.0",
-    "jose": "6.2.3",
-    "viem": "2.55.4",
+    "jose": "6.2.8",
+    "viem": "2.55.13",
     "zod": "4.4.3"
   },
   "devDependencies": {

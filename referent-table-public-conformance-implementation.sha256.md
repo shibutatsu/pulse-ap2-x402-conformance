@@ -52,3 +52,6 @@
 
 - 記録時点: 公開判定報告の固定hashとbehavioral mutation scoreの役割分離を定義した完成版
 - SHA-256: `a1895867fe6465863c6f61f9da98b2166e5295f6761eccb389c1c677d6ba0c91`
+
+- 記録時点: x402 2.22.0のclient extension境界とfixture v0.2の固定出典を定義した完成版
+- SHA-256: `a63c2a00c6fd56c19da02b74998af6872ea666db40bec9aa9c1403b5fceb3335`
