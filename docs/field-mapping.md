@@ -13,6 +13,7 @@ extensions disappear and fallback recipient or amount values can replace the sig
 | `payment_instrument.x402.amount` | `requirements.amount`, `payload.accepted.amount` | authorization `value`; optional settlement `amount` when present | same atomic integer string for every supplied field |
 | `payment_instrument.x402.payTo` | `requirements.payTo`, `payload.accepted.payTo` | authorization `to` | same EVM address |
 | none; fixture resource input | `PaymentRequired.resource`, `PaymentPayload.resource` | none | the pinned producer preserves the standard resource object in its output |
+| Open Mandate `payment.allowed_payees[].id` and closed Mandate `payee.id` | none | none | a matching non-empty `Merchant.id` establishes merchant identity for this profile; `name` and optional `website` may differ |
 | AP2 `payee.id` copied into `payment_instrument.x402.ap2PayeeId` | `payment_instrument.x402.payTo` becomes `requirements.payTo` | authorization `to` | the signed profile mapping binds the AP2 merchant identifier to the EVM recipient |
 | AP2 `payment_amount` copied into `payment_instrument.x402.ap2PaymentAmount` | `payment_instrument.x402.amount` becomes `requirements.amount` | authorization `value`; optional settlement `amount` when present | the commerce amount and token atomic amount are both signed; no implicit 1:1 conversion is assumed |
 | `payment_instrument.x402.payer` | no direct requirement field | authorization `from`, recovered ECDSA address, settlement `payer` | same EVM address; this does not prove the address is an EOA |
