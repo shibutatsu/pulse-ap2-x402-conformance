@@ -69,6 +69,15 @@ def make_models(index: int, holder_public: dict[str, Any]) -> tuple[
         name=f"Synthetic Merchant {suffix}",
         website=f"https://merchant-{suffix}.example",
     )
+    allowed_merchant = (
+        Merchant(
+            id=merchant.id,
+            name=f"Synthetic Merchant Alias {suffix}",
+            website=f"https://merchant-alias-{suffix}.example",
+        )
+        if index == 0
+        else merchant
+    )
     amount = Amount(amount=amount_minor, currency="USD")
     open_checkout_reference = sha256_b64url(
         f"synthetic-open-checkout-mandate:v1:{sequence}"
@@ -99,7 +108,7 @@ def make_models(index: int, holder_public: dict[str, Any]) -> tuple[
                 min=amount_minor,
                 max=amount_minor,
             ),
-            AllowedPayeesConstraint(allowed=[merchant]),
+            AllowedPayeesConstraint(allowed=[allowed_merchant]),
         ],
         cnf={"jwk": holder_public},
         iat=FIXED_NOW - 180,

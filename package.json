@@ -10,7 +10,8 @@
     "node": ">=22.13.0"
   },
   "bin": {
-    "pulse-ap2-x402-verify": "dist/cli.js"
+    "pulse-ap2-x402-verify": "dist/cli.js",
+    "pulse-ap2-x402-evidence": "dist/evidence-cli.js"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -43,14 +44,17 @@
     "fixtures:generate": "tsx scripts/generate-fixtures.ts",
     "fixtures:verify": "tsx src/cli.ts fixtures/v0.1/cases.json",
     "fixtures:hash": "shasum -a 256 fixtures/v0.1/cases.json",
+    "evidence:reproduction": "tsx src/evidence-cli.ts reproduction",
+    "evidence:review": "tsx src/evidence-cli.ts review",
+    "evidence:evm": "tsx src/evidence-cli.ts evm",
     "mutation": "stryker run",
     "audit:production": "npm audit --omit=dev --audit-level=high",
     "check:pack": "npm pack --dry-run",
     "ci": "npm run typecheck && npm run lint && npm run test:x402-producer && npm run test && npm run build && npm run fixtures:verify && npm run audit:production && npm run check:pack"
   },
   "dependencies": {
-    "@x402/core": "2.19.0",
-    "@x402/evm": "2.19.0",
+    "@x402/core": "2.22.0",
+    "@x402/evm": "2.22.0",
     "canonicalize": "2.1.0",
     "commander": "12.1.0",
     "jose": "6.2.3",

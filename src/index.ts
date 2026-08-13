@@ -1,5 +1,6 @@
 export * from "./canonical.js";
 export * from "./ap2-crypto.js";
+export * from "./evidence.js";
 export * from "./failures.js";
 export * from "./types.js";
 export * from "./verifier.js";

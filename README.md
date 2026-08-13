@@ -34,6 +34,9 @@ In particular:
   the signed x402 extension instead of silently accepting semantics it does not evaluate.
 - Every signed amount, payee, payment-reference, and allowed-instrument constraint is enforced;
   matching one instrument by `id` alone does not bypass another constraint.
+- A `payment.allowed_payees` constraint identifies the closed payee by a matching non-empty
+  `Merchant.id`. The merchant `name` and optional `website` are descriptive metadata and may differ
+  without changing that identity result.
 - The signed closed mandate `transaction_id` and Open Mandate `payment.reference` both match the
   independently supplied Open Checkout reference.
 - The signed `payment_instrument.x402` extension survives parsing and binds `scheme`, CAIP-2
@@ -69,6 +72,9 @@ authorization, or regulatory compliance. Those checks need an online verifier or
 policy. See
 [`docs/guarantee-boundary.md`](docs/guarantee-boundary.md).
 
+The ID-only allowed-payee check does not authenticate a merchant's current name or website.
+Integrators that require canonical display metadata must apply that policy separately.
+
 ## Run the committed fixtures from a source checkout
 
 ```bash
@@ -91,6 +97,11 @@ Verify another bundle:
 npx tsx src/cli.ts path/to/cases.json
 ```
 
+Validate an independent reproduction or review record, or compare an accepted case with a public
+EVM receipt, using the separate evidence commands in
+[`docs/external-evidence.md`](docs/external-evidence.md). The online command is read-only and does
+not change the offline verifier's no-network boundary.
+
 The committed corpus under `fixtures/v0.1` contains 20 cryptographically consistent cases and 60
 fail-closed mutation cases spanning Base Sepolia and a local EVM fixture. Here, `v0.1` identifies
 the fixture-format revision; it is not a project, package, tag, or grant-ready release. Every case
@@ -102,11 +113,12 @@ package preview is not a self-contained source distribution.
 ## Source pins
 
 The profile is based on AP2 commit `e1ea56db72a6385bce3e5c1112b3a56ce60acb43` and x402
-Foundation commit `67b1ba0a7abbd7907a28fa624670872532e0eae9` / packages `2.19.0`.
+Foundation commit `c8247c4cd15f29498474404d94636e7dbb894e86` / packages `2.22.0`.
 See [`docs/source-pins.md`](docs/source-pins.md) and [`docs/field-mapping.md`](docs/field-mapping.md).
 
 ## Current maturity
 
 `0.0.0` is an implementation preview. The package remains intentionally marked `private`; a tagged
 `v0.1` release requires external implementer feedback, upstream review, an independent security
-review, and a sustained green-CI window. Apache-2.0 applies to this repository's original code.
+review, and a sustained green-CI window. The scheduled evidence and counting rule are documented in
+[`docs/ci-evidence.md`](docs/ci-evidence.md). Apache-2.0 applies to this repository's original code.

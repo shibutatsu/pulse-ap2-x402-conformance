@@ -66,7 +66,7 @@ describe("the committed conformance corpus", () => {
       passedExpectations: 80,
       failedExpectations: 0,
     });
-    expect(canonicalSha256Base64Url(report)).toBe("Ez8RxrMYy6ySlfosptWynBPpASuxCiebJzjb0I9yn7Q");
+    expect(canonicalSha256Base64Url(report)).toBe("ozerbBdqoBy8Z8cC5N6UR2olbegAX62DXW43nbaeyFM");
   });
 
   it("recovers the payer for every accepted ECDSA fixture", async () => {
@@ -83,6 +83,34 @@ describe("the committed conformance corpus", () => {
         ).x402.payload.payload.authorization.from.toLowerCase(),
       );
     }
+  });
+
+  it("accepts signed merchant display metadata changes when the merchant ID matches", async () => {
+    const bundle = await readBundle();
+    const changedMetadataCase = bundle.cases.find(
+      (item) => (item as { id?: string }).id === "valid-base-sepolia-01",
+    ) as ConformanceCase | undefined;
+    expect(changedMetadataCase).toBeDefined();
+    if (!changedMetadataCase) throw new Error("Missing merchant metadata fixture.");
+
+    const allowedPayees = changedMetadataCase.ap2.openMandate.constraints.find(
+      (constraint) => constraint.type === "payment.allowed_payees",
+    );
+    expect(allowedPayees?.type).toBe("payment.allowed_payees");
+    if (!allowedPayees || allowedPayees.type !== "payment.allowed_payees") {
+      throw new Error("Missing allowed-payees constraint.");
+    }
+
+    const allowedMerchant = allowedPayees.allowed[0];
+    const closedPayee = changedMetadataCase.ap2.closedMandate.payee;
+    expect(allowedMerchant?.id).toBe(closedPayee.id);
+    expect(allowedMerchant?.name).not.toBe(closedPayee.name);
+    expect(allowedMerchant?.website).not.toBe(closedPayee.website);
+
+    await expect(verifyConformanceCase(changedMetadataCase)).resolves.toMatchObject({
+      consistent: true,
+      failures: [],
+    });
   });
 
   it("returns only schema paths and messages for malformed input", async () => {
