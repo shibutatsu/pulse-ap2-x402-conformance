@@ -39,6 +39,11 @@ The two committed outputs are:
   parsed receipt claims, and verification records suitable for joining to the
   TypeScript x402 cases.
 
+`valid-base-sepolia-01` signs the same non-empty merchant ID into the Open
+Mandate allowed-payee constraint and the closed Mandate payee while giving
+them different names and websites. The case records the profile's intentional
+ID-only merchant comparison without treating display metadata as identity.
+
 ## Preserve the signed x402 extension despite AP2 issue 299
 
 An x402-preserving PaymentInstrument is a fixture-only Pydantic model that

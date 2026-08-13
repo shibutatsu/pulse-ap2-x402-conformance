@@ -101,8 +101,8 @@
             "allowed": [
               {
                 "id": "merchant-01",
-                "name": "Synthetic Merchant 01",
-                "website": "https://merchant-01.example"
+                "name": "Synthetic Merchant Alias 01",
+                "website": "https://merchant-alias-01.example"
               }
             ],
             "type": "payment.allowed_payees"
@@ -120,18 +120,18 @@
         "network_confirmation_id": "0xd7e8c03abb96857376a5af61bcf3758de56b166c2e75435214558fc5306a11a8",
         "payment_id": "payment-valid-base-sepolia-01",
         "psp_confirmation_id": "psp-valid-base-sepolia-01",
-        "reference": "KSowQCO9tU2OUL45faC9Eg4_rkHxumtuhHCxNu42iVY",
+        "reference": "JlXmtv4_BUAdarRJMa2VU7aN6u3C2SRiaXkW8VMeo4M",
         "status": "Success"
       },
       "verification": {
         "checkoutBindingVerified": true,
         "clockSkewSeconds": 0,
         "closedMandateClaimsHash": "TFr1u-JS--oQNFbH-OUWgBMgr-TGk7_3ZuqNw_KORLM",
-        "closedMandateReference": "KSowQCO9tU2OUL45faC9Eg4_rkHxumtuhHCxNu42iVY",
+        "closedMandateReference": "JlXmtv4_BUAdarRJMa2VU7aN6u3C2SRiaXkW8VMeo4M",
         "closedMandateSignatureVerified": true,
         "keyBindingVerified": true,
         "openCheckoutReference": "NzsOOLhaDA4lBDiNBcuJUWDmQxpaOjNywMC49sj0fV0",
-        "openMandateClaimsHash": "69QWWcU4ahXGHC7MZWrfzufO2EoFBeZac-lgJowVYQw",
+        "openMandateClaimsHash": "p_07iGMXuvUW_77WoY2960MdpoHhShSA72E3_EAdD3o",
         "openMandateSignatureVerified": true,
         "receiptSignatureVerified": true,
         "verifiedAtEpochSeconds": 1784592000,
@@ -2723,7 +2723,7 @@
       }
     }
   ],
-  "sourceArtifactSha256": "132b4236b98ec47af353491d35271046bfad9d8da4b359e25aec878b3ebad363",
+  "sourceArtifactSha256": "a73ca6a0e095e8608cf2ee3100b9893d0c92a217acf38332d476e671833bf9c4",
   "sourcePins": {
     "ap2Commit": "e1ea56db72a6385bce3e5c1112b3a56ce60acb43",
     "ap2PackageVersion": "0.1",

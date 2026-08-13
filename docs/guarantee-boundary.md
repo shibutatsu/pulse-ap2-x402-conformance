@@ -10,6 +10,7 @@
 | The EIP-3009 nonce equals the 32 bytes encoded by the verified leaf JWT's final closed-mandate reference | The nonce is unused on-chain or cannot be replayed on another incompatible token implementation |
 | The fixture contains no unknown profile field | Future AP2/x402 extensions are safe; unsupported extensions fail closed |
 | The case-level JCS/SHA-256 input hash matches the pinned versions and supplied verification input | The input hash authenticates its author; it is an integrity checksum, not a signature or AP2 reference |
+| A signed `payment.allowed_payees` entry has the same non-empty `Merchant.id` as the closed payee; `name` and optional `website` may differ | The merchant's current name or website is authentic, current, or canonically equal across mandates |
 
 The verdict depends on compact signed artifacts and public verification keys, not caller-set
 verification booleans. Production integrators must supply authenticated trust anchors and their own
@@ -29,6 +30,11 @@ and `payer`. The verifier checks `amount` only when supplied and requires no syn
 The pinned AP2 JSON schemas do not universally forbid additional properties. This conformance
 profile intentionally narrows them to the fields it evaluates and rejects the rest. Supporting a
 new AP2 field or constraint therefore requires an explicit profile version and verifier change.
+
+For `payment.allowed_payees`, this profile follows the pinned AP2 evaluator's ID-based comparison.
+Display metadata is retained in the signed artifacts but is not part of the merchant-identity
+decision. A deployment that relies on a merchant's current legal name or domain needs a separate
+authenticated registry or trust policy.
 
 The profile deliberately does not treat a locally canonicalized claims hash as an AP2-standard
 transaction or mandate reference. AP2 issue #265 discusses canonical hashing as a proposal, but the

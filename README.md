@@ -34,6 +34,9 @@ In particular:
   the signed x402 extension instead of silently accepting semantics it does not evaluate.
 - Every signed amount, payee, payment-reference, and allowed-instrument constraint is enforced;
   matching one instrument by `id` alone does not bypass another constraint.
+- A `payment.allowed_payees` constraint identifies the closed payee by a matching non-empty
+  `Merchant.id`. The merchant `name` and optional `website` are descriptive metadata and may differ
+  without changing that identity result.
 - The signed closed mandate `transaction_id` and Open Mandate `payment.reference` both match the
   independently supplied Open Checkout reference.
 - The signed `payment_instrument.x402` extension survives parsing and binds `scheme`, CAIP-2
@@ -68,6 +71,9 @@ ERC-1271/ERC-6492 signatures, token balances, nonce consumption, chain finality,
 authorization, or regulatory compliance. Those checks need an online verifier or additional trust
 policy. See
 [`docs/guarantee-boundary.md`](docs/guarantee-boundary.md).
+
+The ID-only allowed-payee check does not authenticate a merchant's current name or website.
+Integrators that require canonical display metadata must apply that policy separately.
 
 ## Run the committed fixtures from a source checkout
 
