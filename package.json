@@ -57,8 +57,8 @@
     "@x402/evm": "2.22.0",
     "canonicalize": "2.1.0",
     "commander": "12.1.0",
-    "jose": "6.2.3",
-    "viem": "2.55.4",
+    "jose": "6.2.8",
+    "viem": "2.55.13",
     "zod": "4.4.3"
   },
   "devDependencies": {
