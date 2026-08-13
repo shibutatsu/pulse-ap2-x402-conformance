@@ -23,10 +23,10 @@ offline boundary. It performs read-only public RPC calls and matches a successfu
 transaction, and it does not make the other cases live-chain evidence.
 
 Fixture-generation tests exercise the pinned `@x402/core` `x402Client` and `@x402/evm`
-`ExactEvmScheme`. An explicit after-payment-creation hook replaces the standard producer's random
-nonce and time window with the AP2-derived nonce and deterministic fixture times, then re-signs the
-modified EIP-3009 message. The resulting `PaymentPayload` retains its standard `resource` field.
-This does not prove that an unrelated producer or facilitator will apply the same profile hook.
+`ExactEvmScheme`. A registered client extension replaces the standard producer's random nonce and
+time window with the AP2-derived nonce and deterministic fixture times, then re-signs the modified
+EIP-3009 message. The resulting `PaymentPayload` retains its standard `resource` field. This does
+not prove that an unrelated producer or facilitator will apply the same profile extension.
 
 A standard exact/EIP-3009 success response may contain only `success`, `transaction`, `network`,
 and `payer`. The verifier checks `amount` only when supplied and requires no synthetic settlement

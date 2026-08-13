@@ -29,9 +29,9 @@ assume that fiat minor units convert 1:1 to an ERC-20 atomic amount; the signed 
 extension carries the exact atomic amount instead.
 
 Fixture generation runs the pinned `@x402/core` `x402Client` and `@x402/evm` `ExactEvmScheme`.
-Their standard producer first creates the resource-bearing payload; an explicit
-after-payment-creation hook then replaces its random nonce and time window with the AP2-derived
-nonce and deterministic fixture times and re-signs the modified EIP-3009 message.
+Their standard producer first creates the resource-bearing payload; a registered client extension
+then replaces its random nonce and time window with the AP2-derived nonce and deterministic fixture
+times and re-signs the modified EIP-3009 message.
 
 The standard exact/EIP-3009 success response can contain only `success`, `transaction`, `network`,
 and `payer`. This profile validates `amount` only when that optional standard field is supplied and
