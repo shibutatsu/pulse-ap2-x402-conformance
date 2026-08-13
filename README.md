@@ -102,7 +102,7 @@ package preview is not a self-contained source distribution.
 ## Source pins
 
 The profile is based on AP2 commit `e1ea56db72a6385bce3e5c1112b3a56ce60acb43` and x402
-Foundation commit `67b1ba0a7abbd7907a28fa624670872532e0eae9` / packages `2.19.0`.
+Foundation commit `c8247c4cd15f29498474404d94636e7dbb894e86` / packages `2.22.0`.
 See [`docs/source-pins.md`](docs/source-pins.md) and [`docs/field-mapping.md`](docs/field-mapping.md).
 
 ## Current maturity

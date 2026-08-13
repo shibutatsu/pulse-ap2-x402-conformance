@@ -49,8 +49,8 @@
     "ci": "npm run typecheck && npm run lint && npm run test:x402-producer && npm run test && npm run build && npm run fixtures:verify && npm run audit:production && npm run check:pack"
   },
   "dependencies": {
-    "@x402/core": "2.19.0",
-    "@x402/evm": "2.19.0",
+    "@x402/core": "2.22.0",
+    "@x402/evm": "2.22.0",
     "canonicalize": "2.1.0",
     "commander": "12.1.0",
     "jose": "6.2.3",
