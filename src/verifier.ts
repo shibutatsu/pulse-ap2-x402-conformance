@@ -33,6 +33,8 @@ const TRANSFER_WITH_AUTHORIZATION_TYPES = {
   ],
 } as const;
 
+const SECP256K1_HALF_ORDER = 0x7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a0n;
+
 const UNSAFE_OBJECT_KEYS = new Set(["__proto__", "prototype", "constructor"]);
 
 const ExpectedEnvelopeSchema = z.looseObject({
@@ -46,6 +48,11 @@ const failureOrder = Object.fromEntries(
 
 function addressesEqual(left: string, right: string): boolean {
   return left.toLowerCase() === right.toLowerCase();
+}
+
+function hasCanonicalSecp256k1S(signature: string): boolean {
+  const s = BigInt(`0x${signature.slice(66, 130)}`);
+  return s > 0n && s <= SECP256K1_HALF_ORDER;
 }
 
 function addFailure(
@@ -704,44 +711,53 @@ export async function verifyConformanceCase(input: unknown): Promise<Conformance
   );
 
   let recoveredSigner: string | undefined;
-  try {
-    const chainId = Number(requirements.network.slice("eip155:".length));
-    recoveredSigner = await recoverTypedDataAddress({
-      domain: {
-        name: requirements.extra.name,
-        version: requirements.extra.version,
-        chainId,
-        verifyingContract: requirements.asset as Address,
-      },
-      types: TRANSFER_WITH_AUTHORIZATION_TYPES,
-      primaryType: "TransferWithAuthorization",
-      message: {
-        from: authorization.from as Address,
-        to: authorization.to as Address,
-        value: BigInt(authorization.value),
-        validAfter,
-        validBefore,
-        nonce: authorization.nonce as Hex,
-      },
-      signature: x402.payload.payload.signature as Hex,
-    });
-    if (!addressesEqual(recoveredSigner, authorization.from)) {
-      addFailure(
-        failures,
-        "EIP3009_SIGNATURE_INVALID",
-        "x402.payload.payload.signature",
-        "The EIP-712 signature does not recover the EIP-3009 payer.",
-        authorization.from,
-        recoveredSigner,
-      );
-    }
-  } catch {
+  if (!hasCanonicalSecp256k1S(x402.payload.payload.signature)) {
     addFailure(
       failures,
       "EIP3009_SIGNATURE_INVALID",
       "x402.payload.payload.signature",
-      "The EIP-712 signature could not be recovered.",
+      "The EIP-712 signature does not use a canonical low-s encoding.",
     );
+  } else {
+    try {
+      const chainId = Number(requirements.network.slice("eip155:".length));
+      recoveredSigner = await recoverTypedDataAddress({
+        domain: {
+          name: requirements.extra.name,
+          version: requirements.extra.version,
+          chainId,
+          verifyingContract: requirements.asset as Address,
+        },
+        types: TRANSFER_WITH_AUTHORIZATION_TYPES,
+        primaryType: "TransferWithAuthorization",
+        message: {
+          from: authorization.from as Address,
+          to: authorization.to as Address,
+          value: BigInt(authorization.value),
+          validAfter,
+          validBefore,
+          nonce: authorization.nonce as Hex,
+        },
+        signature: x402.payload.payload.signature as Hex,
+      });
+      if (!addressesEqual(recoveredSigner, authorization.from)) {
+        addFailure(
+          failures,
+          "EIP3009_SIGNATURE_INVALID",
+          "x402.payload.payload.signature",
+          "The EIP-712 signature does not recover the EIP-3009 payer.",
+          authorization.from,
+          recoveredSigner,
+        );
+      }
+    } catch {
+      addFailure(
+        failures,
+        "EIP3009_SIGNATURE_INVALID",
+        "x402.payload.payload.signature",
+        "The EIP-712 signature could not be recovered.",
+      );
+    }
   }
 
   if (!settlement.success) {

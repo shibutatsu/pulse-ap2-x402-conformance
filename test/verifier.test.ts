@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { type Address, type Hex, keccak256, stringToHex } from "viem";
+import { type Address, type Hex, keccak256, recoverTypedDataAddress, stringToHex } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { canonicalSha256Base64Url, conformanceInputHash } from "../src/canonical.js";
 import type { ConformanceBundle, ConformanceCase } from "../src/types.js";
@@ -79,7 +79,7 @@ describe("the committed conformance corpus", () => {
       passedExpectations: 80,
       failedExpectations: 0,
     });
-    expect(canonicalSha256Base64Url(report)).toBe("uazJwRKQ5wCFeo-EdTWKt2JB7cXA-Qlp5pNKgmY7H9I");
+    expect(canonicalSha256Base64Url(report)).toBe("rNjjWOyLlQ4YdOEN4tN4sLfuVUYILLine3dA5-gW8tY");
   });
 
   it("recovers the payer for every accepted ECDSA fixture", async () => {
@@ -265,6 +265,48 @@ describe("the committed conformance corpus", () => {
     const report = await verifyConformanceCase(valid);
     expect(report.failures.map((failure) => failure.code)).toEqual(["EIP3009_SIGNATURE_INVALID"]);
     expect(report.computed.recoveredSigner).toBeDefined();
+  });
+
+  it("rejects a high-s signature even when it recovers the expected payer", async () => {
+    const bundle = await readBundle();
+    const highSCase = bundle.cases.find(
+      (item) => (item as { id?: string }).id === "invalid-eip3009-signature-invalid-02",
+    ) as ConformanceCase | undefined;
+    expect(highSCase).toBeDefined();
+    if (!highSCase) throw new Error("Missing high-s signature fixture.");
+
+    const requirements = highSCase.x402.requirements;
+    const authorization = highSCase.x402.payload.payload.authorization;
+    const recovered = await recoverTypedDataAddress({
+      domain: {
+        name: requirements.extra.name,
+        version: requirements.extra.version,
+        chainId: Number(requirements.network.slice("eip155:".length)),
+        verifyingContract: requirements.asset as Address,
+      },
+      types: authorizationTypes,
+      primaryType: "TransferWithAuthorization",
+      message: {
+        from: authorization.from as Address,
+        to: authorization.to as Address,
+        value: BigInt(authorization.value),
+        validAfter: BigInt(authorization.validAfter),
+        validBefore: BigInt(authorization.validBefore),
+        nonce: authorization.nonce as Hex,
+      },
+      signature: highSCase.x402.payload.payload.signature as Hex,
+    });
+    expect(recovered.toLowerCase()).toBe(authorization.from.toLowerCase());
+
+    await expect(verifyConformanceCase(highSCase)).resolves.toMatchObject({
+      consistent: false,
+      failures: [
+        {
+          code: "EIP3009_SIGNATURE_INVALID",
+          path: "x402.payload.payload.signature",
+        },
+      ],
+    });
   });
 
   it("maps a signed Open Mandate checkout-reference mismatch to the public failure code", async () => {
