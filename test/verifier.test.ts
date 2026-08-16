@@ -79,7 +79,7 @@ describe("the committed conformance corpus", () => {
       passedExpectations: 80,
       failedExpectations: 0,
     });
-    expect(canonicalSha256Base64Url(report)).toBe("rNjjWOyLlQ4YdOEN4tN4sLfuVUYILLine3dA5-gW8tY");
+    expect(canonicalSha256Base64Url(report)).toBe("nItJJX4clF-P1zmtnSLaAh3s_5ZjzdSx4ixCc3ecDEM");
   });
 
   it("recovers the payer for every accepted ECDSA fixture", async () => {
@@ -420,6 +420,23 @@ describe("the committed conformance corpus", () => {
     expect(
       (await verifyConformanceCase(fiveSeconds)).failures.map((failure) => failure.code),
     ).toEqual(["EIP3009_VALID_BEFORE_EXPIRED"]);
+  });
+
+  it("requires the EIP-3009 validAfter time to be strictly before evaluation", async () => {
+    const bundle = await readBundle();
+    const oneSecondBefore = structuredClone(bundle.cases[0]) as ConformanceCase;
+    oneSecondBefore.x402.payload.payload.authorization.validAfter = String(
+      oneSecondBefore.nowEpochSeconds - 1,
+    );
+    await resignAuthorization(oneSecondBefore);
+    expect((await verifyConformanceCase(oneSecondBefore)).consistent).toBe(true);
+
+    const sameSecond = structuredClone(oneSecondBefore);
+    sameSecond.x402.payload.payload.authorization.validAfter = String(sameSecond.nowEpochSeconds);
+    await resignAuthorization(sameSecond);
+    expect(
+      (await verifyConformanceCase(sameSecond)).failures.map((failure) => failure.code),
+    ).toEqual(["EIP3009_VALID_AFTER_IN_FUTURE"]);
   });
 
   it("rejects an EIP-3009 authorization that outlives either AP2 mandate", async () => {

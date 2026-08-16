@@ -664,13 +664,13 @@ export async function verifyConformanceCase(input: unknown): Promise<Conformance
   const validAfter = BigInt(authorization.validAfter);
   const validBefore = BigInt(authorization.validBefore);
   const now = BigInt(nowEpochSeconds);
-  if (validAfter > now) {
+  if (validAfter >= now) {
     addFailure(
       failures,
       "EIP3009_VALID_AFTER_IN_FUTURE",
       "x402.payload.payload.authorization.validAfter",
       "The EIP-3009 authorization is not active at the fixture time.",
-      `<=${now}`,
+      `<${now}`,
       authorization.validAfter,
     );
   }
