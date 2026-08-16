@@ -55,6 +55,11 @@ function hasCanonicalSecp256k1S(signature: string): boolean {
   return s > 0n && s <= SECP256K1_HALF_ORDER;
 }
 
+function hasCanonicalEip3009RecoveryByte(signature: string): boolean {
+  const recoveryByte = Number.parseInt(signature.slice(130, 132), 16);
+  return recoveryByte === 27 || recoveryByte === 28;
+}
+
 function addFailure(
   failures: ConformanceFailure[],
   code: ConformanceFailureCode,
@@ -717,6 +722,13 @@ export async function verifyConformanceCase(input: unknown): Promise<Conformance
       "EIP3009_SIGNATURE_INVALID",
       "x402.payload.payload.signature",
       "The EIP-712 signature does not use a canonical low-s encoding.",
+    );
+  } else if (!hasCanonicalEip3009RecoveryByte(x402.payload.payload.signature)) {
+    addFailure(
+      failures,
+      "EIP3009_SIGNATURE_INVALID",
+      "x402.payload.payload.signature",
+      "The EIP-712 signature must use a 27 or 28 recovery byte.",
     );
   } else {
     try {

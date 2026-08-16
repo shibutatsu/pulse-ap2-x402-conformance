@@ -309,6 +309,51 @@ describe("the committed conformance corpus", () => {
     });
   });
 
+  it("rejects a 0/1 recovery byte even when it recovers the expected payer", async () => {
+    const bundle = await readBundle();
+    const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
+    const signature = changed.x402.payload.payload.signature;
+    const recoveryByte = Number.parseInt(signature.slice(-2), 16);
+    expect([27, 28]).toContain(recoveryByte);
+    changed.x402.payload.payload.signature = `${signature.slice(0, -2)}${(recoveryByte - 27)
+      .toString(16)
+      .padStart(2, "0")}`;
+    changed.inputHash = conformanceInputHash(changed);
+
+    const requirements = changed.x402.requirements;
+    const authorization = changed.x402.payload.payload.authorization;
+    const recovered = await recoverTypedDataAddress({
+      domain: {
+        name: requirements.extra.name,
+        version: requirements.extra.version,
+        chainId: Number(requirements.network.slice("eip155:".length)),
+        verifyingContract: requirements.asset as Address,
+      },
+      types: authorizationTypes,
+      primaryType: "TransferWithAuthorization",
+      message: {
+        from: authorization.from as Address,
+        to: authorization.to as Address,
+        value: BigInt(authorization.value),
+        validAfter: BigInt(authorization.validAfter),
+        validBefore: BigInt(authorization.validBefore),
+        nonce: authorization.nonce as Hex,
+      },
+      signature: changed.x402.payload.payload.signature as Hex,
+    });
+    expect(recovered.toLowerCase()).toBe(authorization.from.toLowerCase());
+
+    await expect(verifyConformanceCase(changed)).resolves.toMatchObject({
+      consistent: false,
+      failures: [
+        {
+          code: "EIP3009_SIGNATURE_INVALID",
+          path: "x402.payload.payload.signature",
+        },
+      ],
+    });
+  });
+
   it("maps a signed Open Mandate checkout-reference mismatch to the public failure code", async () => {
     const bundle = await readBundle();
     const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
