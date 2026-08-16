@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { type Address, type Hex, keccak256, numberToHex, padHex, stringToHex } from "viem";
 import {
   type PublicEvmReader,
+  selectPublicEvmCase,
   verifyIndependentReproductionRecord,
   verifyIndependentSecurityReviewRecord,
   verifyPublicEvmSettlement,
@@ -228,6 +229,20 @@ describe("independent evidence records", () => {
 });
 
 describe("public EVM settlement evidence", () => {
+  it("selects the requested case from a standalone input or the 80-case bundle", async () => {
+    const { bundle } = await fixture();
+    const standalone = bundle.cases[0] as ConformanceCase;
+
+    expect(selectPublicEvmCase(standalone, standalone.id)).toEqual(standalone);
+    expect(selectPublicEvmCase(bundle, standalone.id)).toEqual(standalone);
+    expect(() => selectPublicEvmCase(standalone, "different-case")).toThrow(
+      "does not match the standalone case",
+    );
+    expect(() => selectPublicEvmCase({}, standalone.id)).toThrow(
+      "neither a standalone case nor a valid fixture bundle",
+    );
+  });
+
   it("matches the receipt chain, Transfer event, and AuthorizationUsed event", async () => {
     const { bundle } = await fixture();
     const conformanceCase = bundle.cases.find(

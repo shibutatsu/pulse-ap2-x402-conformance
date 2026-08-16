@@ -250,6 +250,29 @@ export class PublicEvmEvidenceError extends Error {
   }
 }
 
+export function selectPublicEvmCase(input: unknown, caseId: string): ConformanceCase {
+  const standalone = ConformanceCaseSchema.safeParse(input);
+  if (standalone.success) {
+    if (standalone.data.id !== caseId) {
+      throw new PublicEvmEvidenceError("The requested case id does not match the standalone case.");
+    }
+    return standalone.data;
+  }
+  const bundle = ConformanceBundleSchema.safeParse(input);
+  if (!bundle.success) {
+    throw new PublicEvmEvidenceError(
+      "The public EVM input is neither a standalone case nor a valid fixture bundle.",
+    );
+  }
+  const selected = bundle.data.cases.find(
+    (item) => typeof item === "object" && item !== null && "id" in item && item.id === caseId,
+  );
+  if (selected === undefined) {
+    throw new PublicEvmEvidenceError("The requested case id was not found.");
+  }
+  return ConformanceCaseSchema.parse(selected);
+}
+
 export interface PublicEvmSettlementEvidence {
   evidenceVersion: "pulse-public-evm-settlement/0.1";
   caseId: string;

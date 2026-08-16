@@ -7,6 +7,7 @@
 | [x402 Foundation, archived v0.1 corpus](https://github.com/x402-foundation/x402/tree/67b1ba0a7abbd7907a28fa624670872532e0eae9) | commit `67b1ba0a7abbd7907a28fa624670872532e0eae9`, `@x402/core` and `@x402/evm` 2.19.0 | Read-only verification of `fixtures/v0.1/cases.json` |
 | [AP2 issue #299](https://github.com/google-agentic-commerce/AP2/issues/299) | open issue observed 2026-07-21 | Extension-field loss and ID-only instrument matching regression cases |
 | [AP2 issue #265](https://github.com/google-agentic-commerce/AP2/issues/265) | unadopted proposal observed 2026-07-21 | Explicitly not used as a normative JCS/hash rule |
+| [Circle USDC contract addresses](https://developers.circle.com/stablecoins/usdc-contract-addresses) | Base Sepolia entry observed 2026-08-16 | Public settlement preparation uses chain ID `84532` and USDC `0x036CbD53842c5426634e7929541eC2318f3dCF7e` |
 
 The deterministic Python pipeline uses the pinned AP2 implementation to generate and independently
 re-verify 20 signed chains. The TypeScript runtime then verifies the committed compact artifacts
