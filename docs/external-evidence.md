@@ -113,7 +113,8 @@ mainnet assets, customer funds, or any token with value.
 
 After the prepared EIP-3009 call succeeds, rerun the pinned generator with the same evaluation time,
 timeout, and actual transaction hash. The receipt issue time may be the transaction block timestamp
-or a later observation time:
+or a later observation time. It is recorded separately as the AP2 verification time, so the earlier
+evaluation time and the resulting EIP-3009 authorization remain unchanged:
 
 ```bash
 sh scripts/ap2/run-pinned.sh --public-evidence \
@@ -161,6 +162,10 @@ The output excludes the RPC URL and contains no key material. The command never 
 transaction. Do not commit an RPC credential, private key, customer record, or funded test identity.
 The resulting JSON proves the listed receipt facts at its observation time; it is not perpetual
 finality, token-issuer identity, legal authorization, or production-readiness evidence.
+
+The repository includes one completed Base Sepolia example in
+[`fixtures/public-evm`](../fixtures/public-evm/README.md). Its receipt verification result is
+[`evidence/public-evm-base-sepolia.json`](../evidence/public-evm-base-sepolia.json).
 
 ## Release decision
 

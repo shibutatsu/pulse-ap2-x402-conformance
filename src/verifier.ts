@@ -435,13 +435,13 @@ export async function verifyConformanceCase(input: unknown): Promise<Conformance
   const closedMandateReference =
     cryptographicClosedMandateReference ?? verification.closedMandateReference;
   const expectedNonce = deriveEip3009Nonce(closedMandateReference);
-  if (verification.verifiedAtEpochSeconds !== nowEpochSeconds) {
+  if (verification.verifiedAtEpochSeconds < nowEpochSeconds) {
     addFailure(
       failures,
       "AP2_VERIFICATION_CONTEXT_MISMATCH",
       "ap2.verification.verifiedAtEpochSeconds",
-      "The AP2 verification time must equal the conformance case evaluation time.",
-      nowEpochSeconds,
+      "The AP2 verification time must not precede the conformance case evaluation time.",
+      `>= ${nowEpochSeconds}`,
       verification.verifiedAtEpochSeconds,
     );
   }

@@ -71,7 +71,9 @@ const conformanceCase = await createValidCase(normalized, signed, signedBundle, 
 });
 const report = await verifyConformanceCase(conformanceCase);
 if (!report.consistent) {
-  throw new Error(`The composed public EVM case failed offline verification: ${report.failures}`);
+  throw new Error(
+    `The composed public EVM case failed offline verification: ${JSON.stringify(report.failures)}`,
+  );
 }
 
 const authorization = conformanceCase.x402.payload.payload.authorization;

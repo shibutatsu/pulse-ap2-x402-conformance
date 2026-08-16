@@ -249,6 +249,7 @@ def generate(
             {
                 "id": CASE_ID,
                 "nowEpochSeconds": now_epoch_seconds,
+                "verificationTimeEpochSeconds": receipt_issued_at,
                 "expectedAudience": EXPECTED_AUDIENCE,
                 "expectedNonce": "ap2-public-evm-terminal-nonce-01",
                 "openCheckoutReference": open_checkout_reference,

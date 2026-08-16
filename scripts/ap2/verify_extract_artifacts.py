@@ -121,10 +121,16 @@ def verify_case(
 ) -> dict[str, Any]:
     case_id = case.get("id")
     require(isinstance(case_id, str) and case_id, "Case id missing")
-    verification_time = case.get("nowEpochSeconds")
+    evaluation_time = case.get("nowEpochSeconds")
     require(
-        isinstance(verification_time, int) and verification_time > 0,
+        isinstance(evaluation_time, int) and evaluation_time > 0,
         f"{case_id}: logical time missing",
+    )
+    verification_time = case.get("verificationTimeEpochSeconds", evaluation_time)
+    require(
+        isinstance(verification_time, int)
+        and verification_time >= evaluation_time,
+        f"{case_id}: verification time must not precede logical time",
     )
     artifacts = case.get("artifacts")
     expected = case.get("expected")

@@ -100,6 +100,7 @@ const NormalizedBundleSchema = z.looseObject({
 export const SignedArtifactCaseSchema = z.looseObject({
   id: z.string().min(1),
   nowEpochSeconds: z.number().int().positive(),
+  verificationTimeEpochSeconds: z.number().int().positive().optional(),
   expectedAudience: z.string().min(1),
   expectedNonce: z.string().min(1),
   openCheckoutReference: z.string().min(1),
@@ -227,7 +228,11 @@ export async function createValidCase(
   if (instrument.payer.toLowerCase() !== fixturePayer.address.toLowerCase()) {
     throw new Error(`Fixture payer key does not match signed AP2 case ${normalized.id}.`);
   }
-  if (signed.nowEpochSeconds !== normalized.verification.verifiedAtEpochSeconds) {
+  const signedVerificationTime = signed.verificationTimeEpochSeconds ?? signed.nowEpochSeconds;
+  if (signedVerificationTime < signed.nowEpochSeconds) {
+    throw new Error(`Signed verification time precedes logical time for ${normalized.id}.`);
+  }
+  if (signedVerificationTime !== normalized.verification.verifiedAtEpochSeconds) {
     throw new Error(`Signed and normalized verification times differ for ${normalized.id}.`);
   }
   if (signed.openCheckoutReference !== normalized.verification.openCheckoutReference) {
