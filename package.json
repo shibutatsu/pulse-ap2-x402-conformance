@@ -58,7 +58,7 @@
     "canonicalize": "2.1.0",
     "commander": "12.1.0",
     "jose": "6.2.8",
-    "viem": "2.55.13",
+    "viem": "2.55.15",
     "zod": "4.4.3"
   },
   "devDependencies": {
