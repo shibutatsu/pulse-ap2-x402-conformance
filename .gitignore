@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 .venv/
 dist/
+build/
 coverage/
 reports/
 .stryker-tmp/

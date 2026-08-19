@@ -527,10 +527,19 @@ describe("the committed conformance corpus", () => {
     expect(report.failures.map((failure) => failure.code)).toContain(expectedCode);
   });
 
-  it("reports a verification time that differs from the case evaluation time", async () => {
+  it("accepts verification after the case evaluation time", async () => {
     const bundle = await readBundle();
     const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
     changed.ap2.verification.verifiedAtEpochSeconds += 1;
+    changed.inputHash = conformanceInputHash(changed);
+
+    expect((await verifyConformanceCase(changed)).consistent).toBe(true);
+  });
+
+  it("reports verification before the case evaluation time", async () => {
+    const bundle = await readBundle();
+    const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
+    changed.ap2.verification.verifiedAtEpochSeconds -= 1;
     changed.inputHash = conformanceInputHash(changed);
 
     expect(

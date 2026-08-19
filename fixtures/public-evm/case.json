@@ -1,0 +1,225 @@
+{
+  "caseVersion": "ap2-x402-conformance/0.2",
+  "sourcePins": {
+    "ap2Commit": "e1ea56db72a6385bce3e5c1112b3a56ce60acb43",
+    "x402Commit": "c8247c4cd15f29498474404d94636e7dbb894e86",
+    "x402PackageVersion": "2.22.0"
+  },
+  "id": "public-base-sepolia-usdc-01",
+  "description": "AP2 to x402 EIP-3009 case bound to a public Base Sepolia USDC settlement.",
+  "nowEpochSeconds": 1786858400,
+  "ap2": {
+    "closedMandate": {
+      "vct": "mandate.payment.1",
+      "transaction_id": "eRG0ja8GoEvAUQc3ggq6hbibEiD8pILAcKLcdViVeJc",
+      "payee": {
+        "id": "merchant-public-base-sepolia-usdc-01",
+        "name": "Public Base Sepolia Fixture Merchant",
+        "website": "https://github.com/shibutatsu/pulse-ap2-x402-conformance"
+      },
+      "payment_amount": {
+        "amount": 1000,
+        "currency": "USD"
+      },
+      "payment_instrument": {
+        "id": "x402-eip3009-base-sepolia-usdc-public-01",
+        "type": "x402",
+        "description": "Public Base Sepolia USDC EIP-3009 evidence instrument",
+        "x402": {
+          "version": 2,
+          "scheme": "exact",
+          "network": "eip155:84532",
+          "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+          "amount": "1000",
+          "payTo": "0xa9d201e692ef4d28f7ae8c7fb4cdd80aaf9e171e",
+          "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+          "ap2PayeeId": "merchant-public-base-sepolia-usdc-01",
+          "ap2PaymentAmount": {
+            "amount": 1000,
+            "currency": "USD"
+          },
+          "maxTimeoutSeconds": 604800,
+          "eip712Domain": {
+            "name": "USDC",
+            "version": "2"
+          },
+          "nonceBinding": "base64url-decode-ap2-mandate-reference"
+        }
+      },
+      "execution_date": "2026-08-16T05:33:20Z",
+      "iat": 1786858280,
+      "exp": 1787463200
+    },
+    "openMandate": {
+      "vct": "mandate.payment.open.1",
+      "constraints": [
+        {
+          "type": "payment.reference",
+          "conditional_transaction_id": "eRG0ja8GoEvAUQc3ggq6hbibEiD8pILAcKLcdViVeJc"
+        },
+        {
+          "type": "payment.allowed_payment_instruments",
+          "allowed": [
+            {
+              "id": "x402-eip3009-base-sepolia-usdc-public-01",
+              "type": "x402",
+              "description": "Public Base Sepolia USDC EIP-3009 evidence instrument",
+              "x402": {
+                "amount": "1000",
+                "ap2PayeeId": "merchant-public-base-sepolia-usdc-01",
+                "ap2PaymentAmount": {
+                  "amount": 1000,
+                  "currency": "USD"
+                },
+                "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+                "eip712Domain": {
+                  "name": "USDC",
+                  "version": "2"
+                },
+                "maxTimeoutSeconds": 604800,
+                "network": "eip155:84532",
+                "nonceBinding": "base64url-decode-ap2-mandate-reference",
+                "payTo": "0xa9d201e692ef4d28f7ae8c7fb4cdd80aaf9e171e",
+                "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+                "scheme": "exact",
+                "version": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "payment.amount_range",
+          "currency": "USD",
+          "max": 1000,
+          "min": 1000
+        },
+        {
+          "type": "payment.allowed_payees",
+          "allowed": [
+            {
+              "id": "merchant-public-base-sepolia-usdc-01",
+              "name": "Public Base Sepolia Fixture Merchant",
+              "website": "https://github.com/shibutatsu/pulse-ap2-x402-conformance"
+            }
+          ]
+        }
+      ],
+      "cnf": {
+        "jwk": {
+          "kty": "EC",
+          "crv": "P-256",
+          "alg": "ES256",
+          "kid": "ap2-fixture-terminal-holder-v1",
+          "x": "aA9r_y8zudIAtRj6B7XqJkUAU7bK2BrH7PmHFx81_TA",
+          "y": "DmrwqZZHAAhZVYkWN8_KyC_QxG0TGr5WPzqkMtifLxs"
+        }
+      },
+      "iat": 1786858220,
+      "exp": 1787463200
+    },
+    "paymentReceipt": {
+      "status": "Success",
+      "iss": "synthetic-facilitator.example",
+      "iat": 1786858450,
+      "reference": "wOuAPs4rQRhmzofuO4DnoFpURvOVb4MRIDmeRaGEWjU",
+      "payment_id": "payment-public-base-sepolia-usdc-01",
+      "psp_confirmation_id": "psp-public-base-sepolia-usdc-01",
+      "network_confirmation_id": "0xb6a16b58ea994c4db07582cbbc590ffdbec0befffd055b1405f6482d966f2cb1",
+      "error": null,
+      "error_description": null
+    },
+    "verification": {
+      "verifier": "google-agentic-commerce/AP2@e1ea56db72a6385bce3e5c1112b3a56ce60acb43+scripts/ap2/verify_extract_artifacts.py/0.1",
+      "verifiedAtEpochSeconds": 1786858450,
+      "clockSkewSeconds": 0,
+      "openCheckoutReference": "eRG0ja8GoEvAUQc3ggq6hbibEiD8pILAcKLcdViVeJc",
+      "closedMandateClaimsHash": "iyRVGu9on1Z5OMGEgKyVR0S0Xgpm-ezFgliR9_UJHZo",
+      "openMandateClaimsHash": "4_PgwSxZel_hqapO01bW2KdGZKHrzoqT8rwcNAbpdg0",
+      "closedMandateReference": "wOuAPs4rQRhmzofuO4DnoFpURvOVb4MRIDmeRaGEWjU",
+      "cryptographicEvidence": {
+        "mandateChain": "eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImV4YW1wbGUrc2Qtand0IiwgImtpZCI6ICJhcDItZml4dHVyZS1vcGVuLWlzc3Vlci12MSJ9.eyJkZWxlZ2F0ZV9wYXlsb2FkIjogW3siLi4uIjogIlVvUlBscjR5cUNhUTd0aTRMU2V2cEx1c0xLTV9PWExSTXh6Tmk1N2hwWkEifV0sICJfc2RfYWxnIjogInNoYS0yNTYifQ.rFuz0Mpw35Y45YGtIv5Oan9o12SFphvZrExhfWVupn8OWI_7P6V4ieO8A6wEaQU2ZeLTBx1CXFuCycMJ1BbBig~WyJiemZsLV81SXVyczJOMDBmLTUwalJ3IiwgeyJpZCI6ICJ4NDAyLWVpcDMwMDktYmFzZS1zZXBvbGlhLXVzZGMtcHVibGljLTAxIiwgInR5cGUiOiAieDQwMiIsICJkZXNjcmlwdGlvbiI6ICJQdWJsaWMgQmFzZSBTZXBvbGlhIFVTREMgRUlQLTMwMDkgZXZpZGVuY2UgaW5zdHJ1bWVudCIsICJ4NDAyIjogeyJ2ZXJzaW9uIjogMiwgInNjaGVtZSI6ICJleGFjdCIsICJuZXR3b3JrIjogImVpcDE1NTo4NDUzMiIsICJhc3NldCI6ICIweDAzNkNiRDUzODQyYzU0MjY2MzRlNzkyOTU0MWVDMjMxOGYzZENGN2UiLCAiYW1vdW50IjogIjEwMDAiLCAicGF5VG8iOiAiMHhhOWQyMDFlNjkyZWY0ZDI4ZjdhZThjN2ZiNGNkZDgwYWFmOWUxNzFlIiwgInBheWVyIjogIjB4QTNBQ2FDMzFhNjMzODdlMDQxQ0I2YUM3QTVjRThhOTI1NTRFZjRDNyIsICJhcDJQYXllZUlkIjogIm1lcmNoYW50LXB1YmxpYy1iYXNlLXNlcG9saWEtdXNkYy0wMSIsICJhcDJQYXltZW50QW1vdW50IjogeyJhbW91bnQiOiAxMDAwLCAiY3VycmVuY3kiOiAiVVNEIn0sICJtYXhUaW1lb3V0U2Vjb25kcyI6IDYwNDgwMCwgImVpcDcxMkRvbWFpbiI6IHsibmFtZSI6ICJVU0RDIiwgInZlcnNpb24iOiAiMiJ9LCAibm9uY2VCaW5kaW5nIjogImJhc2U2NHVybC1kZWNvZGUtYXAyLW1hbmRhdGUtcmVmZXJlbmNlIn19XQ~WyI0S2ZvampHdFJWUHZQT19EdEVZdVdRIiwgeyJpZCI6ICJtZXJjaGFudC1wdWJsaWMtYmFzZS1zZXBvbGlhLXVzZGMtMDEiLCAibmFtZSI6ICJQdWJsaWMgQmFzZSBTZXBvbGlhIEZpeHR1cmUgTWVyY2hhbnQiLCAid2Vic2l0ZSI6ICJodHRwczovL2dpdGh1Yi5jb20vc2hpYnV0YXRzdS9wdWxzZS1hcDIteDQwMi1jb25mb3JtYW5jZSJ9XQ~WyJweEFhcldmeG5BRGRQaFh2aVN5RUxBIiwgeyJ2Y3QiOiAibWFuZGF0ZS5wYXltZW50Lm9wZW4uMSIsICJjb25zdHJhaW50cyI6IFt7InR5cGUiOiAicGF5bWVudC5yZWZlcmVuY2UiLCAiY29uZGl0aW9uYWxfdHJhbnNhY3Rpb25faWQiOiAiZVJHMGphOEdvRXZBVVFjM2dncTZoYmliRWlEOHBJTEFjS0xjZFZpVmVKYyJ9LCB7InR5cGUiOiAicGF5bWVudC5hbGxvd2VkX3BheW1lbnRfaW5zdHJ1bWVudHMiLCAiYWxsb3dlZCI6IFt7Ii4uLiI6ICI3cHZCd0ZERHUyVDFrcVExbWZLNU1TVTVyYUdzcWJPdzViR3ZIXzFHRHNnIn1dfSwgeyJ0eXBlIjogInBheW1lbnQuYW1vdW50X3JhbmdlIiwgImN1cnJlbmN5IjogIlVTRCIsICJtYXgiOiAxMDAwLCAibWluIjogMTAwMH0sIHsidHlwZSI6ICJwYXltZW50LmFsbG93ZWRfcGF5ZWVzIiwgImFsbG93ZWQiOiBbeyIuLi4iOiAidFpycVl0N0tXcVF6a1l6OG1MXzRTcGtHdnpPVEdhNDIxcHhQcExEZFRwNCJ9XX1dLCAiY25mIjogeyJqd2siOiB7ImFsZyI6ICJFUzI1NiIsICJjcnYiOiAiUC0yNTYiLCAia2lkIjogImFwMi1maXh0dXJlLXRlcm1pbmFsLWhvbGRlci12MSIsICJrdHkiOiAiRUMiLCAieCI6ICJhQTlyX3k4enVkSUF0Umo2QjdYcUprVUFVN2JLMkJySDdQbUhGeDgxX1RBIiwgInkiOiAiRG1yd3FaWkhBQWhaVllrV044X0t5Q19ReEcwVEdyNVdQenFrTXRpZkx4cyJ9fSwgImlhdCI6IDE3ODY4NTgyMjAsICJleHAiOiAxNzg3NDYzMjAwfV0~~eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImtiK3NkLWp3dCIsICJraWQiOiAiYXAyLWZpeHR1cmUtdGVybWluYWwtaG9sZGVyLXYxIn0.eyJkZWxlZ2F0ZV9wYXlsb2FkIjogW3siLi4uIjogIjZFaTFLeG1ZNDU1SlZRT0lqSkxPeWRuVHJNTldrZVd3V3NHMGM2eTRpd3cifV0sICJpYXQiOiAxNzg2ODU4MjgwLCAiYXVkIjogImh0dHBzOi8vc3ludGhldGljLWZhY2lsaXRhdG9yLmV4YW1wbGUvYXAyIiwgIm5vbmNlIjogImFwMi1wdWJsaWMtZXZtLXRlcm1pbmFsLW5vbmNlLTAxIiwgInNkX2hhc2giOiAienprcXkxcFFLLVFjNzV0TmVIMExYQ2toSjhjemJLdmgwM2x2a1UyaEdrYyIsICJfc2RfYWxnIjogInNoYS0yNTYifQ.IGr4D6b095jfPpqY5N236F-0-DYCU9ze2ponxR0UyhkD9mdNgTCVBylqeaAnYoEhuAirkMbCeKKLaEjehnGWeA~WyJMZF81VDJzbXE3dnktTlJNOGozSEFBIiwgeyJ2Y3QiOiAibWFuZGF0ZS5wYXltZW50LjEiLCAidHJhbnNhY3Rpb25faWQiOiAiZVJHMGphOEdvRXZBVVFjM2dncTZoYmliRWlEOHBJTEFjS0xjZFZpVmVKYyIsICJwYXllZSI6IHsiaWQiOiAibWVyY2hhbnQtcHVibGljLWJhc2Utc2Vwb2xpYS11c2RjLTAxIiwgIm5hbWUiOiAiUHVibGljIEJhc2UgU2Vwb2xpYSBGaXh0dXJlIE1lcmNoYW50IiwgIndlYnNpdGUiOiAiaHR0cHM6Ly9naXRodWIuY29tL3NoaWJ1dGF0c3UvcHVsc2UtYXAyLXg0MDItY29uZm9ybWFuY2UifSwgInBheW1lbnRfYW1vdW50IjogeyJhbW91bnQiOiAxMDAwLCAiY3VycmVuY3kiOiAiVVNEIn0sICJwYXltZW50X2luc3RydW1lbnQiOiB7ImlkIjogIng0MDItZWlwMzAwOS1iYXNlLXNlcG9saWEtdXNkYy1wdWJsaWMtMDEiLCAidHlwZSI6ICJ4NDAyIiwgImRlc2NyaXB0aW9uIjogIlB1YmxpYyBCYXNlIFNlcG9saWEgVVNEQyBFSVAtMzAwOSBldmlkZW5jZSBpbnN0cnVtZW50IiwgIng0MDIiOiB7InZlcnNpb24iOiAyLCAic2NoZW1lIjogImV4YWN0IiwgIm5ldHdvcmsiOiAiZWlwMTU1Ojg0NTMyIiwgImFzc2V0IjogIjB4MDM2Q2JENTM4NDJjNTQyNjYzNGU3OTI5NTQxZUMyMzE4ZjNkQ0Y3ZSIsICJhbW91bnQiOiAiMTAwMCIsICJwYXlUbyI6ICIweGE5ZDIwMWU2OTJlZjRkMjhmN2FlOGM3ZmI0Y2RkODBhYWY5ZTE3MWUiLCAicGF5ZXIiOiAiMHhBM0FDYUMzMWE2MzM4N2UwNDFDQjZhQzdBNWNFOGE5MjU1NEVmNEM3IiwgImFwMlBheWVlSWQiOiAibWVyY2hhbnQtcHVibGljLWJhc2Utc2Vwb2xpYS11c2RjLTAxIiwgImFwMlBheW1lbnRBbW91bnQiOiB7ImFtb3VudCI6IDEwMDAsICJjdXJyZW5jeSI6ICJVU0QifSwgIm1heFRpbWVvdXRTZWNvbmRzIjogNjA0ODAwLCAiZWlwNzEyRG9tYWluIjogeyJuYW1lIjogIlVTREMiLCAidmVyc2lvbiI6ICIyIn0sICJub25jZUJpbmRpbmciOiAiYmFzZTY0dXJsLWRlY29kZS1hcDItbWFuZGF0ZS1yZWZlcmVuY2UifX0sICJleGVjdXRpb25fZGF0ZSI6ICIyMDI2LTA4LTE2VDA1OjMzOjIwWiIsICJpYXQiOiAxNzg2ODU4MjgwLCAiZXhwIjogMTc4NzQ2MzIwMH1d~",
+        "paymentReceiptJwt": "eyJhbGciOiAiRVMyNTYiLCAia2lkIjogImFwMi1maXh0dXJlLXJlY2VpcHQtaXNzdWVyLXYxIiwgInR5cCI6ICJKV1QifQ.eyJzdGF0dXMiOiAiU3VjY2VzcyIsICJpc3MiOiAic3ludGhldGljLWZhY2lsaXRhdG9yLmV4YW1wbGUiLCAiaWF0IjogMTc4Njg1ODQ1MCwgInJlZmVyZW5jZSI6ICJ3T3VBUHM0clFSaG16b2Z1TzREbm9GcFVSdk9WYjRNUklEbWVSYUdFV2pVIiwgImVycm9yIjogbnVsbCwgImVycm9yX2Rlc2NyaXB0aW9uIjogbnVsbCwgInBheW1lbnRfaWQiOiAicGF5bWVudC1wdWJsaWMtYmFzZS1zZXBvbGlhLXVzZGMtMDEiLCAicHNwX2NvbmZpcm1hdGlvbl9pZCI6ICJwc3AtcHVibGljLWJhc2Utc2Vwb2xpYS11c2RjLTAxIiwgIm5ldHdvcmtfY29uZmlybWF0aW9uX2lkIjogIjB4YjZhMTZiNThlYTk5NGM0ZGIwNzU4MmNiYmM1OTBmZmRiZWMwYmVmZmZkMDU1YjE0MDVmNjQ4MmQ5NjZmMmNiMSJ9.FxpbDZNnYVVt8nhuuCj-8MmmGgRjqzFZf6mQeFZNDd0Jm_KVre2z2NrK9GTvEbVmYUi3iKpres47mCt1VqDDMg",
+        "trustedRootPublicJwk": {
+          "kty": "EC",
+          "crv": "P-256",
+          "alg": "ES256",
+          "kid": "ap2-fixture-open-issuer-v1",
+          "x": "vZMk6rM5e6U5-XFVTcGUx7Dd-An1bpnHd83X3UsgEdo",
+          "y": "qaTynD0otTKELEbn7bBVYZ7cxsMffZareCf2l7cgbQI"
+        },
+        "trustedReceiptPublicJwk": {
+          "kty": "EC",
+          "crv": "P-256",
+          "alg": "ES256",
+          "kid": "ap2-fixture-receipt-issuer-v1",
+          "x": "JIFfVG75uZL2eFEsQqzfjVZDW3cK03Y-GtCP1zCHApI",
+          "y": "SeOOFRBp0NCxyHFybBJNAbRjEXUws8HKK8hrxeJPbT8"
+        },
+        "expectedAudience": "https://synthetic-facilitator.example/ap2",
+        "expectedNonce": "ap2-public-evm-terminal-nonce-01"
+      }
+    }
+  },
+  "x402": {
+    "requirements": {
+      "scheme": "exact",
+      "network": "eip155:84532",
+      "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "amount": "1000",
+      "payTo": "0xa9d201e692ef4d28f7ae8c7fb4cdd80aaf9e171e",
+      "maxTimeoutSeconds": 604800,
+      "extra": {
+        "name": "USDC",
+        "version": "2",
+        "assetTransferMethod": "eip3009",
+        "ap2MandateReference": "wOuAPs4rQRhmzofuO4DnoFpURvOVb4MRIDmeRaGEWjU",
+        "ap2NonceDerivation": "base64url-decode-ap2-mandate-reference"
+      }
+    },
+    "payload": {
+      "x402Version": 2,
+      "resource": {
+        "url": "https://github.com/shibutatsu/pulse-ap2-x402-conformance/tree/main/fixtures/public-evm",
+        "description": "Public Base Sepolia USDC settlement evidence fixture",
+        "mimeType": "application/json"
+      },
+      "accepted": {
+        "scheme": "exact",
+        "network": "eip155:84532",
+        "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+        "amount": "1000",
+        "payTo": "0xa9d201e692ef4d28f7ae8c7fb4cdd80aaf9e171e",
+        "maxTimeoutSeconds": 604800,
+        "extra": {
+          "name": "USDC",
+          "version": "2",
+          "assetTransferMethod": "eip3009",
+          "ap2MandateReference": "wOuAPs4rQRhmzofuO4DnoFpURvOVb4MRIDmeRaGEWjU",
+          "ap2NonceDerivation": "base64url-decode-ap2-mandate-reference"
+        }
+      },
+      "payload": {
+        "signature": "0x0a5c4f9c13958cc89151d80527e065157963fb0ab23bcc2b152498d2ee668bb72a73d76e4025596caed366bb17f496f31f7249c04b96dbcc60a1e5f87a3732801c",
+        "authorization": {
+          "from": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+          "to": "0xA9D201e692Ef4D28f7AE8c7fb4CDd80aaf9E171e",
+          "value": "1000",
+          "validAfter": "1786858370",
+          "validBefore": "1787463200",
+          "nonce": "0xc0eb803ece2b411866ce87ee3b80e7a05a5446f3956f831120399e45a1845a35"
+        }
+      }
+    },
+    "settlement": {
+      "success": true,
+      "payer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+      "transaction": "0xb6a16b58ea994c4db07582cbbc590ffdbec0befffd055b1405f6482d966f2cb1",
+      "network": "eip155:84532"
+    }
+  },
+  "inputHash": "Er3NyDsyinLooKHl5DE6uw9g4l3ICVT2UWpCsDXXT60",
+  "expected": {
+    "consistent": true,
+    "failureCodes": []
+  }
+}

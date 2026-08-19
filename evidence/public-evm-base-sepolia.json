@@ -1,0 +1,25 @@
+{
+  "evidenceVersion": "pulse-public-evm-settlement/0.1",
+  "caseId": "public-base-sepolia-usdc-01",
+  "caseInputHash": "Er3NyDsyinLooKHl5DE6uw9g4l3ICVT2UWpCsDXXT60",
+  "network": "eip155:84532",
+  "chainId": 84532,
+  "transactionHash": "0xb6a16b58ea994c4db07582cbbc590ffdbec0befffd055b1405f6482d966f2cb1",
+  "blockNumber": "45545081",
+  "blockHash": "0xb26c660f2be2ebb8561d84f3c742038c10f96b271e173320bdf875bb6274c5ce",
+  "confirmations": "95",
+  "receiptStatus": "success",
+  "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+  "transfer": {
+    "from": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+    "to": "0xA9D201e692Ef4D28f7AE8c7fb4CDd80aaf9E171e",
+    "value": "1000",
+    "logIndex": 1
+  },
+  "authorizationUsed": {
+    "authorizer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+    "nonce": "0xc0eb803ece2b411866ce87ee3b80e7a05a5446f3956f831120399e45a1845a35",
+    "logIndex": 0
+  },
+  "verifiedAt": "2026-08-16T05:37:19.794Z"
+}

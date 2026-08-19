@@ -77,13 +77,72 @@ determine whether the review method was sufficient. Those checks remain human re
 
 ## Verify one fixture against a public EVM receipt
 
-The offline fixtures contain synthetic transaction IDs. Replace the transaction ID of one otherwise
-accepted case with a real public settlement transaction, update and re-sign all fields affected by
-that change, and verify the updated case offline first. Then run the read-only receipt check:
+The 80-case corpus intentionally keeps synthetic transaction IDs. A public settlement case is a
+separate, standalone case that retains the AP2 and x402 checks while binding them to a successful
+public transaction. Do not replace a case inside `fixtures/v0.2/cases.json`; doing so would change
+the corpus reproduced by outside implementers.
+
+### Prepare the authorization without sending a transaction
+
+Choose an explicit evaluation time and keep it unchanged through preparation and finalization. The
+default authorization window is seven days. Generate the signed AP2 chain with the zero transaction
+hash, then compose the standalone case and transaction-ready EIP-3009 arguments:
+
+```bash
+sh scripts/ap2/run-pinned.sh --public-evidence \
+  --now-epoch-seconds <evaluation-time> \
+  --output-directory build/public-evm
+
+npm run public-evm:compose -- \
+  --artifact build/public-evm/ap2-signed-artifact.json \
+  --normalized build/public-evm/ap2-normalized-record.json \
+  --output build/public-evm/prepared-case.json \
+  --authorization-output build/public-evm/prepared-authorization.json
+```
+
+The preparation uses Circle's Base Sepolia USDC contract and a publicly derived fixture payer. It
+does not contact an RPC, fund the payer, or submit a transaction. The zero transaction hash and
+`state: prepared` are explicit non-evidence markers. Never publish the prepared case as a completed
+settlement.
+
+Funding the fixture payer with testnet USDC and broadcasting the prepared contract call are external
+state changes. A person must perform and approve those steps. Do not use the public fixture key for
+mainnet assets, customer funds, or any token with value.
+
+### Record the transaction hash without changing the authorization
+
+After the prepared EIP-3009 call succeeds, rerun the pinned generator with the same evaluation time,
+timeout, and actual transaction hash. The receipt issue time may be the transaction block timestamp
+or a later observation time. It is recorded separately as the AP2 verification time, so the earlier
+evaluation time and the resulting EIP-3009 authorization remain unchanged:
+
+```bash
+sh scripts/ap2/run-pinned.sh --public-evidence \
+  --now-epoch-seconds <same-evaluation-time> \
+  --receipt-issued-at <receipt-time> \
+  --network-confirmation-id <0x-transaction-hash> \
+  --output-directory build/public-evm-recorded
+
+npm run public-evm:compose -- \
+  --artifact build/public-evm-recorded/ap2-signed-artifact.json \
+  --normalized build/public-evm-recorded/ap2-normalized-record.json \
+  --output build/public-evm-recorded/public-case.json \
+  --authorization-output build/public-evm-recorded/recorded-authorization.json \
+  --prepared-authorization build/public-evm/prepared-authorization.json
+```
+
+The composer hashes the network, asset, function arguments, nonce, and signature. Finalization fails
+if that hash differs from the prepared authorization. Only the expected transaction hash, AP2
+receipt, case input hash, and state may change.
+
+### Match the standalone case to the public receipt
+
+The `evm` command accepts either the versioned 80-case bundle or a standalone public settlement
+case. Run the read-only receipt check against the recorded case:
 
 ```bash
 PULSE_EVM_RPC_URL="<read-only endpoint>" \
-  npm run evidence:evm -- path/to/live-case-bundle.json \
+  npm run evidence:evm -- build/public-evm-recorded/public-case.json \
   --case <case-id> \
   --min-confirmations 12 \
   --output path/to/public-evm-evidence.json
@@ -103,6 +162,10 @@ The output excludes the RPC URL and contains no key material. The command never 
 transaction. Do not commit an RPC credential, private key, customer record, or funded test identity.
 The resulting JSON proves the listed receipt facts at its observation time; it is not perpetual
 finality, token-issuer identity, legal authorization, or production-readiness evidence.
+
+The repository includes one completed Base Sepolia example in
+[`fixtures/public-evm`](../fixtures/public-evm/README.md). Its receipt verification result is
+[`evidence/public-evm-base-sepolia.json`](../evidence/public-evm-base-sepolia.json).
 
 ## Release decision
 

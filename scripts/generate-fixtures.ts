@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { type Address, type Hex, keccak256, stringToHex } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { z } from "zod";
@@ -79,7 +79,7 @@ type AllowedInstrumentConstraint = Extract<
 >;
 type AllowedInstrument = AllowedInstrumentConstraint["allowed"][number];
 
-const NormalizedRecordSchema = z.strictObject({
+export const NormalizedRecordSchema = z.strictObject({
   id: z.string().min(1),
   closedMandate: ClosedPaymentMandateSchema,
   openMandate: OpenPaymentMandateSchema,
@@ -96,12 +96,13 @@ const NormalizedRecordSchema = z.strictObject({
 });
 
 const NormalizedBundleSchema = z.looseObject({
-  records: z.array(NormalizedRecordSchema).length(VALID_CASE_COUNT),
+  records: z.array(NormalizedRecordSchema),
 });
 
-const SignedArtifactCaseSchema = z.looseObject({
+export const SignedArtifactCaseSchema = z.looseObject({
   id: z.string().min(1),
   nowEpochSeconds: z.number().int().positive(),
+  verificationTimeEpochSeconds: z.number().int().positive().optional(),
   expectedAudience: z.string().min(1),
   expectedNonce: z.string().min(1),
   openCheckoutReference: z.string().min(1),
@@ -114,17 +115,26 @@ const SignedArtifactCaseSchema = z.looseObject({
   }),
 });
 
-const SignedArtifactBundleSchema = z.looseObject({
+export const SignedArtifactBundleSchema = z.looseObject({
   publicKeys: z.looseObject({
     openMandateIssuer: PublicEs256JwkSchema,
     paymentReceiptIssuer: PublicEs256JwkSchema,
   }),
-  cases: z.array(SignedArtifactCaseSchema).length(VALID_CASE_COUNT),
+  cases: z.array(SignedArtifactCaseSchema),
 });
 
-type NormalizedRecord = z.infer<typeof NormalizedRecordSchema>;
-type SignedArtifactCase = z.infer<typeof SignedArtifactCaseSchema>;
-type SignedArtifactBundle = z.infer<typeof SignedArtifactBundleSchema>;
+export type NormalizedRecord = z.infer<typeof NormalizedRecordSchema>;
+export type SignedArtifactCase = z.infer<typeof SignedArtifactCaseSchema>;
+export type SignedArtifactBundle = z.infer<typeof SignedArtifactBundleSchema>;
+
+export interface ValidCaseOptions {
+  resourceUrl?: string;
+  resourceDescription?: string;
+  caseDescription?: string;
+  validAfter?: string;
+  validBefore?: string;
+  settlementTransaction?: string;
+}
 
 function sha256Base64Url(value: string): string {
   return createHash("sha256").update(value, "utf8").digest("base64url");
@@ -218,10 +228,11 @@ async function signAuthorization(
   });
 }
 
-async function createValidCase(
+export async function createValidCase(
   normalized: NormalizedRecord,
   signed: SignedArtifactCase,
   signedBundle: SignedArtifactBundle,
+  options: ValidCaseOptions = {},
 ): Promise<ConformanceCase> {
   if (normalized.id !== signed.id) {
     throw new Error(`Signed and normalized AP2 case IDs differ: ${normalized.id}/${signed.id}`);
@@ -234,7 +245,11 @@ async function createValidCase(
   if (instrument.payer.toLowerCase() !== fixturePayer.address.toLowerCase()) {
     throw new Error(`Fixture payer key does not match signed AP2 case ${normalized.id}.`);
   }
-  if (signed.nowEpochSeconds !== normalized.verification.verifiedAtEpochSeconds) {
+  const signedVerificationTime = signed.verificationTimeEpochSeconds ?? signed.nowEpochSeconds;
+  if (signedVerificationTime < signed.nowEpochSeconds) {
+    throw new Error(`Signed verification time precedes logical time for ${normalized.id}.`);
+  }
+  if (signedVerificationTime !== normalized.verification.verifiedAtEpochSeconds) {
     throw new Error(`Signed and normalized verification times differ for ${normalized.id}.`);
   }
   if (signed.openCheckoutReference !== normalized.verification.openCheckoutReference) {
@@ -263,7 +278,7 @@ async function createValidCase(
       ap2NonceDerivation: "base64url-decode-ap2-mandate-reference" as const,
     },
   };
-  const validBefore = Math.min(
+  const defaultValidBefore = Math.min(
     signed.nowEpochSeconds + instrument.maxTimeoutSeconds,
     closedMandate.exp,
     openMandate.exp,
@@ -273,16 +288,17 @@ async function createValidCase(
       paymentRequired: {
         x402Version: 2,
         resource: {
-          url: `https://fixtures.example/pulse-ap2-x402/${normalized.id}`,
-          description: `Synthetic conformance resource for ${normalized.id}`,
+          url: options.resourceUrl ?? `https://fixtures.example/pulse-ap2-x402/${normalized.id}`,
+          description:
+            options.resourceDescription ?? `Synthetic conformance resource for ${normalized.id}`,
           mimeType: "application/json",
         },
         accepts: [requirements],
       },
       fixtureSigner: fixturePayer,
       closedMandateReference,
-      validAfter: String(signed.nowEpochSeconds - 30),
-      validBefore: String(validBefore),
+      validAfter: options.validAfter ?? String(signed.nowEpochSeconds - 30),
+      validBefore: options.validBefore ?? String(defaultValidBefore),
     }),
   );
 
@@ -290,7 +306,9 @@ async function createValidCase(
     caseVersion: "ap2-x402-conformance/0.2",
     sourcePins: SOURCE_PINS,
     id: normalized.id,
-    description: `Cryptographically signed AP2 to x402 EIP-3009 consistency fixture ${normalized.id}.`,
+    description:
+      options.caseDescription ??
+      `Cryptographically signed AP2 to x402 EIP-3009 consistency fixture ${normalized.id}.`,
     nowEpochSeconds: signed.nowEpochSeconds,
     ap2: {
       closedMandate: structuredClone(closedMandate),
@@ -320,7 +338,7 @@ async function createValidCase(
       settlement: {
         success: true,
         payer: instrument.payer,
-        transaction: paymentReceipt.network_confirmation_id,
+        transaction: options.settlementTransaction ?? paymentReceipt.network_confirmation_id,
         network: instrument.network,
       },
     },
@@ -803,6 +821,12 @@ async function main(): Promise<void> {
   ]);
   const normalizedBundle = NormalizedBundleSchema.parse(JSON.parse(normalizedInput));
   const signedBundle = SignedArtifactBundleSchema.parse(JSON.parse(signedInput));
+  if (
+    normalizedBundle.records.length !== VALID_CASE_COUNT ||
+    signedBundle.cases.length !== VALID_CASE_COUNT
+  ) {
+    throw new Error(`Expected exactly ${VALID_CASE_COUNT} signed and normalized AP2 cases.`);
+  }
   const packageManifest = PackageManifestSchema.parse(JSON.parse(packageManifestInput));
   const installedCoreManifest = InstalledPackageManifestSchema.parse(
     JSON.parse(installedCoreManifestInput),
@@ -864,4 +888,7 @@ async function main(): Promise<void> {
   );
 }
 
-await main();
+const executedPath = process.argv[1];
+if (executedPath !== undefined && import.meta.url === pathToFileURL(resolve(executedPath)).href) {
+  await main();
+}

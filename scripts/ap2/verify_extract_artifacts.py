@@ -17,7 +17,6 @@ from jwcrypto.jwk import JWK
 
 from artifact_common import (
     AP2_COMMIT,
-    FIXED_NOW,
     FIXTURE_COUNT,
     GENERATED_AT,
     OPEN_ISSUER_KEY_LABEL,
@@ -122,7 +121,17 @@ def verify_case(
 ) -> dict[str, Any]:
     case_id = case.get("id")
     require(isinstance(case_id, str) and case_id, "Case id missing")
-    require(case.get("nowEpochSeconds") == FIXED_NOW, f"{case_id}: logical time mismatch")
+    evaluation_time = case.get("nowEpochSeconds")
+    require(
+        isinstance(evaluation_time, int) and evaluation_time > 0,
+        f"{case_id}: logical time missing",
+    )
+    verification_time = case.get("verificationTimeEpochSeconds", evaluation_time)
+    require(
+        isinstance(verification_time, int)
+        and verification_time >= evaluation_time,
+        f"{case_id}: verification time must not precede logical time",
+    )
     artifacts = case.get("artifacts")
     expected = case.get("expected")
     require(isinstance(artifacts, dict), f"{case_id}: artifacts missing")
@@ -141,7 +150,7 @@ def verify_case(
         key_or_provider=open_public,
         payload_type=OpenPaymentMandateWithX402,
         clock_skew_seconds=0,
-        current_time=FIXED_NOW,
+        current_time=verification_time,
     )
     require(
         isinstance(separately_verified_open.mandate_payload, OpenPaymentMandateWithX402),
@@ -154,7 +163,7 @@ def verify_case(
         expected_aud=case.get("expectedAudience"),
         expected_nonce=case.get("expectedNonce"),
         clock_skew_seconds=0,
-        current_time=FIXED_NOW,
+        current_time=verification_time,
     )
     require(
         isinstance(verified_payloads, list) and len(verified_payloads) == 2,
@@ -242,7 +251,7 @@ def verify_case(
             "keyBindingVerified": True,
             "checkoutBindingVerified": True,
             "receiptSignatureVerified": True,
-            "verifiedAtEpochSeconds": FIXED_NOW,
+            "verifiedAtEpochSeconds": verification_time,
             "clockSkewSeconds": 0,
             "openCheckoutReference": open_checkout_reference,
             "closedMandateClaimsHash": canonical_sha256_b64url(closed_claims),
