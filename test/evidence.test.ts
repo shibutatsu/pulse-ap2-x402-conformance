@@ -11,7 +11,7 @@ import {
 } from "../src/evidence.js";
 import type { ConformanceBundle, ConformanceCase } from "../src/types.js";
 
-const fixtureUrl = new URL("../fixtures/v0.2/cases.json", import.meta.url);
+const fixtureUrl = new URL("../fixtures/v0.3/cases.json", import.meta.url);
 const TRANSFER_TOPIC = keccak256(stringToHex("Transfer(address,address,uint256)"));
 const AUTHORIZATION_USED_TOPIC = keccak256(stringToHex("AuthorizationUsed(address,bytes32)"));
 
@@ -35,7 +35,7 @@ function reproductionRecord(raw: string, bundle: ConformanceBundle): Record<stri
     },
     fixture: {
       repositoryCommit: "2".repeat(40),
-      path: "fixtures/v0.2/cases.json",
+      path: "fixtures/v0.3/cases.json",
       sha256: createHash("sha256").update(raw, "utf8").digest("hex"),
       caseCount: 80,
     },
@@ -133,7 +133,7 @@ describe("independent evidence records", () => {
     expect(verifyIndependentReproductionRecord(raw, record)).toMatchObject({
       automatedChecksPassed: false,
       errors: [
-        "fixture.path: Expected fixtures/v0.2/cases.json for ap2-x402-conformance-bundle/0.2",
+        "fixture.path: Expected fixtures/v0.3/cases.json for ap2-x402-conformance-bundle/0.3",
       ],
     });
   });

@@ -29,8 +29,8 @@ const BASE_SEPOLIA_NETWORK = "eip155:84532";
 const LOCAL_NETWORK = "eip155:31337";
 const SOURCE_PINS = {
   ap2Commit: "e1ea56db72a6385bce3e5c1112b3a56ce60acb43",
-  x402Commit: "c8247c4cd15f29498474404d94636e7dbb894e86",
-  x402PackageVersion: "2.22.0",
+  x402Commit: "17d319fab5c17a6b4873eb41197894db924f59ed",
+  x402PackageVersion: "2.23.0",
 } as const;
 
 const PackageManifestSchema = z.object({
@@ -303,7 +303,7 @@ export async function createValidCase(
   );
 
   const conformanceCase: ConformanceCase = {
-    caseVersion: "ap2-x402-conformance/0.2",
+    caseVersion: "ap2-x402-conformance/0.3",
     sourcePins: SOURCE_PINS,
     id: normalized.id,
     description:
@@ -868,7 +868,7 @@ async function main(): Promise<void> {
   }
 
   const bundle: ConformanceBundle = ConformanceBundleSchema.parse({
-    bundleVersion: "ap2-x402-conformance-bundle/0.2",
+    bundleVersion: "ap2-x402-conformance-bundle/0.3",
     generatedAt: GENERATED_AT,
     sourcePins: SOURCE_PINS,
     cases,
@@ -880,7 +880,7 @@ async function main(): Promise<void> {
     );
   }
 
-  const outputPath = resolve(scriptDirectory, "../fixtures/v0.2/cases.json");
+  const outputPath = resolve(scriptDirectory, "../fixtures/v0.3/cases.json");
   await mkdir(dirname(outputPath), { recursive: true });
   await writeFile(outputPath, `${JSON.stringify(bundle, null, 2)}\n`, "utf8");
   process.stdout.write(

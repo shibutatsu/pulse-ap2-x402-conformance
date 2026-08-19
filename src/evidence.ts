@@ -41,7 +41,11 @@ export const IndependentReproductionRecordSchema = z.strictObject({
   }),
   fixture: z.strictObject({
     repositoryCommit: gitCommit,
-    path: z.enum(["fixtures/v0.1/cases.json", "fixtures/v0.2/cases.json"]),
+    path: z.enum([
+      "fixtures/v0.1/cases.json",
+      "fixtures/v0.2/cases.json",
+      "fixtures/v0.3/cases.json",
+    ]),
     sha256,
     caseCount: z.literal(80),
   }),
@@ -133,7 +137,9 @@ export function verifyIndependentReproductionRecord(
   const expectedFixturePath =
     bundleResult.data.bundleVersion === "ap2-x402-conformance-bundle/0.1"
       ? "fixtures/v0.1/cases.json"
-      : "fixtures/v0.2/cases.json";
+      : bundleResult.data.bundleVersion === "ap2-x402-conformance-bundle/0.2"
+        ? "fixtures/v0.2/cases.json"
+        : "fixtures/v0.3/cases.json";
   if (record.fixture.path !== expectedFixturePath) {
     errors.push(
       `fixture.path: Expected ${expectedFixturePath} for ${bundleResult.data.bundleVersion}`,

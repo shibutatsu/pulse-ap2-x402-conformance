@@ -98,6 +98,10 @@ export async function createAp2BoundX402PaymentPayload({
   const nonce = deriveEip3009Nonce(closedMandateReference);
 
   const client = registerExactEvmScheme(new x402Client(), { signer: fixtureSigner });
+  // The single requirement is already strict-checked against the verified AP2 input above;
+  // client-side spend controls would couple fixture bytes to the upstream default-asset
+  // catalog and USD caps, so deterministic generation disables them.
+  client.setSpendControls(false);
   client.registerExtension({
     key: "org.ethereum.ap2",
     enrichPaymentPayload: async (paymentPayload) => {

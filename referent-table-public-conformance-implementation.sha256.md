@@ -55,3 +55,5 @@
 
 - 記録時点: x402 2.22.0のclient extension境界とfixture v0.2の固定出典を定義した完成版
 - SHA-256: `a63c2a00c6fd56c19da02b74998af6872ea666db40bec9aa9c1403b5fceb3335`
+- 記録時点: x402固定版を2.23.0へ更新し、producerがwallet向けspend controlsを無効化する定義を反映した完成版
+- SHA-256: `bd8644256347f514805e5d3201b6ffc20a47f875cd31e73c017f753b10214fce`
