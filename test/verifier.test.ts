@@ -6,8 +6,9 @@ import { canonicalSha256Base64Url, conformanceInputHash } from "../src/canonical
 import type { ConformanceBundle, ConformanceCase } from "../src/types.js";
 import { verifyConformanceBundle, verifyConformanceCase } from "../src/verifier.js";
 
-const fixtureUrl = new URL("../fixtures/v0.2/cases.json", import.meta.url);
+const fixtureUrl = new URL("../fixtures/v0.3/cases.json", import.meta.url);
 const archivedFixtureUrl = new URL("../fixtures/v0.1/cases.json", import.meta.url);
+const archivedV02FixtureUrl = new URL("../fixtures/v0.2/cases.json", import.meta.url);
 const fixturePayer = privateKeyToAccount(
   keccak256(stringToHex("pulse-ap2-x402-conformance/public-fixture-payer/v1")),
 );
@@ -63,6 +64,18 @@ describe("the committed conformance corpus", () => {
     });
   });
 
+  it("keeps the archived v0.2 corpus verifiable under its original source pins", async () => {
+    const archived = JSON.parse(
+      await readFile(fileURLToPath(archivedV02FixtureUrl), "utf8"),
+    ) as ConformanceBundle;
+    await expect(verifyConformanceBundle(archived)).resolves.toMatchObject({
+      allExpectationsMatched: true,
+      total: 80,
+      passedExpectations: 80,
+      failedExpectations: 0,
+    });
+  });
+
   it("contains 20 accepted and 60 fail-closed cases whose expectations all match", async () => {
     const bundle = await readBundle();
     expect(bundle.cases).toHaveLength(80);
@@ -79,7 +92,7 @@ describe("the committed conformance corpus", () => {
       passedExpectations: 80,
       failedExpectations: 0,
     });
-    expect(canonicalSha256Base64Url(report)).toBe("nItJJX4clF-P1zmtnSLaAh3s_5ZjzdSx4ixCc3ecDEM");
+    expect(canonicalSha256Base64Url(report)).toBe("4fzsljbB2dr7MzMoOohMi76QJGmgtTGPQru2c76sKyY");
   });
 
   it("recovers the payer for every accepted ECDSA fixture", async () => {

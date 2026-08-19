@@ -103,11 +103,11 @@ EVM receipt, using the separate evidence commands in
 [`docs/external-evidence.md`](docs/external-evidence.md). The online command is read-only and does
 not change the offline verifier's no-network boundary.
 
-The current corpus under `fixtures/v0.2` contains 20 cryptographically consistent cases and 60
+The current corpus under `fixtures/v0.3` contains 20 cryptographically consistent cases and 60
 fail-closed mutation cases spanning Base Sepolia and a local EVM fixture. The archived
-`fixtures/v0.1/cases.json` remains verifiable with its original x402 2.19.0 source pin and is not
-regenerated. Here, `v0.2` identifies the fixture-format revision; it is not a project, package, tag,
-or grant-ready release. Every case uses public, deterministic test identities. Runtime verification
+`fixtures/v0.1/cases.json` and `fixtures/v0.2/cases.json` bundles remain verifiable with their
+original x402 2.19.0 and 2.22.0 source pins and are not regenerated. Here, `v0.3` identifies the
+fixture-format revision; it is not a project, package, tag, or grant-ready release. Every case uses public, deterministic test identities. Runtime verification
 performs no network request; only the separate reproduction script downloads the pinned AP2 source
 when no local checkout is supplied. The reproduction and `tsx` commands above target a Git source
 checkout; the private package preview is not a self-contained source distribution. See
@@ -116,7 +116,7 @@ checkout; the private package preview is not a self-contained source distributio
 ## Source pins
 
 The profile is based on AP2 commit `e1ea56db72a6385bce3e5c1112b3a56ce60acb43` and x402
-Foundation commit `c8247c4cd15f29498474404d94636e7dbb894e86` / packages `2.22.0`.
+Foundation commit `17d319fab5c17a6b4873eb41197894db924f59ed` / packages `2.23.0`.
 See [`docs/source-pins.md`](docs/source-pins.md) and [`docs/field-mapping.md`](docs/field-mapping.md).
 
 ## Current maturity
