@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { type Address, type Hex, keccak256, stringToHex } from "viem";
+import { type Address, type Hex, keccak256, recoverTypedDataAddress, stringToHex } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { canonicalSha256Base64Url, conformanceInputHash } from "../src/canonical.js";
 import type { ConformanceBundle, ConformanceCase } from "../src/types.js";
@@ -79,7 +79,7 @@ describe("the committed conformance corpus", () => {
       passedExpectations: 80,
       failedExpectations: 0,
     });
-    expect(canonicalSha256Base64Url(report)).toBe("uazJwRKQ5wCFeo-EdTWKt2JB7cXA-Qlp5pNKgmY7H9I");
+    expect(canonicalSha256Base64Url(report)).toBe("nItJJX4clF-P1zmtnSLaAh3s_5ZjzdSx4ixCc3ecDEM");
   });
 
   it("recovers the payer for every accepted ECDSA fixture", async () => {
@@ -267,6 +267,93 @@ describe("the committed conformance corpus", () => {
     expect(report.computed.recoveredSigner).toBeDefined();
   });
 
+  it("rejects a high-s signature even when it recovers the expected payer", async () => {
+    const bundle = await readBundle();
+    const highSCase = bundle.cases.find(
+      (item) => (item as { id?: string }).id === "invalid-eip3009-signature-invalid-02",
+    ) as ConformanceCase | undefined;
+    expect(highSCase).toBeDefined();
+    if (!highSCase) throw new Error("Missing high-s signature fixture.");
+
+    const requirements = highSCase.x402.requirements;
+    const authorization = highSCase.x402.payload.payload.authorization;
+    const recovered = await recoverTypedDataAddress({
+      domain: {
+        name: requirements.extra.name,
+        version: requirements.extra.version,
+        chainId: Number(requirements.network.slice("eip155:".length)),
+        verifyingContract: requirements.asset as Address,
+      },
+      types: authorizationTypes,
+      primaryType: "TransferWithAuthorization",
+      message: {
+        from: authorization.from as Address,
+        to: authorization.to as Address,
+        value: BigInt(authorization.value),
+        validAfter: BigInt(authorization.validAfter),
+        validBefore: BigInt(authorization.validBefore),
+        nonce: authorization.nonce as Hex,
+      },
+      signature: highSCase.x402.payload.payload.signature as Hex,
+    });
+    expect(recovered.toLowerCase()).toBe(authorization.from.toLowerCase());
+
+    await expect(verifyConformanceCase(highSCase)).resolves.toMatchObject({
+      consistent: false,
+      failures: [
+        {
+          code: "EIP3009_SIGNATURE_INVALID",
+          path: "x402.payload.payload.signature",
+        },
+      ],
+    });
+  });
+
+  it("rejects a 0/1 recovery byte even when it recovers the expected payer", async () => {
+    const bundle = await readBundle();
+    const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
+    const signature = changed.x402.payload.payload.signature;
+    const recoveryByte = Number.parseInt(signature.slice(-2), 16);
+    expect([27, 28]).toContain(recoveryByte);
+    changed.x402.payload.payload.signature = `${signature.slice(0, -2)}${(recoveryByte - 27)
+      .toString(16)
+      .padStart(2, "0")}`;
+    changed.inputHash = conformanceInputHash(changed);
+
+    const requirements = changed.x402.requirements;
+    const authorization = changed.x402.payload.payload.authorization;
+    const recovered = await recoverTypedDataAddress({
+      domain: {
+        name: requirements.extra.name,
+        version: requirements.extra.version,
+        chainId: Number(requirements.network.slice("eip155:".length)),
+        verifyingContract: requirements.asset as Address,
+      },
+      types: authorizationTypes,
+      primaryType: "TransferWithAuthorization",
+      message: {
+        from: authorization.from as Address,
+        to: authorization.to as Address,
+        value: BigInt(authorization.value),
+        validAfter: BigInt(authorization.validAfter),
+        validBefore: BigInt(authorization.validBefore),
+        nonce: authorization.nonce as Hex,
+      },
+      signature: changed.x402.payload.payload.signature as Hex,
+    });
+    expect(recovered.toLowerCase()).toBe(authorization.from.toLowerCase());
+
+    await expect(verifyConformanceCase(changed)).resolves.toMatchObject({
+      consistent: false,
+      failures: [
+        {
+          code: "EIP3009_SIGNATURE_INVALID",
+          path: "x402.payload.payload.signature",
+        },
+      ],
+    });
+  });
+
   it("maps a signed Open Mandate checkout-reference mismatch to the public failure code", async () => {
     const bundle = await readBundle();
     const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
@@ -333,6 +420,23 @@ describe("the committed conformance corpus", () => {
     expect(
       (await verifyConformanceCase(fiveSeconds)).failures.map((failure) => failure.code),
     ).toEqual(["EIP3009_VALID_BEFORE_EXPIRED"]);
+  });
+
+  it("requires the EIP-3009 validAfter time to be strictly before evaluation", async () => {
+    const bundle = await readBundle();
+    const oneSecondBefore = structuredClone(bundle.cases[0]) as ConformanceCase;
+    oneSecondBefore.x402.payload.payload.authorization.validAfter = String(
+      oneSecondBefore.nowEpochSeconds - 1,
+    );
+    await resignAuthorization(oneSecondBefore);
+    expect((await verifyConformanceCase(oneSecondBefore)).consistent).toBe(true);
+
+    const sameSecond = structuredClone(oneSecondBefore);
+    sameSecond.x402.payload.payload.authorization.validAfter = String(sameSecond.nowEpochSeconds);
+    await resignAuthorization(sameSecond);
+    expect(
+      (await verifyConformanceCase(sameSecond)).failures.map((failure) => failure.code),
+    ).toEqual(["EIP3009_VALID_AFTER_IN_FUTURE"]);
   });
 
   it("rejects an EIP-3009 authorization that outlives either AP2 mandate", async () => {
@@ -423,10 +527,19 @@ describe("the committed conformance corpus", () => {
     expect(report.failures.map((failure) => failure.code)).toContain(expectedCode);
   });
 
-  it("reports a verification time that differs from the case evaluation time", async () => {
+  it("accepts verification after the case evaluation time", async () => {
     const bundle = await readBundle();
     const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
     changed.ap2.verification.verifiedAtEpochSeconds += 1;
+    changed.inputHash = conformanceInputHash(changed);
+
+    expect((await verifyConformanceCase(changed)).consistent).toBe(true);
+  });
+
+  it("reports verification before the case evaluation time", async () => {
+    const bundle = await readBundle();
+    const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
+    changed.ap2.verification.verifiedAtEpochSeconds -= 1;
     changed.inputHash = conformanceInputHash(changed);
 
     expect(

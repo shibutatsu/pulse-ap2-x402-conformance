@@ -6,11 +6,11 @@ import { Command, InvalidArgumentError } from "commander";
 import { http, createPublicClient } from "viem";
 import {
   type PublicEvmReader,
+  selectPublicEvmCase,
   verifyIndependentReproductionRecord,
   verifyIndependentSecurityReviewRecord,
   verifyPublicEvmSettlement,
 } from "./evidence.js";
-import { ConformanceBundleSchema } from "./types.js";
 
 function positiveInteger(value: string): bigint {
   if (!/^[1-9][0-9]*$/.test(value)) {
@@ -56,7 +56,7 @@ program
 program
   .command("evm")
   .description("Verify an accepted case against a public EVM transaction receipt")
-  .argument("<bundle>", "path to a versioned fixture bundle")
+  .argument("<case-or-bundle>", "path to a standalone case or versioned fixture bundle")
   .requiredOption("--case <id>", "accepted fixture case id")
   .option("--min-confirmations <count>", "minimum block confirmations", positiveInteger, 1n)
   .option("--output <path>", "write the evidence record to this path")
@@ -69,12 +69,7 @@ program
       if (rpcUrl === undefined || rpcUrl.length === 0) {
         throw new Error("Set PULSE_EVM_RPC_URL to a read-only public EVM endpoint.");
       }
-      const bundle = ConformanceBundleSchema.parse(await readJson(bundlePath));
-      const selectedCase = bundle.cases.find(
-        (item) =>
-          typeof item === "object" && item !== null && "id" in item && item.id === options.case,
-      );
-      if (selectedCase === undefined) throw new Error("The requested case id was not found.");
+      const selectedCase = selectPublicEvmCase(await readJson(bundlePath), options.case);
 
       const client = createPublicClient({ transport: http(rpcUrl) });
       const evidence = await verifyPublicEvmSettlement(
