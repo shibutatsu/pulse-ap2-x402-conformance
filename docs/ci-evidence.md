@@ -14,9 +14,15 @@ Issue #17 remains incomplete until 14 consecutive calendar days have a scheduled
 successful `Required CI result`. Use the run URL from each daily record as the public evidence for
 that date. A missing or failed daily run restarts the count.
 
-The weekly Mutation Testing runs must also remain successful during the same 14-day window. Its
-public run page and uploaded mutation report are separate evidence; the daily CI record does not
-claim that mutation testing ran every day.
+The weekly Mutation Testing runs must also remain successful during the same 14-day window. Each
+scheduled mutation run ends with `Required mutation result`, writes its run URL, tested commit, and
+job results to the run summary, and uploads `scheduled-mutation.json`. The mutation report and the
+machine-readable record are retained for 30 days. The daily CI record does not claim that mutation
+testing ran every day.
+
+Scheduled runs use concurrency groups that are separate from push and manual runs. A normal push or
+manual verification therefore cannot cancel the scheduled run that supplies a day or mutation
+record for this gate.
 
 Push, pull-request, and manually dispatched runs are useful checks but do not count as the scheduled
 daily record. Adding this workflow starts evidence collection; it does not by itself satisfy the

@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: mutation-${{ github.workflow }}-${{ github.ref }}
+  group: mutation-${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
   cancel-in-progress: true
 
 jobs:
@@ -43,4 +43,66 @@ jobs:
           name: mutation-report-${{ github.run_id }}
           path: reports/mutation
           if-no-files-found: warn
-          retention-days: 14
+          retention-days: 30
+
+  mutation-required:
+    name: Required mutation result
+    if: always()
+    needs: [mutation]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Require mutation testing to pass
+        env:
+          MUTATION_RESULT: ${{ needs.mutation.result }}
+        run: test "$MUTATION_RESULT" = "success"
+
+  scheduled-evidence:
+    name: Record scheduled mutation evidence
+    if: always() && github.event_name == 'schedule'
+    needs: [mutation, mutation-required]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Write machine-readable evidence and run summary
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          COMMIT_SHA: ${{ github.sha }}
+          MUTATION_RESULT: ${{ needs.mutation.result }}
+          REQUIRED_RESULT: ${{ needs.mutation-required.result }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p reports/ci-evidence
+          jq -n \
+            --arg runUrl "$RUN_URL" \
+            --arg commitSha "$COMMIT_SHA" \
+            --arg recordedAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --arg mutationResult "$MUTATION_RESULT" \
+            --arg requiredResult "$REQUIRED_RESULT" \
+            '{
+              runUrl: $runUrl,
+              commitSha: $commitSha,
+              recordedAt: $recordedAt,
+              jobs: {
+                mutation: $mutationResult,
+                requiredMutation: $requiredResult
+              }
+            }' > reports/ci-evidence/scheduled-mutation.json
+
+          {
+            echo "## Scheduled mutation evidence"
+            echo
+            echo "- Run: [$RUN_URL]($RUN_URL)"
+            echo "- Commit: \`$COMMIT_SHA\`"
+            echo "- Mutation testing: \`$MUTATION_RESULT\`"
+            echo "- Required mutation result: \`$REQUIRED_RESULT\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload scheduled mutation evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: scheduled-mutation-evidence-${{ github.run_id }}
+          path: reports/ci-evidence/scheduled-mutation.json
+          if-no-files-found: error
+          retention-days: 30
