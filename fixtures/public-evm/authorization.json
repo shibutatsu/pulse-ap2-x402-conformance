@@ -1,0 +1,24 @@
+{
+  "requestVersion": "pulse-public-evm-authorization/0.1",
+  "state": "recorded",
+  "warning": "The payer key is a public fixture key. Fund testnet addresses only and never reuse it for assets with value.",
+  "network": "eip155:84532",
+  "chainId": 84532,
+  "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+  "function": "transferWithAuthorization(address,address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32)",
+  "arguments": {
+    "from": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+    "to": "0xA9D201e692Ef4D28f7AE8c7fb4CDd80aaf9E171e",
+    "value": "1000",
+    "validAfter": "1786858370",
+    "validBefore": "1787463200",
+    "nonce": "0xc0eb803ece2b411866ce87ee3b80e7a05a5446f3956f831120399e45a1845a35",
+    "v": 28,
+    "r": "0x0a5c4f9c13958cc89151d80527e065157963fb0ab23bcc2b152498d2ee668bb7",
+    "s": "0x2a73d76e4025596caed366bb17f496f31f7249c04b96dbcc60a1e5f87a373280"
+  },
+  "signature": "0x0a5c4f9c13958cc89151d80527e065157963fb0ab23bcc2b152498d2ee668bb72a73d76e4025596caed366bb17f496f31f7249c04b96dbcc60a1e5f87a3732801c",
+  "authorizationHash": "jVLFesDqVtTfEm69TddjR-YI1D33SNLhnOk1RQygg-s",
+  "expectedTransactionHash": "0xb6a16b58ea994c4db07582cbbc590ffdbec0befffd055b1405f6482d966f2cb1",
+  "caseInputHash": "Er3NyDsyinLooKHl5DE6uw9g4l3ICVT2UWpCsDXXT60"
+}

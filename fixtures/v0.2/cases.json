@@ -15445,7 +15445,7 @@
         "x402PackageVersion": "2.22.0"
       },
       "id": "invalid-eip3009-signature-invalid-01",
-      "description": "Invalid synthetic fixture 01: rejects an EIP-3009 authorization with an unrecoverable signature.",
+      "description": "Invalid synthetic fixture 01: rejects an unrecoverable or non-canonical EIP-3009 signature.",
       "nowEpochSeconds": 1784592000,
       "ap2": {
         "closedMandate": {
@@ -15672,7 +15672,7 @@
         "x402PackageVersion": "2.22.0"
       },
       "id": "invalid-eip3009-signature-invalid-02",
-      "description": "Invalid synthetic fixture 02: rejects an EIP-3009 authorization with an unrecoverable signature.",
+      "description": "Invalid synthetic fixture 02: rejects an unrecoverable or non-canonical EIP-3009 signature.",
       "nowEpochSeconds": 1784592000,
       "ap2": {
         "closedMandate": {
@@ -15865,7 +15865,7 @@
             }
           },
           "payload": {
-            "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "signature": "0x7b6204efbf2ed4073a35ed10e8f098eb62fdeaed52ff1f7b6a67e5ecbe4f350392275f6b58c1f73c418d1dc2fe715895215bce271c9afd244e15eb46c31e81de1c",
             "authorization": {
               "from": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
               "to": "0xfC9187E215b0e44656c568077b87dDbfF30Af658",
@@ -15883,7 +15883,7 @@
           "network": "eip155:84532"
         }
       },
-      "inputHash": "xaJcB0CC5q-WCOkyeO1DFLs6jLZvkGOzOGF1AF7ybT8",
+      "inputHash": "sU1tqbPVNxg-R5jgjWMA6lWi6wTHnsZyh8HrMOGZnos",
       "expected": {
         "consistent": false,
         "failureCodes": [

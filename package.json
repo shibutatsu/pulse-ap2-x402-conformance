@@ -47,6 +47,7 @@
     "evidence:reproduction": "tsx src/evidence-cli.ts reproduction",
     "evidence:review": "tsx src/evidence-cli.ts review",
     "evidence:evm": "tsx src/evidence-cli.ts evm",
+    "public-evm:compose": "tsx scripts/compose-public-evm-case.ts",
     "mutation": "stryker run",
     "audit:production": "npm audit --omit=dev --audit-level=high",
     "check:pack": "npm pack --dry-run",
@@ -58,7 +59,7 @@
     "canonicalize": "2.1.0",
     "commander": "12.1.0",
     "jose": "6.2.8",
-    "viem": "2.55.13",
+    "viem": "2.55.15",
     "zod": "4.4.3"
   },
   "devDependencies": {

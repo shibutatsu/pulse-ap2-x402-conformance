@@ -143,11 +143,12 @@ def create_receipt(
     case_id: str,
     network_confirmation_id: str,
     receipt_key: Any,
+    issued_at: int = FIXED_NOW,
 ) -> tuple[str, dict[str, Any]]:
     receipt = PaymentReceipt(
         status="Success",
         iss="synthetic-facilitator.example",
-        iat=FIXED_NOW,
+        iat=issued_at,
         reference=reference,
         payment_id=f"payment-{case_id}",
         psp_confirmation_id=f"psp-{case_id}",

@@ -50,7 +50,20 @@ uv pip install \
   "$sdk_source"
 
 cd "$project_root"
-AP2_SOURCE_DIR="$sdk_source" "$venv_dir/bin/python" \
-  scripts/ap2/generate_signed_artifacts.py
-AP2_SOURCE_DIR="$sdk_source" "$venv_dir/bin/python" \
-  scripts/ap2/verify_extract_artifacts.py
+case "${1:-}" in
+  "")
+    AP2_SOURCE_DIR="$sdk_source" "$venv_dir/bin/python" \
+      scripts/ap2/generate_signed_artifacts.py
+    AP2_SOURCE_DIR="$sdk_source" "$venv_dir/bin/python" \
+      scripts/ap2/verify_extract_artifacts.py
+    ;;
+  --public-evidence)
+    shift
+    AP2_SOURCE_DIR="$sdk_source" "$venv_dir/bin/python" \
+      scripts/ap2/generate_public_evm_artifacts.py "$@"
+    ;;
+  *)
+    echo "usage: $0 [--public-evidence GENERATOR_OPTIONS]" >&2
+    exit 2
+    ;;
+esac
