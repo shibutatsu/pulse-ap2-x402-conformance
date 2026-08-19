@@ -53,7 +53,8 @@ In particular:
   and `payer`. The verifier checks those fields and checks `amount` only when the optional standard
   field is present; it does not require a synthetic settlement `extra` or AP2-reference echo.
 - The EIP-3009 nonce is the 32-byte value encoded by the final closed-mandate reference derived from
-  the verified leaf JWT, and the EIP-712 signature recovers the expected payer address.
+  the verified leaf JWT, and the EIP-712 signature uses a canonical low-s encoding with a 27 or 28
+  recovery byte and recovers the expected payer address.
 - AP2 Payment Receipt `reference` and network confirmation point to the checked mandate and x402
   transaction. The local canonical claims hashes are separate, non-normative integrity checks.
 - The full 80-case verification report has a pinned JCS/SHA-256 regression hash so public failure

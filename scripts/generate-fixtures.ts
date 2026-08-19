@@ -68,8 +68,10 @@ interface MutationDefinition {
   slug: string;
   description: string;
   failureCodes: ConformanceFailureCode[];
-  mutate: (draft: ConformanceCase) => Promise<void> | void;
+  mutate: (draft: ConformanceCase, variant: number) => Promise<void> | void;
 }
+
+const SECP256K1_ORDER = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141n;
 
 type AllowedInstrumentConstraint = Extract<
   ConformanceCase["ap2"]["openMandate"]["constraints"][number],
@@ -161,6 +163,21 @@ function corruptRootSignature(mandateChain: string): string {
   const separatorIndex = mandateChain.indexOf("~~");
   if (separatorIndex <= 0) throw new Error("Cannot corrupt malformed AP2 mandate chain.");
   return `${corruptJwtSignature(mandateChain.slice(0, separatorIndex))}${mandateChain.slice(separatorIndex)}`;
+}
+
+function toHighSSignature(signature: string): `0x${string}` {
+  if (!/^0x[0-9a-fA-F]{130}$/.test(signature)) {
+    throw new Error("Cannot transform a malformed ECDSA signature.");
+  }
+  const r = signature.slice(2, 66);
+  const s = BigInt(`0x${signature.slice(66, 130)}`);
+  const recovery = Number.parseInt(signature.slice(130, 132), 16);
+  if (s <= 0n || s >= SECP256K1_ORDER || (recovery !== 27 && recovery !== 28)) {
+    throw new Error("Cannot transform a non-canonical ECDSA signature.");
+  }
+  const highS = (SECP256K1_ORDER - s).toString(16).padStart(64, "0");
+  const flippedRecovery = recovery === 27 ? 28 : 27;
+  return `0x${r}${highS}${flippedRecovery.toString(16)}`;
 }
 
 function addressFromLabel(label: string): Address {
@@ -675,10 +692,13 @@ const mutations: MutationDefinition[] = [
   },
   {
     slug: "eip3009-signature-invalid",
-    description: "rejects an EIP-3009 authorization with an unrecoverable signature",
+    description: "rejects an unrecoverable or non-canonical EIP-3009 signature",
     failureCodes: ["EIP3009_SIGNATURE_INVALID"],
-    mutate: (draft) => {
-      draft.x402.payload.payload.signature = `0x${"0".repeat(130)}`;
+    mutate: (draft, variant) => {
+      draft.x402.payload.payload.signature =
+        variant === 0
+          ? `0x${"0".repeat(130)}`
+          : toHighSSignature(draft.x402.payload.payload.signature);
     },
   },
   {
@@ -768,7 +788,7 @@ async function createInvalidCases(validCases: ConformanceCase[]): Promise<Confor
       const base = validCases[baseIndex];
       if (!base) throw new Error(`No valid fixture template at index ${baseIndex}.`);
       const draft = structuredClone(base);
-      await mutation.mutate(draft);
+      await mutation.mutate(draft, variant);
       draft.id = `invalid-${mutation.slug}-${String(variant + 1).padStart(2, "0")}`;
       draft.description = `Invalid synthetic fixture ${String(variant + 1).padStart(2, "0")}: ${mutation.description}.`;
       draft.expected = {
