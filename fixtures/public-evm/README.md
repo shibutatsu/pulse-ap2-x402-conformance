@@ -52,4 +52,12 @@ PULSE_EVM_RPC_URL="<read-only Base Sepolia endpoint>" \
   --output build/public-evm-evidence.json
 ```
 
+Check the committed receipt record against the committed case without using an RPC endpoint:
+
+```bash
+npm run evidence:evm-record -- \
+  fixtures/public-evm/case.json \
+  evidence/public-evm-base-sepolia.json
+```
+
 The evidence establishes the transaction, successful receipt, matching token transfer, and matching EIP-3009 authorization event at the recorded observation time. It does not satisfy the separate external-implementation, independent-review, or sustained-CI gates in issue #17.
