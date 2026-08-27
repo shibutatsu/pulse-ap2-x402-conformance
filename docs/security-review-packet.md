@@ -76,9 +76,10 @@ Publish a stable HTTPS report containing:
 5. a machine-readable `pulse-independent-security-review/0.1` record matching
    [`security-review-record.example.json`](evidence/security-review-record.example.json).
 
-Report exploitable details privately to the maintainer before public disclosure, then publish a safe
-summary. Do not request or use production secrets, customer data, funded wallets, transaction
-submission, or write-enabled RPC credentials.
+Report exploitable details through the repository's
+[private vulnerability reporting form](https://github.com/shibutatsu/pulse-ap2-x402-conformance/security/advisories/new)
+before public disclosure, then publish a safe summary. Do not request or use production secrets,
+customer data, funded wallets, transaction submission, or write-enabled RPC credentials.
 
 Validate the published record from the frozen checkout:
 
