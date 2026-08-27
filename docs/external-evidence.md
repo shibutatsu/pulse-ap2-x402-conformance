@@ -8,7 +8,9 @@ independent, turn a review into an audit, or satisfy the other release gates.
 ## Record an independent reproduction
 
 A qualifying implementer must evaluate all 80 cases without importing this repository's verifier
-or compiled output. The published record has this shape:
+or compiled output. The language-neutral start-to-finish procedure is in
+[`independent-implementation-guide.md`](independent-implementation-guide.md). The published record
+has this shape:
 
 ```json
 {
@@ -64,8 +66,9 @@ retained only so already-published records can still be checked against their or
 
 Use [`security-review-record.example.json`](evidence/security-review-record.example.json) as the
 field reference. The stable public report should cover the scope in issue
-[#18](https://github.com/shibutatsu/pulse-ap2-x402-conformance/issues/18), including method,
-findings, remediation state, and residual risk.
+[#18](https://github.com/shibutatsu/pulse-ap2-x402-conformance/issues/18). The frozen scope, threat
+model, review commands, and required deliverables are collected in
+[`security-review-packet.md`](security-review-packet.md).
 
 ```bash
 npm run evidence:review -- path/to/security-review.json

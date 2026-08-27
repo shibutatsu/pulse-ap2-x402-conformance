@@ -103,6 +103,10 @@ EVM receipt, using the separate evidence commands in
 [`docs/external-evidence.md`](docs/external-evidence.md). The online command is read-only and does
 not change the offline verifier's no-network boundary.
 
+Outside implementers can start with the
+[`independent implementation guide`](docs/independent-implementation-guide.md). Independent payment
+and EVM reviewers can use the frozen [`security review packet`](docs/security-review-packet.md).
+
 The current corpus under `fixtures/v0.3` contains 20 cryptographically consistent cases and 60
 fail-closed mutation cases spanning Base Sepolia and a local EVM fixture. The archived
 `fixtures/v0.1/cases.json` and `fixtures/v0.2/cases.json` bundles remain verifiable with their
