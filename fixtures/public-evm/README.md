@@ -10,6 +10,7 @@ This directory contains one standalone AP2-to-x402 case tied to a successful pub
 - Block: `45545081`
 - Transfer: `1000` atomic units (`0.001 USDC`)
 - Authorization hash: `jVLFesDqVtTfEm69TddjR-YI1D33SNLhnOk1RQygg-s`
+- Evidence SHA-256: `7abaec474f7d7ccecc39049aa1519189cc977571b1b234bf95add55ebf03b977`
 
 [`case.json`](case.json) is the standalone conformance input. [`authorization.json`](authorization.json) records the exact EIP-3009 arguments and signature used by the transaction. The read-only receipt verification result is stored in [`../../evidence/public-evm-base-sepolia.json`](../../evidence/public-evm-base-sepolia.json).
 
@@ -52,4 +53,13 @@ PULSE_EVM_RPC_URL="<read-only Base Sepolia endpoint>" \
   --output build/public-evm-evidence.json
 ```
 
+Check the committed receipt record against the committed case without using an RPC endpoint:
+
+```bash
+npm run evidence:evm-record -- \
+  fixtures/public-evm/case.json \
+  evidence/public-evm-base-sepolia.json
+```
+
 The evidence establishes the transaction, successful receipt, matching token transfer, and matching EIP-3009 authorization event at the recorded observation time. It does not satisfy the separate external-implementation, independent-review, or sustained-CI gates in issue #17.
+The test suite pins the complete evidence-file SHA-256 so block metadata, log indexes, confirmation count, and verification time cannot drift unnoticed. The offline check still does not re-query the chain or prove current finality.

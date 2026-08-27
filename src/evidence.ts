@@ -14,6 +14,10 @@ import { verifyConformanceCase } from "./verifier.js";
 
 const sha256 = z.string().regex(/^[0-9a-f]{64}$/);
 const gitCommit = z.string().regex(/^[0-9a-f]{40}$/);
+const address = z.string().regex(/^0x[0-9a-fA-F]{40}$/);
+const hex32 = z.string().regex(/^0x[0-9a-fA-F]{64}$/);
+const unsignedDecimal = z.string().regex(/^(0|[1-9][0-9]*)$/);
+const positiveDecimal = z.string().regex(/^[1-9][0-9]*$/);
 const httpsUrl = z
   .string()
   .url()
@@ -305,6 +309,32 @@ export interface PublicEvmSettlementEvidence {
   verifiedAt: string;
 }
 
+export const PublicEvmSettlementEvidenceSchema = z.strictObject({
+  evidenceVersion: z.literal("pulse-public-evm-settlement/0.1"),
+  caseId: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
+  caseInputHash: z.string().min(1),
+  network: z.string().regex(/^eip155:[1-9][0-9]*$/),
+  chainId: z.number().int().positive(),
+  transactionHash: hex32,
+  blockNumber: unsignedDecimal,
+  blockHash: hex32,
+  confirmations: positiveDecimal,
+  receiptStatus: z.literal("success"),
+  asset: address,
+  transfer: z.strictObject({
+    from: address,
+    to: address,
+    value: unsignedDecimal,
+    logIndex: z.number().int().nonnegative(),
+  }),
+  authorizationUsed: z.strictObject({
+    authorizer: address,
+    nonce: hex32,
+    logIndex: z.number().int().nonnegative(),
+  }),
+  verifiedAt: z.string().datetime({ offset: true }),
+});
+
 function topicAddress(topic: Hex | undefined): Address | undefined {
   if (topic === undefined || !/^0x[0-9a-fA-F]{64}$/.test(topic)) return undefined;
   return `0x${topic.slice(-40)}` as Address;
@@ -312,6 +342,93 @@ function topicAddress(topic: Hex | undefined): Address | undefined {
 
 function sameHex(left: string, right: string): boolean {
   return left.toLowerCase() === right.toLowerCase();
+}
+
+function requireEqual(
+  errors: string[],
+  path: string,
+  actual: string | number,
+  expected: string | number,
+  hex = false,
+): void {
+  const matches =
+    hex && typeof actual === "string" && typeof expected === "string"
+      ? sameHex(actual, expected)
+      : actual === expected;
+  if (!matches) errors.push(`${path}: Does not match the supplied conformance case`);
+}
+
+export async function verifyPublicEvmSettlementRecord(
+  caseInput: unknown,
+  evidenceInput: unknown,
+): Promise<EvidenceRecordValidationReport> {
+  const caseResult = ConformanceCaseSchema.safeParse(caseInput);
+  if (!caseResult.success) {
+    return {
+      valid: false,
+      automatedChecksPassed: false,
+      errors: issueMessages(caseResult.error).map((message) => `case.${message}`),
+    };
+  }
+  const evidenceResult = PublicEvmSettlementEvidenceSchema.safeParse(evidenceInput);
+  if (!evidenceResult.success) {
+    return {
+      valid: false,
+      automatedChecksPassed: false,
+      errors: issueMessages(evidenceResult.error),
+    };
+  }
+
+  const conformanceCase = caseResult.data;
+  const evidence = evidenceResult.data;
+  const report = await verifyConformanceCase(conformanceCase);
+  const errors: string[] = [];
+  if (!report.consistent || !conformanceCase.expected.consistent) {
+    errors.push("case: Public settlement evidence requires an accepted offline case");
+  }
+
+  const requirements = conformanceCase.x402.requirements;
+  const authorization = conformanceCase.x402.payload.payload.authorization;
+  requireEqual(errors, "caseId", evidence.caseId, conformanceCase.id);
+  requireEqual(errors, "caseInputHash", evidence.caseInputHash, conformanceCase.inputHash);
+  requireEqual(errors, "network", evidence.network, requirements.network);
+  requireEqual(
+    errors,
+    "chainId",
+    evidence.chainId,
+    Number(requirements.network.slice("eip155:".length)),
+  );
+  requireEqual(
+    errors,
+    "transactionHash",
+    evidence.transactionHash,
+    conformanceCase.x402.settlement.transaction,
+    true,
+  );
+  requireEqual(errors, "asset", evidence.asset, requirements.asset, true);
+  requireEqual(errors, "transfer.from", evidence.transfer.from, authorization.from, true);
+  requireEqual(errors, "transfer.to", evidence.transfer.to, authorization.to, true);
+  requireEqual(errors, "transfer.value", evidence.transfer.value, authorization.value);
+  requireEqual(
+    errors,
+    "authorizationUsed.authorizer",
+    evidence.authorizationUsed.authorizer,
+    authorization.from,
+    true,
+  );
+  requireEqual(
+    errors,
+    "authorizationUsed.nonce",
+    evidence.authorizationUsed.nonce,
+    authorization.nonce,
+    true,
+  );
+
+  return {
+    valid: errors.length === 0,
+    automatedChecksPassed: errors.length === 0,
+    errors,
+  };
 }
 
 export async function verifyPublicEvmSettlement(

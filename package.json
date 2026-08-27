@@ -47,11 +47,12 @@
     "evidence:reproduction": "tsx src/evidence-cli.ts reproduction",
     "evidence:review": "tsx src/evidence-cli.ts review",
     "evidence:evm": "tsx src/evidence-cli.ts evm",
+    "evidence:evm-record": "tsx src/evidence-cli.ts evm-record",
     "public-evm:compose": "tsx scripts/compose-public-evm-case.ts",
     "mutation": "stryker run",
     "audit:production": "npm audit --omit=dev --audit-level=high",
     "check:pack": "npm pack --dry-run",
-    "ci": "npm run typecheck && npm run lint && npm run test:x402-producer && npm run test && npm run build && npm run fixtures:verify && npm run audit:production && npm run check:pack"
+    "ci": "npm run typecheck && npm run lint && npm run test:x402-producer && npm run test && npm run build && npm run fixtures:verify && npm run evidence:evm-record -- fixtures/public-evm/case.json evidence/public-evm-base-sepolia.json && npm run audit:production && npm run check:pack"
   },
   "dependencies": {
     "@x402/core": "2.23.0",

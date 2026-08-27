@@ -10,6 +10,7 @@ import {
   verifyIndependentReproductionRecord,
   verifyIndependentSecurityReviewRecord,
   verifyPublicEvmSettlement,
+  verifyPublicEvmSettlementRecord,
 } from "./evidence.js";
 
 function positiveInteger(value: string): bigint {
@@ -49,6 +50,18 @@ program
   .argument("<record>", "path to the independent review record")
   .action(async (recordPath: string) => {
     const report = verifyIndependentSecurityReviewRecord(await readJson(recordPath));
+    process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
+    if (!report.automatedChecksPassed) process.exitCode = 1;
+  });
+
+program
+  .command("evm-record")
+  .description("Validate a recorded public EVM evidence file against its offline case")
+  .argument("<case>", "path to the standalone public EVM conformance case")
+  .argument("<record>", "path to the recorded public EVM evidence")
+  .action(async (casePath: string, recordPath: string) => {
+    const [conformanceCase, record] = await Promise.all([readJson(casePath), readJson(recordPath)]);
+    const report = await verifyPublicEvmSettlementRecord(conformanceCase, record);
     process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
     if (!report.automatedChecksPassed) process.exitCode = 1;
   });

@@ -8,10 +8,14 @@ import {
   verifyIndependentReproductionRecord,
   verifyIndependentSecurityReviewRecord,
   verifyPublicEvmSettlement,
+  verifyPublicEvmSettlementRecord,
 } from "../src/evidence.js";
 import type { ConformanceBundle, ConformanceCase } from "../src/types.js";
 
 const fixtureUrl = new URL("../fixtures/v0.3/cases.json", import.meta.url);
+const publicEvmCaseUrl = new URL("../fixtures/public-evm/case.json", import.meta.url);
+const publicEvmEvidenceUrl = new URL("../evidence/public-evm-base-sepolia.json", import.meta.url);
+const publicEvmEvidenceSha256 = "7abaec474f7d7ccecc39049aa1519189cc977571b1b234bf95add55ebf03b977";
 const TRANSFER_TOPIC = keccak256(stringToHex("Transfer(address,address,uint256)"));
 const AUTHORIZATION_USED_TOPIC = keccak256(stringToHex("AuthorizationUsed(address,bytes32)"));
 
@@ -229,6 +233,44 @@ describe("independent evidence records", () => {
 });
 
 describe("public EVM settlement evidence", () => {
+  it("keeps the committed public receipt evidence bound to its offline case", async () => {
+    const [caseRaw, evidenceRaw] = await Promise.all([
+      readFile(fileURLToPath(publicEvmCaseUrl), "utf8"),
+      readFile(fileURLToPath(publicEvmEvidenceUrl), "utf8"),
+    ]);
+    expect(createHash("sha256").update(evidenceRaw).digest("hex")).toBe(publicEvmEvidenceSha256);
+
+    await expect(
+      verifyPublicEvmSettlementRecord(JSON.parse(caseRaw), JSON.parse(evidenceRaw)),
+    ).resolves.toEqual({
+      valid: true,
+      automatedChecksPassed: true,
+      errors: [],
+    });
+  });
+
+  it("rejects a recorded receipt that drifts from the committed case", async () => {
+    const [caseRaw, evidenceRaw] = await Promise.all([
+      readFile(fileURLToPath(publicEvmCaseUrl), "utf8"),
+      readFile(fileURLToPath(publicEvmEvidenceUrl), "utf8"),
+    ]);
+    const evidence = JSON.parse(evidenceRaw) as {
+      transactionHash: string;
+      authorizationUsed: { nonce: string };
+    };
+    evidence.transactionHash = `0x${"0".repeat(64)}`;
+    evidence.authorizationUsed.nonce = `0x${"1".repeat(64)}`;
+
+    await expect(verifyPublicEvmSettlementRecord(JSON.parse(caseRaw), evidence)).resolves.toEqual({
+      valid: false,
+      automatedChecksPassed: false,
+      errors: [
+        "transactionHash: Does not match the supplied conformance case",
+        "authorizationUsed.nonce: Does not match the supplied conformance case",
+      ],
+    });
+  });
+
   it("selects the requested case from a standalone input or the 80-case bundle", async () => {
     const { bundle } = await fixture();
     const standalone = bundle.cases[0] as ConformanceCase;

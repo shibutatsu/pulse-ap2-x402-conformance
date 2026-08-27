@@ -57,3 +57,9 @@
 - SHA-256: `a63c2a00c6fd56c19da02b74998af6872ea666db40bec9aa9c1403b5fceb3335`
 - 記録時点: x402固定版を2.23.0へ更新し、producerがwallet向けspend controlsを無効化する定義を反映した完成版
 - SHA-256: `bd8644256347f514805e5d3201b6ffc20a47f875cd31e73c017f753b10214fce`
+
+- 記録時点: 保存済み公開EVM証拠と適合試験入力を通常CIで再照合する定義を反映した完成版
+- SHA-256: `a5ed2d15261843b5004cdaee6cd8f0a9215494734ec3e23336dd9b2b3a05ace6`
+
+- 記録時点: 保存済み公開EVM証拠の全byteをraw SHA-256で固定する定義を反映した完成版
+- SHA-256: `3104e6ad9ce5edb3bbd62538b91c1e395a1f5efbd0159ecda13bb0f030f743de`

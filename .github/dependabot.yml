@@ -68,6 +68,9 @@ updates:
           - minor
           - patch
     ignore:
+      # pydantic pins an exact pydantic-core version. Let pydantic updates move
+      # this transitive dependency instead of opening incompatible lock-only PRs.
+      - dependency-name: pydantic-core
       - dependency-name: "*"
         update-types:
           - version-update:semver-major

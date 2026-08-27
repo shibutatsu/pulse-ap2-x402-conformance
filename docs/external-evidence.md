@@ -167,6 +167,18 @@ The repository includes one completed Base Sepolia example in
 [`fixtures/public-evm`](../fixtures/public-evm/README.md). Its receipt verification result is
 [`evidence/public-evm-base-sepolia.json`](../evidence/public-evm-base-sepolia.json).
 
+Validate a saved receipt result against its standalone case without making an RPC request:
+
+```bash
+npm run evidence:evm-record -- \
+  fixtures/public-evm/case.json \
+  evidence/public-evm-base-sepolia.json
+```
+
+This offline check verifies the case first, then binds the saved case ID, input hash, network,
+transaction, asset, transfer, and authorization event back to that case. It detects drift between
+the two committed JSON files. It does not reread the receipt or refresh its confirmation count.
+
 ## Release decision
 
 Passing any command above means only that the record passed its automated checks. Keep package
