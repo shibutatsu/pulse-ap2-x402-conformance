@@ -1,6 +1,6 @@
 # Daily Required CI evidence for the 14-day release gate
 
-The CI workflow runs once per day at 13:53 UTC on the default branch. The minute is intentionally
+The CI workflow runs once per day at 18:23 UTC on the default branch. The minute is intentionally
 away from the start of the hour because GitHub [documents that scheduled workflows can be delayed or
 dropped during high load](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
 Each scheduled run executes both supported Node.js versions, regenerates and verifies the pinned AP2
