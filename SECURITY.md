@@ -6,8 +6,8 @@ No production version is supported yet. Security fixes are applied to `main` dur
 
 ## Reporting
 
-Use this repository's GitHub private vulnerability reporting form. Do not include working secrets
-or customer data in a public issue.
+Use this repository's [GitHub private vulnerability reporting form](https://github.com/shibutatsu/pulse-ap2-x402-conformance/security/advisories/new).
+Do not include working secrets or customer data in a public issue.
 
 ## Security boundary
 
