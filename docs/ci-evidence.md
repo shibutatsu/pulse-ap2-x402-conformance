@@ -1,8 +1,10 @@
 # Daily Required CI evidence for the 14-day release gate
 
-The CI workflow runs once per day on the default branch. Each scheduled run executes both supported
-Node.js versions, regenerates and verifies the pinned AP2 artifacts, and finishes with the
-`Required CI result` job.
+The CI workflow runs once per day at 13:53 UTC on the default branch. The minute is intentionally
+away from the start of the hour because GitHub [documents that scheduled workflows can be delayed or
+dropped during high load](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+Each scheduled run executes both supported Node.js versions, regenerates and verifies the pinned AP2
+artifacts, and finishes with the `Required CI result` job.
 
 After those jobs finish, `Record daily Required CI evidence` adds the public run URL, tested commit,
 recording time, and job results to the run summary. It also uploads the same data as
