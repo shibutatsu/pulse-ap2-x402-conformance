@@ -15,6 +15,7 @@ import type { ConformanceBundle, ConformanceCase } from "../src/types.js";
 const fixtureUrl = new URL("../fixtures/v0.3/cases.json", import.meta.url);
 const publicEvmCaseUrl = new URL("../fixtures/public-evm/case.json", import.meta.url);
 const publicEvmEvidenceUrl = new URL("../evidence/public-evm-base-sepolia.json", import.meta.url);
+const publicEvmEvidenceSha256 = "7abaec474f7d7ccecc39049aa1519189cc977571b1b234bf95add55ebf03b977";
 const TRANSFER_TOPIC = keccak256(stringToHex("Transfer(address,address,uint256)"));
 const AUTHORIZATION_USED_TOPIC = keccak256(stringToHex("AuthorizationUsed(address,bytes32)"));
 
@@ -237,6 +238,7 @@ describe("public EVM settlement evidence", () => {
       readFile(fileURLToPath(publicEvmCaseUrl), "utf8"),
       readFile(fileURLToPath(publicEvmEvidenceUrl), "utf8"),
     ]);
+    expect(createHash("sha256").update(evidenceRaw).digest("hex")).toBe(publicEvmEvidenceSha256);
 
     await expect(
       verifyPublicEvmSettlementRecord(JSON.parse(caseRaw), JSON.parse(evidenceRaw)),
