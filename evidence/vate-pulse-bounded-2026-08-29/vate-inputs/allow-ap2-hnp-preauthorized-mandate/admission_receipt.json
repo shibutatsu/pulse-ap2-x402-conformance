@@ -1,0 +1,70 @@
+{
+  "decision": {
+    "human_readable_summary": "The verifier accepted AP2 Human Not Present mandate evidence as payment authority and admitted the bounded purchase action.",
+    "outcome": "allow",
+    "reason_codes": [
+      "EVIDENCE_VERIFIED",
+      "POLICY_MATCH"
+    ]
+  },
+  "evidence": [
+    {
+      "digest": {
+        "alg": "sha-256",
+        "value": "1cbb43e0b5a8a53560e50731399fcd0b8899924eef580826a6f8af899b90a595"
+      },
+      "protocol_hint": "ap2_human_not_present",
+      "type": "payment_mandate",
+      "uri": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-valid.example.json",
+      "verification": {
+        "checked_at": "2026-05-07T10:00:06Z",
+        "method": "ap2-human-not-present-mandate-verification",
+        "result": "verified",
+        "status_result": "active"
+      }
+    }
+  ],
+  "expires_at": "2026-05-07T10:05:00Z",
+  "issued_at": "2026-05-07T10:00:08Z",
+  "policy": {
+    "policy_id": "al2-ap2-human-not-present-commerce",
+    "policy_ref": "https://verifier.example/policies/al2-ap2-human-not-present-commerce/2026-05-07.1",
+    "policy_version": "2026-05-07.1"
+  },
+  "profile": "VATE-AL2-Verifier-Admission-v0.3",
+  "receipt_id": "admrec-ap2hnp-valid-20260507-001",
+  "receipt_type": "admission",
+  "request": {
+    "a2a_context_id": "ctx-ap2hnp-valid-20260507-001",
+    "a2a_task_id": "task-ap2hnp-valid-20260507-001",
+    "action": "commerce.purchase",
+    "audience": "https://tickets.example",
+    "constraints": {
+      "expected_runtime": "spiffe://agent.example/workload/ticket-agent",
+      "max_amount": {
+        "currency": "USD",
+        "value": "45.00"
+      },
+      "payment": {
+        "human_present": false,
+        "mandate_id": "ap2hnp-valid-20260507-001",
+        "merchant": "tickets.example",
+        "psp_audience": "https://psp.example/ap2"
+      }
+    },
+    "input_hash": "sha-256:c5ddaa41c6039ea4af068fa6c2ad3c6d5759bf26680649082c15b0a56a30a77e",
+    "request_id": "areq-ap2hnp-valid-20260507-001",
+    "target_audience": "https://tickets.example",
+    "transaction_id": "txn-ap2hnp-valid-20260507-001"
+  },
+  "subject": {
+    "actor": "did:web:agent.example",
+    "principal": "did:web:user.example",
+    "runtime": "spiffe://agent.example/workload/ticket-agent"
+  },
+  "verifier": {
+    "id": "did:web:verifier.example",
+    "key_id": "did:web:verifier.example#key-1"
+  },
+  "version": "vate-0.3"
+}

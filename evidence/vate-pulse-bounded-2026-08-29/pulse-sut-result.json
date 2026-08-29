@@ -1,0 +1,1448 @@
+{
+  "version": "vate-sut-results-2026-07",
+  "profile": "VATE-AL2-Verifier-Admission-v0.3",
+  "generated_at": "2026-08-29T01:28:30Z",
+  "artifact_mode": "corpus-fixture-validation",
+  "implementation": {
+    "name": "Pulse AP2-x402 external VATE attempt",
+    "type": "external-verifier-projection",
+    "version": "vate-pulse-mapper/0.1",
+    "language": "Python standard library",
+    "source": "https://github.com/shibutatsu/pulse-ap2-x402-conformance.git",
+    "commit": "ce125dbada38d45dcde34eeb02197fc5be0e1ad9",
+    "environment": "candidate-owned mapping/projection from ce125dbada38d45dcde34eeb02197fc5be0e1ad9; frozen Pulse verifyConformanceCase at e06a6cbfe3ddb965c8fc70f50838f5014ec2038e; operator-selected python3 runtime Python 3.14.4",
+    "upstream_verifier": {
+      "source": "https://github.com/shibutatsu/pulse-ap2-x402-conformance",
+      "commit": "e06a6cbfe3ddb965c8fc70f50838f5014ec2038e",
+      "entry_point": "src/verifier.ts#verifyConformanceCase"
+    }
+  },
+  "corpus": {
+    "profile": "VATE-AL2-Verifier-Admission-v0.3",
+    "digest": {
+      "alg": "sha-256",
+      "value": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370"
+    }
+  },
+  "results": [
+    {
+      "case_id": "allow-ap2-hnp-preauthorized-mandate",
+      "status": "completed",
+      "outcome": "allow",
+      "should_execute": true,
+      "reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "checks": [
+        {
+          "details": "Pulse accepted the generated input with no failures.",
+          "name": "decision.outcome",
+          "pass": true
+        },
+        {
+          "details": "The request audience equals the target audience.",
+          "name": "request.audience",
+          "pass": true
+        },
+        {
+          "details": "The eligible evidence declares the AP2 human-not-present protocol.",
+          "name": "evidence[0].protocol_hint",
+          "pass": true
+        },
+        {
+          "details": "The frozen Pulse report is consistent.",
+          "name": "evidence.verification.result",
+          "pass": true
+        }
+      ],
+      "artifacts": {
+        "admission_receipt": {
+          "uri": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-valid.example.json",
+          "media_type": "application/json",
+          "digest": {
+            "alg": "sha-256",
+            "value": "60ab3343833cb5840ed8070cc55b55dd715c72f04284a542c42c113290b2eae9"
+          }
+        }
+      },
+      "limitations": [
+        "Bounded candidate-executed projection from the preserved raw frozen-Pulse report."
+      ]
+    },
+    {
+      "case_id": "attenuate-ap2-hnp-amount-overrun",
+      "status": "completed",
+      "outcome": "deny",
+      "should_execute": false,
+      "reason_codes": [
+        "AP2_X402_AMOUNT_MISMATCH"
+      ],
+      "checks": [],
+      "artifacts": {
+        "admission_receipt": {
+          "uri": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-overrun.example.json",
+          "media_type": "application/json",
+          "digest": {
+            "alg": "sha-256",
+            "value": "08803e26794f3513dc108f3f03c238e9acb17e7a23e1b4bdd62730cc6973c8f6"
+          }
+        }
+      },
+      "limitations": [
+        "Bounded candidate-executed projection from the preserved raw frozen-Pulse report.",
+        "VATE attenuation versus Pulse non-attenuate remains an explicit mismatch."
+      ]
+    },
+    {
+      "case_id": "deny-ap2-hnp-stale-mandate",
+      "status": "completed",
+      "outcome": "deny",
+      "should_execute": false,
+      "reason_codes": [
+        "PERMIT_EXPIRED",
+        "FAIL_CLOSED"
+      ],
+      "checks": [
+        {
+          "details": "Pulse rejected the expired authorization.",
+          "name": "decision.outcome",
+          "pass": true
+        },
+        {
+          "details": "The raw report includes the EIP-3009 expiry failure.",
+          "name": "evidence.verification.failure_reason",
+          "pass": true
+        }
+      ],
+      "artifacts": {
+        "admission_receipt": {
+          "uri": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-stale.example.json",
+          "media_type": "application/json",
+          "digest": {
+            "alg": "sha-256",
+            "value": "535294eaa7d3c6d0ae3844eb31314ab60657267d2889ba41b85ceaa787dcdff6"
+          }
+        }
+      },
+      "limitations": [
+        "Bounded candidate-executed projection from the preserved raw frozen-Pulse report."
+      ]
+    },
+    {
+      "case_id": "allow-a2a-signed-agent-card-evidence",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "allow-jose-detached-runtime-attestation",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "allow-mcp-oauth-token-authority-bound",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "allow-mcp-oauth-transport-bound",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "allow-mcp-tool-class-aligned",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "allow-replay-state-unused",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "allow-resource-indicator-aligned",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "allow-status-fresh-at-boundary",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "allow-valid-admission",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "allow-valid-basic-external-write",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "allow-valid-with-policy-snapshot",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "allow-valid-with-status-fresh",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "attenuate-max-amount",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "attenuate-requires-new-permit",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "attenuate-target-scope",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-alg-not-allowed",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-ambiguous-trust-anchor",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-ap2-hnp-replay",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-attenuation-approval-string",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-attenuation-legacy-effective-constraints",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-attenuation-malformed-money",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-attenuation-max-amount-type-edge",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-attenuation-negative-amount",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-attenuation-unsafe-path",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-audience-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-digest-mismatch-before-policy",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-digest-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-empty-evidence-refs",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-evidence-type-not-allowed",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-expired-permit",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-jose-alg-none",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-jose-crit-unsupported",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-jose-es384-not-allowed",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-jose-hs256-downgrade",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-jose-payload-digest-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-kid-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-mcp-oauth-overscope",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-mcp-oauth-upstream-denied",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-mcp-tool-class-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-not-yet-valid-permit",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-policy-snapshot-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-replay-detected",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-replay-state-replayed",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-resource-indicator-drift",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-runtime-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-runtime-proof-stale",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-signature-tampered",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-status-revoked",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-status-stale-fail-closed",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-status-stale-just-over-boundary",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-token-passthrough-as-authority",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-trust-anchor-expired",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-trust-anchor-not-yet-valid",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-trust-anchor-revoked",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "deny-unknown-trust-anchor",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "interop-ap2-ucp-commerce-evidence",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "interop-oap-decision-evidence",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "post-execution-admission-digest-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "post-execution-after-admission-expiry",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "post-execution-after-deny",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "post-execution-allow-effective-constraints-exceeded",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "post-execution-ap2-hnp-linkage-success",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "post-execution-effective-constraints-aggregate-exceeded",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "post-execution-effective-constraints-exceeded",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "post-execution-finish-after-admission-expiry",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "post-execution-linkage-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "post-execution-linkage-success",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "post-execution-runtime-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "post-execution-transaction-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "rcl-005-authorization-params-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "rcl-006-occurrence-action-linkage-mismatch",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    },
+    {
+      "case_id": "rcl-008-full-pipeline-acceptance-control",
+      "status": "skipped",
+      "outcome": "out-of-scope",
+      "should_execute": false,
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "limitations": [
+        "Outside the bounded three-case Pulse attempt; no SUT outcome is claimed."
+      ]
+    }
+  ],
+  "external_run": {
+    "record_version": "vate-pulse-external-sut-run-record-0.6",
+    "status": "completed",
+    "evidence_class": "candidate-executed",
+    "vate_source_commit": "5a37f87de0190da44e619b1800261637e83dd7ed",
+    "pulse_verifier_commit": "e06a6cbfe3ddb965c8fc70f50838f5014ec2038e",
+    "source_policy": {
+      "vate_expected_used": false,
+      "vate_admission_receipt_used_as_source": false,
+      "vate_post_execution_receipt_used_as_source": false,
+      "case_id_verdict_lookup_used": false,
+      "unchanged_pulse_fixture_used": false,
+      "pulse_verifier_semantic_change": false,
+      "comparison_receipts_used_only_by_vate_compare": true,
+      "candidate_runtime_received_eligible_inputs_only": true,
+      "source_scan_is_primary_control": false
+    },
+    "comparison_contract": {
+      "corpus_case_count": 75,
+      "selected_case_count": 3,
+      "out_of_scope_case_count": 72,
+      "fixed_runner_treats_skipped_as_failure": true,
+      "completed_expected_summary": {
+        "passed": 2,
+        "failed": 73,
+        "skipped": 72
+      },
+      "selected_expected_relation_counts": {
+        "match": 2,
+        "mismatch": 1
+      },
+      "verify_bundle_is_integrity_only": true
+    },
+    "attempt": {
+      "stage": "complete",
+      "reason_code": "COMPLETED",
+      "details": "All three selected eligible inputs were mapped, replayed through frozen Pulse, and projected.",
+      "completed_case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "incomplete_case_ids": [],
+      "evidence": [
+        {
+          "case_id": null,
+          "kind": "starter-manifest",
+          "path": "starter-manifest.json",
+          "raw_sha256": "af8a13ff90a48f442b4306d44e4944b854bea019215adfccf0b11805d6c1d266"
+        },
+        {
+          "case_id": null,
+          "kind": "mapping-source",
+          "path": "mapping-source/mapper.py",
+          "raw_sha256": "85c87df9a5e4d33c6d68078212a7f94f3271c22b8a69d5c20f526b3879073efb"
+        },
+        {
+          "case_id": null,
+          "kind": "worksheet",
+          "path": "mapping-worksheet.json",
+          "raw_sha256": "e61fd9328adadea9bbe00aef6b72158d8a120c44dd6921762c57b882e8ebf266"
+        },
+        {
+          "case_id": null,
+          "kind": "eligible-input-manifest",
+          "path": "eligible-input-manifest.json",
+          "raw_sha256": "5ea1b9c2fde2561bb01a4e7f9240c2cea7d16d02c470a1e7ac9a3fbb3506d18a"
+        },
+        {
+          "case_id": null,
+          "kind": "generated-records",
+          "path": "generated-records.json",
+          "raw_sha256": "16bd3b518e7edd9886f2eb742a61ba47f84dd762e1ca127c7d34c22e5df5e2b2"
+        },
+        {
+          "case_id": null,
+          "kind": "candidate-map-request",
+          "path": "candidate-execution/map-request.json",
+          "raw_sha256": "758b05f6f4b2d9c3d01380b93f7acf9251e2c3c11bfe1a3d560ffd3d034f9152"
+        },
+        {
+          "case_id": null,
+          "kind": "candidate-map-output",
+          "path": "candidate-execution/map-output.json",
+          "raw_sha256": "668d14060025da66b243b287bb1e30d9c69f66c244577c6d1e3ffb5db0d65c8e"
+        },
+        {
+          "case_id": null,
+          "kind": "candidate-projection-request",
+          "path": "candidate-execution/projection-request.json",
+          "raw_sha256": "25f4e3a5dcb2ec17895e505040200f9c8b9078b5844268bc832a37e0a6f766ac"
+        },
+        {
+          "case_id": null,
+          "kind": "candidate-projection-output",
+          "path": "candidate-execution/projection-output.json",
+          "raw_sha256": "364d794fef581499af9c7ef819628c18761f64ddefbcc36bd8fcc7a805fc73cd"
+        },
+        {
+          "case_id": "allow-ap2-hnp-preauthorized-mandate",
+          "kind": "pulse-input",
+          "path": "pulse-inputs/allow-ap2-hnp-preauthorized-mandate.pulse-input.json",
+          "raw_sha256": "5d92b927e2cc466a0efff20953985afd1285d9d6df00e146ed203700a8b84989"
+        },
+        {
+          "case_id": "allow-ap2-hnp-preauthorized-mandate",
+          "kind": "raw-pulse-output",
+          "path": "raw-pulse-output.json",
+          "raw_sha256": "12d024b44ff5ddbe3aa3ebf0d116a762fdb1376dc4950399b7380515628d8e96"
+        },
+        {
+          "case_id": "attenuate-ap2-hnp-amount-overrun",
+          "kind": "pulse-input",
+          "path": "pulse-inputs/attenuate-ap2-hnp-amount-overrun.pulse-input.json",
+          "raw_sha256": "d53aba68b2c13c80f4057d7f0a6e8c6d76d29630b9934028c0d4ae61c5f4d800"
+        },
+        {
+          "case_id": "attenuate-ap2-hnp-amount-overrun",
+          "kind": "raw-pulse-output",
+          "path": "raw-pulse-output.json",
+          "raw_sha256": "12d024b44ff5ddbe3aa3ebf0d116a762fdb1376dc4950399b7380515628d8e96"
+        },
+        {
+          "case_id": "deny-ap2-hnp-stale-mandate",
+          "kind": "pulse-input",
+          "path": "pulse-inputs/deny-ap2-hnp-stale-mandate.pulse-input.json",
+          "raw_sha256": "9eb5f74556db07140e5f74623031febddd06fdacba0dd9deca774380e5ec3599"
+        },
+        {
+          "case_id": "deny-ap2-hnp-stale-mandate",
+          "kind": "raw-pulse-output",
+          "path": "raw-pulse-output.json",
+          "raw_sha256": "12d024b44ff5ddbe3aa3ebf0d116a762fdb1376dc4950399b7380515628d8e96"
+        }
+      ]
+    },
+    "starter_manifest": {
+      "path": "starter-manifest.json",
+      "raw_sha256": "af8a13ff90a48f442b4306d44e4944b854bea019215adfccf0b11805d6c1d266"
+    },
+    "mapping_source": {
+      "owner": "candidate_owned",
+      "repository": "https://github.com/shibutatsu/pulse-ap2-x402-conformance.git",
+      "locator_verification": "local-git-origin-only-no-remote-fetch",
+      "commit": "ce125dbada38d45dcde34eeb02197fc5be0e1ad9",
+      "repository_path": "mapper.py",
+      "entrypoint": "mapper.py",
+      "command": [
+        "python3",
+        "-I",
+        "-S",
+        "-B",
+        "mapper.py"
+      ],
+      "bundle_path": "mapping-source/mapper.py",
+      "raw_sha256": "85c87df9a5e4d33c6d68078212a7f94f3271c22b8a69d5c20f526b3879073efb"
+    },
+    "worksheet": {
+      "path": "mapping-worksheet.json",
+      "raw_sha256": "e61fd9328adadea9bbe00aef6b72158d8a120c44dd6921762c57b882e8ebf266"
+    },
+    "eligible_input_manifest": {
+      "path": "eligible-input-manifest.json",
+      "raw_sha256": "5ea1b9c2fde2561bb01a4e7f9240c2cea7d16d02c470a1e7ac9a3fbb3506d18a"
+    },
+    "generated_records": {
+      "path": "generated-records.json",
+      "raw_sha256": "16bd3b518e7edd9886f2eb742a61ba47f84dd762e1ca127c7d34c22e5df5e2b2"
+    },
+    "candidate_execution": {
+      "interface_version": "vate-pulse-candidate-executable-0.2",
+      "command": [
+        "python3",
+        "-I",
+        "-S",
+        "-B",
+        "mapper.py"
+      ],
+      "runtime": {
+        "logical_name": "python3",
+        "requested_absolute_path": "/opt/homebrew/bin/python3",
+        "requested_file_type": "symlink",
+        "realpath": "/opt/homebrew/Cellar/python@3.14/3.14.4_1/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "realpath_file_type": "regular",
+        "raw_sha256": "02a8df1726463faedb3adef289b3d1bdeabb7785c837fd8c174023aeeeb4d312",
+        "version": "Python 3.14.4"
+      },
+      "commit_export": {
+        "mode": "fresh-tracked-regular-commit-export-per-invocation",
+        "working_tree_scope": "identity-and-cleanliness-check-only-never-executed",
+        "file_count": 2,
+        "total_bytes": 135486,
+        "file_inventory_sha256": "ec024a8007fc1071e5e4f12bb4716ee0531a3228b652efb887b4760551740c85",
+        "inventory_basis": "sorted canonical JSON [{path,file_type,git_mode,raw_sha256,size}]",
+        "fresh_per_invocation": true,
+        "regular_files_only": true,
+        "live_checkout_executed": false,
+        "external_packages_available": false,
+        "runtime_network_allowed": false,
+        "export_write_allowed": false
+      },
+      "map_request": {
+        "path": "candidate-execution/map-request.json",
+        "raw_sha256": "758b05f6f4b2d9c3d01380b93f7acf9251e2c3c11bfe1a3d560ffd3d034f9152"
+      },
+      "map_output": {
+        "path": "candidate-execution/map-output.json",
+        "raw_sha256": "668d14060025da66b243b287bb1e30d9c69f66c244577c6d1e3ffb5db0d65c8e"
+      },
+      "projection_request": {
+        "path": "candidate-execution/projection-request.json",
+        "raw_sha256": "25f4e3a5dcb2ec17895e505040200f9c8b9078b5844268bc832a37e0a6f766ac"
+      },
+      "projection_output": {
+        "path": "candidate-execution/projection-output.json",
+        "raw_sha256": "364d794fef581499af9c7ef819628c18761f64ddefbcc36bd8fcc7a805fc73cd"
+      },
+      "sensitivity_contract": {
+        "probe_dimensions": [
+          "amount",
+          "merchant",
+          "evaluation_time",
+          "replay_nonce"
+        ],
+        "randomized_per_validation": true,
+        "independent_recomputation": true,
+        "tamper_proof_claim": false
+      }
+    },
+    "case_runs": [
+      {
+        "case_id": "allow-ap2-hnp-preauthorized-mandate",
+        "vate_input_closure_sha256": "1a2058d71869f1530f461479b9b9f505da318702eedeef7bca4afd9e92c1d5a3",
+        "vate_inputs": [
+          {
+            "role": "case",
+            "artifact_key": "case",
+            "source_path": "conformance/al2-vate-v0.3/cases/allow-ap2-hnp-preauthorized-mandate.json",
+            "source_raw_sha256": "f81b1d7389905b6dc8d034dfcb3aa313b5ecb714235005f8e957bc8c6f4aa50b",
+            "bundle_path": "vate-inputs/allow-ap2-hnp-preauthorized-mandate/case.json",
+            "bundle_raw_sha256": "f81b1d7389905b6dc8d034dfcb3aa313b5ecb714235005f8e957bc8c6f4aa50b"
+          },
+          {
+            "role": "source",
+            "artifact_key": "admission_request",
+            "source_path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-valid.example.json",
+            "source_raw_sha256": "7f57ef2203fb04dba7a1365daf4359a77526eb497effedc84b100854af3fa165",
+            "bundle_path": "vate-inputs/allow-ap2-hnp-preauthorized-mandate/admission_request.json",
+            "bundle_raw_sha256": "7f57ef2203fb04dba7a1365daf4359a77526eb497effedc84b100854af3fa165"
+          },
+          {
+            "role": "source",
+            "artifact_key": "ap2_mandate",
+            "source_path": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-valid.example.json",
+            "source_raw_sha256": "22abc3d0905eee01449327a56a384359c0701e753719bfc2b5cb500da62d0e72",
+            "bundle_path": "vate-inputs/allow-ap2-hnp-preauthorized-mandate/ap2_mandate.json",
+            "bundle_raw_sha256": "22abc3d0905eee01449327a56a384359c0701e753719bfc2b5cb500da62d0e72"
+          },
+          {
+            "role": "comparison-only",
+            "artifact_key": "admission_receipt",
+            "source_path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-valid.example.json",
+            "source_raw_sha256": "60ab3343833cb5840ed8070cc55b55dd715c72f04284a542c42c113290b2eae9",
+            "bundle_path": "vate-inputs/allow-ap2-hnp-preauthorized-mandate/admission_receipt.json",
+            "bundle_raw_sha256": "60ab3343833cb5840ed8070cc55b55dd715c72f04284a542c42c113290b2eae9"
+          }
+        ],
+        "pulse_input": {
+          "path": "pulse-inputs/allow-ap2-hnp-preauthorized-mandate.pulse-input.json",
+          "raw_sha256": "5d92b927e2cc466a0efff20953985afd1285d9d6df00e146ed203700a8b84989"
+        },
+        "raw_report": {
+          "path": "raw-pulse-output.json",
+          "raw_sha256": "12d024b44ff5ddbe3aa3ebf0d116a762fdb1376dc4950399b7380515628d8e96",
+          "report_index": 0
+        },
+        "projection": {
+          "result_index": 0,
+          "source_document": "raw_pulse_output",
+          "source_json_pointer": "/reports/0",
+          "observed_relation_to_vate": "match",
+          "projected_checks": [
+            {
+              "details": "Pulse accepted the generated input with no failures.",
+              "name": "decision.outcome",
+              "pass": true
+            },
+            {
+              "details": "The request audience equals the target audience.",
+              "name": "request.audience",
+              "pass": true
+            },
+            {
+              "details": "The eligible evidence declares the AP2 human-not-present protocol.",
+              "name": "evidence[0].protocol_hint",
+              "pass": true
+            },
+            {
+              "details": "The frozen Pulse report is consistent.",
+              "name": "evidence.verification.result",
+              "pass": true
+            }
+          ],
+          "projected_reason_codes": [
+            "EVIDENCE_VERIFIED",
+            "POLICY_MATCH"
+          ],
+          "projected_should_execute": true,
+          "projected_vate_outcome": "allow",
+          "pulse_outcome_class": "accept"
+        }
+      },
+      {
+        "case_id": "attenuate-ap2-hnp-amount-overrun",
+        "vate_input_closure_sha256": "e0be368ae171cd9198aedaaf0713728537b6e16263268da2a1eed7c81fa04aa1",
+        "vate_inputs": [
+          {
+            "role": "case",
+            "artifact_key": "case",
+            "source_path": "conformance/al2-vate-v0.3/cases/attenuate-ap2-hnp-amount-overrun.json",
+            "source_raw_sha256": "683f1868b5b61ae48aa16ed0faed0e875b9ffa15dcbddfcab11ef5f71ab00dc6",
+            "bundle_path": "vate-inputs/attenuate-ap2-hnp-amount-overrun/case.json",
+            "bundle_raw_sha256": "683f1868b5b61ae48aa16ed0faed0e875b9ffa15dcbddfcab11ef5f71ab00dc6"
+          },
+          {
+            "role": "source",
+            "artifact_key": "admission_request",
+            "source_path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-overrun.example.json",
+            "source_raw_sha256": "6d0bc2cb8ad2f33841a17ea4393c99acfd04dfcfa25f3be697dc4b115726c47b",
+            "bundle_path": "vate-inputs/attenuate-ap2-hnp-amount-overrun/admission_request.json",
+            "bundle_raw_sha256": "6d0bc2cb8ad2f33841a17ea4393c99acfd04dfcfa25f3be697dc4b115726c47b"
+          },
+          {
+            "role": "source",
+            "artifact_key": "ap2_mandate",
+            "source_path": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-overrun.example.json",
+            "source_raw_sha256": "d36f54d452131a0280eec04dc85b6132d70dbd35a7d378e14c5b89a39c9d2351",
+            "bundle_path": "vate-inputs/attenuate-ap2-hnp-amount-overrun/ap2_mandate.json",
+            "bundle_raw_sha256": "d36f54d452131a0280eec04dc85b6132d70dbd35a7d378e14c5b89a39c9d2351"
+          },
+          {
+            "role": "comparison-only",
+            "artifact_key": "admission_receipt",
+            "source_path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-overrun.example.json",
+            "source_raw_sha256": "08803e26794f3513dc108f3f03c238e9acb17e7a23e1b4bdd62730cc6973c8f6",
+            "bundle_path": "vate-inputs/attenuate-ap2-hnp-amount-overrun/admission_receipt.json",
+            "bundle_raw_sha256": "08803e26794f3513dc108f3f03c238e9acb17e7a23e1b4bdd62730cc6973c8f6"
+          }
+        ],
+        "pulse_input": {
+          "path": "pulse-inputs/attenuate-ap2-hnp-amount-overrun.pulse-input.json",
+          "raw_sha256": "d53aba68b2c13c80f4057d7f0a6e8c6d76d29630b9934028c0d4ae61c5f4d800"
+        },
+        "raw_report": {
+          "path": "raw-pulse-output.json",
+          "raw_sha256": "12d024b44ff5ddbe3aa3ebf0d116a762fdb1376dc4950399b7380515628d8e96",
+          "report_index": 1
+        },
+        "projection": {
+          "result_index": 1,
+          "source_document": "raw_pulse_output",
+          "source_json_pointer": "/reports/1",
+          "observed_relation_to_vate": "mismatch",
+          "projected_checks": [],
+          "projected_reason_codes": [
+            "AP2_X402_AMOUNT_MISMATCH"
+          ],
+          "projected_should_execute": false,
+          "projected_vate_outcome": "deny",
+          "pulse_outcome_class": "non-attenuate"
+        }
+      },
+      {
+        "case_id": "deny-ap2-hnp-stale-mandate",
+        "vate_input_closure_sha256": "fded9e057a80f78c4a3119d9232f34d3098594dad975ad8ad7eee56abd77f600",
+        "vate_inputs": [
+          {
+            "role": "case",
+            "artifact_key": "case",
+            "source_path": "conformance/al2-vate-v0.3/cases/deny-ap2-hnp-stale-mandate.json",
+            "source_raw_sha256": "aea9595be5683a5381c6333f0e3772cfaff7688e47ee16961db3c1bab71e76ec",
+            "bundle_path": "vate-inputs/deny-ap2-hnp-stale-mandate/case.json",
+            "bundle_raw_sha256": "aea9595be5683a5381c6333f0e3772cfaff7688e47ee16961db3c1bab71e76ec"
+          },
+          {
+            "role": "source",
+            "artifact_key": "admission_request",
+            "source_path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-stale.example.json",
+            "source_raw_sha256": "7950cf298f5ced91a1f169fbb72bbe51057c80c5df5a8495b9e3ce95d5f707ce",
+            "bundle_path": "vate-inputs/deny-ap2-hnp-stale-mandate/admission_request.json",
+            "bundle_raw_sha256": "7950cf298f5ced91a1f169fbb72bbe51057c80c5df5a8495b9e3ce95d5f707ce"
+          },
+          {
+            "role": "source",
+            "artifact_key": "ap2_mandate",
+            "source_path": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-stale.example.json",
+            "source_raw_sha256": "3448d1900326b458f630e7a53f33e9e59d9c9cdb7808ba684a5a64298f866049",
+            "bundle_path": "vate-inputs/deny-ap2-hnp-stale-mandate/ap2_mandate.json",
+            "bundle_raw_sha256": "3448d1900326b458f630e7a53f33e9e59d9c9cdb7808ba684a5a64298f866049"
+          },
+          {
+            "role": "comparison-only",
+            "artifact_key": "admission_receipt",
+            "source_path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-stale.example.json",
+            "source_raw_sha256": "535294eaa7d3c6d0ae3844eb31314ab60657267d2889ba41b85ceaa787dcdff6",
+            "bundle_path": "vate-inputs/deny-ap2-hnp-stale-mandate/admission_receipt.json",
+            "bundle_raw_sha256": "535294eaa7d3c6d0ae3844eb31314ab60657267d2889ba41b85ceaa787dcdff6"
+          }
+        ],
+        "pulse_input": {
+          "path": "pulse-inputs/deny-ap2-hnp-stale-mandate.pulse-input.json",
+          "raw_sha256": "9eb5f74556db07140e5f74623031febddd06fdacba0dd9deca774380e5ec3599"
+        },
+        "raw_report": {
+          "path": "raw-pulse-output.json",
+          "raw_sha256": "12d024b44ff5ddbe3aa3ebf0d116a762fdb1376dc4950399b7380515628d8e96",
+          "report_index": 2
+        },
+        "projection": {
+          "result_index": 2,
+          "source_document": "raw_pulse_output",
+          "source_json_pointer": "/reports/2",
+          "observed_relation_to_vate": "match",
+          "projected_checks": [
+            {
+              "details": "Pulse rejected the expired authorization.",
+              "name": "decision.outcome",
+              "pass": true
+            },
+            {
+              "details": "The raw report includes the EIP-3009 expiry failure.",
+              "name": "evidence.verification.failure_reason",
+              "pass": true
+            }
+          ],
+          "projected_reason_codes": [
+            "PERMIT_EXPIRED",
+            "FAIL_CLOSED"
+          ],
+          "projected_should_execute": false,
+          "projected_vate_outcome": "deny",
+          "pulse_outcome_class": "reject"
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "This is a bounded three-case candidate execution; the remaining 72 VATE cases are explicitly out of scope.",
+    "The VATE attenuation versus Pulse non-attenuate observation is preserved as a mismatch.",
+    "This external SUT observation is not organic adoption, audit, endorsement, certification, production approval, general compatibility, Pulse Issue #18 completion, or a Pulse security review."
+  ]
+}

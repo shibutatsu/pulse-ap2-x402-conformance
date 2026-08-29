@@ -1,0 +1,57 @@
+{
+  "decision": {
+    "human_readable_summary": "The verifier denied execution because the AP2 mandate was no longer valid at admission time.",
+    "outcome": "deny",
+    "reason_codes": [
+      "PERMIT_EXPIRED",
+      "FAIL_CLOSED"
+    ]
+  },
+  "evidence": [
+    {
+      "digest": {
+        "alg": "sha-256",
+        "value": "867e5c25b5a54dae8a9d3c03d4f2cdb0332b562521e0c68f1e2dd43eb5636063"
+      },
+      "protocol_hint": "ap2_human_not_present",
+      "type": "payment_mandate",
+      "uri": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-stale.example.json",
+      "verification": {
+        "checked_at": "2026-05-07T10:00:06Z",
+        "failure_reason": "The AP2 Human Not Present mandate expired before admission.",
+        "method": "ap2-human-not-present-mandate-verification",
+        "result": "failed"
+      }
+    }
+  ],
+  "expires_at": "2026-05-07T10:05:00Z",
+  "issued_at": "2026-05-07T10:00:08Z",
+  "policy": {
+    "policy_id": "al2-ap2-human-not-present-commerce",
+    "policy_ref": "https://verifier.example/policies/al2-ap2-human-not-present-commerce/2026-05-07.1",
+    "policy_version": "2026-05-07.1"
+  },
+  "profile": "VATE-AL2-Verifier-Admission-v0.3",
+  "receipt_id": "admrec-ap2hnp-stale-20260507-001",
+  "receipt_type": "admission",
+  "request": {
+    "a2a_context_id": "ctx-ap2hnp-stale-20260507-001",
+    "a2a_task_id": "task-ap2hnp-stale-20260507-001",
+    "action": "commerce.purchase",
+    "audience": "https://tickets.example",
+    "input_hash": "sha-256:fb6980fe15093698f942e85fff6c6fad3d5570266f47f10c35869bed7cfe2b78",
+    "request_id": "areq-ap2hnp-stale-20260507-001",
+    "target_audience": "https://tickets.example",
+    "transaction_id": "txn-ap2hnp-stale-20260507-001"
+  },
+  "subject": {
+    "actor": "did:web:agent.example",
+    "principal": "did:web:user.example",
+    "runtime": "spiffe://agent.example/workload/ticket-agent"
+  },
+  "verifier": {
+    "id": "did:web:verifier.example",
+    "key_id": "did:web:verifier.example#key-1"
+  },
+  "version": "vate-0.3"
+}

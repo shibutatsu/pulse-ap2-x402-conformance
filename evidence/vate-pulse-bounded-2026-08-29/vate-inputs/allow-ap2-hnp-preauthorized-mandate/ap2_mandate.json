@@ -1,0 +1,35 @@
+{
+  "actor": "did:web:agent.example",
+  "audience": "https://psp.example/ap2",
+  "constraints": {
+    "allowed_action": "commerce.purchase",
+    "allowed_merchant": "tickets.example",
+    "execution_window": {
+      "not_after": "2026-05-07T10:30:00Z",
+      "not_before": "2026-05-07T08:30:00Z"
+    },
+    "max_amount": {
+      "currency": "USD",
+      "value": "50.00"
+    },
+    "one_time_use": true,
+    "replay_nonce": "nonce-ap2hnp-valid-001"
+  },
+  "expires_at": "2026-05-07T10:30:00Z",
+  "flow": "human_not_present",
+  "intent": "Buy one approved event ticket when inventory becomes available.",
+  "issued_at": "2026-05-07T08:30:00Z",
+  "issuer": "did:web:wallet.example",
+  "mandate_id": "ap2hnp-20260507-valid-001",
+  "merchant": "tickets.example",
+  "not_before": "2026-05-07T08:30:00Z",
+  "principal": "did:web:user.example",
+  "proof": {
+    "alg": "ES256",
+    "format": "detached_jws",
+    "kid": "did:web:wallet.example#key-1",
+    "signature_ref": "https://wallet.example/ap2/mandates/ap2hnp-20260507-valid-001.jws"
+  },
+  "status": "active",
+  "type": "ap2_mandate"
+}

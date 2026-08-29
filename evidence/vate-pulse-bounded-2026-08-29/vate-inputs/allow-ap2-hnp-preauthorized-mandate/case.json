@@ -1,0 +1,70 @@
+{
+  "artifact_reference_checks": [
+    {
+      "artifact": "ap2_mandate",
+      "expect_match": true,
+      "reference_paths": [
+        {
+          "artifact": "admission_request",
+          "path": "evidence_refs[0].digest"
+        },
+        {
+          "artifact": "admission_receipt",
+          "path": "evidence[0].digest"
+        }
+      ]
+    }
+  ],
+  "artifacts": {
+    "admission_receipt": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-valid.example.json",
+    "admission_request": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-valid.example.json",
+    "ap2_mandate": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-valid.example.json"
+  },
+  "case_id": "allow-ap2-hnp-preauthorized-mandate",
+  "category": "positive",
+  "expected": {
+    "admission_decision": "allow",
+    "checks": [
+      {
+        "expected": "pass",
+        "name": "decision.outcome"
+      },
+      {
+        "expected": "pass",
+        "name": "request.audience"
+      },
+      {
+        "expected": "present",
+        "name": "evidence[0].protocol_hint"
+      },
+      {
+        "expected": "pass",
+        "name": "evidence.verification.result"
+      }
+    ],
+    "reason_codes": [
+      "EVIDENCE_VERIFIED",
+      "POLICY_MATCH"
+    ],
+    "should_execute": true
+  },
+  "integrity_checks": [
+    {
+      "artifact": "ap2_mandate",
+      "expect_match": true,
+      "expected_digest": {
+        "alg": "sha-256",
+        "value": "1cbb43e0b5a8a53560e50731399fcd0b8899924eef580826a6f8af899b90a595"
+      }
+    }
+  ],
+  "profile": "VATE-AL2-Verifier-Admission-v0.3",
+  "purpose": "A VATE verifier should consume AP2 Human Not Present mandate evidence as payment authority without redefining payment protocol semantics.",
+  "title": "Allow a pre-authorized AP2 Human Not Present mandate",
+  "validation_focus": [
+    "AP2 Human Not Present",
+    "payment authority evidence",
+    "bounded delegated commerce"
+  ],
+  "version": "vate-conformance-0.3"
+}

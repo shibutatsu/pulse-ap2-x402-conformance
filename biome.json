@@ -12,6 +12,13 @@
     "rules": { "recommended": true }
   },
   "files": {
-    "ignore": ["dist/**", "coverage/**", "reports/**", ".stryker-tmp/**", "fixtures/**/*.json"]
+    "ignore": [
+      "dist/**",
+      "coverage/**",
+      "reports/**",
+      ".stryker-tmp/**",
+      "fixtures/**/*.json",
+      "evidence/vate-pulse-bounded-2026-08-29/**"
+    ]
   }
 }
