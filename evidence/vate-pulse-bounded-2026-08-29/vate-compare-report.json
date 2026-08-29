@@ -1,0 +1,2251 @@
+{
+  "cases": [
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-a2a-signed-agent-card-evidence",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['EVIDENCE_VERIFIED', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected EVIDENCE_VERIFIED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check jose.protected_header: missing",
+        "check jose.detached_payload_digest: missing",
+        "check jose.signing_input: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "allow",
+      "actual_primary_reason_code": "EVIDENCE_VERIFIED",
+      "actual_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "actual_should_execute": true,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-ap2-hnp-preauthorized-mandate",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [],
+      "pass": true
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-jose-detached-runtime-attestation",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['EVIDENCE_VERIFIED', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected EVIDENCE_VERIFIED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check jose.detached_payload_digest: missing",
+        "check jose.signing_input: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-mcp-oauth-token-authority-bound",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['EVIDENCE_VERIFIED', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected EVIDENCE_VERIFIED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check request.transport.oauth.token_present: missing",
+        "check request.transport.oauth.upstream_authorization: missing",
+        "check request.transport.oauth.resource_binding: missing",
+        "check request.transport.oauth.resource: missing",
+        "check request.target_resource: missing",
+        "check request.transport.openid.subject: missing",
+        "check request.transport.mcp.requested_tool_class: missing",
+        "check evidence.verification.result: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-mcp-oauth-transport-bound",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['EVIDENCE_VERIFIED', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected EVIDENCE_VERIFIED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check request.audience: missing",
+        "check request.transport.protocol: missing",
+        "check request.transport.oauth.audience: missing",
+        "check request.transport.openid.subject: missing",
+        "check evidence[0].protocol_hint: missing",
+        "check evidence[1].protocol_hint: missing",
+        "check evidence.verification.result: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-mcp-tool-class-aligned",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['EVIDENCE_VERIFIED', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected EVIDENCE_VERIFIED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check request.transport.mcp.authorized_tool: missing",
+        "check request.transport.mcp.authorized_tool_class: missing",
+        "check request.transport.mcp.requested_tool: missing",
+        "check request.transport.mcp.requested_tool_class: missing",
+        "check request.target_resource: missing",
+        "check evidence.verification.result: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-replay-state-unused",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['EVIDENCE_VERIFIED', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected EVIDENCE_VERIFIED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.result: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-resource-indicator-aligned",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['EVIDENCE_VERIFIED', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected EVIDENCE_VERIFIED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check request.requested_target_resource.normalized: missing",
+        "check request.transport.oauth.resource: missing",
+        "check request.transport.oauth.protected_resource: missing",
+        "check request.transport.oauth.resource_binding: missing",
+        "check request.target_resource: missing",
+        "check request.transport.mcp.requested_tool_class: missing",
+        "check evidence.verification.result: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-status-fresh-at-boundary",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "STATUS_FRESH",
+      "expected_reason_codes": [
+        "STATUS_FRESH",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['STATUS_FRESH', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected STATUS_FRESH actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.result: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-valid-admission",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['EVIDENCE_VERIFIED', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected EVIDENCE_VERIFIED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.result: missing",
+        "check policy.policy_version: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-valid-basic-external-write",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['EVIDENCE_VERIFIED', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected EVIDENCE_VERIFIED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.result: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-valid-with-policy-snapshot",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "POLICY_SNAPSHOT_MATCH",
+      "expected_reason_codes": [
+        "POLICY_SNAPSHOT_MATCH",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['POLICY_SNAPSHOT_MATCH', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POLICY_SNAPSHOT_MATCH actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check policy.policy_snapshot.digest: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-valid-with-status-fresh",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "STATUS_FRESH",
+      "expected_reason_codes": [
+        "STATUS_FRESH",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['STATUS_FRESH', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected STATUS_FRESH actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.result: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "deny",
+      "actual_primary_reason_code": "AP2_X402_AMOUNT_MISMATCH",
+      "actual_reason_codes": [
+        "AP2_X402_AMOUNT_MISMATCH"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "attenuate-ap2-hnp-amount-overrun",
+      "category": "positive",
+      "expected_outcome": "attenuate",
+      "expected_primary_reason_code": "PAYMENT_TOKEN_LIMIT",
+      "expected_reason_codes": [
+        "PAYMENT_TOKEN_LIMIT",
+        "LOCAL_POLICY_MAX_AMOUNT_NARROWED"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "outcome: expected attenuate actual deny",
+        "reason_codes: expected ['PAYMENT_TOKEN_LIMIT', 'LOCAL_POLICY_MAX_AMOUNT_NARROWED'] actual ['AP2_X402_AMOUNT_MISMATCH']",
+        "primary_reason_code: expected PAYMENT_TOKEN_LIMIT actual AP2_X402_AMOUNT_MISMATCH",
+        "check attenuation.original_request_hash: missing",
+        "check attenuation.effective_request_hash: missing",
+        "check attenuation.changes[0].path: missing",
+        "check attenuation.effective_constraints.max_amount.value: missing"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "attenuate-max-amount",
+      "category": "positive",
+      "expected_outcome": "attenuate",
+      "expected_primary_reason_code": "PAYMENT_TOKEN_LIMIT",
+      "expected_reason_codes": [
+        "PAYMENT_TOKEN_LIMIT",
+        "LOCAL_POLICY_MAX_AMOUNT_NARROWED"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected attenuate actual out-of-scope",
+        "reason_codes: expected ['PAYMENT_TOKEN_LIMIT', 'LOCAL_POLICY_MAX_AMOUNT_NARROWED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected PAYMENT_TOKEN_LIMIT actual OUT_OF_SCOPE",
+        "check attenuation.original_request_hash: missing",
+        "check attenuation.effective_request_hash: missing",
+        "check attenuation.changes[0].path: missing",
+        "check a2a_metadata.admission_receipt.digest: missing",
+        "check a2a_metadata.policy_snapshot.digest: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "attenuate-requires-new-permit",
+      "category": "positive",
+      "expected_outcome": "attenuate",
+      "expected_primary_reason_code": "NEW_PERMIT_REQUIRED",
+      "expected_reason_codes": [
+        "NEW_PERMIT_REQUIRED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected attenuate actual out-of-scope",
+        "reason_codes: expected ['NEW_PERMIT_REQUIRED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected NEW_PERMIT_REQUIRED actual OUT_OF_SCOPE",
+        "check attenuation.require_new_permit: missing",
+        "check attenuation.changes[0].reason_code: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "attenuate-target-scope",
+      "category": "positive",
+      "expected_outcome": "attenuate",
+      "expected_primary_reason_code": "TARGET_SCOPE_NARROWED",
+      "expected_reason_codes": [
+        "TARGET_SCOPE_NARROWED"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected attenuate actual out-of-scope",
+        "reason_codes: expected ['TARGET_SCOPE_NARROWED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected TARGET_SCOPE_NARROWED actual OUT_OF_SCOPE",
+        "check attenuation.original_request_hash: missing",
+        "check attenuation.effective_request_hash: missing",
+        "check attenuation.effective_constraints: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-alg-not-allowed",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ALG_NOT_ALLOWED",
+      "expected_reason_codes": [
+        "ALG_NOT_ALLOWED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['ALG_NOT_ALLOWED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected ALG_NOT_ALLOWED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-ambiguous-trust-anchor",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_reason_codes": [
+        "SCHEMA_INVALID",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['SCHEMA_INVALID', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected SCHEMA_INVALID actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-ap2-hnp-replay",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "REPLAY_DETECTED",
+      "expected_reason_codes": [
+        "REPLAY_DETECTED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['REPLAY_DETECTED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected REPLAY_DETECTED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "deny",
+      "actual_primary_reason_code": "PERMIT_EXPIRED",
+      "actual_reason_codes": [
+        "PERMIT_EXPIRED",
+        "FAIL_CLOSED"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-ap2-hnp-stale-mandate",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "PERMIT_EXPIRED",
+      "expected_reason_codes": [
+        "PERMIT_EXPIRED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [],
+      "pass": true
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-attenuation-approval-string",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_reason_codes": [
+        "SCHEMA_INVALID",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['SCHEMA_INVALID', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected SCHEMA_INVALID actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-attenuation-legacy-effective-constraints",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_reason_codes": [
+        "SCHEMA_INVALID",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['SCHEMA_INVALID', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected SCHEMA_INVALID actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-attenuation-malformed-money",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_reason_codes": [
+        "SCHEMA_INVALID",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['SCHEMA_INVALID', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected SCHEMA_INVALID actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-attenuation-max-amount-type-edge",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_reason_codes": [
+        "SCHEMA_INVALID",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['SCHEMA_INVALID', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected SCHEMA_INVALID actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-attenuation-negative-amount",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_reason_codes": [
+        "SCHEMA_INVALID",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['SCHEMA_INVALID', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected SCHEMA_INVALID actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-attenuation-unsafe-path",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_reason_codes": [
+        "SCHEMA_INVALID",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['SCHEMA_INVALID', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected SCHEMA_INVALID actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-audience-mismatch",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "AUDIENCE_MISMATCH",
+      "expected_reason_codes": [
+        "AUDIENCE_MISMATCH",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['AUDIENCE_MISMATCH', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected AUDIENCE_MISMATCH actual OUT_OF_SCOPE",
+        "check request.audience: missing",
+        "check target.audience: missing",
+        "check admission_receipt.decision: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-digest-mismatch-before-policy",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "DIGEST_MISMATCH",
+      "expected_reason_codes": [
+        "DIGEST_MISMATCH",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['DIGEST_MISMATCH', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected DIGEST_MISMATCH actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "check policy.policy_version: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-digest-mismatch",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "DIGEST_MISMATCH",
+      "expected_reason_codes": [
+        "DIGEST_MISMATCH",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['DIGEST_MISMATCH', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected DIGEST_MISMATCH actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-empty-evidence-refs",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_reason_codes": [
+        "SCHEMA_INVALID",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['SCHEMA_INVALID', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected SCHEMA_INVALID actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-evidence-type-not-allowed",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ISSUER_NOT_AUTHORIZED",
+      "expected_reason_codes": [
+        "ISSUER_NOT_AUTHORIZED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['ISSUER_NOT_AUTHORIZED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected ISSUER_NOT_AUTHORIZED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-expired-permit",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "PERMIT_EXPIRED",
+      "expected_reason_codes": [
+        "PERMIT_EXPIRED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['PERMIT_EXPIRED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected PERMIT_EXPIRED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "check post_execution_receipt: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-jose-alg-none",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ALG_NOT_ALLOWED",
+      "expected_reason_codes": [
+        "ALG_NOT_ALLOWED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['ALG_NOT_ALLOWED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected ALG_NOT_ALLOWED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-jose-crit-unsupported",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_reason_codes": [
+        "SCHEMA_INVALID",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['SCHEMA_INVALID', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected SCHEMA_INVALID actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-jose-es384-not-allowed",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ALG_NOT_ALLOWED",
+      "expected_reason_codes": [
+        "ALG_NOT_ALLOWED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['ALG_NOT_ALLOWED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected ALG_NOT_ALLOWED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check jose.protected_header: missing",
+        "check jose.detached_payload_digest: missing",
+        "check jose.signing_input: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-jose-hs256-downgrade",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ALG_NOT_ALLOWED",
+      "expected_reason_codes": [
+        "ALG_NOT_ALLOWED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['ALG_NOT_ALLOWED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected ALG_NOT_ALLOWED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check jose.protected_header: missing",
+        "check jose.detached_payload_digest: missing",
+        "check jose.signing_input: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-jose-payload-digest-mismatch",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "DIGEST_MISMATCH",
+      "expected_reason_codes": [
+        "DIGEST_MISMATCH",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['DIGEST_MISMATCH', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected DIGEST_MISMATCH actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-kid-mismatch",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "UNKNOWN_TRUST_ANCHOR",
+      "expected_reason_codes": [
+        "UNKNOWN_TRUST_ANCHOR",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['UNKNOWN_TRUST_ANCHOR', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected UNKNOWN_TRUST_ANCHOR actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-mcp-oauth-overscope",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "TARGET_NOT_PERMITTED",
+      "expected_reason_codes": [
+        "TARGET_NOT_PERMITTED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['TARGET_NOT_PERMITTED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected TARGET_NOT_PERMITTED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check request.transport.oauth.resource: missing",
+        "check request.target_resource: missing",
+        "check evidence.verification.result: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-mcp-oauth-upstream-denied",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ACTION_NOT_PERMITTED",
+      "expected_reason_codes": [
+        "ACTION_NOT_PERMITTED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['ACTION_NOT_PERMITTED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected ACTION_NOT_PERMITTED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check request.transport.oauth.resource: missing",
+        "check request.transport.oauth.scopes: missing",
+        "check request.transport.oauth.required_scope: missing",
+        "check request.target_resource: missing",
+        "check evidence[0].protocol_hint: missing",
+        "check evidence.verification.result: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-mcp-tool-class-mismatch",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "TOOL_CLASS_MISMATCH",
+      "expected_reason_codes": [
+        "TOOL_CLASS_MISMATCH",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['TOOL_CLASS_MISMATCH', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected TOOL_CLASS_MISMATCH actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check request.transport.mcp.authorized_tool_class: missing",
+        "check request.transport.mcp.requested_tool_class: missing",
+        "check request.target_resource: missing",
+        "check evidence.verification.failure_reason: missing",
+        "check admission_receipt.evidence[0].verification.diagnostic_code: missing",
+        "check admission_receipt.evidence[0].verification.full_token: missing",
+        "check admission_receipt.evidence[0].verification.tool_payload: missing",
+        "check admission_receipt.evidence[0].verification.prompt: missing",
+        "check admission_receipt.request.transport.mcp.inferred_tool_authority: missing",
+        "check admission_receipt.evidence.verification.inferred_tool_authority: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-not-yet-valid-permit",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "PERMIT_NOT_YET_VALID",
+      "expected_reason_codes": [
+        "PERMIT_NOT_YET_VALID",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['PERMIT_NOT_YET_VALID', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected PERMIT_NOT_YET_VALID actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-policy-snapshot-mismatch",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "POLICY_SNAPSHOT_MISMATCH",
+      "expected_reason_codes": [
+        "POLICY_SNAPSHOT_MISMATCH",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['POLICY_SNAPSHOT_MISMATCH', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POLICY_SNAPSHOT_MISMATCH actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check policy.policy_snapshot.digest: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-replay-detected",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "REPLAY_DETECTED",
+      "expected_reason_codes": [
+        "REPLAY_DETECTED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['REPLAY_DETECTED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected REPLAY_DETECTED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-replay-state-replayed",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "REPLAY_DETECTED",
+      "expected_reason_codes": [
+        "REPLAY_DETECTED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['REPLAY_DETECTED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected REPLAY_DETECTED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-resource-indicator-drift",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "RESOURCE_INDICATOR_MISMATCH",
+      "expected_reason_codes": [
+        "RESOURCE_INDICATOR_MISMATCH",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['RESOURCE_INDICATOR_MISMATCH', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected RESOURCE_INDICATOR_MISMATCH actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check request.transport.oauth.resource: missing",
+        "check request.transport.oauth.protected_resource: missing",
+        "check request.target_resource: missing",
+        "check evidence.verification.failure_reason: missing",
+        "check admission_receipt.evidence[0].verification.diagnostic_code: missing",
+        "check admission_receipt.evidence[0].verification.full_token: missing",
+        "check admission_receipt.evidence[0].verification.tool_payload: missing",
+        "check admission_receipt.evidence[0].verification.prompt: missing",
+        "check admission_receipt.request.transport.oauth.inferred_resource_authority: missing",
+        "check admission_receipt.evidence.verification.inferred_resource_authority: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-runtime-mismatch",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "RUNTIME_MISMATCH",
+      "expected_reason_codes": [
+        "RUNTIME_MISMATCH",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['RUNTIME_MISMATCH', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected RUNTIME_MISMATCH actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-runtime-proof-stale",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "RUNTIME_PROOF_STALE",
+      "expected_reason_codes": [
+        "RUNTIME_PROOF_STALE",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['RUNTIME_PROOF_STALE', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected RUNTIME_PROOF_STALE actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.result: missing",
+        "check evidence.verification.failure_reason: missing",
+        "check policy.policy_version: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-signature-tampered",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SIGNATURE_INVALID",
+      "expected_reason_codes": [
+        "SIGNATURE_INVALID",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['SIGNATURE_INVALID', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected SIGNATURE_INVALID actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-status-revoked",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "STATUS_REVOKED",
+      "expected_reason_codes": [
+        "STATUS_REVOKED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['STATUS_REVOKED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected STATUS_REVOKED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-status-stale-fail-closed",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "STATUS_STALE",
+      "expected_reason_codes": [
+        "STATUS_STALE",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['STATUS_STALE', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected STATUS_STALE actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-status-stale-just-over-boundary",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "STATUS_STALE",
+      "expected_reason_codes": [
+        "STATUS_STALE",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['STATUS_STALE', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected STATUS_STALE actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-token-passthrough-as-authority",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "TOKEN_AUTHORITY_INSUFFICIENT",
+      "expected_reason_codes": [
+        "TOKEN_AUTHORITY_INSUFFICIENT",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['TOKEN_AUTHORITY_INSUFFICIENT', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected TOKEN_AUTHORITY_INSUFFICIENT actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check request.transport.oauth.token_present: missing",
+        "check request.transport.oauth.access_token: missing",
+        "check evidence.verification.failure_reason: missing",
+        "check admission_receipt.evidence[0].verification.diagnostic_code: missing",
+        "check admission_receipt.evidence[0].verification.full_token: missing",
+        "check admission_receipt.evidence[0].verification.tool_payload: missing",
+        "check admission_receipt.evidence[0].verification.prompt: missing",
+        "check admission_receipt.request.transport.oauth.inferred_resource_authority: missing",
+        "check admission_receipt.request.transport.mcp.inferred_tool_authority: missing",
+        "check admission_receipt.evidence.verification.inferred_resource_authority: missing",
+        "check admission_receipt.evidence.verification.inferred_tool_authority: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-trust-anchor-expired",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "TRUST_ANCHOR_EXPIRED",
+      "expected_reason_codes": [
+        "TRUST_ANCHOR_EXPIRED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['TRUST_ANCHOR_EXPIRED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected TRUST_ANCHOR_EXPIRED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-trust-anchor-not-yet-valid",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "TRUST_ANCHOR_NOT_YET_VALID",
+      "expected_reason_codes": [
+        "TRUST_ANCHOR_NOT_YET_VALID",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['TRUST_ANCHOR_NOT_YET_VALID', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected TRUST_ANCHOR_NOT_YET_VALID actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-trust-anchor-revoked",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "TRUST_ANCHOR_REVOKED",
+      "expected_reason_codes": [
+        "TRUST_ANCHOR_REVOKED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['TRUST_ANCHOR_REVOKED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected TRUST_ANCHOR_REVOKED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-unknown-trust-anchor",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "UNKNOWN_TRUST_ANCHOR",
+      "expected_reason_codes": [
+        "UNKNOWN_TRUST_ANCHOR",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['UNKNOWN_TRUST_ANCHOR', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected UNKNOWN_TRUST_ANCHOR actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.failure_reason: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "interop-ap2-ucp-commerce-evidence",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['EVIDENCE_VERIFIED', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected EVIDENCE_VERIFIED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check request.audience: missing",
+        "check evidence[0].protocol_hint: missing",
+        "check evidence[1].protocol_hint: missing",
+        "check evidence.verification.result: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "interop-oap-decision-evidence",
+      "category": "positive",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_reason_codes": [
+        "EVIDENCE_VERIFIED",
+        "POLICY_MATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected allow actual out-of-scope",
+        "reason_codes: expected ['EVIDENCE_VERIFIED', 'POLICY_MATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected EVIDENCE_VERIFIED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence[0].protocol_hint: missing",
+        "check evidence.verification.result: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-admission-digest-mismatch",
+      "category": "linkage",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_ADMISSION_DIGEST_MISMATCH",
+      "expected_reason_codes": [
+        "POST_EXEC_ADMISSION_DIGEST_MISMATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected failed actual out-of-scope",
+        "reason_codes: expected ['POST_EXEC_ADMISSION_DIGEST_MISMATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POST_EXEC_ADMISSION_DIGEST_MISMATCH actual OUT_OF_SCOPE",
+        "check post_execution.admission.digest: missing",
+        "check result.policy_violations: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-after-admission-expiry",
+      "category": "linkage",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_ADMISSION_EXPIRED",
+      "expected_reason_codes": [
+        "POST_EXEC_ADMISSION_EXPIRED"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected failed actual out-of-scope",
+        "reason_codes: expected ['POST_EXEC_ADMISSION_EXPIRED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POST_EXEC_ADMISSION_EXPIRED actual OUT_OF_SCOPE",
+        "check post_execution.execution.started_at: missing",
+        "check result.policy_violations: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-after-deny",
+      "category": "linkage",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_ADMISSION_DENIED",
+      "expected_reason_codes": [
+        "POST_EXEC_ADMISSION_DENIED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected failed actual out-of-scope",
+        "reason_codes: expected ['POST_EXEC_ADMISSION_DENIED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POST_EXEC_ADMISSION_DENIED actual OUT_OF_SCOPE",
+        "check post_execution.admission.receipt_id: missing",
+        "check result.policy_violations: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-allow-effective-constraints-exceeded",
+      "category": "linkage",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED",
+      "expected_reason_codes": [
+        "POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected failed actual out-of-scope",
+        "reason_codes: expected ['POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED actual OUT_OF_SCOPE",
+        "check post_execution.result.side_effects[0].amount.value: missing",
+        "check result.policy_violations: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-ap2-hnp-linkage-success",
+      "category": "linkage",
+      "expected_outcome": "success",
+      "expected_primary_reason_code": "ADMISSION_RECEIPT_LINKED",
+      "expected_reason_codes": [
+        "ADMISSION_RECEIPT_LINKED",
+        "EFFECTIVE_REQUEST_HASH_MATCH",
+        "NO_POLICY_VIOLATIONS"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected success actual out-of-scope",
+        "reason_codes: expected ['ADMISSION_RECEIPT_LINKED', 'EFFECTIVE_REQUEST_HASH_MATCH', 'NO_POLICY_VIOLATIONS'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected ADMISSION_RECEIPT_LINKED actual OUT_OF_SCOPE",
+        "check post_execution.admission.digest: missing",
+        "check post_execution.execution.effective_request_hash: missing",
+        "check post_execution.result.policy_violations: missing",
+        "check post_execution.result.side_effects[0].payment_authority_ref: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-effective-constraints-aggregate-exceeded",
+      "category": "linkage",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED",
+      "expected_reason_codes": [
+        "POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected failed actual out-of-scope",
+        "reason_codes: expected ['POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED actual OUT_OF_SCOPE",
+        "check post_execution.result.side_effects[0].amount.value: missing",
+        "check post_execution.result.side_effects[1].amount.value: missing",
+        "check post_execution.result.policy_violations: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-effective-constraints-exceeded",
+      "category": "linkage",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED",
+      "expected_reason_codes": [
+        "POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected failed actual out-of-scope",
+        "reason_codes: expected ['POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED actual OUT_OF_SCOPE",
+        "check post_execution.result.side_effects[0].amount.value: missing",
+        "check result.policy_violations: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-finish-after-admission-expiry",
+      "category": "linkage",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_ADMISSION_EXPIRED",
+      "expected_reason_codes": [
+        "POST_EXEC_ADMISSION_EXPIRED"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected failed actual out-of-scope",
+        "reason_codes: expected ['POST_EXEC_ADMISSION_EXPIRED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POST_EXEC_ADMISSION_EXPIRED actual OUT_OF_SCOPE",
+        "check post_execution.execution.started_at: missing",
+        "check post_execution.execution.finished_at: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-linkage-mismatch",
+      "category": "linkage",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_EFFECTIVE_REQUEST_HASH_MISMATCH",
+      "expected_reason_codes": [
+        "POST_EXEC_EFFECTIVE_REQUEST_HASH_MISMATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected failed actual out-of-scope",
+        "reason_codes: expected ['POST_EXEC_EFFECTIVE_REQUEST_HASH_MISMATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POST_EXEC_EFFECTIVE_REQUEST_HASH_MISMATCH actual OUT_OF_SCOPE",
+        "check post_execution.execution.effective_request_hash: missing",
+        "check result.policy_violations: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-linkage-success",
+      "category": "linkage",
+      "expected_outcome": "success",
+      "expected_primary_reason_code": "ADMISSION_RECEIPT_LINKED",
+      "expected_reason_codes": [
+        "ADMISSION_RECEIPT_LINKED",
+        "EFFECTIVE_REQUEST_HASH_MATCH",
+        "NO_POLICY_VIOLATIONS"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected success actual out-of-scope",
+        "reason_codes: expected ['ADMISSION_RECEIPT_LINKED', 'EFFECTIVE_REQUEST_HASH_MATCH', 'NO_POLICY_VIOLATIONS'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected ADMISSION_RECEIPT_LINKED actual OUT_OF_SCOPE",
+        "check post_execution.admission.digest: missing",
+        "check post_execution.execution.effective_request_hash: missing",
+        "check post_execution.result.policy_violations: missing",
+        "check a2a_metadata.post_execution_receipt.digest: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-runtime-mismatch",
+      "category": "linkage",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_RUNTIME_MISMATCH",
+      "expected_reason_codes": [
+        "POST_EXEC_RUNTIME_MISMATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected failed actual out-of-scope",
+        "reason_codes: expected ['POST_EXEC_RUNTIME_MISMATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POST_EXEC_RUNTIME_MISMATCH actual OUT_OF_SCOPE",
+        "check post_execution.execution.runtime: missing",
+        "check result.policy_violations: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-transaction-mismatch",
+      "category": "linkage",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_TRANSACTION_MISMATCH",
+      "expected_reason_codes": [
+        "POST_EXEC_TRANSACTION_MISMATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected failed actual out-of-scope",
+        "reason_codes: expected ['POST_EXEC_TRANSACTION_MISMATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POST_EXEC_TRANSACTION_MISMATCH actual OUT_OF_SCOPE",
+        "check post_execution.execution.transaction_id: missing",
+        "check result.policy_violations: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "rcl-005-authorization-params-mismatch",
+      "category": "negative",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ACTION_NOT_PERMITTED",
+      "expected_reason_codes": [
+        "ACTION_NOT_PERMITTED",
+        "FAIL_CLOSED"
+      ],
+      "expected_should_execute": false,
+      "failures": [
+        "sut result skipped",
+        "outcome: expected deny actual out-of-scope",
+        "reason_codes: expected ['ACTION_NOT_PERMITTED', 'FAIL_CLOSED'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected ACTION_NOT_PERMITTED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check evidence.verification.result: missing",
+        "check request.action_binding.digest: missing",
+        "check request.mapping_only.source_authorization.params_digest: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "rcl-006-occurrence-action-linkage-mismatch",
+      "category": "linkage",
+      "expected_outcome": "success",
+      "expected_primary_reason_code": "POST_EXEC_LINKAGE_MISMATCH",
+      "expected_reason_codes": [
+        "POST_EXEC_LINKAGE_MISMATCH"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected success actual out-of-scope",
+        "reason_codes: expected ['POST_EXEC_LINKAGE_MISMATCH'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected POST_EXEC_LINKAGE_MISMATCH actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check post_execution.execution.action_binding.digest: missing",
+        "check post_execution.result.outcome: missing",
+        "check result.policy_violations: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "rcl-008-full-pipeline-acceptance-control",
+      "category": "linkage",
+      "expected_outcome": "success",
+      "expected_primary_reason_code": "ADMISSION_RECEIPT_LINKED",
+      "expected_reason_codes": [
+        "ADMISSION_RECEIPT_LINKED",
+        "EFFECTIVE_REQUEST_HASH_MATCH",
+        "NO_POLICY_VIOLATIONS"
+      ],
+      "expected_should_execute": true,
+      "failures": [
+        "should_execute: expected True actual False",
+        "sut result skipped",
+        "outcome: expected success actual out-of-scope",
+        "reason_codes: expected ['ADMISSION_RECEIPT_LINKED', 'EFFECTIVE_REQUEST_HASH_MATCH', 'NO_POLICY_VIOLATIONS'] actual ['OUT_OF_SCOPE']",
+        "primary_reason_code: expected ADMISSION_RECEIPT_LINKED actual OUT_OF_SCOPE",
+        "check decision.outcome: missing",
+        "check post_execution.execution.action_binding.digest: missing",
+        "check post_execution.result.outcome: missing",
+        "check result.policy_violations: missing",
+        "artifacts: expected object with required artifact references"
+      ],
+      "pass": false
+    }
+  ],
+  "checked_at": "2026-08-29T01:30:43Z",
+  "corpus": {
+    "artifact_count": 212,
+    "digest": {
+      "alg": "sha-256",
+      "value": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370"
+    },
+    "name": "al2-vate-v0.3",
+    "root": "conformance/al2-vate-v0.3"
+  },
+  "profile": "VATE-AL2-Verifier-Admission-v0.3",
+  "summary": {
+    "failed": 73,
+    "passed": 2,
+    "skipped": 72,
+    "total": 75
+  },
+  "sut_results": {
+    "artifact_mode": "corpus-fixture-validation",
+    "artifact_mode_counts": {
+      "corpus-fixture-validation": 75,
+      "generated-receipts": 0
+    },
+    "digest": {
+      "alg": "sha-256",
+      "value": "ea38b6c9766ee13b2f998eacf3735644b3b087fbfc7551413bd0e3dcbd42be16"
+    },
+    "digest_basis": "json-sorted-no-whitespace",
+    "implementation": {
+      "commit": "ce125dbada38d45dcde34eeb02197fc5be0e1ad9",
+      "environment": "candidate-owned mapping/projection from ce125dbada38d45dcde34eeb02197fc5be0e1ad9; frozen Pulse verifyConformanceCase at e06a6cbfe3ddb965c8fc70f50838f5014ec2038e; operator-selected python3 runtime Python 3.14.4",
+      "language": "Python standard library",
+      "name": "Pulse AP2-x402 external VATE attempt",
+      "source": "https://github.com/shibutatsu/pulse-ap2-x402-conformance.git",
+      "type": "external-verifier-projection",
+      "upstream_verifier": {
+        "commit": "e06a6cbfe3ddb965c8fc70f50838f5014ec2038e",
+        "entry_point": "src/verifier.ts#verifyConformanceCase",
+        "source": "https://github.com/shibutatsu/pulse-ap2-x402-conformance"
+      },
+      "version": "vate-pulse-mapper/0.1"
+    },
+    "path": "/private/tmp/vate-pulse-run.F7a6dp/pulse-sut-result.json"
+  },
+  "version": "vate-conformance-report-2026-07"
+}

@@ -1,0 +1,111 @@
+{
+  "recordVersion": "vate-pulse-raw-verifier-output-0.3",
+  "pulseVerifierCommit": "e06a6cbfe3ddb965c8fc70f50838f5014ec2038e",
+  "runtime": {
+    "nodeVersion": "v22.22.3",
+    "npmVersion": "10.9.8",
+    "pulsePackageVersion": "0.0.0"
+  },
+  "execution": {
+    "workingDirectory": "$PULSE_REPO",
+    "entryPoint": "src/verifier.ts#verifyConformanceCase",
+    "driverSha256": "723479d08f55f0954ee1494556fd8da9ed812a55b53c9a5204d5414c47e980f2",
+    "command": [
+      "node",
+      "--import",
+      "tsx",
+      "--input-type=module",
+      "--eval",
+      "import { readFile } from \"node:fs/promises\";\nimport { verifyConformanceCase } from \"./src/verifier.ts\";\nconst reports = [];\nfor (const path of process.argv.slice(1)) {\n  const value = JSON.parse(await readFile(path, \"utf8\"));\n  reports.push(await verifyConformanceCase(value));\n}\nprocess.stdout.write(JSON.stringify(reports));\n",
+      "--",
+      "$RUN_DIR/pulse-inputs/allow-ap2-hnp-preauthorized-mandate.pulse-input.json",
+      "$RUN_DIR/pulse-inputs/attenuate-ap2-hnp-amount-overrun.pulse-input.json",
+      "$RUN_DIR/pulse-inputs/deny-ap2-hnp-stale-mandate.pulse-input.json"
+    ]
+  },
+  "inputs": [
+    {
+      "vateCaseId": "allow-ap2-hnp-preauthorized-mandate",
+      "pulseCaseId": "vate-pulse-work-item-0",
+      "path": "pulse-inputs/allow-ap2-hnp-preauthorized-mandate.pulse-input.json",
+      "rawSha256Before": "5d92b927e2cc466a0efff20953985afd1285d9d6df00e146ed203700a8b84989",
+      "rawSha256After": "5d92b927e2cc466a0efff20953985afd1285d9d6df00e146ed203700a8b84989"
+    },
+    {
+      "vateCaseId": "attenuate-ap2-hnp-amount-overrun",
+      "pulseCaseId": "vate-pulse-work-item-1",
+      "path": "pulse-inputs/attenuate-ap2-hnp-amount-overrun.pulse-input.json",
+      "rawSha256Before": "d53aba68b2c13c80f4057d7f0a6e8c6d76d29630b9934028c0d4ae61c5f4d800",
+      "rawSha256After": "d53aba68b2c13c80f4057d7f0a6e8c6d76d29630b9934028c0d4ae61c5f4d800"
+    },
+    {
+      "vateCaseId": "deny-ap2-hnp-stale-mandate",
+      "pulseCaseId": "vate-pulse-work-item-2",
+      "path": "pulse-inputs/deny-ap2-hnp-stale-mandate.pulse-input.json",
+      "rawSha256Before": "9eb5f74556db07140e5f74623031febddd06fdacba0dd9deca774380e5ec3599",
+      "rawSha256After": "9eb5f74556db07140e5f74623031febddd06fdacba0dd9deca774380e5ec3599"
+    }
+  ],
+  "reports": [
+    {
+      "caseId": "vate-pulse-work-item-0",
+      "consistent": true,
+      "computed": {
+        "closedMandateClaimsHash": "enHwnzvxV-XKkKC6kwzEJy7g609DqczZ9dphBeBQ-rE",
+        "openMandateClaimsHash": "v5CnqtVmW9pm4DI5iLNfyOdAu9g-BldWKUc0pI6fkVw",
+        "closedMandateReference": "x8_yhID82RWQM8HagMxWHclcyzSKZ4iIgDE8IfummAg",
+        "inputHash": "NXav7rCkNvRr0NbwQTv6fehgzCgOdiaEeEADvlOGYNY",
+        "expectedNonce": "0xc7cff28480fcd9159033c1da80cc561dc95ccb348a67888880313c21fba69808",
+        "recoveredSigner": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7"
+      },
+      "failures": []
+    },
+    {
+      "caseId": "vate-pulse-work-item-1",
+      "consistent": false,
+      "computed": {
+        "closedMandateClaimsHash": "a8pehqi2sDRxU9Sif9_cl-lwdghOq6OZ0obiJ8hgyvM",
+        "openMandateClaimsHash": "fNIYgrmjLZQsFPc9kYt01PXJGnR5gYVKkTKOuYmH-OA",
+        "closedMandateReference": "t4WpKFSYpP79Kt3LIilq2iQlOZy3w0qpBA3sztxj_es",
+        "inputHash": "pfXy0chkr9n-xx63w8nwUBZW3aERtb_jD-S1q0PLEf0",
+        "expectedNonce": "0xb785a9285498a4fefd2addcb22296ada2425399cb7c34aa9040deccedc63fdeb",
+        "recoveredSigner": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7"
+      },
+      "failures": [
+        {
+          "code": "AP2_X402_AMOUNT_MISMATCH",
+          "path": "x402.requirements.amount",
+          "message": "The x402 atomic amount differs from the signed AP2 instrument extension.",
+          "expected": "5000",
+          "actual": "12500"
+        }
+      ]
+    },
+    {
+      "caseId": "vate-pulse-work-item-2",
+      "consistent": false,
+      "computed": {
+        "closedMandateClaimsHash": "-8DqD6mJvWsz6LDC-xhgmAQmylPMBXRZFPw_T23ZQkU",
+        "openMandateClaimsHash": "lH9t7jluii402pSL-VechbejSXQC8r9ckU7VPcZHzuw",
+        "closedMandateReference": "kV4KunrzEXhK3M-Xs9BJYKBzlh0b7WGV8TEfOEcR7RQ",
+        "inputHash": "oMFE0KyQWe5Mkb-GWr0sfvbNJc3X7e2wvVasgUy7Ncw",
+        "expectedNonce": "0x915e0aba7af311784adccf97b3d04960a073961d1bed6195f1311f384711ed14",
+        "recoveredSigner": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7"
+      },
+      "failures": [
+        {
+          "code": "AP2_MANDATE_TIME_INVALID",
+          "path": "ap2.verification.cryptographicEvidence.root-claims",
+          "message": "AP2 cryptographic verification failed (EXP_INVALID): JWT exp is invalid or expired"
+        },
+        {
+          "code": "EIP3009_VALID_BEFORE_EXPIRED",
+          "path": "x402.payload.payload.authorization.validBefore",
+          "message": "The EIP-3009 authorization is expired or has less than the x402 six-second safety buffer.",
+          "expected": ">=1778148006",
+          "actual": "1778137200"
+        }
+      ]
+    }
+  ]
+}

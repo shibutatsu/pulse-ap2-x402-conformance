@@ -1,0 +1,47 @@
+{
+  "action": "commerce.purchase",
+  "actor": "did:web:agent.example",
+  "audience": "https://tickets.example",
+  "constraints": {
+    "expected_runtime": "spiffe://agent.example/workload/ticket-agent",
+    "max_amount": {
+      "currency": "USD",
+      "value": "45.00"
+    },
+    "payment": {
+      "human_present": false,
+      "mandate_id": "ap2hnp-20260507-valid-001",
+      "merchant": "tickets.example",
+      "psp_audience": "https://psp.example/ap2"
+    }
+  },
+  "correlation": {
+    "a2a_context_id": "ctx-ap2hnp-valid-20260507-001",
+    "a2a_task_id": "task-ap2hnp-valid-20260507-001"
+  },
+  "evidence_refs": [
+    {
+      "digest": {
+        "alg": "sha-256",
+        "value": "1cbb43e0b5a8a53560e50731399fcd0b8899924eef580826a6f8af899b90a595"
+      },
+      "media_type": "application/ap2-mandate+json",
+      "protocol_hint": "ap2_human_not_present",
+      "type": "payment_mandate",
+      "uri": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-valid.example.json"
+    }
+  ],
+  "expires_at": "2026-05-07T10:05:00Z",
+  "input_hash": "sha-256:c5ddaa41c6039ea4af068fa6c2ad3c6d5759bf26680649082c15b0a56a30a77e",
+  "issued_at": "2026-05-07T10:00:00Z",
+  "principal": "did:web:user.example",
+  "profile": "VATE-AL2-Verifier-Admission-v0.3",
+  "request_id": "areq-ap2hnp-valid-20260507-001",
+  "runtime": "spiffe://agent.example/workload/ticket-agent",
+  "target": {
+    "audience": "https://tickets.example",
+    "resource": "https://tickets.example/checkout/event-456"
+  },
+  "transaction_id": "txn-ap2hnp-valid-20260507-001",
+  "version": "vate-0.3"
+}

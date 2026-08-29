@@ -1,0 +1,2366 @@
+{
+  "version": "vate-pulse-mapping-worksheet-0.4",
+  "status": "completed",
+  "ownership": {
+    "final_mapping_source": "candidate_owned",
+    "final_projection_source": "candidate_owned",
+    "pulse_verifier": "frozen_upstream",
+    "instructions": "The Pulse candidate completed and pinned every mapping, generation, and projection decision in the same candidate Git commit as mapper.py."
+  },
+  "pins": {
+    "vate_source_commit": "5a37f87de0190da44e619b1800261637e83dd7ed",
+    "vate_corpus_digest": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370",
+    "pulse_verifier_commit": "e06a6cbfe3ddb965c8fc70f50838f5014ec2038e"
+  },
+  "leaf_contract": {
+    "reference_pulse_case": "valid-base-sepolia-01",
+    "primitive_leaf_count": 142,
+    "primitive_leaf_path_digest": "8e7ea0b60120e84c5763cd6d80e512f8d27af26ea25edae0620c17c3f5edc0fe",
+    "container_count": 42,
+    "container_path_digest": "22721558cc9a4f37aa87d024a59816e3e08bd2ea3dc9a56f2a11d50321b34160",
+    "machine_coverage_scope": "frozen-pulse-input-json-142-primitive-leaves-and-42-containers-only",
+    "required_empty_containers": [
+      "/expected/failureCodes"
+    ],
+    "basis": "Sorted JSON Pointer paths for every primitive leaf in valid-base-sepolia-01 from frozen Pulse fixtures/v0.3/cases.json; UTF-8 compact JSON array SHA-256."
+  },
+  "case_sources": [
+    {
+      "case_id": "allow-ap2-hnp-preauthorized-mandate",
+      "admission_request": {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-valid.example.json",
+        "raw_sha256": "7f57ef2203fb04dba7a1365daf4359a77526eb497effedc84b100854af3fa165"
+      },
+      "ap2_mandate": {
+        "path": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-valid.example.json",
+        "raw_sha256": "22abc3d0905eee01449327a56a384359c0701e753719bfc2b5cb500da62d0e72"
+      }
+    },
+    {
+      "case_id": "attenuate-ap2-hnp-amount-overrun",
+      "admission_request": {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-overrun.example.json",
+        "raw_sha256": "6d0bc2cb8ad2f33841a17ea4393c99acfd04dfcfa25f3be697dc4b115726c47b"
+      },
+      "ap2_mandate": {
+        "path": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-overrun.example.json",
+        "raw_sha256": "d36f54d452131a0280eec04dc85b6132d70dbd35a7d378e14c5b89a39c9d2351"
+      }
+    },
+    {
+      "case_id": "deny-ap2-hnp-stale-mandate",
+      "admission_request": {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-stale.example.json",
+        "raw_sha256": "7950cf298f5ced91a1f169fbb72bbe51057c80c5df5a8495b9e3ce95d5f707ce"
+      },
+      "ap2_mandate": {
+        "path": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-stale.example.json",
+        "raw_sha256": "3448d1900326b458f630e7a53f33e9e59d9c9cdb7808ba684a5a64298f866049"
+      }
+    }
+  ],
+  "prohibited_sources": [
+    {
+      "document": "vate_case",
+      "json_pointer_prefix": "/expected",
+      "reason": "Expected outcomes, reason codes, checks, and execution gates must not drive the Pulse result."
+    },
+    {
+      "document": "vate_admission_receipt",
+      "json_pointer_prefix": "",
+      "reason": "The committed VATE admission receipt is a comparison-only artifact and must not be copied into the Pulse input or result projection."
+    }
+  ],
+  "scaffolding_inputs": {
+    "pulse_profile": {
+      "ownership": "candidate_owned",
+      "status": "fixed_invocation_scaffolding",
+      "case_version": "ap2-x402-conformance/0.3",
+      "source_pins": {
+        "ap2Commit": "e1ea56db72a6385bce3e5c1112b3a56ce60acb43",
+        "x402Commit": "17d319fab5c17a6b4873eb41197894db924f59ed",
+        "x402PackageVersion": "2.23.0"
+      },
+      "boundary": "Frozen Pulse v0.3 schema literals only; not VATE source pins."
+    },
+    "asset_profile": {
+      "ownership": "candidate_owned",
+      "status": "completed",
+      "network": "eip155:84532",
+      "asset": "0xb95de892c9463d5187a03c1fe18904d9724fd50f",
+      "decimals": 2,
+      "usd_to_asset_conversion": {
+        "asset_units_per_usd": "1",
+        "rounding": "reject_non_integral"
+      },
+      "boundary": "Candidate must choose synthetic offline values and an exact decimal conversion without implying price, production-token status, or VATE provenance."
+    },
+    "evm_participants": {
+      "ownership": "candidate_owned",
+      "status": "completed",
+      "payer": "0xa3acac31a63387e041cb6ac7a5ce8a92554ef4c7",
+      "pay_to": "0x4c9ac5336ef07b88ad149ec5eb5cf1d7ce37cf17",
+      "boundary": "Public fixture identities only. Merchant maps to Pulse payee identity and never implicitly to pay_to."
+    },
+    "merchant_profile": {
+      "ownership": "candidate_owned",
+      "status": "completed",
+      "id_transform": "exact-source-merchant",
+      "name_transform": "exact-source-merchant",
+      "website_transform": "prepend-https-to-exact-source-merchant"
+    },
+    "instrument_profile": {
+      "ownership": "candidate_owned",
+      "status": "completed",
+      "id_transform": "fixed-literal-vate-pulse-eip3009-v1",
+      "description": "Synthetic exact EIP-3009 fixture instrument"
+    },
+    "x402_profile": {
+      "ownership": "candidate_owned",
+      "status": "completed",
+      "version": 2,
+      "scheme": "exact",
+      "max_timeout_seconds": 300,
+      "eip712_domain_name": "VATE Pulse Synthetic USD",
+      "eip712_domain_version": "1",
+      "asset_transfer_method": "eip3009",
+      "nonce_derivation": "base64url-decode-ap2-mandate-reference"
+    },
+    "ap2_generation_profile": {
+      "ownership": "candidate_owned",
+      "status": "completed",
+      "verifier_label": "candidate-stdlib/vate-pulse-mapper/0.1+Pulse@e06a6cb",
+      "clock_skew_seconds": 0,
+      "expected_audience": "https://synthetic-facilitator.example/ap2",
+      "evaluation_time_transform": "admission-request-issued-at",
+      "window_transform": "intersection-of-request-expiry-mandate-window-and-timeout",
+      "execution_date_transform": "admission-request-issued-at",
+      "expected_nonce_transform": "exact-vate-replay-nonce",
+      "open_issuer_key_label": "pulse-ap2-conformance/open-issuer/public-fixture/v1",
+      "terminal_holder_key_label": "pulse-ap2-conformance/terminal-holder/public-fixture/v1",
+      "receipt_issuer_key_label": "pulse-ap2-conformance/receipt-issuer/public-fixture/v1",
+      "receipt_issuer": "synthetic-facilitator.example",
+      "receipt_status": "Success",
+      "payment_id_transform": "payment- plus first 20 lowercase hex characters of SHA-256(transaction_id)",
+      "psp_confirmation_id_transform": "psp- plus first 20 lowercase hex characters of SHA-256(transaction_id)",
+      "network_confirmation_id_transform": "0x plus SHA-256(vate-pulse-settlement-v1:transaction_id:replay_nonce) lowercase hex"
+    },
+    "resource_profile": {
+      "ownership": "candidate_owned",
+      "status": "completed",
+      "description": "Synthetic VATE-to-Pulse conformance resource",
+      "mime_type": "application/json"
+    },
+    "settlement_profile": {
+      "ownership": "candidate_owned",
+      "status": "completed",
+      "success": true,
+      "transaction_transform": "0x plus SHA-256(vate-pulse-settlement-v1:transaction_id:replay_nonce) lowercase hex"
+    },
+    "fixture_key_handling": {
+      "ownership": "candidate_owned",
+      "status": "completed",
+      "candidate_source": "Python standard-library SHA-256 or Keccak public-label-to-scalar derivation with RFC 6979 signatures; persist only public labels, public JWKs, the public EVM address, and signatures.",
+      "required_record": "Record deterministic public fixture-key labels, public JWKs or public EVM address, and signatures. Persist no private key, seed, mnemonic, or other non-public signing material."
+    },
+    "pulse_expected_envelope": {
+      "ownership": "candidate_owned",
+      "status": "fixed_invocation_scaffolding",
+      "value": {
+        "consistent": true,
+        "failureCodes": []
+      },
+      "boundary": "Schema-only neutral Pulse field. verifyConformanceCase does not use it to produce ConformanceReport. It must not derive from VATE expected data."
+    }
+  },
+  "required_coverage_topics": [
+    "usd_decimal_to_asset_decimals_and_atomic_amount",
+    "merchant_to_pulse_payee_identity",
+    "evaluation_time_and_window",
+    "vate_replay_nonce_to_pulse_key_binding_and_eip3009_nonce",
+    "generated_ap2_fields_and_fixture_keys",
+    "generated_x402_fields",
+    "generated_eip3009_fields_and_signature",
+    "generated_payment_receipt_fields_and_key",
+    "frozen_pulse_verifier_invocation",
+    "raw_pulse_output_preservation",
+    "pulse_to_vate_result_projection_without_expected_lookup"
+  ],
+  "mapping_rows": [
+    {
+      "row_id": "case-id-label",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "candidate_execution_request",
+      "source_json_pointer": "/items/{case_index}/workItemId",
+      "transform": "Prefix the opaque validator-assigned workItemId with vate-pulse-. No VATE case ID is supplied to the candidate executable, and this label must never select a verdict.",
+      "pulse_destination": "/id",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": false
+    },
+    {
+      "row_id": "evaluation-time",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/issued_at",
+      "transform": "Parse RFC 3339 Z timestamp and emit exact Unix epoch seconds; reject fractional seconds, invalid offsets, or lossy local-time conversion.",
+      "pulse_destination": "/nowEpochSeconds",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "verification-time",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "pulse_case",
+      "source_json_pointer": "/nowEpochSeconds",
+      "transform": "Exact copy after evaluation-time derivation.",
+      "pulse_destination": "/ap2/verification/verifiedAtEpochSeconds",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "open-checkout-reference",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/transaction_id",
+      "transform": "UTF-8 SHA-256 of the domain-separated string vate-pulse-open-checkout-v1:<transaction_id>, encoded as canonical unpadded base64url.",
+      "pulse_destination": "/ap2/verification/openCheckoutReference",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "closed-transaction-reference",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/verification/openCheckoutReference",
+      "transform": "Exact copy.",
+      "pulse_destination": "/ap2/closedMandate/transaction_id",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "open-reference-constraint",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/verification/openCheckoutReference",
+      "transform": "Exact copy.",
+      "pulse_destination": "/ap2/openMandate/constraints/0/conditional_transaction_id",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "request-usd-minor-units",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/constraints/max_amount/value",
+      "transform": "Parse request and mandate-limit USD as exact base-10 decimals, take min(request, mandate limit), require at most two fractional digits, and multiply by 100 without float arithmetic. Reject non-integral, negative, exponent, or overflow values.",
+      "pulse_destination": "/ap2/closedMandate/payment_amount/amount",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "request-usd-currency",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/constraints/max_amount/currency",
+      "transform": "Require exact string USD and copy.",
+      "pulse_destination": "/ap2/closedMandate/payment_amount/currency",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "mandate-limit-minor-units",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/max_amount/value",
+      "transform": "Parse as an exact base-10 USD decimal and multiply by 100 without float arithmetic, using the same fail-closed rules as request-usd-minor-units.",
+      "pulse_destination": "/ap2/openMandate/constraints/2/max",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "mandate-limit-currency",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/max_amount/currency",
+      "transform": "Require exact string USD and copy.",
+      "pulse_destination": "/ap2/openMandate/constraints/2/currency",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "request-atomic-amount",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/constraints/max_amount/value",
+      "transform": "Apply asset_profile with exact decimal arithmetic: requested atomic = USD decimal * asset_units_per_usd * 10^decimals. Reject any non-integral atomic value or uint256 overflow.",
+      "pulse_destination": "/x402/requirements/amount",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "permitted-atomic-amount",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/max_amount/value",
+      "transform": "Apply the same exact conversion to min(request USD, mandate max USD); this signed instrument amount is the decision-relevant permitted atomic amount.",
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/amount",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "merchant-payee-id",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/merchant",
+      "transform": "Require a non-empty lowercase DNS-style identifier and copy exactly as Pulse Merchant.id. Do not derive an EVM address from this value.",
+      "pulse_destination": "/ap2/closedMandate/payee/id",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "merchant-allowed-id",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/merchant",
+      "transform": "Same validated exact Merchant.id as merchant-payee-id.",
+      "pulse_destination": "/ap2/openMandate/constraints/3/allowed/0/id",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "merchant-ap2-payee-id",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/merchant",
+      "transform": "Same validated exact Merchant.id as merchant-payee-id.",
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/ap2PayeeId",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "resource-url",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/target/resource",
+      "transform": "Require an absolute HTTPS URL and copy.",
+      "pulse_destination": "/x402/payload/resource/url",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "open-issued-at",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/issued_at",
+      "transform": "Parse RFC 3339 Z timestamp to exact Unix epoch seconds.",
+      "pulse_destination": "/ap2/openMandate/iat",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "closed-issued-at",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/issued_at",
+      "transform": "Parse RFC 3339 Z timestamp to exact Unix epoch seconds.",
+      "pulse_destination": "/ap2/closedMandate/iat",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "open-expiry",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/expires_at",
+      "transform": "Parse RFC 3339 Z timestamp to exact Unix epoch seconds without extending the source window.",
+      "pulse_destination": "/ap2/openMandate/exp",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "closed-expiry",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/expires_at",
+      "transform": "Parse exact Unix seconds and take the minimum of admission expiry, mandate expiry, and mandate execution-window not_after; never widen any source window.",
+      "pulse_destination": "/ap2/closedMandate/exp",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "eip3009-valid-after",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/execution_window/not_before",
+      "transform": "Parse RFC 3339 Z timestamp to exact Unix epoch seconds and emit as a canonical unsigned decimal string.",
+      "pulse_destination": "/x402/payload/payload/authorization/validAfter",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "eip3009-valid-before",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/execution_window/not_after",
+      "transform": "Take the minimum of this timestamp, VATE admission-request /expires_at, and Pulse /nowEpochSeconds plus candidate max_timeout_seconds. Emit exact Unix epoch seconds as a canonical unsigned decimal string. Never widen any source window.",
+      "pulse_destination": "/x402/payload/payload/authorization/validBefore",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "terminal-key-binding-nonce",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/replay_nonce",
+      "transform": "Require a non-empty UTF-8 string and copy exactly into the terminal KB-SD-JWT nonce and Pulse expectedNonce input.",
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/expectedNonce",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "closed-mandate-reference",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "generated_ap2_artifacts",
+      "source_json_pointer": "/closedPaymentMandateLeafJwt",
+      "transform": "Compute base64url(SHA-256(exact ASCII leaf issuer JWT)) using the frozen Pulse/AP2 rule. The signed leaf includes the VATE-derived terminal nonce; record the exact leaf JWT digest separately.",
+      "pulse_destination": "/ap2/verification/closedMandateReference",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "eip3009-nonce",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/verification/closedMandateReference",
+      "transform": "Canonical unpadded base64url decode to exactly 32 bytes, then lower-case 0x-prefixed hexadecimal. This is the frozen Pulse deriveEip3009Nonce rule; it is not direct string equality with the VATE replay nonce.",
+      "pulse_destination": "/x402/payload/payload/authorization/nonce",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "asset-network-scaffolding",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/asset_profile/network",
+      "transform": "Candidate confirms or replaces, then copies the selected EVM CAIP-2 identifier across the signed instrument, requirements, accepted payload, and settlement.",
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/network",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "asset-address-scaffolding",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/asset_profile/asset",
+      "transform": "Candidate confirms or replaces, validates as a 20-byte EVM address, and copies across the signed instrument, requirements, accepted payload, and EIP-712 verifyingContract.",
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/asset",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "payer-scaffolding",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/evm_participants/payer",
+      "transform": "Candidate confirms the public fixture signer address and copies it across the signed instrument, EIP-3009 authorization, and settlement. Record the public key derivation source; persist no non-public signing material.",
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/payer",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "pay-to-scaffolding",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/evm_participants/pay_to",
+      "transform": "Candidate confirms or replaces the synthetic EVM recipient and copies it across the signed instrument, requirements, accepted payload, and EIP-3009 authorization. Do not derive it from the VATE merchant string.",
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/payTo",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "generated-ap2-artifacts",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "pulse_case_preimage",
+      "source_json_pointer": "/ap2",
+      "transform": "Candidate-owned generator creates a new signed Open Mandate, terminal Closed Mandate chain, and Payment Receipt JWT from the mapped values. Record every generated header, claim, disclosure/salt rule, public JWK, key label, compact artifact digest, and normalized output. Do not reuse an unchanged committed Pulse fixture.",
+      "pulse_destination": "/ap2/verification/cryptographicEvidence",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "generated-x402-objects",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "pulse_case_preimage",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402",
+      "transform": "Candidate-owned source builds requirements, invokes the frozen x402 producer boundary where used, records the complete accepted payload, and signs the mapped EIP-3009 message. Every generated or copied leaf must be listed in the completed worksheet.",
+      "pulse_destination": "/x402",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "pulse-input-hash",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "pulse_case",
+      "source_json_pointer": "",
+      "transform": "Call the frozen Pulse conformanceInputHash over caseVersion, sourcePins, nowEpochSeconds, ap2, and x402 only; record the final Pulse input file raw SHA-256 separately.",
+      "pulse_destination": "/inputHash",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "neutral-pulse-expected-envelope",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/pulse_expected_envelope/value",
+      "transform": "Exact copy solely to satisfy Pulse ConformanceCaseSchema. Call verifyConformanceCase directly; never use this field to derive or normalize the raw Pulse report.",
+      "pulse_destination": "/expected",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": false
+    },
+    {
+      "row_id": "observed-pulse-report",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "raw_pulse_output",
+      "source_json_pointer": "/reports/{case_index}",
+      "transform": "Preserve byte-for-byte raw output and record its raw SHA-256 before any projection. No expected lookup, case-ID verdict table, or post-hoc change is allowed.",
+      "pulse_destination": "/external_run/case_runs/{case_index}",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "pulse-to-vate-outcome",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "raw_pulse_output",
+      "source_json_pointer": "/reports/{case_index}/consistent",
+      "transform": "Project allow only when the eligible source is within its mandate and the raw Pulse report is consistent with no failures. Preserve an exact AP2_X402_AMOUNT_MISMATCH as deny plus non-attenuate/mismatch. Project a stale source with EIP3009_VALID_BEFORE_EXPIRED as deny plus reject/match. Use only eligible inputs and the raw Pulse report.",
+      "pulse_destination": "/results/{case_index}/outcome",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "pulse-to-vate-execution-gate",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "raw_pulse_output",
+      "source_json_pointer": "/reports/{case_index}/consistent",
+      "transform": "Set true only for the consistent no-failure allow projection; set false for the exact amount mismatch, expiry rejection, and every unsupported raw report.",
+      "pulse_destination": "/results/{case_index}/should_execute",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "pulse-to-vate-reasons",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "raw_pulse_output",
+      "source_json_pointer": "/reports/{case_index}/failures",
+      "transform": "Emit EVIDENCE_VERIFIED and POLICY_MATCH for consistent allow; preserve AP2_X402_AMOUNT_MISMATCH verbatim for overrun; emit PERMIT_EXPIRED and FAIL_CLOSED only when the raw stale report includes EIP3009_VALID_BEFORE_EXPIRED.",
+      "pulse_destination": "/results/{case_index}/reason_codes",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    },
+    {
+      "row_id": "pulse-to-vate-checks",
+      "case_ids": [
+        "allow-ap2-hnp-preauthorized-mandate",
+        "attenuate-ap2-hnp-amount-overrun",
+        "deny-ap2-hnp-stale-mandate"
+      ],
+      "source_document": "raw_pulse_output",
+      "source_json_pointer": "/reports/{case_index}",
+      "transform": "For consistent allow emit decision.outcome, request.audience, evidence[0].protocol_hint, and evidence.verification.result. Emit no checks for overrun. For stale expiry emit decision.outcome and evidence.verification.failure_reason. Every emitted check passes from eligible-input or raw-report evidence.",
+      "pulse_destination": "/results/{case_index}/checks",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned",
+      "decision_relevant": true
+    }
+  ],
+  "generated_field_inventory": [
+    {
+      "pulse_destination": "/ap2/closedMandate/execution_date",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/ap2_generation_profile/execution_date_transform",
+      "dependencies": [
+        "scaffold:ap2-generation-profile"
+      ],
+      "transform": "Apply the candidate-owned execution-date rule within the fixed VATE window.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/exp",
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/expires_at",
+      "dependencies": [
+        "mapping_row:closed-expiry"
+      ],
+      "transform": "Use the earlier of the request expiry and applicable mandate not_after/expiry; never widen either window.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/iat",
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/issued_at",
+      "dependencies": [
+        "mapping_row:closed-issued-at"
+      ],
+      "transform": "Parse RFC 3339 Z to exact Unix seconds.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payee/id",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/merchant",
+      "dependencies": [
+        "mapping_row:merchant-payee-id"
+      ],
+      "transform": "Apply the candidate-recorded Merchant.id normalization to the VATE merchant string.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payee/name",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/merchant_profile/name_transform",
+      "dependencies": [
+        "scaffold:merchant-profile"
+      ],
+      "transform": "Apply the candidate-owned display-name transform to the mapped merchant identity.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payee/website",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/merchant_profile/website_transform",
+      "dependencies": [
+        "scaffold:merchant-profile"
+      ],
+      "transform": "Apply the candidate-owned website transform; do not synthesize a live claim.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_amount/amount",
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/constraints/max_amount/value",
+      "dependencies": [
+        "mapping_row:request-usd-minor-units"
+      ],
+      "transform": "Parse request and mandate-limit USD exactly, take the permitted minimum, multiply by 100 without binary floating point, and emit a safe nonnegative integer.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_amount/currency",
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/constraints/max_amount/currency",
+      "dependencies": [
+        "mapping_row:request-usd-currency"
+      ],
+      "transform": "Require USD and copy the uppercase ISO 4217 code.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/description",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/instrument_profile/description",
+      "dependencies": [
+        "scaffold:instrument-profile"
+      ],
+      "transform": "Copy the candidate-authored synthetic fixture description.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/id",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/instrument_profile/id_transform",
+      "dependencies": [
+        "scaffold:instrument-profile"
+      ],
+      "transform": "Generate a deterministic instrument ID from declared candidate scaffolding.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/type",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/scheme",
+      "dependencies": [
+        "scaffold:pulse-schema"
+      ],
+      "transform": "Emit the Pulse payment-instrument discriminator x402.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/amount",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/max_amount/value",
+      "dependencies": [
+        "mapping_row:permitted-atomic-amount",
+        "scaffold:asset-profile"
+      ],
+      "transform": "Candidate resolved: convert min(request USD, mandate max USD) to the signed permitted atomic amount using the declared exact asset rule; reject rounding, exponent, overflow, or implicit market-price claims.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/ap2PayeeId",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payee/id",
+      "dependencies": [
+        "mapping_row:merchant-ap2-payee-id"
+      ],
+      "transform": "Copy the normalized Pulse Merchant.id exactly; never derive payTo from it.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/ap2PaymentAmount/amount",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_amount/amount",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_amount/amount"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/ap2PaymentAmount/currency",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_amount/currency",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_amount/currency"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/asset",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/asset_profile/asset",
+      "dependencies": [
+        "scaffold:asset-profile"
+      ],
+      "transform": "Validate and copy the candidate-selected 20-byte EVM asset address.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/eip712Domain/name",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/eip712_domain_name",
+      "dependencies": [
+        "scaffold:x402-profile"
+      ],
+      "transform": "Copy the candidate-selected EIP-712 domain name.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/eip712Domain/version",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/eip712_domain_version",
+      "dependencies": [
+        "scaffold:x402-profile"
+      ],
+      "transform": "Copy the candidate-selected EIP-712 domain version.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/maxTimeoutSeconds",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/max_timeout_seconds",
+      "dependencies": [
+        "scaffold:x402-profile"
+      ],
+      "transform": "Copy the candidate-selected positive timeout and enforce it in the authorization window.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/network",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/asset_profile/network",
+      "dependencies": [
+        "scaffold:asset-profile"
+      ],
+      "transform": "Validate and copy the candidate-selected EVM CAIP-2 network.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/nonceBinding",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/nonce_derivation",
+      "dependencies": [
+        "scaffold:x402-profile"
+      ],
+      "transform": "Copy the frozen nonce-binding discriminator.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/payTo",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/evm_participants/pay_to",
+      "dependencies": [
+        "scaffold:evm-participants"
+      ],
+      "transform": "Validate and copy the candidate-selected public fixture recipient; do not derive it from merchant.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/payer",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/evm_participants/payer",
+      "dependencies": [
+        "scaffold:evm-participants"
+      ],
+      "transform": "Validate and copy the candidate-selected public fixture payer.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/scheme",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/scheme",
+      "dependencies": [
+        "scaffold:x402-profile"
+      ],
+      "transform": "Copy the exact-scheme literal.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/payment_instrument/x402/version",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/version",
+      "dependencies": [
+        "scaffold:x402-profile"
+      ],
+      "transform": "Copy the fixed x402 instrument extension version.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/transaction_id",
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/transaction_id",
+      "dependencies": [
+        "mapping_row:closed-transaction-reference"
+      ],
+      "transform": "Domain-separate and SHA-256 the VATE transaction_id; encode canonical unpadded base64url.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/closedMandate/vct",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/pulse_profile/case_version",
+      "dependencies": [
+        "scaffold:pulse-schema"
+      ],
+      "transform": "Emit the Pulse Closed Payment Mandate discriminator mandate.payment.1.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/cnf/jwk/alg",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/fixture_key_handling",
+      "dependencies": [
+        "generator:public-fixture-key-record"
+      ],
+      "transform": "Emit the public ES256 JWK schema literal ES256 for this key; no private key material may be recorded.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/cnf/jwk/crv",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/fixture_key_handling",
+      "dependencies": [
+        "generator:public-fixture-key-record"
+      ],
+      "transform": "Emit the public ES256 JWK schema literal P-256 for this key; no private key material may be recorded.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/cnf/jwk/kid",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/openMandate/cnf/jwk/kid",
+      "dependencies": [
+        "generator:public-fixture-key-record",
+        "scaffold:fixture-key-handling"
+      ],
+      "transform": "Candidate resolved: generate or select the deterministic public fixture key after recording its label; emit only this public JWK leaf and no private material.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/cnf/jwk/kty",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/fixture_key_handling",
+      "dependencies": [
+        "generator:public-fixture-key-record"
+      ],
+      "transform": "Emit the public ES256 JWK schema literal EC for this key; no private key material may be recorded.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/cnf/jwk/x",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/openMandate/cnf/jwk/x",
+      "dependencies": [
+        "generator:public-fixture-key-record",
+        "scaffold:fixture-key-handling"
+      ],
+      "transform": "Candidate resolved: generate or select the deterministic public fixture key after recording its label; emit only this public JWK leaf and no private material.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/cnf/jwk/y",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/openMandate/cnf/jwk/y",
+      "dependencies": [
+        "generator:public-fixture-key-record",
+        "scaffold:fixture-key-handling"
+      ],
+      "transform": "Candidate resolved: generate or select the deterministic public fixture key after recording its label; emit only this public JWK leaf and no private material.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/0/conditional_transaction_id",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/transaction_id",
+      "dependencies": [
+        "mapping_row:open-reference-constraint"
+      ],
+      "transform": "Copy the derived checkout reference exactly.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/0/type",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/pulse_profile/case_version",
+      "dependencies": [
+        "scaffold:pulse-schema"
+      ],
+      "transform": "Emit the required payment.reference discriminator.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/description",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/description",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/description"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/id",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/id",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/id"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/type",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/scheme",
+      "dependencies": [
+        "scaffold:pulse-schema"
+      ],
+      "transform": "Emit the allowed-instrument type x402; do not infer a verdict.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/amount",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/amount",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/amount"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/ap2PayeeId",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/ap2PayeeId",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/ap2PayeeId"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/ap2PaymentAmount/amount",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/ap2PaymentAmount/amount",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/ap2PaymentAmount/amount"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/ap2PaymentAmount/currency",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/ap2PaymentAmount/currency",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/ap2PaymentAmount/currency"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/asset",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/asset",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/asset"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/eip712Domain/name",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/eip712Domain/name",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/eip712Domain/name"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/eip712Domain/version",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/eip712Domain/version",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/eip712Domain/version"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/maxTimeoutSeconds",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/maxTimeoutSeconds",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/maxTimeoutSeconds"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/network",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/network",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/network"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/nonceBinding",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/nonceBinding",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/nonceBinding"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/payTo",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/payTo",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/payTo"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/payer",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/payer",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/payer"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/scheme",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/scheme",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/scheme"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/allowed/0/x402/version",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/version",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/version"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/1/type",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/pulse_profile/case_version",
+      "dependencies": [
+        "scaffold:pulse-schema"
+      ],
+      "transform": "Emit the required payment.allowed_payment_instruments discriminator.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/2/currency",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/max_amount/currency",
+      "dependencies": [
+        "mapping_row:mandate-limit-currency"
+      ],
+      "transform": "Require USD and copy the uppercase ISO 4217 code.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/2/max",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/max_amount/value",
+      "dependencies": [
+        "mapping_row:mandate-limit-minor-units"
+      ],
+      "transform": "Parse exact USD decimal and multiply by 100 without binary floating point; this is the mandate cap, not the requested amount.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/2/min",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/max_amount/value",
+      "dependencies": [
+        "mapping_row:mandate-limit-minor-units"
+      ],
+      "transform": "Candidate resolved: candidate records a nonnegative lower-bound rule that does not widen or invert the VATE cap.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/2/type",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/pulse_profile/case_version",
+      "dependencies": [
+        "scaffold:pulse-schema"
+      ],
+      "transform": "Emit the required payment.amount_range discriminator.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/3/allowed/0/id",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/allowed_merchant",
+      "dependencies": [
+        "mapping_row:merchant-allowed-id"
+      ],
+      "transform": "Apply the same Merchant.id normalization used for the closed payee.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/3/allowed/0/name",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/merchant_profile/name_transform",
+      "dependencies": [
+        "scaffold:merchant-profile"
+      ],
+      "transform": "Apply the same candidate-owned display-name transform to the allowed payee.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/3/allowed/0/website",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/merchant_profile/website_transform",
+      "dependencies": [
+        "scaffold:merchant-profile"
+      ],
+      "transform": "Apply the same candidate-owned website transform to the allowed payee.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/constraints/3/type",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/pulse_profile/case_version",
+      "dependencies": [
+        "scaffold:pulse-schema"
+      ],
+      "transform": "Emit the required payment.allowed_payees discriminator.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/exp",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/expires_at",
+      "dependencies": [
+        "mapping_row:open-expiry"
+      ],
+      "transform": "Parse the mandate expiry to Unix seconds and do not widen the mandate window.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/iat",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/issued_at",
+      "dependencies": [
+        "mapping_row:open-issued-at"
+      ],
+      "transform": "Parse RFC 3339 Z to exact Unix seconds.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/openMandate/vct",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/pulse_profile/case_version",
+      "dependencies": [
+        "scaffold:pulse-schema"
+      ],
+      "transform": "Emit the Pulse Open Payment Mandate discriminator mandate.payment.open.1.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/paymentReceipt/error",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/paymentReceipt/error",
+      "dependencies": [
+        "generator:payment-receipt",
+        "scaffold:ap2-generation-profile"
+      ],
+      "transform": "Candidate resolved: generate this Pulse Payment Receipt leaf from the candidate-owned receipt plan and the generated closed-mandate reference; never copy the VATE admission receipt.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/paymentReceipt/error_description",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/paymentReceipt/error_description",
+      "dependencies": [
+        "generator:payment-receipt",
+        "scaffold:ap2-generation-profile"
+      ],
+      "transform": "Candidate resolved: generate this Pulse Payment Receipt leaf from the candidate-owned receipt plan and the generated closed-mandate reference; never copy the VATE admission receipt.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/paymentReceipt/iat",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/nowEpochSeconds",
+      "dependencies": [
+        "mapping_row:evaluation-time",
+        "generator:payment-receipt"
+      ],
+      "transform": "Copy the fixed evaluation epoch unless the candidate documents another in-window generated receipt time.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/paymentReceipt/iss",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/paymentReceipt/iss",
+      "dependencies": [
+        "generator:payment-receipt",
+        "scaffold:ap2-generation-profile"
+      ],
+      "transform": "Candidate resolved: generate this Pulse Payment Receipt leaf from the candidate-owned receipt plan and the generated closed-mandate reference; never copy the VATE admission receipt.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/paymentReceipt/network_confirmation_id",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/paymentReceipt/network_confirmation_id",
+      "dependencies": [
+        "generator:payment-receipt",
+        "scaffold:ap2-generation-profile"
+      ],
+      "transform": "Candidate resolved: generate this Pulse Payment Receipt leaf from the candidate-owned receipt plan and the generated closed-mandate reference; never copy the VATE admission receipt.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/paymentReceipt/payment_id",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/paymentReceipt/payment_id",
+      "dependencies": [
+        "generator:payment-receipt",
+        "scaffold:ap2-generation-profile"
+      ],
+      "transform": "Candidate resolved: generate this Pulse Payment Receipt leaf from the candidate-owned receipt plan and the generated closed-mandate reference; never copy the VATE admission receipt.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/paymentReceipt/psp_confirmation_id",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/paymentReceipt/psp_confirmation_id",
+      "dependencies": [
+        "generator:payment-receipt",
+        "scaffold:ap2-generation-profile"
+      ],
+      "transform": "Candidate resolved: generate this Pulse Payment Receipt leaf from the candidate-owned receipt plan and the generated closed-mandate reference; never copy the VATE admission receipt.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/paymentReceipt/reference",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/paymentReceipt/reference",
+      "dependencies": [
+        "generator:frozen-pulse-canonical-rule",
+        "mapping_row:generated-ap2-artifacts"
+      ],
+      "transform": "Generate with the frozen Pulse canonical hash/reference rule after mapping VATE inputs; record the exact generated leaf and its dependencies.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/paymentReceipt/status",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/paymentReceipt/status",
+      "dependencies": [
+        "generator:payment-receipt",
+        "scaffold:ap2-generation-profile"
+      ],
+      "transform": "Candidate resolved: generate this Pulse Payment Receipt leaf from the candidate-owned receipt plan and the generated closed-mandate reference; never copy the VATE admission receipt.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/clockSkewSeconds",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/ap2_generation_profile/clock_skew_seconds",
+      "dependencies": [
+        "scaffold:ap2-generation-profile"
+      ],
+      "transform": "Copy the candidate-selected nonnegative clock skew, bounded by Pulse schema.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/closedMandateClaimsHash",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/verification/closedMandateClaimsHash",
+      "dependencies": [
+        "generator:frozen-pulse-canonical-rule",
+        "mapping_row:generated-ap2-artifacts"
+      ],
+      "transform": "Generate with the frozen Pulse canonical hash/reference rule after mapping VATE inputs; record the exact generated leaf and its dependencies.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/closedMandateReference",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/verification/closedMandateReference",
+      "dependencies": [
+        "generator:frozen-pulse-canonical-rule",
+        "mapping_row:generated-ap2-artifacts"
+      ],
+      "transform": "Generate with the frozen Pulse canonical hash/reference rule after mapping VATE inputs; record the exact generated leaf and its dependencies.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/expectedAudience",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/ap2_generation_profile/expected_audience",
+      "dependencies": [
+        "scaffold:ap2-generation-profile"
+      ],
+      "transform": "Bind the candidate-selected AP2 audience; document how it relates to the VATE mandate audience.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/expectedNonce",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/replay_nonce",
+      "dependencies": [
+        "mapping_row:terminal-key-binding-nonce"
+      ],
+      "transform": "Copy the VATE replay nonce exactly into the terminal key-binding input.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/mandateChain",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/verification/cryptographicEvidence/mandateChain",
+      "dependencies": [
+        "generator:candidate-owned-jose-and-eip3009",
+        "scaffold:fixture-key-handling"
+      ],
+      "transform": "Candidate resolved: generate and sign after all mapped claims are fixed; include protected JOSE header, claims, SD-JWT disclosures/salts where applicable, signature, and key-label dependencies in the candidate-owned generation record, while persisting no private material.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/paymentReceiptJwt",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/verification/cryptographicEvidence/paymentReceiptJwt",
+      "dependencies": [
+        "generator:candidate-owned-jose-and-eip3009",
+        "scaffold:fixture-key-handling"
+      ],
+      "transform": "Candidate resolved: generate and sign after all mapped claims are fixed; include protected JOSE header, claims, SD-JWT disclosures/salts where applicable, signature, and key-label dependencies in the candidate-owned generation record, while persisting no private material.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/trustedReceiptPublicJwk/alg",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/fixture_key_handling",
+      "dependencies": [
+        "generator:public-fixture-key-record"
+      ],
+      "transform": "Emit the public ES256 JWK schema literal ES256 for this key; no private key material may be recorded.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/trustedReceiptPublicJwk/crv",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/fixture_key_handling",
+      "dependencies": [
+        "generator:public-fixture-key-record"
+      ],
+      "transform": "Emit the public ES256 JWK schema literal P-256 for this key; no private key material may be recorded.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/trustedReceiptPublicJwk/kid",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/verification/cryptographicEvidence/trustedReceiptPublicJwk/kid",
+      "dependencies": [
+        "generator:public-fixture-key-record",
+        "scaffold:fixture-key-handling"
+      ],
+      "transform": "Candidate resolved: generate or select the deterministic public fixture key after recording its label; emit only this public JWK leaf and no private material.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/trustedReceiptPublicJwk/kty",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/fixture_key_handling",
+      "dependencies": [
+        "generator:public-fixture-key-record"
+      ],
+      "transform": "Emit the public ES256 JWK schema literal EC for this key; no private key material may be recorded.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/trustedReceiptPublicJwk/x",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/verification/cryptographicEvidence/trustedReceiptPublicJwk/x",
+      "dependencies": [
+        "generator:public-fixture-key-record",
+        "scaffold:fixture-key-handling"
+      ],
+      "transform": "Candidate resolved: generate or select the deterministic public fixture key after recording its label; emit only this public JWK leaf and no private material.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/trustedReceiptPublicJwk/y",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/verification/cryptographicEvidence/trustedReceiptPublicJwk/y",
+      "dependencies": [
+        "generator:public-fixture-key-record",
+        "scaffold:fixture-key-handling"
+      ],
+      "transform": "Candidate resolved: generate or select the deterministic public fixture key after recording its label; emit only this public JWK leaf and no private material.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/trustedRootPublicJwk/alg",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/fixture_key_handling",
+      "dependencies": [
+        "generator:public-fixture-key-record"
+      ],
+      "transform": "Emit the public ES256 JWK schema literal ES256 for this key; no private key material may be recorded.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/trustedRootPublicJwk/crv",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/fixture_key_handling",
+      "dependencies": [
+        "generator:public-fixture-key-record"
+      ],
+      "transform": "Emit the public ES256 JWK schema literal P-256 for this key; no private key material may be recorded.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/trustedRootPublicJwk/kid",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/verification/cryptographicEvidence/trustedRootPublicJwk/kid",
+      "dependencies": [
+        "generator:public-fixture-key-record",
+        "scaffold:fixture-key-handling"
+      ],
+      "transform": "Candidate resolved: generate or select the deterministic public fixture key after recording its label; emit only this public JWK leaf and no private material.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/trustedRootPublicJwk/kty",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/fixture_key_handling",
+      "dependencies": [
+        "generator:public-fixture-key-record"
+      ],
+      "transform": "Emit the public ES256 JWK schema literal EC for this key; no private key material may be recorded.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/trustedRootPublicJwk/x",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/verification/cryptographicEvidence/trustedRootPublicJwk/x",
+      "dependencies": [
+        "generator:public-fixture-key-record",
+        "scaffold:fixture-key-handling"
+      ],
+      "transform": "Candidate resolved: generate or select the deterministic public fixture key after recording its label; emit only this public JWK leaf and no private material.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/cryptographicEvidence/trustedRootPublicJwk/y",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/verification/cryptographicEvidence/trustedRootPublicJwk/y",
+      "dependencies": [
+        "generator:public-fixture-key-record",
+        "scaffold:fixture-key-handling"
+      ],
+      "transform": "Candidate resolved: generate or select the deterministic public fixture key after recording its label; emit only this public JWK leaf and no private material.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/openCheckoutReference",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/transaction_id",
+      "dependencies": [
+        "mapping_row:open-checkout-reference"
+      ],
+      "transform": "Copy the derived checkout reference exactly.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/openMandateClaimsHash",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/ap2/verification/openMandateClaimsHash",
+      "dependencies": [
+        "generator:frozen-pulse-canonical-rule",
+        "mapping_row:generated-ap2-artifacts"
+      ],
+      "transform": "Generate with the frozen Pulse canonical hash/reference rule after mapping VATE inputs; record the exact generated leaf and its dependencies.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/verifiedAtEpochSeconds",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/nowEpochSeconds",
+      "dependencies": [
+        "mapping_row:verification-time"
+      ],
+      "transform": "Copy the fixed evaluation epoch exactly.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/ap2/verification/verifier",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/ap2_generation_profile/verifier_label",
+      "dependencies": [
+        "scaffold:ap2-generation-profile"
+      ],
+      "transform": "Copy the candidate-recorded verifier label without implying VATE endorsement.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/caseVersion",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/pulse_profile/case_version",
+      "dependencies": [
+        "scaffold:pulse-profile"
+      ],
+      "transform": "Copy the frozen Pulse v0.3 schema literal exactly.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/description",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/resource_profile/description",
+      "dependencies": [
+        "scaffold:resource-profile"
+      ],
+      "transform": "Candidate supplies a factual case description; it must not encode the expected verdict.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/expected/consistent",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/pulse_expected_envelope/value/consistent",
+      "dependencies": [
+        "scaffold:neutral-pulse-expected"
+      ],
+      "transform": "Copy the neutral schema-only boolean. Never derive it from VATE expected data.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/id",
+      "source_document": "candidate_execution_request",
+      "source_json_pointer": "/items/{case_index}/workItemId",
+      "dependencies": [
+        "mapping_row:case-id-label"
+      ],
+      "transform": "Prefix the opaque workItemId with vate-pulse-. The candidate runtime receives no VATE case ID and the label must never select a verdict.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/inputHash",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/inputHash",
+      "dependencies": [
+        "mapping_row:pulse-input-hash"
+      ],
+      "transform": "Compute frozen Pulse conformanceInputHash over caseVersion, sourcePins, nowEpochSeconds, ap2, and x402 only, then record the canonical base64url digest.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/nowEpochSeconds",
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/issued_at",
+      "dependencies": [
+        "mapping_row:evaluation-time"
+      ],
+      "transform": "Parse RFC 3339 Z to exact Unix seconds; reject offsets, fractions, or lossy local time.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/sourcePins/ap2Commit",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/pulse_profile/source_pins/ap2Commit",
+      "dependencies": [
+        "scaffold:pulse-profile"
+      ],
+      "transform": "Copy the frozen Pulse AP2 source pin exactly.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/sourcePins/x402Commit",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/pulse_profile/source_pins/x402Commit",
+      "dependencies": [
+        "scaffold:pulse-profile"
+      ],
+      "transform": "Copy the frozen Pulse x402 source pin exactly.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/sourcePins/x402PackageVersion",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/pulse_profile/source_pins/x402PackageVersion",
+      "dependencies": [
+        "scaffold:pulse-profile"
+      ],
+      "transform": "Copy the frozen Pulse x402 package version exactly.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/accepted/amount",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/x402/requirements/amount",
+      "dependencies": [
+        "pulse_leaf:/x402/requirements/amount"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/accepted/asset",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/x402/requirements/asset",
+      "dependencies": [
+        "pulse_leaf:/x402/requirements/asset"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/accepted/extra/ap2MandateReference",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/x402/requirements/extra/ap2MandateReference",
+      "dependencies": [
+        "pulse_leaf:/x402/requirements/extra/ap2MandateReference"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/accepted/extra/ap2NonceDerivation",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/x402/requirements/extra/ap2NonceDerivation",
+      "dependencies": [
+        "pulse_leaf:/x402/requirements/extra/ap2NonceDerivation"
+      ],
+      "transform": "Copy the generated requirements leaf exactly into accepted.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/accepted/extra/assetTransferMethod",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/x402/requirements/extra/assetTransferMethod",
+      "dependencies": [
+        "pulse_leaf:/x402/requirements/extra/assetTransferMethod"
+      ],
+      "transform": "Copy the generated requirements leaf exactly into accepted.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/accepted/extra/name",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/x402/requirements/extra/name",
+      "dependencies": [
+        "pulse_leaf:/x402/requirements/extra/name"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/accepted/extra/version",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/x402/requirements/extra/version",
+      "dependencies": [
+        "pulse_leaf:/x402/requirements/extra/version"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/accepted/maxTimeoutSeconds",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/x402/requirements/maxTimeoutSeconds",
+      "dependencies": [
+        "pulse_leaf:/x402/requirements/maxTimeoutSeconds"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/accepted/network",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/x402/requirements/network",
+      "dependencies": [
+        "pulse_leaf:/x402/requirements/network"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/accepted/payTo",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/x402/requirements/payTo",
+      "dependencies": [
+        "pulse_leaf:/x402/requirements/payTo"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/accepted/scheme",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/x402/requirements/scheme",
+      "dependencies": [
+        "pulse_leaf:/x402/requirements/scheme"
+      ],
+      "transform": "Copy the generated requirements leaf exactly into accepted.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/payload/authorization/from",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/payer",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/payer"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/payload/authorization/nonce",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/verification/closedMandateReference",
+      "dependencies": [
+        "mapping_row:eip3009-nonce"
+      ],
+      "transform": "Canonical base64url-decode to exactly 32 bytes and emit lower-case 0x-prefixed hex.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/payload/authorization/to",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/payTo",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/payTo"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/payload/authorization/validAfter",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/constraints/execution_window/not_before",
+      "dependencies": [
+        "mapping_row:eip3009-valid-after"
+      ],
+      "transform": "Parse exact Unix seconds and emit a canonical unsigned decimal string.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/payload/authorization/validBefore",
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/expires_at",
+      "dependencies": [
+        "mapping_row:eip3009-valid-before"
+      ],
+      "transform": "Take the earliest applicable request/mandate/timeout bound and emit a canonical unsigned decimal string.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/payload/authorization/value",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/x402/payload/accepted/amount",
+      "dependencies": [
+        "pulse_leaf:/x402/payload/accepted/amount"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/payload/signature",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/x402/payload/payload/signature",
+      "dependencies": [
+        "generator:candidate-owned-jose-and-eip3009",
+        "scaffold:fixture-key-handling"
+      ],
+      "transform": "Candidate resolved: generate and sign after all mapped claims are fixed; include protected JOSE header, claims, SD-JWT disclosures/salts where applicable, signature, and key-label dependencies in the candidate-owned generation record, while persisting no private material.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/resource/description",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/resource_profile/description",
+      "dependencies": [
+        "scaffold:resource-profile"
+      ],
+      "transform": "Copy the candidate-authored synthetic resource description.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/resource/mimeType",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/resource_profile/mime_type",
+      "dependencies": [
+        "scaffold:resource-profile"
+      ],
+      "transform": "Copy the candidate-selected MIME type.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/resource/url",
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/target/resource",
+      "dependencies": [
+        "mapping_row:resource-url"
+      ],
+      "transform": "Copy the VATE target resource URL exactly.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/payload/x402Version",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/version",
+      "dependencies": [
+        "scaffold:x402-profile"
+      ],
+      "transform": "Copy the fixed x402 payload version.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/requirements/amount",
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/constraints/max_amount/value",
+      "dependencies": [
+        "mapping_row:request-atomic-amount",
+        "scaffold:asset-profile"
+      ],
+      "transform": "Candidate resolved: convert the requested USD amount to exact atomic units using the declared asset rule; keep it distinct from the signed permitted amount when the request exceeds the mandate limit.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/requirements/asset",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/asset",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/asset"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/requirements/extra/ap2MandateReference",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/x402/requirements/extra/ap2MandateReference",
+      "dependencies": [
+        "generator:frozen-pulse-canonical-rule",
+        "mapping_row:generated-ap2-artifacts"
+      ],
+      "transform": "Generate with the frozen Pulse canonical hash/reference rule after mapping VATE inputs; record the exact generated leaf and its dependencies.",
+      "provenance": "vate-derived",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/requirements/extra/ap2NonceDerivation",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/nonce_derivation",
+      "dependencies": [
+        "scaffold:x402-profile"
+      ],
+      "transform": "Copy the frozen nonce-derivation literal.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/requirements/extra/assetTransferMethod",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/asset_transfer_method",
+      "dependencies": [
+        "scaffold:x402-profile"
+      ],
+      "transform": "Copy the fixed EIP-3009 transfer-method literal.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/requirements/extra/name",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/eip712_domain_name",
+      "dependencies": [
+        "scaffold:x402-profile"
+      ],
+      "transform": "Copy the candidate-selected synthetic asset/domain label.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/requirements/extra/version",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/eip712_domain_version",
+      "dependencies": [
+        "scaffold:x402-profile"
+      ],
+      "transform": "Copy the candidate-selected synthetic asset/domain version.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/requirements/maxTimeoutSeconds",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/maxTimeoutSeconds",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/maxTimeoutSeconds"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/requirements/network",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/network",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/network"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/requirements/payTo",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/payTo",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/payTo"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/requirements/scheme",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/x402_profile/scheme",
+      "dependencies": [
+        "scaffold:x402-profile"
+      ],
+      "transform": "Copy the exact-scheme literal.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/settlement/network",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/network",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/network"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/settlement/payer",
+      "source_document": "pulse_case",
+      "source_json_pointer": "/ap2/closedMandate/payment_instrument/x402/payer",
+      "dependencies": [
+        "pulse_leaf:/ap2/closedMandate/payment_instrument/x402/payer"
+      ],
+      "transform": "Copy the already mapped/generated source leaf exactly; reject missing, type-changing, or lossy conversion.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/settlement/success",
+      "source_document": "worksheet",
+      "source_json_pointer": "/scaffolding_inputs/settlement_profile/success",
+      "dependencies": [
+        "scaffold:settlement-profile"
+      ],
+      "transform": "Copy the candidate-owned synthetic settlement success state; never derive it from VATE expected data.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    },
+    {
+      "pulse_destination": "/x402/settlement/transaction",
+      "source_document": "candidate_generator_output",
+      "source_json_pointer": "/x402/settlement/transaction",
+      "dependencies": [
+        "generator:synthetic-settlement",
+        "scaffold:settlement-profile"
+      ],
+      "transform": "Candidate resolved: generate the deterministic synthetic transaction identifier under the recorded settlement rule.",
+      "provenance": "non-vate-scaffolding",
+      "ownership": "candidate_owned"
+    }
+  ],
+  "completion_requirements": [
+    "Resolve every candidate decision and every null scaffolding value in a candidate-owned completed worksheet at an exact commit.",
+    "Retain exactly the frozen 142 primitive Pulse input leaves and the required empty /expected/failureCodes container; do not add, omit, or collapse leaf records.",
+    "For every leaf retain source_document, source_json_pointer, dependencies, exact transform, Pulse destination, provenance, and ownership.",
+    "Keep all VATE /expected pointers and all VATE admission-receipt bytes out of mapping_rows, generated_field_inventory, the Pulse input, and result projection.",
+    "Regenerate AP2 JOSE/SD-JWT, x402, EIP-3009, Payment Receipt, public-key, and signature fields after applying VATE-derived values; an unchanged Pulse fixture plus sidecar VATE hashes is invalid.",
+    "Call frozen verifyConformanceCase without semantic changes and preserve its exact report objects in raw JSON before projection.",
+    "Record pre/post raw SHA-256 for every Pulse input, the raw output hash, mapping source hash, worksheet hash, and starter manifest hash.",
+    "Preserve VATE attenuate versus Pulse reject/non-attenuate as an explicit mismatch; never normalize it to pass.",
+    "Use the standard candidate executable interface with opaque workItemId values and eligible admissionRequest/ap2Mandate JSON only; the candidate runtime must never receive a VATE case, case ID, /expected subtree, admission receipt, or post-execution receipt.",
+    "Bind the canonical map request, byte-exact candidate map stdout, completed worksheet, generated records, Pulse input, raw Pulse replay, canonical projection request, and byte-exact projection stdout in one bundle-local hash chain.",
+    "Pass independent recomputation and randomized amount, merchant, evaluation-time/window, and replay-nonce sensitivity probes; this is reproducible execution evidence, not a tamper-proof proof."
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "artifact_reference_checks": [
+    {
+      "artifact": "ap2_mandate",
+      "expect_match": true,
+      "reference_paths": [
+        {
+          "artifact": "admission_request",
+          "path": "evidence_refs[0].digest"
+        },
+        {
+          "artifact": "admission_receipt",
+          "path": "evidence[0].digest"
+        }
+      ]
+    }
+  ],
+  "artifacts": {
+    "admission_receipt": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-overrun.example.json",
+    "admission_request": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-overrun.example.json",
+    "ap2_mandate": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-overrun.example.json"
+  },
+  "case_id": "attenuate-ap2-hnp-amount-overrun",
+  "category": "positive",
+  "expected": {
+    "admission_decision": "attenuate",
+    "checks": [
+      {
+        "expected": "present",
+        "name": "attenuation.original_request_hash"
+      },
+      {
+        "expected": "present",
+        "name": "attenuation.effective_request_hash"
+      },
+      {
+        "expected": "present",
+        "name": "attenuation.changes[0].path"
+      },
+      {
+        "expected": "present",
+        "name": "attenuation.effective_constraints.max_amount.value"
+      }
+    ],
+    "reason_codes": [
+      "PAYMENT_TOKEN_LIMIT",
+      "LOCAL_POLICY_MAX_AMOUNT_NARROWED"
+    ],
+    "should_execute": true
+  },
+  "integrity_checks": [
+    {
+      "artifact": "ap2_mandate",
+      "expect_match": true,
+      "expected_digest": {
+        "alg": "sha-256",
+        "value": "b8693fb237aeb61b19438a82ab678f2e37f6d1f4c524cdfaa54e128af0abf37b"
+      }
+    }
+  ],
+  "profile": "VATE-AL2-Verifier-Admission-v0.3",
+  "purpose": "A VATE verifier should narrow a purchase request when the requested amount exceeds the AP2 mandate limit.",
+  "title": "Attenuate an AP2 Human Not Present amount overrun",
+  "validation_focus": [
+    "AP2 Human Not Present",
+    "amount limit",
+    "machine-readable attenuation"
+  ],
+  "version": "vate-conformance-0.3"
+}
