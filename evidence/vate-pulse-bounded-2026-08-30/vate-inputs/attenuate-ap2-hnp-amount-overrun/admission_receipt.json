@@ -1,0 +1,84 @@
+{
+  "attenuation": {
+    "changes": [
+      {
+        "from": "125.00",
+        "op": "replace",
+        "path": "/constraints/max_amount/value",
+        "reason_code": "PAYMENT_TOKEN_LIMIT",
+        "source_evidence_ref": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-overrun.example.json",
+        "to": "50.00"
+      }
+    ],
+    "effective_constraints": {
+      "expires_at": "2026-05-07T10:30:00Z",
+      "max_amount": {
+        "currency": "USD",
+        "value": "50.00"
+      },
+      "payment": {
+        "human_present": false,
+        "mandate_id": "ap2hnp-20260507-overrun-001"
+      }
+    },
+    "effective_request_hash": "sha-256:792e8611f6cb3064f3b9801ec90ba486924b2e9291c010f52650d6ca29ca89ca",
+    "mode": "narrow",
+    "original_request_hash": "sha-256:e6db1a5fb7bb48b424acda5e9b092d31b94cf8d1bdeccc8fc08e7daaea85c30b",
+    "require_new_permit": false
+  },
+  "decision": {
+    "human_readable_summary": "The verifier narrowed the requested USD 125.00 purchase to the AP2 mandate limit of USD 50.00.",
+    "outcome": "attenuate",
+    "reason_codes": [
+      "PAYMENT_TOKEN_LIMIT",
+      "LOCAL_POLICY_MAX_AMOUNT_NARROWED"
+    ]
+  },
+  "evidence": [
+    {
+      "digest": {
+        "alg": "sha-256",
+        "value": "b8693fb237aeb61b19438a82ab678f2e37f6d1f4c524cdfaa54e128af0abf37b"
+      },
+      "protocol_hint": "ap2_human_not_present",
+      "type": "payment_mandate",
+      "uri": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-overrun.example.json",
+      "verification": {
+        "checked_at": "2026-05-07T10:00:06Z",
+        "method": "ap2-human-not-present-mandate-verification",
+        "result": "verified",
+        "status_result": "attenuated"
+      }
+    }
+  ],
+  "expires_at": "2026-05-07T10:05:00Z",
+  "issued_at": "2026-05-07T10:00:08Z",
+  "policy": {
+    "policy_id": "al2-ap2-human-not-present-commerce",
+    "policy_ref": "https://verifier.example/policies/al2-ap2-human-not-present-commerce/2026-05-07.1",
+    "policy_version": "2026-05-07.1"
+  },
+  "profile": "VATE-AL2-Verifier-Admission-v0.3",
+  "receipt_id": "admrec-ap2hnp-overrun-20260507-001",
+  "receipt_type": "admission",
+  "request": {
+    "a2a_context_id": "ctx-ap2hnp-overrun-20260507-001",
+    "a2a_task_id": "task-ap2hnp-overrun-20260507-001",
+    "action": "commerce.purchase",
+    "audience": "https://tickets.example",
+    "input_hash": "sha-256:7df33abc1344838c35cd5e36fe8c36bb2b954e3e307f2f48cd31928174aea848",
+    "request_id": "areq-ap2hnp-overrun-20260507-001",
+    "target_audience": "https://tickets.example",
+    "transaction_id": "txn-ap2hnp-overrun-20260507-001"
+  },
+  "subject": {
+    "actor": "did:web:agent.example",
+    "principal": "did:web:user.example",
+    "runtime": "spiffe://agent.example/workload/ticket-agent"
+  },
+  "verifier": {
+    "id": "did:web:verifier.example",
+    "key_id": "did:web:verifier.example#key-1"
+  },
+  "version": "vate-0.3"
+}

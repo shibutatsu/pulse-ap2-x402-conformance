@@ -1,5 +1,9 @@
 # Bounded VATE-to-Pulse external SUT evidence
 
+This is the superseded worksheet 0.4 provenance record retained for auditability. Use the
+[worksheet 0.5 correction](../vate-pulse-bounded-2026-08-30/README.md) for the current bounded
+result. The mapper semantics and observed Pulse/VATE outcome were unchanged.
+
 This directory records the solicited three-case VATE-to-Pulse attempt delivered
 from the immutable starter kit. It is a candidate-executed external SUT record,
 not organic adoption, a security review, an audit, endorsement, certification,

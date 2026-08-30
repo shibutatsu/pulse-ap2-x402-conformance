@@ -1,0 +1,1728 @@
+{
+  "artifact_mode_counts": {
+    "corpus-fixture-validation": 75,
+    "generated-receipts": 0
+  },
+  "case_results": [
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-a2a-signed-agent-card-evidence",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "allow",
+      "actual_primary_reason_code": "EVIDENCE_VERIFIED",
+      "actual_should_execute": true,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-ap2-hnp-preauthorized-mandate",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_should_execute": true,
+      "pass": true
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-jose-detached-runtime-attestation",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-mcp-oauth-token-authority-bound",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-mcp-oauth-transport-bound",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-mcp-tool-class-aligned",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-replay-state-unused",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-resource-indicator-aligned",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-status-fresh-at-boundary",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "STATUS_FRESH",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-valid-admission",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-valid-basic-external-write",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-valid-with-policy-snapshot",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "POLICY_SNAPSHOT_MATCH",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "allow-valid-with-status-fresh",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "STATUS_FRESH",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "deny",
+      "actual_primary_reason_code": "AP2_X402_AMOUNT_MISMATCH",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "attenuate-ap2-hnp-amount-overrun",
+      "expected_outcome": "attenuate",
+      "expected_primary_reason_code": "PAYMENT_TOKEN_LIMIT",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "attenuate-max-amount",
+      "expected_outcome": "attenuate",
+      "expected_primary_reason_code": "PAYMENT_TOKEN_LIMIT",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "attenuate-requires-new-permit",
+      "expected_outcome": "attenuate",
+      "expected_primary_reason_code": "NEW_PERMIT_REQUIRED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "attenuate-target-scope",
+      "expected_outcome": "attenuate",
+      "expected_primary_reason_code": "TARGET_SCOPE_NARROWED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-alg-not-allowed",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ALG_NOT_ALLOWED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-ambiguous-trust-anchor",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-ap2-hnp-replay",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "REPLAY_DETECTED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "deny",
+      "actual_primary_reason_code": "PERMIT_EXPIRED",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-ap2-hnp-stale-mandate",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "PERMIT_EXPIRED",
+      "expected_should_execute": false,
+      "pass": true
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-attenuation-approval-string",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-attenuation-legacy-effective-constraints",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-attenuation-malformed-money",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-attenuation-max-amount-type-edge",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-attenuation-negative-amount",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-attenuation-unsafe-path",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-audience-mismatch",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "AUDIENCE_MISMATCH",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-digest-mismatch-before-policy",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "DIGEST_MISMATCH",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-digest-mismatch",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "DIGEST_MISMATCH",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-empty-evidence-refs",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-evidence-type-not-allowed",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ISSUER_NOT_AUTHORIZED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-expired-permit",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "PERMIT_EXPIRED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-jose-alg-none",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ALG_NOT_ALLOWED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-jose-crit-unsupported",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SCHEMA_INVALID",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-jose-es384-not-allowed",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ALG_NOT_ALLOWED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-jose-hs256-downgrade",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ALG_NOT_ALLOWED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-jose-payload-digest-mismatch",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "DIGEST_MISMATCH",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-kid-mismatch",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "UNKNOWN_TRUST_ANCHOR",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-mcp-oauth-overscope",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "TARGET_NOT_PERMITTED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-mcp-oauth-upstream-denied",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ACTION_NOT_PERMITTED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-mcp-tool-class-mismatch",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "TOOL_CLASS_MISMATCH",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-not-yet-valid-permit",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "PERMIT_NOT_YET_VALID",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-policy-snapshot-mismatch",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "POLICY_SNAPSHOT_MISMATCH",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-replay-detected",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "REPLAY_DETECTED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-replay-state-replayed",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "REPLAY_DETECTED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-resource-indicator-drift",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "RESOURCE_INDICATOR_MISMATCH",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-runtime-mismatch",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "RUNTIME_MISMATCH",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-runtime-proof-stale",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "RUNTIME_PROOF_STALE",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-signature-tampered",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "SIGNATURE_INVALID",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-status-revoked",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "STATUS_REVOKED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-status-stale-fail-closed",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "STATUS_STALE",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-status-stale-just-over-boundary",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "STATUS_STALE",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-token-passthrough-as-authority",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "TOKEN_AUTHORITY_INSUFFICIENT",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-trust-anchor-expired",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "TRUST_ANCHOR_EXPIRED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-trust-anchor-not-yet-valid",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "TRUST_ANCHOR_NOT_YET_VALID",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-trust-anchor-revoked",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "TRUST_ANCHOR_REVOKED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "deny-unknown-trust-anchor",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "UNKNOWN_TRUST_ANCHOR",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "interop-ap2-ucp-commerce-evidence",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "interop-oap-decision-evidence",
+      "expected_outcome": "allow",
+      "expected_primary_reason_code": "EVIDENCE_VERIFIED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-admission-digest-mismatch",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_ADMISSION_DIGEST_MISMATCH",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-after-admission-expiry",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_ADMISSION_EXPIRED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-after-deny",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_ADMISSION_DENIED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-allow-effective-constraints-exceeded",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-ap2-hnp-linkage-success",
+      "expected_outcome": "success",
+      "expected_primary_reason_code": "ADMISSION_RECEIPT_LINKED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-effective-constraints-aggregate-exceeded",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-effective-constraints-exceeded",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_EFFECTIVE_CONSTRAINTS_EXCEEDED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-finish-after-admission-expiry",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_ADMISSION_EXPIRED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-linkage-mismatch",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_EFFECTIVE_REQUEST_HASH_MISMATCH",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-linkage-success",
+      "expected_outcome": "success",
+      "expected_primary_reason_code": "ADMISSION_RECEIPT_LINKED",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-runtime-mismatch",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_RUNTIME_MISMATCH",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "post-execution-transaction-mismatch",
+      "expected_outcome": "failed",
+      "expected_primary_reason_code": "POST_EXEC_TRANSACTION_MISMATCH",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "rcl-005-authorization-params-mismatch",
+      "expected_outcome": "deny",
+      "expected_primary_reason_code": "ACTION_NOT_PERMITTED",
+      "expected_should_execute": false,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "rcl-006-occurrence-action-linkage-mismatch",
+      "expected_outcome": "success",
+      "expected_primary_reason_code": "POST_EXEC_LINKAGE_MISMATCH",
+      "expected_should_execute": true,
+      "pass": false
+    },
+    {
+      "actual_outcome": "out-of-scope",
+      "actual_primary_reason_code": "OUT_OF_SCOPE",
+      "actual_should_execute": false,
+      "artifact_mode": "corpus-fixture-validation",
+      "case_id": "rcl-008-full-pipeline-acceptance-control",
+      "expected_outcome": "success",
+      "expected_primary_reason_code": "ADMISSION_RECEIPT_LINKED",
+      "expected_should_execute": true,
+      "pass": false
+    }
+  ],
+  "conformance_report": {
+    "digest": {
+      "alg": "sha-256",
+      "value": "92e7d9db4de1d0bf0b30aa94ee71eeec11ea70e2d38c5a36f64750e11dbf349e"
+    },
+    "digest_basis": "json-sorted-no-whitespace",
+    "media_type": "application/vate-conformance-report+json",
+    "uri": "vate-compare-report.json"
+  },
+  "corpus": {
+    "artifact_count": 212,
+    "case_count": 75,
+    "digest": {
+      "alg": "sha-256",
+      "value": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370"
+    },
+    "manifest": [
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-a2a-signed-agent-card-evidence.json",
+        "sha256": "fa570980bf26f6fd624854363ca0cdac29b3377917ca10f5f6192726351b2bfa"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-ap2-hnp-preauthorized-mandate.json",
+        "sha256": "f81b1d7389905b6dc8d034dfcb3aa313b5ecb714235005f8e957bc8c6f4aa50b"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-jose-detached-runtime-attestation.json",
+        "sha256": "e46fd7e6112e559fb37b8b58c41deff9d83ec737f422f169576fd6f4a4dcd85b"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-mcp-oauth-token-authority-bound.json",
+        "sha256": "991d566ab7c9a903d60c43674c5b2b9d632e04fe27d2c6214569e0f31681fd6e"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-mcp-oauth-transport-bound.json",
+        "sha256": "9723455a5ec9f8941553796f8ba1b800090f08af9ac97c1619af965e1a5060d6"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-mcp-tool-class-aligned.json",
+        "sha256": "44f24c193f3613a4aea717d937520c98868b9e5717dfbd5ecbbc3ea1b202be35"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-replay-state-unused.json",
+        "sha256": "324d6feb59f867e2f86ed89762f62a8319157a073e6e762791566eed037ceea6"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-resource-indicator-aligned.json",
+        "sha256": "4ab5a270400c103e3f9d25099e5e8b5afc03cd854612d1ef025b04027269b215"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-status-fresh-at-boundary.json",
+        "sha256": "631a8aca684f25d1e41c7a5d0fd389c9fc3b2252e1f3a10596afa3c55830dc45"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-valid-admission.json",
+        "sha256": "3a02a09f7144b18e5996041aa6887880865c0d7140be0586df4a8e20d7805cf0"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-valid-basic-external-write.json",
+        "sha256": "1bd7221caa0a1fad35effad84f61c2696d77c76ee4c0fee3612ae968ddf556d1"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-valid-with-policy-snapshot.json",
+        "sha256": "58ea076cdeb824907a0479e57941926ee83c5c54769f368445e899dbd9c6301a"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/allow-valid-with-status-fresh.json",
+        "sha256": "10a285cec81b7344bbb6fe2f7034ec063cdcfcd1e800a29aa6611d2f78fc16a2"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/attenuate-ap2-hnp-amount-overrun.json",
+        "sha256": "683f1868b5b61ae48aa16ed0faed0e875b9ffa15dcbddfcab11ef5f71ab00dc6"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/attenuate-max-amount.json",
+        "sha256": "e82048bd32aa3dba537b442cdcfb629f31852b43a922f30837c6825b152b8ce7"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/attenuate-requires-new-permit.json",
+        "sha256": "3ff2e85564087dc345ef39cf5a40f76f07f3b3de987ee7b46afd98d0e13ea73b"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/attenuate-target-scope.json",
+        "sha256": "fdc43f9dc8de45dca98eaf3273c352dad2b56fa06b09f5cf91cd4d7d82d3df61"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-alg-not-allowed.json",
+        "sha256": "8264f4649802e0d3c77f472ef7eed4660ff10a729b57d35ad44ff9e273e45a8c"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-ambiguous-trust-anchor.json",
+        "sha256": "238449adda3b5eaf9661605536c222521b29b107343f28d7737f5297d2e3aafc"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-ap2-hnp-replay.json",
+        "sha256": "21ab5b9feb2abf416f06b71a3e9569f48854815b5fcfb3f517a363ec72babf41"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-ap2-hnp-stale-mandate.json",
+        "sha256": "aea9595be5683a5381c6333f0e3772cfaff7688e47ee16961db3c1bab71e76ec"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-attenuation-approval-string.json",
+        "sha256": "b5e5b530bf16810bf7717ce8b98fa247f56228a96fcee522e3d446fc5f46b617"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-attenuation-legacy-effective-constraints.json",
+        "sha256": "57956b97ddf872f989e9f100c8af3fcbfdf27d5fc57a849a170d6c3f3ca48156"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-attenuation-malformed-money.json",
+        "sha256": "927e53a1dba8ba85a0899f005cc48a7e84ddcee304abf9a0b4e32a4668e4f854"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-attenuation-max-amount-type-edge.json",
+        "sha256": "7849116190a8cd467961587969b6ba32c8a721559d9fe4e8d3c8216221ecca91"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-attenuation-negative-amount.json",
+        "sha256": "ad91ea49bad839d32fd05e2ce444a68a490cd85f3a589e8cd503de02e4c9c3e4"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-attenuation-unsafe-path.json",
+        "sha256": "e8d6a2812adf90a49d608c3cbdd9857e7515b7d32d13328a6e5c18405c241212"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-audience-mismatch.json",
+        "sha256": "51c8e27971b4d228c0910aa909e5aa59351081608e1bd95633d8c22d20315213"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-digest-mismatch-before-policy.json",
+        "sha256": "23ba27aac2bdcc15897b49456c92778e8409b639bc2c40b4b5baf0e263a6ce78"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-digest-mismatch.json",
+        "sha256": "e21335c1f0ec0c07100ff555fd55799d0c8f05c137153c64426c833dba81b38e"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-empty-evidence-refs.json",
+        "sha256": "e52529444e1277b30e70c1d29716aaa9a4720f3aff60729e73cdfab893a55590"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-evidence-type-not-allowed.json",
+        "sha256": "48edc237ca044585d401a3131e4f48b75af0b5a744cba80be61ef02b3fd54dbb"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-expired-permit.json",
+        "sha256": "f61b36491e2c21cd7c78ec8182b33d1040514973908ffc0237922c2c01547def"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-jose-alg-none.json",
+        "sha256": "c2f141c79d4ef686d9a0652b4f3bed59877139432aa3406aab71fec326fff53b"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-jose-crit-unsupported.json",
+        "sha256": "d62090eaf0f6e1e1df49c4e46f2953703e30a08a1e7fbaeb15a13618328c2893"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-jose-es384-not-allowed.json",
+        "sha256": "37494b540779abf002ec7e6dcea9f1d1f1ada47c3b75c3d64f6147315b2d2541"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-jose-hs256-downgrade.json",
+        "sha256": "ffcd65bed877d547e695c8bc4e8c441b98977bb6ba5dd34957b853e0ffab7cda"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-jose-payload-digest-mismatch.json",
+        "sha256": "fa6e42d373546d63a39370cb4c1706bc5d3ceb29ea74f67a6ea1415850a86e42"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-kid-mismatch.json",
+        "sha256": "3f09c1ec400181ec683ccaba1658b9e3ef525ee9722601c1dce323fa34ed0065"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-mcp-oauth-overscope.json",
+        "sha256": "1be2e8a1f46df29bba118cef6e707a3a655f25f80df7ca49dff55c3c403d58f6"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-mcp-oauth-upstream-denied.json",
+        "sha256": "9920c2e561b82e61f8b8c20d5cc7d24606126d961c62a244eea80f46530f13b7"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-mcp-tool-class-mismatch.json",
+        "sha256": "4d2ba27e409fa9515ad43ac600934c9fdb168092b13bfae3982ae3c0ed7f428d"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-not-yet-valid-permit.json",
+        "sha256": "22425cf7781265a4c4c32e7f3a2a64792e591d79b77ccf923eb9688fe077f128"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-policy-snapshot-mismatch.json",
+        "sha256": "0ce3fe9741d85aafcaf83bb38055595de5c72cd4a891fd9c9e81993d6281d8de"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-replay-detected.json",
+        "sha256": "58aa4fcaa8e2b56ad7a393cc78775da31bfaf10835c9d8b875f9a65f291a3bb4"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-replay-state-replayed.json",
+        "sha256": "075acb320760252dbfa16f99275343f71ef02defcc6c4aafe0122637d22486ce"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-resource-indicator-drift.json",
+        "sha256": "8ac13c3f15ae02eb9027291d7a73242052d5d73cf33a1276069768081ce0e696"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-runtime-mismatch.json",
+        "sha256": "c760d514bc6b5e0160b872c92cfc25ed1a31442d4061f2e7dc89c0f4c34966a8"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-runtime-proof-stale.json",
+        "sha256": "2b35e59ac5c45680de9cb6f017a5a4158bb11d293002a52d688bac9562e4ac87"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-signature-tampered.json",
+        "sha256": "858e40a422e94924b649c05698f868e57d789dd037ee7426488a20014faf5541"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-status-revoked.json",
+        "sha256": "96311d5c70a97a0633c624af47f03d5922d2e9912d47020839349746c1354059"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-status-stale-fail-closed.json",
+        "sha256": "45f8f6ce8590f04347af2a756b316d3405a5a164bc600c2add4b2f15242d7a7c"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-status-stale-just-over-boundary.json",
+        "sha256": "66b720da0ded7dec1033cb2777b7846dc327482b2d83a6c451631c1b2f7baafb"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-token-passthrough-as-authority.json",
+        "sha256": "91eb95c626e7886e49c7f4b8c96752fc86db2cacb1241455db77d8df197836e9"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-trust-anchor-expired.json",
+        "sha256": "6764f764b43505678f638be552d07ce51de8cafd5a559cd46e29b07fced57db3"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-trust-anchor-not-yet-valid.json",
+        "sha256": "d3ea9c512c6d6956100b97467037e26fd1ead33612a64f17f8251ff30ba9fadc"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-trust-anchor-revoked.json",
+        "sha256": "c3dee8e16994b606e37944cd0406a448631413a2f82fefe040ab7d32de918bdd"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/deny-unknown-trust-anchor.json",
+        "sha256": "ed7e8c9ea384b6712d7f9710c04e54065da323998215b88e8944bf52955b47ae"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/interop-ap2-ucp-commerce-evidence.json",
+        "sha256": "1f57e7808422a899aa1b65f5932dd6fd8a542428c8c38b27e9256023f54c933d"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/interop-oap-decision-evidence.json",
+        "sha256": "de6f3333434bce3be27ba6d2eabc18318a38129aee0a02e1a0e60e9ca86dd0fc"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/post-execution-admission-digest-mismatch.json",
+        "sha256": "bde2dc219d8fbd08d9285a06a6494aa6c931b3910282a86ea178684dacb32b7a"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/post-execution-after-admission-expiry.json",
+        "sha256": "6a9ffa385e6b9dcf5af6df8accbcc63ca96d0b627ec7b726d284f051190acd95"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/post-execution-after-deny.json",
+        "sha256": "ab2f2f22940e0d0f1ca3f51cc9ee274fe55f5b8f76f3a5e363bba66432095c27"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/post-execution-allow-effective-constraints-exceeded.json",
+        "sha256": "43d0481a7d1bf62dc7f00744bada2c1870f0a5cb3771fc200df5ff5db312a17d"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/post-execution-ap2-hnp-linkage-success.json",
+        "sha256": "7a60e7340466853c07a141357b78d0f701b0421f2b0066fe68820a52411ad48f"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/post-execution-effective-constraints-aggregate-exceeded.json",
+        "sha256": "a317ccef120d703aefae8efd64a0ca2503ef4b8d20f248ae84151d1dfbf02318"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/post-execution-effective-constraints-exceeded.json",
+        "sha256": "175d9b79fd60b05ba44f6bbe276b738a3e242931112fcf4f434ff91f47d11595"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/post-execution-finish-after-admission-expiry.json",
+        "sha256": "f030a6460cde9e9715891e3f3f4e4b563fbaae66671e183d4297daec7ba51209"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/post-execution-linkage-mismatch.json",
+        "sha256": "a3a92f99f7b45b6fa6d845e6cf2a5dd0c3298c84cc4971746b4bc3e737f8bc3b"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/post-execution-linkage-success.json",
+        "sha256": "f3d71195057b3ce0391d39cbdefbecb33ac7008a1c9851fee386e3f4908be452"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/post-execution-runtime-mismatch.json",
+        "sha256": "5af8da79d1af542616382600280a6bc9866326c1e9e647e43748040ead0224c6"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/post-execution-transaction-mismatch.json",
+        "sha256": "d270a84b06373b0bdfb35eeae6c412a7b0a2ec3cb1c277f917eb46150cb8f51b"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/rcl-005-authorization-params-mismatch.json",
+        "sha256": "f842f8b9bb9b243443874cd8f6ba0407c80a4c2c2e161ae6ab3781112fd84530"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/rcl-006-occurrence-action-linkage-mismatch.json",
+        "sha256": "59bc1b751656eac95fa77fb4a521562e7dc1d76e026c6b65d87eacbe89262aad"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/cases/rcl-008-full-pipeline-acceptance-control.json",
+        "sha256": "34083699e9b4b5ba8ad632e3c99254bf6e530e0f6d1cde40b9a259aa6627f913"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/conformance-case.schema.json",
+        "sha256": "837996aacc30adb469b5f39b22dcd5ff07a4b56a77b67e8402fc537702429ab1"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/external/rcl/rcl-oracle-fixtures.v1.json",
+        "sha256": "4164151383605d9d68230d81cc9ae1dd31eb5cfb3fb1348289abf71ee64773ea"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/attenuation-approval-string.json",
+        "sha256": "73b95c887a9a77cca3fd5461ce70d9d3a73b431b6e7105b12b91ada3f8756938"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/attenuation-legacy-effective-constraints.json",
+        "sha256": "a40b9efaf9bd0dbd642bdd2f6865b2ad2e9f6f1529abc9623cd7fc098d89596d"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/attenuation-malformed-money.json",
+        "sha256": "9b81298bf42dadb15964db312bb6529c05f212a88539858d34a6a972792a55df"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/attenuation-max-amount-type-edge.json",
+        "sha256": "3481bf845de28733de6d975782f933dc7c43fbdf0603c0eaa0b91883bf816052"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/attenuation-negative-amount.json",
+        "sha256": "8b6b2373653283213d9933a3d88b5368e14988bedf8c0298d1e141fbdc67d020"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/attenuation-unsafe-path.json",
+        "sha256": "d7d8f74ea8b377692c73ca96140bd1261e247969df70b8e8735763b9fd1cd073"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/empty-evidence-refs-admission-request.json",
+        "sha256": "7b0f32dc300f82564863f355058eb79ae53e99bae704067adae65a7cbb8d8afc"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/replay-consumed-context.json",
+        "sha256": "a79e527cef82e84ba918128b96a9a85d8284a45ffc3b2fa7b78a07fc862d9c87"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/replay-replayed-context.json",
+        "sha256": "d7252a584395319331a9d51eb8bc3191a481285c6eae65c4ed1e91989e9b5fbc"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/replay-unused-context.json",
+        "sha256": "8cba4197a4210aa76407c1a0f29836e8cb2ab553bc4c700b426c73199f354eb6"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/runtime-binding-match-context.json",
+        "sha256": "6d2ce8f39cf1ebc56a893f01abb83f586cc9a851ac2cdb854064d2b391e361db"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/runtime-binding-mismatch-context.json",
+        "sha256": "a7e503305bf0e954fff018fbb15ca9c4369fe69406b95975f7945ea21f25125d"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/runtime-proof-stale-context.json",
+        "sha256": "ac6f623b99c398b459cf6f4e2ca2c9c59e1dac4a7fa8de398578dc4205df099d"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/status-boundary-context.json",
+        "sha256": "a90c4d2142135eb9a901a444660f08ea69cc900edab192141de4c1f4320a4a1c"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/status-fresh-context.json",
+        "sha256": "4967a00c0be2429cd16b2f5152c278d970efdf2f17c78bbb8fa5442f64a47f1c"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/status-stale-context.json",
+        "sha256": "32464bac060eac870231d0ac4371327836c26a331ab48a57d85f355f4de30ba8"
+      },
+      {
+        "path": "conformance/al2-vate-v0.3/fixtures/status-stale-just-over-boundary-context.json",
+        "sha256": "c1012bedf2d6e0c8d7f0584c239dacd2c7e1ab5d98ea845573f630148cccdf31"
+      },
+      {
+        "path": "examples/a2a/agent-card-v1-vate-extension.example.json",
+        "sha256": "b38046a2784da8dc2b0218fee7b8a9c72f139174c888eb09468638d810c9e9a8"
+      },
+      {
+        "path": "examples/a2a/metadata-admission-issued.json",
+        "sha256": "41d0fc3f5672d45f10581743c4c21915b1f42c344d4abf1dda018065e18268b9"
+      },
+      {
+        "path": "examples/a2a/metadata-post-execution-issued.json",
+        "sha256": "09037a4f6b0e3c859a549c9b382abadd06cdce56d0830bcdbdf7266bbab11e1e"
+      },
+      {
+        "path": "examples/admission-request-runtime-proof-stale.example.json",
+        "sha256": "db6813f24fd3dfe2973e9a43d3806957a27415738c97ddb77f0d6b06c7fbe718"
+      },
+      {
+        "path": "examples/admission-request.example.json",
+        "sha256": "979cd16837993c08574c848d7d63302c8aa57fbc7793fc92d31bb733995cf8ae"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-overrun.example.json",
+        "sha256": "d36f54d452131a0280eec04dc85b6132d70dbd35a7d378e14c5b89a39c9d2351"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-replay.example.json",
+        "sha256": "e39a66fa10d723442b888f1019eb741015d7976f5bdcb98c9d8951e738c3b197"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-stale.example.json",
+        "sha256": "3448d1900326b458f630e7a53f33e9e59d9c9cdb7808ba684a5a64298f866049"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-valid.example.json",
+        "sha256": "22abc3d0905eee01449327a56a384359c0701e753719bfc2b5cb500da62d0e72"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-overrun.example.json",
+        "sha256": "08803e26794f3513dc108f3f03c238e9acb17e7a23e1b4bdd62730cc6973c8f6"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-replay.example.json",
+        "sha256": "cc6b04954436a3b15502476a377e109b1065c066d4cc370bbd5760475e6a1036"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-stale.example.json",
+        "sha256": "535294eaa7d3c6d0ae3844eb31314ab60657267d2889ba41b85ceaa787dcdff6"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-valid.example.json",
+        "sha256": "60ab3343833cb5840ed8070cc55b55dd715c72f04284a542c42c113290b2eae9"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-overrun.example.json",
+        "sha256": "6d0bc2cb8ad2f33841a17ea4393c99acfd04dfcfa25f3be697dc4b115726c47b"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-replay.example.json",
+        "sha256": "fcb76c70a382acdfe94fa65eb767a6c47011454bfda0d33b4124e18ade5e94ac"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-stale.example.json",
+        "sha256": "7950cf298f5ced91a1f169fbb72bbe51057c80c5df5a8495b9e3ce95d5f707ce"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-valid.example.json",
+        "sha256": "7f57ef2203fb04dba7a1365daf4359a77526eb497effedc84b100854af3fa165"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-post-execution-receipt-ap2-hnp-overrun.example.json",
+        "sha256": "eb9ac1a9ab095e9b6a3b98a174322e22ad4256cdc90a7fa43364d97d95aa0c69"
+      },
+      {
+        "path": "examples/interop/ap2-human-not-present-to-vate/vate-post-execution-receipt-ap2-hnp-valid.example.json",
+        "sha256": "b8270db155bdf2cb3063bede1d22bdf2c26f03a20cd68f5b1a591fae0db0bc72"
+      },
+      {
+        "path": "examples/interop/ap2-ucp-to-vate/vate-admission-receipt-from-ap2-ucp.example.json",
+        "sha256": "2e3ae3bd54cf5343d6a4b5a4e9940de6041283b35a22f810a8b16a523826b4ef"
+      },
+      {
+        "path": "examples/interop/ap2-ucp-to-vate/vate-admission-request-from-ap2-ucp.example.json",
+        "sha256": "ed4444bfcfea5930d88803cd926edbc1dadb91a066c902df04e0c49aa2d83ae0"
+      },
+      {
+        "path": "examples/interop/oap-to-vate/vate-admission-receipt-from-oap.example.json",
+        "sha256": "c383e3e2cf7c30189a4886ca29f21dfd7f0e8543bb008350b554d39c603b9c37"
+      },
+      {
+        "path": "examples/interop/oap-to-vate/vate-admission-request-from-oap.example.json",
+        "sha256": "94af2a2c0196a0abf2cb590b77bb584f8d667df7b2f2be9a0fc35f689742c941"
+      },
+      {
+        "path": "examples/interop/rcl-to-vate/action-other.derived-vate-projection.json",
+        "sha256": "2d6a7160d8362150491a9c6bfb7c5d4e1847140438a3a49f55bbafc4f31a2ff0"
+      },
+      {
+        "path": "examples/interop/rcl-to-vate/action-params.derived-vate-projection.json",
+        "sha256": "6cc82e38bb7626cc24b5b3aa75a823f03e275a988819f94d02b886fb1f1808b1"
+      },
+      {
+        "path": "examples/interop/rcl-to-vate/action-transfer.derived-vate-projection.json",
+        "sha256": "956c135e7eff7533c61e2f84c0a23c02251ecc9b246abe5258c4d50780ddc313"
+      },
+      {
+        "path": "examples/interop/rcl-to-vate/rcl-005-006-008-projection-map.v1.json",
+        "sha256": "c2cf0ee55bbbc40393d8598fbe2d65558a19856f8a8e63c3628951d39e4e238c"
+      },
+      {
+        "path": "examples/interop/rcl-to-vate/request-basis.derived-vate-projection.json",
+        "sha256": "de01ed9b22b923f3a76f681a2f23b54085613b2b80f24c66529c49242a563974"
+      },
+      {
+        "path": "examples/interop/rcl-to-vate/result-basis-settled.derived-vate-projection.json",
+        "sha256": "3b86398b8cef2e25fb5c4fd6201f6596e8d00a81418142f2ca797c022a41cfa3"
+      },
+      {
+        "path": "examples/interop/rcl-to-vate/vate-admission-receipt-rcl-005.derived-vate-projection.json",
+        "sha256": "f5e12fb8884230dc40a37b272cc49c42c48253bbf00bb864692f00c7d37a7355"
+      },
+      {
+        "path": "examples/interop/rcl-to-vate/vate-admission-receipt-rcl-006-008.derived-vate-projection.json",
+        "sha256": "dea518ceb00a59d43e41f3eb7d9194661a6588d5956ec06ea0e9d6e9afef8733"
+      },
+      {
+        "path": "examples/interop/rcl-to-vate/vate-admission-request-rcl-005-006-008.derived-vate-projection.json",
+        "sha256": "4aaf702493980de69e8bf4f7fdc58afbecb6e46c3c88bfb8659ab8027c296181"
+      },
+      {
+        "path": "examples/interop/rcl-to-vate/vate-post-execution-receipt-rcl-006.derived-vate-projection.json",
+        "sha256": "d26a402d6c5c581842d42557421d3ff8fd44dde1747ad5307dd89d6df02106b8"
+      },
+      {
+        "path": "examples/interop/rcl-to-vate/vate-post-execution-receipt-rcl-008.derived-vate-projection.json",
+        "sha256": "e42bf114245eb7bd01b3644fca64f9639a823a42c8163fa0239252756560be9a"
+      },
+      {
+        "path": "examples/jose/detached-runtime-attestation-payload.json",
+        "sha256": "6f1dbae1c2dd871de2d6b7f25418469adcfdf6430fb492014c0f023b13173c20"
+      },
+      {
+        "path": "examples/jose/jose-detached-a2a-agent-card.example.json",
+        "sha256": "1f8278484961f780805748ba7f5cb8233a42e62e34b6c0c233ac84531762ea8f"
+      },
+      {
+        "path": "examples/jose/jose-detached-runtime-attestation-alg-none.example.json",
+        "sha256": "28b612a8dc66e287535bc2b88e6d73a8b77ebe4a5389b377cb8df9c8e4651995"
+      },
+      {
+        "path": "examples/jose/jose-detached-runtime-attestation-crit-unsupported.example.json",
+        "sha256": "867b873a4ecd5275a24257392b591a5e6008692707f091fec4b520ba8ca4c3f6"
+      },
+      {
+        "path": "examples/jose/jose-detached-runtime-attestation-es384-not-allowed.example.json",
+        "sha256": "d5744746e782a1b37ca344b93592c2bfd6dc6cdf892c003ca782f39b670d6b3a"
+      },
+      {
+        "path": "examples/jose/jose-detached-runtime-attestation-hs256-downgrade.example.json",
+        "sha256": "d11c5f76b3892698fa8942ec0da1f31dab10a01cf1d063e493cdc16142173c2e"
+      },
+      {
+        "path": "examples/jose/jose-detached-runtime-attestation-payload-digest-mismatch.example.json",
+        "sha256": "23fdcf8176bbb99ce58e6312163132bd5eff816547e8f955c96e2e287305755f"
+      },
+      {
+        "path": "examples/jose/jose-detached-runtime-attestation-valid.example.json",
+        "sha256": "25d61756d37ee5a651747742b0141b127c870a7cb3d2771d53fdb951db0f156c"
+      },
+      {
+        "path": "examples/policies/al2-repo-merge-policy-snapshot.example.json",
+        "sha256": "f75428eb69168b9bd061251945bb5ceb4819c794486d63d5175da7a35e1f4f53"
+      },
+      {
+        "path": "examples/policies/merchant-purchase-al2-policy-snapshot.example.json",
+        "sha256": "d74c76ae064e614068238faefcebd6b08c6f2275c18807f5ceb10e8f8d7fa1b2"
+      },
+      {
+        "path": "examples/receipts/admission-allow-a2a-signed-agent-card.example.json",
+        "sha256": "b557fce66a40a3036a5232a2953bd5df0f394e3ea40092d80f967d86026a93c8"
+      },
+      {
+        "path": "examples/receipts/admission-allow-mcp-oauth-bound.example.json",
+        "sha256": "8855d35a43aeb1cd6e0211e974587999f5d176d2a8b4fb20b968c20b311ba920"
+      },
+      {
+        "path": "examples/receipts/admission-allow-mcp-oauth-resource-indicator-aligned.example.json",
+        "sha256": "bc55a0c77341e2fe7c85446279777581237f08b155d557df99aefeb6804a89e8"
+      },
+      {
+        "path": "examples/receipts/admission-allow-mcp-oauth-token-authority-bound.example.json",
+        "sha256": "dadd219fbb569df6ab8c585bbe14a69afc14128b89b64e6ab0947667cbfee05b"
+      },
+      {
+        "path": "examples/receipts/admission-allow-mcp-oauth-tool-class-aligned.example.json",
+        "sha256": "336acea254aa549b54085906964611ae01799ad144efe68b09ce310a5f9a20ae"
+      },
+      {
+        "path": "examples/receipts/admission-allow-policy-snapshot.example.json",
+        "sha256": "0a67a7d778c3ec8f87dfce648a631f92606cb31d178741b395207436e9a98930"
+      },
+      {
+        "path": "examples/receipts/admission-allow-replay-unused.example.json",
+        "sha256": "41e96d8d5779076beaddb1f47612821cfa6a0ffd4b2ad44a45fde35431930420"
+      },
+      {
+        "path": "examples/receipts/admission-allow-status-boundary.example.json",
+        "sha256": "5805759bb6beb10cfae6719781acaf3cc729af6e80a136f460c3a0b89ceea286"
+      },
+      {
+        "path": "examples/receipts/admission-allow-status-fresh.example.json",
+        "sha256": "c461cf51c1569d6d7876bdbc6b5e43284dad992484abc7c038e132ed4408af3e"
+      },
+      {
+        "path": "examples/receipts/admission-allow.example.json",
+        "sha256": "ddf27a01edcbaf6130470bc52309ee757c9c5a2b39f300444c2b767256ee5015"
+      },
+      {
+        "path": "examples/receipts/admission-attenuate-max-amount.example.json",
+        "sha256": "3fc16f29508874c0ff813e52eb069b39b49a2ad544d5418ecc26fc7f2c68d580"
+      },
+      {
+        "path": "examples/receipts/admission-attenuate-requires-new-permit.example.json",
+        "sha256": "f453881b03e7029be60e55474d3df29f52cf6dae57b6dbbf6cb0931c4c6532a3"
+      },
+      {
+        "path": "examples/receipts/admission-attenuate-target-scope.example.json",
+        "sha256": "86c6d93b0b1eda7d2a30e1de7df8e4a28dcdd2348927b438f292c4260ad9aab5"
+      },
+      {
+        "path": "examples/receipts/admission-deny-alg-not-allowed.example.json",
+        "sha256": "a6f53337b763ea52b0b109ed540e2de803adfe57190e8490b0949624cc0518db"
+      },
+      {
+        "path": "examples/receipts/admission-deny-ambiguous-trust-anchor.example.json",
+        "sha256": "53cfea9e7fef658836c238b232fa1651f41dc7bedc2e2067b43d549e8df2b76e"
+      },
+      {
+        "path": "examples/receipts/admission-deny-attenuation-approval-string.example.json",
+        "sha256": "621d8bfb4dc8f94d9cd3eefde2a7f068a9fad2018937209fc31c97ef90f31a53"
+      },
+      {
+        "path": "examples/receipts/admission-deny-attenuation-legacy-effective-constraints.example.json",
+        "sha256": "3dd0dc03028e0e389071aff4c3ac644b55ebbcc3b579739c4c290177dabd2f65"
+      },
+      {
+        "path": "examples/receipts/admission-deny-attenuation-malformed-money.example.json",
+        "sha256": "61532c44a46e97d84da3c0e011356569ab0d9040e6ba667e6f46a04e7f7bacaf"
+      },
+      {
+        "path": "examples/receipts/admission-deny-attenuation-max-amount-type-edge.example.json",
+        "sha256": "6301ebae36a4949f3e95e93cb110ea55a2710738c8b96f09d2d662eb46418674"
+      },
+      {
+        "path": "examples/receipts/admission-deny-attenuation-negative-amount.example.json",
+        "sha256": "7686b169c13fcc8f787d3fe012877e7a062b7b4ef4b145bc43fe88384ee78b5d"
+      },
+      {
+        "path": "examples/receipts/admission-deny-attenuation-unsafe-path.example.json",
+        "sha256": "f3488a4a50971e40163cd5277f1a11eb660045a846665ba02728a077f8ea5882"
+      },
+      {
+        "path": "examples/receipts/admission-deny-audience-mismatch.example.json",
+        "sha256": "d7b8089e3245c4bd78dbafc3f27218201782e81be39731cfd62ba437fbc86dcf"
+      },
+      {
+        "path": "examples/receipts/admission-deny-digest-mismatch-before-policy.example.json",
+        "sha256": "066a5b1a95abed928777cfb49f1fc56d68d60e9e6d896dff4726809322f785af"
+      },
+      {
+        "path": "examples/receipts/admission-deny-digest-mismatch.example.json",
+        "sha256": "02a70868d3ca8739369e69708ee34b8870ca807932a37deee26b064bc9c1f4d9"
+      },
+      {
+        "path": "examples/receipts/admission-deny-empty-evidence-refs.example.json",
+        "sha256": "2790c2bfa8aa5e4d699f67219411ff9f7c471dbe88830f71bcaea5acb416fd4b"
+      },
+      {
+        "path": "examples/receipts/admission-deny-evidence-type-not-allowed.example.json",
+        "sha256": "1d25474f6d132d317a661084097ef80438378c0a4ef90f1224e3622eaa611731"
+      },
+      {
+        "path": "examples/receipts/admission-deny-expired-permit.example.json",
+        "sha256": "e5c71daa1b3017df6ef6c15334ecfcf3b6435c53e4698b6b385d1862650b017a"
+      },
+      {
+        "path": "examples/receipts/admission-deny-jose-alg-none.example.json",
+        "sha256": "139b99a51ee72c8c950417115968793a5f9fb54489912c5f60e53ebbfc6191d0"
+      },
+      {
+        "path": "examples/receipts/admission-deny-jose-crit-unsupported.example.json",
+        "sha256": "79a0225d57baef0eb2062be786913e43061a401c4b69334ab14f1c6ad2dc9007"
+      },
+      {
+        "path": "examples/receipts/admission-deny-jose-es384-not-allowed.example.json",
+        "sha256": "e85b83b7c685c74856b3edcc3f57a9c64b9732eea6df51855caa69302be66e9c"
+      },
+      {
+        "path": "examples/receipts/admission-deny-jose-hs256-downgrade.example.json",
+        "sha256": "d43fdc09d18b961f1556167b847f6df143d707368446f1854e1b800fe1052723"
+      },
+      {
+        "path": "examples/receipts/admission-deny-jose-payload-digest-mismatch.example.json",
+        "sha256": "37e425aca82fd5e677a59689f2dd14bff743b256820d679f1009de44eb80aecc"
+      },
+      {
+        "path": "examples/receipts/admission-deny-kid-mismatch.example.json",
+        "sha256": "f2dc291102ed75a36ca876ed0f2da640974a3bf11eb928df15c978702256b0d1"
+      },
+      {
+        "path": "examples/receipts/admission-deny-mcp-oauth-overscope.example.json",
+        "sha256": "54e64169886955879c5a035eeda124b32ca193d935c5f3a214514b38dc98a7de"
+      },
+      {
+        "path": "examples/receipts/admission-deny-mcp-oauth-upstream-denied.example.json",
+        "sha256": "d69fd7d707ff4af7ad0b52706830bcc413ac08cd9fe9ebb93b13e427eca15818"
+      },
+      {
+        "path": "examples/receipts/admission-deny-mcp-tool-class-mismatch.example.json",
+        "sha256": "f1633a4fb4140544a38a7f8f22255ba5f576f7d42e55c1a7eecd5410a40c7cb5"
+      },
+      {
+        "path": "examples/receipts/admission-deny-not-yet-valid-permit.example.json",
+        "sha256": "0e8f1a34ff6829fc79e01974abdcb97cb054f7d1df1ee53f1653251bd06b47c1"
+      },
+      {
+        "path": "examples/receipts/admission-deny-policy-snapshot-mismatch.example.json",
+        "sha256": "cd81157bc6e1499957467de463274d6f89171fdd9edd0ade37e6808ba96f3658"
+      },
+      {
+        "path": "examples/receipts/admission-deny-replay-detected.example.json",
+        "sha256": "296159be0434aa5a966b1a81fc90076f7deb27abf75a11a38e5953dbf4ca3fdd"
+      },
+      {
+        "path": "examples/receipts/admission-deny-replay-replayed.example.json",
+        "sha256": "adabc11f449b84470d9e5ed8172abc9fc4a0aedab8df2c2609856bc112b1c4da"
+      },
+      {
+        "path": "examples/receipts/admission-deny-resource-indicator-drift.example.json",
+        "sha256": "cc5e1cf1e992c728a804e29746fb4ddd3dd9fc4f0ecf4d39aa11c3ff0f012acc"
+      },
+      {
+        "path": "examples/receipts/admission-deny-runtime-mismatch.example.json",
+        "sha256": "8675ed9bd118e0306b224d3822ecd5497c9c55a59ba474f91682ec38a490c40c"
+      },
+      {
+        "path": "examples/receipts/admission-deny-runtime-proof-stale.example.json",
+        "sha256": "cabdc49f806d25115f1c8c486e145c43b6abb62726552c4cd676f3f102b4c043"
+      },
+      {
+        "path": "examples/receipts/admission-deny-signature-tampered.example.json",
+        "sha256": "a83ee881c642ea7747e575508f2bacaf1cfafbb173f561cc744dde4f85aa6bf8"
+      },
+      {
+        "path": "examples/receipts/admission-deny-status-revoked.example.json",
+        "sha256": "3e2257b1f59a5cc2401bb1820a627f0353e5450f91a2498eab324945360af246"
+      },
+      {
+        "path": "examples/receipts/admission-deny-status-stale-just-over-boundary.example.json",
+        "sha256": "fb8a9352b8e86fb386b36f272ebee09c05b72b686806e535808f36192eea6166"
+      },
+      {
+        "path": "examples/receipts/admission-deny-status-stale.example.json",
+        "sha256": "c1080250a5b99259d579b58349444e86345e17271d851c324d6ec8f63990996a"
+      },
+      {
+        "path": "examples/receipts/admission-deny-token-passthrough-as-authority.example.json",
+        "sha256": "7d09453e553a70f41685eae83dcd2ecbd13bd15b849904c72298f9ca019dd5f3"
+      },
+      {
+        "path": "examples/receipts/admission-deny-trust-anchor-expired.example.json",
+        "sha256": "2f08e4b7181747a9aa40275236f5743fef0fcd64aca4d222e8e884303d0fce62"
+      },
+      {
+        "path": "examples/receipts/admission-deny-trust-anchor-not-yet-valid.example.json",
+        "sha256": "cfb833d1ad84e8727604985f43b145d21d88adf0d544c23cb073f0fe0cf9c90b"
+      },
+      {
+        "path": "examples/receipts/admission-deny-trust-anchor-revoked.example.json",
+        "sha256": "4c01041678b833ee99b61971b78dfd3cf8506e1009845a0643d1000cd52331e7"
+      },
+      {
+        "path": "examples/receipts/admission-deny-unknown-trust-anchor.example.json",
+        "sha256": "c1e3ec917dc34b7a319161b4a0661120c1e2823c7530b3ecd3d5550ad29601d9"
+      },
+      {
+        "path": "examples/receipts/post-execution-admission-digest-mismatch.example.json",
+        "sha256": "4157dee0d8ff4fa3c656771d846f75a99fb2b4c52ca602937acb80106539d177"
+      },
+      {
+        "path": "examples/receipts/post-execution-after-admission-expiry.example.json",
+        "sha256": "40ebd3c9d297a6d32d9643fc52772c18fe4dde79744192d960c00a33502ecf34"
+      },
+      {
+        "path": "examples/receipts/post-execution-after-deny.example.json",
+        "sha256": "eb216c238c57a9c599bbc7bf8db4604f7d075aa9e51fb3130874b814d37f5d87"
+      },
+      {
+        "path": "examples/receipts/post-execution-effective-constraints-aggregate-exceeded.example.json",
+        "sha256": "1d97365947f0027c0ed1c779bf213c8b019491ad20f4ccf17e0364f8931cfe00"
+      },
+      {
+        "path": "examples/receipts/post-execution-effective-constraints-exceeded.example.json",
+        "sha256": "af8a3ae55d0466d792f83cb3cd29a2434a7bd635c432fe0fb585ec462523cf5f"
+      },
+      {
+        "path": "examples/receipts/post-execution-finish-after-admission-expiry.example.json",
+        "sha256": "c86706166f28a2d0684d702d30a1b6fee63a249ca2254f40415fbf163954fa94"
+      },
+      {
+        "path": "examples/receipts/post-execution-linkage-mismatch.example.json",
+        "sha256": "5303fa3dd273d76c213dea72ac106956282bb3269166577c2380ff43f3ad55d9"
+      },
+      {
+        "path": "examples/receipts/post-execution-runtime-mismatch.example.json",
+        "sha256": "0f900192431d18f2534aa8f8610f6025ed85e66141d927745381b902b4b73336"
+      },
+      {
+        "path": "examples/receipts/post-execution-success.example.json",
+        "sha256": "258b5995711d81d6f8d987f159e845e164ee37ae8896b9bcd16b91b725ee111e"
+      },
+      {
+        "path": "examples/receipts/post-execution-transaction-mismatch.example.json",
+        "sha256": "f492dda77565e3acafce58e70b125b6e8920417babc3f727deb547756f94e0c1"
+      },
+      {
+        "path": "examples/transport/mcp-oauth-admission-request.example.json",
+        "sha256": "933d2fc8fd1072870919acb3e52ac446109ee4f44c88d2556d9152e21e87dd53"
+      },
+      {
+        "path": "examples/transport/mcp-oauth-overscope-admission-request.example.json",
+        "sha256": "29d9a7b6224d6870f496e007e2871941b70830d07962cc68b7e0b0fe5861b6c8"
+      },
+      {
+        "path": "examples/transport/mcp-oauth-resource-indicator-aligned-admission-request.example.json",
+        "sha256": "1034785be94e959499f988d84a4fb76babee9716d40e1398ee05ddf5ef1276ae"
+      },
+      {
+        "path": "examples/transport/mcp-oauth-resource-indicator-drift-admission-request.example.json",
+        "sha256": "4b9f8cd4071253d884a7449259172b5c74bb511184bbe50d382164b9460a22ad"
+      },
+      {
+        "path": "examples/transport/mcp-oauth-token-authority-bound-admission-request.example.json",
+        "sha256": "99d76adef054ca6d4c2ad9bc2fa88371444cdbfddac2f911e95cfbd25d119388"
+      },
+      {
+        "path": "examples/transport/mcp-oauth-token-passthrough-admission-request.example.json",
+        "sha256": "7d88fbcbd27a466dce9a90cafe8a6bec37dbd5ca3fad9dd09bf6d3adac6a2cd8"
+      },
+      {
+        "path": "examples/transport/mcp-oauth-tool-class-aligned-admission-request.example.json",
+        "sha256": "af3984d52c271b87f97206f4f4dc13e2ec208a7e28f3cefe4c769def1c5aef72"
+      },
+      {
+        "path": "examples/transport/mcp-oauth-tool-class-mismatch-admission-request.example.json",
+        "sha256": "4b22d298240d8ed2720bf900dda494ddf05ff355c537b96684d9a829e09fcaaf"
+      },
+      {
+        "path": "examples/transport/mcp-oauth-upstream-denied-admission-request.example.json",
+        "sha256": "9b579348016727cace3853773fe5cac4201469a185e220f39d1c4d8b7ce5433a"
+      },
+      {
+        "path": "examples/trust-bundle-agent-card.example.json",
+        "sha256": "52eb6aa22275b514446904bac885723303d20ef264d2fdffcf900b1414c6c6bf"
+      },
+      {
+        "path": "examples/trust-bundle-ambiguous.example.json",
+        "sha256": "a7fa6a2d307c78128e98113cd0e4961fa0132a6d1c4a8b0a6a17c4b17268b38f"
+      },
+      {
+        "path": "examples/trust-bundle.example.json",
+        "sha256": "48094e17ffa90464a626edc01ed1eef37e48acfa95659d26460f1ff1926b7e9c"
+      }
+    ],
+    "name": "al2-vate-v0.3",
+    "root": "conformance/al2-vate-v0.3"
+  },
+  "generated_at": "2026-08-30T01:42:24Z",
+  "implementation": {
+    "commit": "1ee413652f11e720a0da7ffb318e91d87a447d4c",
+    "environment": "candidate-owned mapping/projection from 1ee413652f11e720a0da7ffb318e91d87a447d4c; frozen Pulse verifyConformanceCase at e06a6cbfe3ddb965c8fc70f50838f5014ec2038e; operator-selected python3 runtime Python 3.14.4",
+    "language": "Python standard library",
+    "name": "Pulse AP2-x402 external VATE attempt",
+    "source": "https://github.com/shibutatsu/pulse-ap2-x402-conformance.git",
+    "type": "external-verifier-projection",
+    "version": "vate-pulse-mapper/0.2"
+  },
+  "limitations": [
+    "This report records one implementation run against one corpus snapshot.",
+    "Passing cases do not imply production readiness or endorsement."
+  ],
+  "profile": "VATE-AL2-Verifier-Admission-v0.3",
+  "publication": {
+    "uri": "vate-implementation-report.json"
+  },
+  "status": "fail",
+  "summary": {
+    "failed": 73,
+    "passed": 2,
+    "skipped": 72,
+    "total": 75
+  },
+  "version": "vate-implementation-report-2026-07"
+}
