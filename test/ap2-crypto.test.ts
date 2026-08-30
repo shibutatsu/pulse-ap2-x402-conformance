@@ -150,6 +150,28 @@ describe("verifyAp2MandateChainAndReceipt", () => {
     await expect(verifyAp2MandateChainAndReceipt(artifact.input)).resolves.toBeDefined();
   });
 
+  it("rejects a negative case evaluation time", async () => {
+    const artifact = await createArtifact();
+    artifact.input.nowEpochSeconds = -1;
+
+    await expectVerificationFailure(artifact.input, "input", "CHAIN_MALFORMED");
+  });
+
+  it("accepts zero as a case evaluation time", async () => {
+    const artifact = await createArtifact({
+      leafIat: 0,
+      mutateOpenMandate: (mandate) => {
+        mandate.iat = 0;
+      },
+      mutateClosedMandate: (mandate) => {
+        mandate.iat = 0;
+      },
+    });
+    artifact.input.nowEpochSeconds = 0;
+
+    await expect(verifyAp2MandateChainAndReceipt(artifact.input)).resolves.toBeDefined();
+  });
+
   it("rejects a root typ that identifies a terminal KB-SD-JWT", async () => {
     const artifact = await createArtifact({ rootTyp: "kb+sd-jwt" });
     await expectVerificationFailure(artifact.input, "root-header", "TYP_INVALID");
