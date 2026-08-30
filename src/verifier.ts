@@ -389,6 +389,7 @@ export async function verifyConformanceCase(input: unknown): Promise<Conformance
       trustedReceiptPublicJwk: evidence.trustedReceiptPublicJwk,
       expectedAudience: evidence.expectedAudience,
       expectedNonce: evidence.expectedNonce,
+      nowEpochSeconds,
       verifiedAtEpochSeconds: verification.verifiedAtEpochSeconds,
       clockSkewSeconds: verification.clockSkewSeconds,
       openCheckoutReference: verification.openCheckoutReference,
@@ -459,8 +460,8 @@ export async function verifyConformanceCase(input: unknown): Promise<Conformance
   }
   const ap2ClockSkew = verification.clockSkewSeconds;
   if (
-    open.iat > verification.verifiedAtEpochSeconds + ap2ClockSkew ||
-    closed.iat > verification.verifiedAtEpochSeconds + ap2ClockSkew ||
+    open.iat > nowEpochSeconds + ap2ClockSkew ||
+    closed.iat > nowEpochSeconds + ap2ClockSkew ||
     open.exp < verification.verifiedAtEpochSeconds - ap2ClockSkew ||
     closed.exp < verification.verifiedAtEpochSeconds - ap2ClockSkew
   ) {
@@ -468,7 +469,7 @@ export async function verifyConformanceCase(input: unknown): Promise<Conformance
       failures,
       "AP2_MANDATE_TIME_INVALID",
       "ap2.verification",
-      "An AP2 mandate is expired or issued in the future for the recorded verification context.",
+      "An AP2 mandate was issued after the case evaluation context or expired before the recorded verification context.",
     );
   }
   if (closedMandateClaimsHash !== verification.closedMandateClaimsHash) {
@@ -632,6 +633,17 @@ export async function verifyConformanceCase(input: unknown): Promise<Conformance
       "x402.payload.extensions",
       "Unknown x402 payload extensions are not evaluated by this profile.",
     );
+  }
+  for (const field of ["extensions", "extra"] as const) {
+    const value = settlement[field];
+    if (value && Object.keys(value).length > 0) {
+      addFailure(
+        failures,
+        "X402_UNSUPPORTED_EXTENSION",
+        `x402.settlement.${field}`,
+        `Unknown x402 settlement ${field} values are not evaluated by this profile.`,
+      );
+    }
   }
 
   compareScalar(

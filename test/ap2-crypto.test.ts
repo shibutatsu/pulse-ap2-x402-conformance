@@ -99,6 +99,57 @@ describe("verifyAp2MandateChainAndReceipt", () => {
     await expectVerificationFailure(artifact.input, "leaf-claims", "IAT_INVALID");
   });
 
+  it.each([
+    [
+      "root token envelope",
+      {
+        mutateRootEnvelope: (envelope: Record<string, unknown>) => {
+          envelope.iat = NOW + 31;
+        },
+      },
+      "root-claims",
+    ],
+    [
+      "open mandate",
+      {
+        mutateOpenMandate: (mandate: Record<string, unknown>) => {
+          mandate.iat = NOW + 31;
+        },
+      },
+      "root-claims",
+    ],
+    ["terminal token envelope", { leafIat: NOW + 31 }, "leaf-claims"],
+    [
+      "closed mandate",
+      {
+        mutateClosedMandate: (mandate: Record<string, unknown>) => {
+          mandate.iat = NOW + 31;
+        },
+      },
+      "leaf-claims",
+    ],
+  ] as const)(
+    "rejects a %s issued after the case evaluation time",
+    async (_label, options, stage) => {
+      const artifact = await createArtifact(options);
+      artifact.input.verifiedAtEpochSeconds = NOW + 60;
+
+      await expectVerificationFailure(artifact.input, stage, "IAT_INVALID");
+    },
+  );
+
+  it("checks receipt issuance at the recorded verification time", async () => {
+    const artifact = await createArtifact({
+      leafIat: NOW - 30,
+      mutateClosedMandate: (mandate) => {
+        mandate.iat = NOW - 30;
+      },
+    });
+    artifact.input.nowEpochSeconds = NOW - 60;
+
+    await expect(verifyAp2MandateChainAndReceipt(artifact.input)).resolves.toBeDefined();
+  });
+
   it("rejects a root typ that identifies a terminal KB-SD-JWT", async () => {
     const artifact = await createArtifact({ rootTyp: "kb+sd-jwt" });
     await expectVerificationFailure(artifact.input, "root-header", "TYP_INVALID");
@@ -514,6 +565,7 @@ async function createArtifact(options: ArtifactOptions = {}): Promise<TestArtifa
       trustedReceiptPublicJwk: publicJwk(RECEIPT_PRIVATE_JWK),
       expectedAudience: "credential-provider",
       expectedNonce: "verifier-nonce-1",
+      nowEpochSeconds: NOW,
       verifiedAtEpochSeconds: NOW,
       clockSkewSeconds: 30,
       openCheckoutReference: OPEN_CHECKOUT_REFERENCE,
