@@ -1,5 +1,5 @@
 {
-  "version": "vate-pulse-mapping-worksheet-0.4",
+  "version": "vate-pulse-mapping-worksheet-0.5",
   "status": "completed",
   "ownership": {
     "final_mapping_source": "candidate_owned",
@@ -761,13 +761,13 @@
   "generated_field_inventory": [
     {
       "pulse_destination": "/ap2/closedMandate/execution_date",
-      "source_document": "worksheet",
-      "source_json_pointer": "/scaffolding_inputs/ap2_generation_profile/execution_date_transform",
+      "source_document": "vate_admission_request",
+      "source_json_pointer": "/issued_at",
       "dependencies": [
-        "scaffold:ap2-generation-profile"
+        "mapping_row:evaluation-time"
       ],
-      "transform": "Apply the candidate-owned execution-date rule within the fixed VATE window.",
-      "provenance": "non-vate-scaffolding",
+      "transform": "Copy the exact VATE admission request issued_at RFC 3339 timestamp without modification.",
+      "provenance": "vate-derived",
       "ownership": "candidate_owned"
     },
     {
@@ -805,24 +805,24 @@
     },
     {
       "pulse_destination": "/ap2/closedMandate/payee/name",
-      "source_document": "worksheet",
-      "source_json_pointer": "/scaffolding_inputs/merchant_profile/name_transform",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/merchant",
       "dependencies": [
-        "scaffold:merchant-profile"
+        "mapping_row:merchant-payee-id"
       ],
-      "transform": "Apply the candidate-owned display-name transform to the mapped merchant identity.",
-      "provenance": "non-vate-scaffolding",
+      "transform": "Copy the exact validated VATE merchant string.",
+      "provenance": "vate-derived",
       "ownership": "candidate_owned"
     },
     {
       "pulse_destination": "/ap2/closedMandate/payee/website",
-      "source_document": "worksheet",
-      "source_json_pointer": "/scaffolding_inputs/merchant_profile/website_transform",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/merchant",
       "dependencies": [
-        "scaffold:merchant-profile"
+        "mapping_row:merchant-payee-id"
       ],
-      "transform": "Apply the candidate-owned website transform; do not synthesize a live claim.",
-      "provenance": "non-vate-scaffolding",
+      "transform": "Prefix https:// to the exact validated VATE merchant string; this is deterministic fixture metadata, not a live merchant claim.",
+      "provenance": "vate-derived",
       "ownership": "candidate_owned"
     },
     {
@@ -1403,24 +1403,24 @@
     },
     {
       "pulse_destination": "/ap2/openMandate/constraints/3/allowed/0/name",
-      "source_document": "worksheet",
-      "source_json_pointer": "/scaffolding_inputs/merchant_profile/name_transform",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/merchant",
       "dependencies": [
-        "scaffold:merchant-profile"
+        "mapping_row:merchant-allowed-id"
       ],
-      "transform": "Apply the same candidate-owned display-name transform to the allowed payee.",
-      "provenance": "non-vate-scaffolding",
+      "transform": "Copy the exact validated VATE merchant string.",
+      "provenance": "vate-derived",
       "ownership": "candidate_owned"
     },
     {
       "pulse_destination": "/ap2/openMandate/constraints/3/allowed/0/website",
-      "source_document": "worksheet",
-      "source_json_pointer": "/scaffolding_inputs/merchant_profile/website_transform",
+      "source_document": "vate_ap2_mandate",
+      "source_json_pointer": "/merchant",
       "dependencies": [
-        "scaffold:merchant-profile"
+        "mapping_row:merchant-allowed-id"
       ],
-      "transform": "Apply the same candidate-owned website transform to the allowed payee.",
-      "provenance": "non-vate-scaffolding",
+      "transform": "Prefix https:// to the exact validated VATE merchant string; this is deterministic fixture metadata, not a live merchant claim.",
+      "provenance": "vate-derived",
       "ownership": "candidate_owned"
     },
     {
@@ -2354,6 +2354,7 @@
     "Resolve every candidate decision and every null scaffolding value in a candidate-owned completed worksheet at an exact commit.",
     "Retain exactly the frozen 142 primitive Pulse input leaves and the required empty /expected/failureCodes container; do not add, omit, or collapse leaf records.",
     "For every leaf retain source_document, source_json_pointer, dependencies, exact transform, Pulse destination, provenance, and ownership.",
+    "Classify provenance by direct value origin: direct copies or deterministic transforms of eligible VATE bytes are vate-derived; candidate-selected or candidate-generated direct origins are non-vate-scaffolding, with transitive VATE influence disclosed through dependencies, generator records, and sensitivity replay.",
     "Keep all VATE /expected pointers and all VATE admission-receipt bytes out of mapping_rows, generated_field_inventory, the Pulse input, and result projection.",
     "Regenerate AP2 JOSE/SD-JWT, x402, EIP-3009, Payment Receipt, public-key, and signature fields after applying VATE-derived values; an unchanged Pulse fixture plus sidecar VATE hashes is invalid.",
     "Call frozen verifyConformanceCase without semantic changes and preserve its exact report objects in raw JSON before projection.",
