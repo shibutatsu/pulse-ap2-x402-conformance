@@ -549,6 +549,22 @@ describe("the committed conformance corpus", () => {
     expect((await verifyConformanceCase(changed)).consistent).toBe(true);
   });
 
+  it("reports an AP2 mandate issued after the case evaluation time", async () => {
+    const bundle = await readBundle();
+    const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
+    changed.ap2.verification.verifiedAtEpochSeconds += 60;
+    changed.ap2.closedMandate.iat =
+      changed.nowEpochSeconds + changed.ap2.verification.clockSkewSeconds + 1;
+    changed.ap2.verification.closedMandateClaimsHash = canonicalSha256Base64Url(
+      changed.ap2.closedMandate,
+    );
+    changed.inputHash = conformanceInputHash(changed);
+
+    expect(
+      (await verifyConformanceCase(changed)).failures.map((failure) => failure.code),
+    ).toContain("AP2_MANDATE_TIME_INVALID");
+  });
+
   it("reports verification before the case evaluation time", async () => {
     const bundle = await readBundle();
     const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
@@ -573,6 +589,25 @@ describe("the committed conformance corpus", () => {
       (await verifyConformanceCase(changed)).failures.map((failure) => failure.code),
     ).toContain("AP2_MANDATE_TIME_INVALID");
   });
+
+  it.each(["extensions", "extra"] as const)(
+    "rejects non-empty x402 settlement %s",
+    async (field) => {
+      const bundle = await readBundle();
+      const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
+      changed.x402.settlement[field] = { unsupported: true };
+      changed.inputHash = conformanceInputHash(changed);
+
+      const report = await verifyConformanceCase(changed);
+      expect(report.consistent).toBe(false);
+      expect(report.failures).toContainEqual(
+        expect.objectContaining({
+          code: "X402_UNSUPPORTED_EXTENSION",
+          path: `x402.settlement.${field}`,
+        }),
+      );
+    },
+  );
 
   it("marks a malformed case with no expectation as a bundle expectation failure", async () => {
     const bundle = await readBundle();

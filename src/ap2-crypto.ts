@@ -66,6 +66,7 @@ export interface VerifyAp2CryptoInput {
   trustedReceiptPublicJwk: JWK;
   expectedAudience: string;
   expectedNonce: string;
+  nowEpochSeconds: number;
   verifiedAtEpochSeconds: number;
   clockSkewSeconds: number;
   openCheckoutReference: string;
@@ -119,6 +120,7 @@ export async function verifyAp2MandateChainAndReceipt(
   const resolvedRootEnvelope = resolveDisclosures(rootEnvelope, rootToken, "root-disclosures");
   validateTimeClaims(
     resolvedRootEnvelope,
+    input.nowEpochSeconds,
     input.verifiedAtEpochSeconds,
     input.clockSkewSeconds,
     "root-claims",
@@ -126,6 +128,7 @@ export async function verifyAp2MandateChainAndReceipt(
   const openMandate = extractSingleDelegatePayload(resolvedRootEnvelope, "root-claims");
   validateTimeClaims(
     openMandate,
+    input.nowEpochSeconds,
     input.verifiedAtEpochSeconds,
     input.clockSkewSeconds,
     "root-claims",
@@ -140,6 +143,7 @@ export async function verifyAp2MandateChainAndReceipt(
   validateLeafEnvelopeBinding(leafEnvelope, rootToken, rootEnvelope, input);
   validateTimeClaims(
     leafEnvelope,
+    input.nowEpochSeconds,
     input.verifiedAtEpochSeconds,
     input.clockSkewSeconds,
     "leaf-claims",
@@ -148,6 +152,7 @@ export async function verifyAp2MandateChainAndReceipt(
   const closedMandate = extractSingleDelegatePayload(resolvedLeafEnvelope, "leaf-claims");
   validateTimeClaims(
     closedMandate,
+    input.nowEpochSeconds,
     input.verifiedAtEpochSeconds,
     input.clockSkewSeconds,
     "leaf-claims",
@@ -193,6 +198,8 @@ function validateInput(input: VerifyAp2CryptoInput): void {
     input.expectedNonce.length === 0 ||
     typeof input.openCheckoutReference !== "string" ||
     input.openCheckoutReference.length === 0 ||
+    !Number.isSafeInteger(input.nowEpochSeconds) ||
+    input.nowEpochSeconds < 0 ||
     !Number.isSafeInteger(input.verifiedAtEpochSeconds) ||
     input.verifiedAtEpochSeconds < 0 ||
     !Number.isSafeInteger(input.clockSkewSeconds) ||
@@ -588,7 +595,13 @@ function validatePaymentReceipt(
   verifiedAtEpochSeconds: number,
   clockSkewSeconds: number,
 ): void {
-  validateTimeClaims(receipt, verifiedAtEpochSeconds, clockSkewSeconds, "receipt-claims");
+  validateTimeClaims(
+    receipt,
+    verifiedAtEpochSeconds,
+    verifiedAtEpochSeconds,
+    clockSkewSeconds,
+    "receipt-claims",
+  );
   const commonClaimsValid =
     (receipt.status === "Success" || receipt.status === "Error") &&
     typeof receipt.iss === "string" &&
@@ -624,17 +637,24 @@ function validatePaymentReceipt(
 
 function validateTimeClaims(
   claims: Record<string, unknown>,
-  now: number,
+  issuanceReferenceEpochSeconds: number,
+  expiryReferenceEpochSeconds: number,
   clockSkew: number,
   stage: "root-claims" | "leaf-claims" | "receipt-claims",
 ): void {
   if (claims.iat !== undefined) {
-    if (!Number.isSafeInteger(claims.iat) || (claims.iat as number) > now + clockSkew) {
+    if (
+      !Number.isSafeInteger(claims.iat) ||
+      (claims.iat as number) > issuanceReferenceEpochSeconds + clockSkew
+    ) {
       throw failure(stage, "IAT_INVALID", "JWT iat is invalid or in the future");
     }
   }
   if (claims.exp !== undefined) {
-    if (!Number.isSafeInteger(claims.exp) || now > (claims.exp as number) + clockSkew) {
+    if (
+      !Number.isSafeInteger(claims.exp) ||
+      expiryReferenceEpochSeconds > (claims.exp as number) + clockSkew
+    ) {
       throw failure(stage, "EXP_INVALID", "JWT exp is invalid or expired");
     }
   }
