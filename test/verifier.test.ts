@@ -549,21 +549,49 @@ describe("the committed conformance corpus", () => {
     expect((await verifyConformanceCase(changed)).consistent).toBe(true);
   });
 
-  it("reports an AP2 mandate issued after the case evaluation time", async () => {
-    const bundle = await readBundle();
-    const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
-    changed.ap2.verification.verifiedAtEpochSeconds += 60;
-    changed.ap2.closedMandate.iat =
-      changed.nowEpochSeconds + changed.ap2.verification.clockSkewSeconds + 1;
-    changed.ap2.verification.closedMandateClaimsHash = canonicalSha256Base64Url(
-      changed.ap2.closedMandate,
-    );
-    changed.inputHash = conformanceInputHash(changed);
+  it.each([
+    ["openMandate", "openMandateClaimsHash"],
+    ["closedMandate", "closedMandateClaimsHash"],
+  ] as const)(
+    "reports an AP2 %s issued after the case evaluation time",
+    async (mandateField, claimsHashField) => {
+      const bundle = await readBundle();
+      const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
+      changed.ap2.verification.verifiedAtEpochSeconds += 60;
+      changed.ap2[mandateField].iat =
+        changed.nowEpochSeconds + changed.ap2.verification.clockSkewSeconds + 1;
+      changed.ap2.verification[claimsHashField] = canonicalSha256Base64Url(
+        changed.ap2[mandateField],
+      );
+      changed.inputHash = conformanceInputHash(changed);
 
-    expect(
-      (await verifyConformanceCase(changed)).failures.map((failure) => failure.code),
-    ).toContain("AP2_MANDATE_TIME_INVALID");
-  });
+      expect(
+        (await verifyConformanceCase(changed)).failures.map((failure) => failure.code),
+      ).toContain("AP2_MANDATE_TIME_INVALID");
+    },
+  );
+
+  it.each([
+    ["openMandate", "openMandateClaimsHash"],
+    ["closedMandate", "closedMandateClaimsHash"],
+  ] as const)(
+    "does not report an AP2 %s issued at the clock-skew boundary as invalid",
+    async (mandateField, claimsHashField) => {
+      const bundle = await readBundle();
+      const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
+      changed.ap2.verification.clockSkewSeconds = 30;
+      changed.ap2[mandateField].iat =
+        changed.nowEpochSeconds + changed.ap2.verification.clockSkewSeconds;
+      changed.ap2.verification[claimsHashField] = canonicalSha256Base64Url(
+        changed.ap2[mandateField],
+      );
+      changed.inputHash = conformanceInputHash(changed);
+
+      expect(
+        (await verifyConformanceCase(changed)).failures.map((failure) => failure.code),
+      ).not.toContain("AP2_MANDATE_TIME_INVALID");
+    },
+  );
 
   it("reports verification before the case evaluation time", async () => {
     const bundle = await readBundle();
@@ -608,6 +636,16 @@ describe("the committed conformance corpus", () => {
       );
     },
   );
+
+  it("accepts empty x402 settlement extension containers", async () => {
+    const bundle = await readBundle();
+    const changed = structuredClone(bundle.cases[0]) as ConformanceCase;
+    changed.x402.settlement.extensions = {};
+    changed.x402.settlement.extra = {};
+    changed.inputHash = conformanceInputHash(changed);
+
+    expect((await verifyConformanceCase(changed)).consistent).toBe(true);
+  });
 
   it("marks a malformed case with no expectation as a bundle expectation failure", async () => {
     const bundle = await readBundle();
