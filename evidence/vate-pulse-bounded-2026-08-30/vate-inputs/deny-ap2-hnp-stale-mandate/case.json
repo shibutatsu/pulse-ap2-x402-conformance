@@ -1,0 +1,62 @@
+{
+  "artifact_reference_checks": [
+    {
+      "artifact": "ap2_mandate",
+      "expect_match": true,
+      "reference_paths": [
+        {
+          "artifact": "admission_request",
+          "path": "evidence_refs[0].digest"
+        },
+        {
+          "artifact": "admission_receipt",
+          "path": "evidence[0].digest"
+        }
+      ]
+    }
+  ],
+  "artifacts": {
+    "admission_receipt": "examples/interop/ap2-human-not-present-to-vate/vate-admission-receipt-ap2-hnp-stale.example.json",
+    "admission_request": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-stale.example.json",
+    "ap2_mandate": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-stale.example.json"
+  },
+  "case_id": "deny-ap2-hnp-stale-mandate",
+  "category": "negative",
+  "expected": {
+    "admission_decision": "deny",
+    "checks": [
+      {
+        "expected": "fail",
+        "name": "decision.outcome"
+      },
+      {
+        "expected": "present",
+        "name": "evidence.verification.failure_reason"
+      }
+    ],
+    "reason_codes": [
+      "PERMIT_EXPIRED",
+      "FAIL_CLOSED"
+    ],
+    "should_execute": false
+  },
+  "integrity_checks": [
+    {
+      "artifact": "ap2_mandate",
+      "expect_match": true,
+      "expected_digest": {
+        "alg": "sha-256",
+        "value": "867e5c25b5a54dae8a9d3c03d4f2cdb0332b562521e0c68f1e2dd43eb5636063"
+      }
+    }
+  ],
+  "profile": "VATE-AL2-Verifier-Admission-v0.3",
+  "purpose": "A VATE verifier should fail closed when Human Not Present payment authority is stale or expired at admission time.",
+  "title": "Deny an expired AP2 Human Not Present mandate",
+  "validation_focus": [
+    "AP2 Human Not Present",
+    "expired payment authority",
+    "fail closed"
+  ],
+  "version": "vate-conformance-0.3"
+}

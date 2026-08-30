@@ -1,0 +1,290 @@
+{
+  "artifacts": {
+    "conformance_report": {
+      "digest": {
+        "alg": "sha-256",
+        "value": "92e7d9db4de1d0bf0b30aa94ee71eeec11ea70e2d38c5a36f64750e11dbf349e"
+      },
+      "digest_basis": "json-sorted-no-whitespace",
+      "path": "/private/tmp/vate-pulse-run-provenance.Hr7xUk/vate-compare-report.json"
+    },
+    "corpus": {
+      "artifact_count": 212,
+      "digest": {
+        "alg": "sha-256",
+        "value": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370"
+      },
+      "root": "conformance/al2-vate-v0.3"
+    },
+    "implementation_report": {
+      "digest": {
+        "alg": "sha-256",
+        "value": "a0c30a9b3ecf61d389ad12cd1caffd6c13c170cc307aab477ccdfd28873da49c"
+      },
+      "digest_basis": "json-sorted-no-whitespace",
+      "path": "/private/tmp/vate-pulse-run-provenance.Hr7xUk/vate-implementation-report.json"
+    },
+    "sut_results": {
+      "digest": {
+        "alg": "sha-256",
+        "value": "edfd466c3bd6de3e6819109dcafc03348107ce4c7697bd520c9042117e09d00c"
+      },
+      "digest_basis": "json-sorted-no-whitespace",
+      "path": "/private/tmp/vate-pulse-run-provenance.Hr7xUk/pulse-sut-result.json"
+    }
+  },
+  "checked_at": "2026-08-30T01:42:32Z",
+  "checks": [
+    {
+      "name": "conformance_report.shape",
+      "pass": true
+    },
+    {
+      "name": "implementation_report.shape",
+      "pass": true
+    },
+    {
+      "name": "sut_results.shape",
+      "pass": true
+    },
+    {
+      "actual": "vate-conformance-report-2026-07",
+      "expected": "vate-conformance-report-2026-07",
+      "name": "conformance_report.version",
+      "pass": true
+    },
+    {
+      "actual": "VATE-AL2-Verifier-Admission-v0.3",
+      "expected": "VATE-AL2-Verifier-Admission-v0.3",
+      "name": "conformance_report.profile",
+      "pass": true
+    },
+    {
+      "actual": "vate-implementation-report-2026-07",
+      "expected": "vate-implementation-report-2026-07",
+      "name": "implementation_report.version",
+      "pass": true
+    },
+    {
+      "actual": "VATE-AL2-Verifier-Admission-v0.3",
+      "expected": "VATE-AL2-Verifier-Admission-v0.3",
+      "name": "implementation_report.profile",
+      "pass": true
+    },
+    {
+      "actual": {
+        "alg": "sha-256",
+        "value": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370"
+      },
+      "expected": {
+        "alg": "sha-256",
+        "value": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370"
+      },
+      "name": "corpus_index.digest",
+      "pass": true
+    },
+    {
+      "details": "committed corpus.json manifest matches the recomputed corpus manifest",
+      "name": "corpus_index.manifest",
+      "pass": true
+    },
+    {
+      "actual": {
+        "alg": "sha-256",
+        "value": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370"
+      },
+      "expected": {
+        "alg": "sha-256",
+        "value": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370"
+      },
+      "name": "conformance_report.corpus.digest",
+      "pass": true
+    },
+    {
+      "actual": {
+        "alg": "sha-256",
+        "value": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370"
+      },
+      "expected": {
+        "alg": "sha-256",
+        "value": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370"
+      },
+      "name": "implementation_report.corpus.digest",
+      "pass": true
+    },
+    {
+      "details": "implementation report manifest matches the recomputed corpus manifest",
+      "name": "implementation_report.corpus.manifest",
+      "pass": true
+    },
+    {
+      "actual": {
+        "alg": "sha-256",
+        "value": "92e7d9db4de1d0bf0b30aa94ee71eeec11ea70e2d38c5a36f64750e11dbf349e"
+      },
+      "expected": {
+        "alg": "sha-256",
+        "value": "92e7d9db4de1d0bf0b30aa94ee71eeec11ea70e2d38c5a36f64750e11dbf349e"
+      },
+      "name": "implementation_report.conformance_report.digest",
+      "pass": true
+    },
+    {
+      "actual": "json-sorted-no-whitespace",
+      "expected": "json-sorted-no-whitespace",
+      "name": "implementation_report.conformance_report.digest_basis",
+      "pass": true
+    },
+    {
+      "actual": {
+        "failed": 73,
+        "passed": 2,
+        "skipped": 72,
+        "total": 75
+      },
+      "expected": {
+        "failed": 73,
+        "passed": 2,
+        "skipped": 72,
+        "total": 75
+      },
+      "name": "implementation_report.summary",
+      "pass": true
+    },
+    {
+      "actual": "fail",
+      "expected": "fail",
+      "name": "implementation_report.status",
+      "pass": true
+    },
+    {
+      "details": "implementation case_results are the conformance report case projection",
+      "name": "implementation_report.case_results",
+      "pass": true
+    },
+    {
+      "actual": {
+        "corpus-fixture-validation": 75,
+        "generated-receipts": 0
+      },
+      "expected": {
+        "corpus-fixture-validation": 75,
+        "generated-receipts": 0
+      },
+      "name": "conformance_report.sut_results.artifact_mode_counts",
+      "pass": true
+    },
+    {
+      "actual": {
+        "corpus-fixture-validation": 75,
+        "generated-receipts": 0
+      },
+      "expected": {
+        "corpus-fixture-validation": 75,
+        "generated-receipts": 0
+      },
+      "name": "implementation_report.artifact_mode_counts",
+      "pass": true
+    },
+    {
+      "actual": "vate-sut-results-2026-07",
+      "expected": "vate-sut-results-2026-07",
+      "name": "sut_results.version",
+      "pass": true
+    },
+    {
+      "actual": "VATE-AL2-Verifier-Admission-v0.3",
+      "expected": "VATE-AL2-Verifier-Admission-v0.3",
+      "name": "sut_results.profile",
+      "pass": true
+    },
+    {
+      "actual": {
+        "alg": "sha-256",
+        "value": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370"
+      },
+      "expected": {
+        "alg": "sha-256",
+        "value": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370"
+      },
+      "name": "sut_results.corpus.digest",
+      "pass": true
+    },
+    {
+      "actual": {
+        "alg": "sha-256",
+        "value": "edfd466c3bd6de3e6819109dcafc03348107ce4c7697bd520c9042117e09d00c"
+      },
+      "expected": {
+        "alg": "sha-256",
+        "value": "edfd466c3bd6de3e6819109dcafc03348107ce4c7697bd520c9042117e09d00c"
+      },
+      "name": "conformance_report.sut_results.digest",
+      "pass": true
+    },
+    {
+      "actual": "json-sorted-no-whitespace",
+      "expected": "json-sorted-no-whitespace",
+      "name": "conformance_report.sut_results.digest_basis",
+      "pass": true
+    },
+    {
+      "actual": {
+        "commit": "1ee413652f11e720a0da7ffb318e91d87a447d4c",
+        "environment": "candidate-owned mapping/projection from 1ee413652f11e720a0da7ffb318e91d87a447d4c; frozen Pulse verifyConformanceCase at e06a6cbfe3ddb965c8fc70f50838f5014ec2038e; operator-selected python3 runtime Python 3.14.4",
+        "language": "Python standard library",
+        "name": "Pulse AP2-x402 external VATE attempt",
+        "source": "https://github.com/shibutatsu/pulse-ap2-x402-conformance.git",
+        "type": "external-verifier-projection",
+        "upstream_verifier": {
+          "commit": "e06a6cbfe3ddb965c8fc70f50838f5014ec2038e",
+          "entry_point": "src/verifier.ts#verifyConformanceCase",
+          "source": "https://github.com/shibutatsu/pulse-ap2-x402-conformance"
+        },
+        "version": "vate-pulse-mapper/0.2"
+      },
+      "expected": {
+        "commit": "1ee413652f11e720a0da7ffb318e91d87a447d4c",
+        "environment": "candidate-owned mapping/projection from 1ee413652f11e720a0da7ffb318e91d87a447d4c; frozen Pulse verifyConformanceCase at e06a6cbfe3ddb965c8fc70f50838f5014ec2038e; operator-selected python3 runtime Python 3.14.4",
+        "language": "Python standard library",
+        "name": "Pulse AP2-x402 external VATE attempt",
+        "source": "https://github.com/shibutatsu/pulse-ap2-x402-conformance.git",
+        "type": "external-verifier-projection",
+        "upstream_verifier": {
+          "commit": "e06a6cbfe3ddb965c8fc70f50838f5014ec2038e",
+          "entry_point": "src/verifier.ts#verifyConformanceCase",
+          "source": "https://github.com/shibutatsu/pulse-ap2-x402-conformance"
+        },
+        "version": "vate-pulse-mapper/0.2"
+      },
+      "name": "conformance_report.sut_results.implementation",
+      "pass": true
+    },
+    {
+      "actual": "corpus-fixture-validation",
+      "expected": "corpus-fixture-validation",
+      "name": "conformance_report.sut_results.artifact_mode",
+      "pass": true
+    },
+    {
+      "actual": {
+        "corpus-fixture-validation": 75,
+        "generated-receipts": 0
+      },
+      "expected": {
+        "corpus-fixture-validation": 75,
+        "generated-receipts": 0
+      },
+      "name": "conformance_report.sut_results.submitted_artifact_mode_counts",
+      "pass": true
+    }
+  ],
+  "profile": "VATE-AL2-Verifier-Admission-v0.3",
+  "status": "pass",
+  "summary": {
+    "failed": 0,
+    "passed": 27,
+    "total": 27
+  },
+  "version": "vate-report-bundle-verification-2026-07"
+}

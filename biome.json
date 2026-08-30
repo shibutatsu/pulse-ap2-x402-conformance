@@ -18,7 +18,8 @@
       "reports/**",
       ".stryker-tmp/**",
       "fixtures/**/*.json",
-      "evidence/vate-pulse-bounded-2026-08-29/**"
+      "evidence/vate-pulse-bounded-2026-08-29/**",
+      "evidence/vate-pulse-bounded-2026-08-30/**"
     ]
   }
 }

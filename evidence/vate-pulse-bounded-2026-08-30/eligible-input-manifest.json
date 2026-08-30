@@ -1,0 +1,69 @@
+{
+  "recordVersion": "vate-pulse-eligible-inputs-0.1",
+  "vateSourceCommit": "5a37f87de0190da44e619b1800261637e83dd7ed",
+  "corpusDigest": "988aae7d03dd5bb743e8e03e6ab1120ce8735a4837ac818ffd9d665de0c1e370",
+  "excludedSourceClasses": [
+    "vate-case-expected",
+    "vate-admission-receipt",
+    "vate-post-execution-receipt"
+  ],
+  "cases": [
+    {
+      "caseId": "allow-ap2-hnp-preauthorized-mandate",
+      "inputs": [
+        {
+          "artifactKey": "admission_request",
+          "sourcePath": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-valid.example.json",
+          "sourceRawSha256": "7f57ef2203fb04dba7a1365daf4359a77526eb497effedc84b100854af3fa165",
+          "bundlePath": "vate-inputs/allow-ap2-hnp-preauthorized-mandate/admission_request.json",
+          "bundleRawSha256": "7f57ef2203fb04dba7a1365daf4359a77526eb497effedc84b100854af3fa165"
+        },
+        {
+          "artifactKey": "ap2_mandate",
+          "sourcePath": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-valid.example.json",
+          "sourceRawSha256": "22abc3d0905eee01449327a56a384359c0701e753719bfc2b5cb500da62d0e72",
+          "bundlePath": "vate-inputs/allow-ap2-hnp-preauthorized-mandate/ap2_mandate.json",
+          "bundleRawSha256": "22abc3d0905eee01449327a56a384359c0701e753719bfc2b5cb500da62d0e72"
+        }
+      ]
+    },
+    {
+      "caseId": "attenuate-ap2-hnp-amount-overrun",
+      "inputs": [
+        {
+          "artifactKey": "admission_request",
+          "sourcePath": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-overrun.example.json",
+          "sourceRawSha256": "6d0bc2cb8ad2f33841a17ea4393c99acfd04dfcfa25f3be697dc4b115726c47b",
+          "bundlePath": "vate-inputs/attenuate-ap2-hnp-amount-overrun/admission_request.json",
+          "bundleRawSha256": "6d0bc2cb8ad2f33841a17ea4393c99acfd04dfcfa25f3be697dc4b115726c47b"
+        },
+        {
+          "artifactKey": "ap2_mandate",
+          "sourcePath": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-overrun.example.json",
+          "sourceRawSha256": "d36f54d452131a0280eec04dc85b6132d70dbd35a7d378e14c5b89a39c9d2351",
+          "bundlePath": "vate-inputs/attenuate-ap2-hnp-amount-overrun/ap2_mandate.json",
+          "bundleRawSha256": "d36f54d452131a0280eec04dc85b6132d70dbd35a7d378e14c5b89a39c9d2351"
+        }
+      ]
+    },
+    {
+      "caseId": "deny-ap2-hnp-stale-mandate",
+      "inputs": [
+        {
+          "artifactKey": "admission_request",
+          "sourcePath": "examples/interop/ap2-human-not-present-to-vate/vate-admission-request-ap2-hnp-stale.example.json",
+          "sourceRawSha256": "7950cf298f5ced91a1f169fbb72bbe51057c80c5df5a8495b9e3ce95d5f707ce",
+          "bundlePath": "vate-inputs/deny-ap2-hnp-stale-mandate/admission_request.json",
+          "bundleRawSha256": "7950cf298f5ced91a1f169fbb72bbe51057c80c5df5a8495b9e3ce95d5f707ce"
+        },
+        {
+          "artifactKey": "ap2_mandate",
+          "sourcePath": "examples/interop/ap2-human-not-present-to-vate/ap2-hnp-mandate-stale.example.json",
+          "sourceRawSha256": "3448d1900326b458f630e7a53f33e9e59d9c9cdb7808ba684a5a64298f866049",
+          "bundlePath": "vate-inputs/deny-ap2-hnp-stale-mandate/ap2_mandate.json",
+          "bundleRawSha256": "3448d1900326b458f630e7a53f33e9e59d9c9cdb7808ba684a5a64298f866049"
+        }
+      ]
+    }
+  ]
+}
