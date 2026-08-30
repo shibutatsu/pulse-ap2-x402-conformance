@@ -23,7 +23,9 @@ In particular:
 
 - The Open Payment Mandate root SD-JWT verifies against the supplied trusted P-256 public JWK.
 - The terminal `kb+sd-jwt` verifies against `cnf.jwk`, including `sd_hash`, audience, nonce,
-  issuance time, expiry, disclosures, and the Checkout reference.
+  issuance time, expiry, disclosures, and the Checkout reference. Mandate envelopes and delegate
+  claims cannot be issued after the case evaluation time beyond the configured clock skew; receipt
+  issuance remains checked at the recorded AP2 verification time.
 - The signed Payment Receipt JWT verifies against its supplied trusted public JWK and references the
   final closed-mandate leaf JWT.
 - The normalized AP2 claims and local canonical integrity hashes still match the claims extracted
@@ -52,6 +54,8 @@ In particular:
 - A standard exact/EIP-3009 `SettleResponse` may report only `success`, `transaction`, `network`,
   and `payer`. The verifier checks those fields and checks `amount` only when the optional standard
   field is present; it does not require a synthetic settlement `extra` or AP2-reference echo.
+  Non-empty settlement `extensions` or `extra` fail closed because this profile does not evaluate
+  their semantics.
 - The EIP-3009 nonce is the 32-byte value encoded by the final closed-mandate reference derived from
   the verified leaf JWT, and the EIP-712 signature uses a canonical low-s encoding with a 27 or 28
   recovery byte and recovers the expected payer address.
