@@ -19,8 +19,18 @@ updates:
         update-types:
           - minor
           - patch
+      source-pinned-x402:
+        patterns:
+          - "@x402/core"
+          - "@x402/evm"
+        update-types:
+          - minor
+          - patch
       production-dependencies:
         dependency-type: production
+        exclude-patterns:
+          - "@x402/core"
+          - "@x402/evm"
         update-types:
           - minor
           - patch
