@@ -5,6 +5,12 @@ The repository provides three checks for evidence required by issue
 and its fixture-bound fields. They do not establish who performed the work, make an implementation
 independent, turn a review into an audit, or satisfy the other release gates.
 
+The current reproduction and security-review targets are fixed to Pulse commit
+`e06a6cbfe3ddb965c8fc70f50838f5014ec2038e`. The reproduction check requires an accepted
+version-specific repository commit, path, and raw SHA-256 tuple. It retains the v0.2 tuple expressly
+grandfathered in issue #16 for work already underway. Supplying a modified bundle and repeating its
+new hash in the record, or mixing values from accepted tuples, does not create qualifying evidence.
+
 ## Record an independent reproduction
 
 A qualifying implementer must evaluate all 80 cases without importing this repository's verifier
@@ -15,7 +21,7 @@ has this shape:
 ```json
 {
   "recordVersion": "pulse-independent-reproduction/0.1",
-  "performedAt": "2026-08-13T10:00:00Z",
+  "performedAt": "2026-08-28T10:00:00Z",
   "implementation": {
     "repositoryUrl": "https://github.com/example/independent-verifier",
     "commit": "1111111111111111111111111111111111111111",
@@ -26,9 +32,9 @@ has this shape:
     "independentOfPrimeBeat": true
   },
   "fixture": {
-    "repositoryCommit": "2222222222222222222222222222222222222222",
+    "repositoryCommit": "e06a6cbfe3ddb965c8fc70f50838f5014ec2038e",
     "path": "fixtures/v0.3/cases.json",
-    "sha256": "<lowercase SHA-256 of the exact fixture bytes>",
+    "sha256": "8f40be1bdc3d4458f758100e91b418b6a335c5d8d358723f118e2d3e1ad84ee0",
     "caseCount": 80
   },
   "environment": {
@@ -55,9 +61,10 @@ failure codes in fixture order. Validate the published record against the exact 
 npm run evidence:reproduction -- fixtures/v0.3/cases.json path/to/reproduction.json
 ```
 
-The command checks the raw fixture SHA-256, case coverage, decisions, and failure codes. A successful
-result is still subject to human confirmation that the implementation and publisher are genuinely
-independent. Two qualifying outside implementations are required by issue #17.
+The command checks the frozen Pulse commit, raw fixture SHA-256, case coverage, decisions, and
+failure codes. A successful result is still subject to human confirmation that the implementation
+and publisher are genuinely independent. Two qualifying outside implementations are required by
+issue #17.
 
 The fixture path must match the bundle version. New reproduction work should use v0.3; v0.1 and v0.2 are
 retained only so already-published records can still be checked against their original bytes.
@@ -74,9 +81,10 @@ model, review commands, and required deliverables are collected in
 npm run evidence:review -- path/to/security-review.json
 ```
 
-The command rejects incomplete records and keeps its automated check false while a critical or high
-finding is open or accepted as risk. It cannot authenticate the reviewer, confirm independence, or
-determine whether the review method was sufficient. Those checks remain human release decisions.
+The command rejects records for a commit other than the frozen review target and keeps its automated
+check false while a critical or high finding is open or accepted as risk. It cannot authenticate the
+reviewer, confirm independence, or determine whether the review method was sufficient. Those checks
+remain human release decisions.
 
 ## Verify one fixture against a public EVM receipt
 

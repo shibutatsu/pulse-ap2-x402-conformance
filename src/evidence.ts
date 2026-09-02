@@ -25,6 +25,37 @@ const httpsUrl = z
     message: "Expected an HTTPS URL",
   });
 
+const FROZEN_PULSE_EVIDENCE_COMMIT = "e06a6cbfe3ddb965c8fc70f50838f5014ec2038e";
+
+const FROZEN_REPRODUCTION_TARGETS = {
+  "ap2-x402-conformance-bundle/0.1": [
+    {
+      repositoryCommit: FROZEN_PULSE_EVIDENCE_COMMIT,
+      path: "fixtures/v0.1/cases.json",
+      sha256: "4ff061cfa709b043662e67335bf4abd0e8dcf8cb45d32ee333992e3789d95a80",
+    },
+  ],
+  "ap2-x402-conformance-bundle/0.2": [
+    {
+      repositoryCommit: FROZEN_PULSE_EVIDENCE_COMMIT,
+      path: "fixtures/v0.2/cases.json",
+      sha256: "1e8168b52c463a5441590b051facb767317a71cadbde3fcab6aee2d40f3fbaa1",
+    },
+    {
+      repositoryCommit: "3ae75963462cd7daf66fac9bba13184d0b036152",
+      path: "fixtures/v0.2/cases.json",
+      sha256: "326de97fde74636bf4c2b8c6838548cb5f091f754189af2c1a9d25aae92c1ec0",
+    },
+  ],
+  "ap2-x402-conformance-bundle/0.3": [
+    {
+      repositoryCommit: FROZEN_PULSE_EVIDENCE_COMMIT,
+      path: "fixtures/v0.3/cases.json",
+      sha256: "8f40be1bdc3d4458f758100e91b418b6a335c5d8d358723f118e2d3e1ad84ee0",
+    },
+  ],
+} as const;
+
 const ReproductionResultSchema = z.strictObject({
   id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
   decision: z.enum(["accept", "reject"]),
@@ -138,18 +169,24 @@ export function verifyIndependentReproductionRecord(
   }
 
   const record = recordResult.data;
-  const expectedFixturePath =
-    bundleResult.data.bundleVersion === "ap2-x402-conformance-bundle/0.1"
-      ? "fixtures/v0.1/cases.json"
-      : bundleResult.data.bundleVersion === "ap2-x402-conformance-bundle/0.2"
-        ? "fixtures/v0.2/cases.json"
-        : "fixtures/v0.3/cases.json";
+  const frozenTargets = FROZEN_REPRODUCTION_TARGETS[bundleResult.data.bundleVersion];
+  const expectedFixturePath = frozenTargets[0].path;
   if (record.fixture.path !== expectedFixturePath) {
     errors.push(
       `fixture.path: Expected ${expectedFixturePath} for ${bundleResult.data.bundleVersion}`,
     );
   }
   const actualFixtureHash = rawSha256(bundleRaw);
+  const frozenTarget = frozenTargets.find((target) => target.sha256 === actualFixtureHash);
+  if (frozenTarget === undefined) {
+    errors.push(
+      `bundle.sha256: Does not match the frozen ${bundleResult.data.bundleVersion} fixture`,
+    );
+  } else if (record.fixture.repositoryCommit !== frozenTarget.repositoryCommit) {
+    errors.push(
+      `fixture.repositoryCommit: Expected frozen Pulse commit ${frozenTarget.repositoryCommit}`,
+    );
+  }
   if (record.fixture.sha256 !== actualFixtureHash) {
     errors.push("fixture.sha256: Does not match the supplied fixture bytes");
   }
@@ -213,17 +250,24 @@ export function verifyIndependentSecurityReviewRecord(
       errors: issueMessages(result.error),
     };
   }
+  const errors: string[] = [];
+  if (result.data.reviewedCommit !== FROZEN_PULSE_EVIDENCE_COMMIT) {
+    errors.push(`reviewedCommit: Expected frozen Pulse commit ${FROZEN_PULSE_EVIDENCE_COMMIT}`);
+  }
   const unresolvedBlockingFindings = result.data.findings.filter(
     (finding) =>
       (finding.severity === "critical" || finding.severity === "high") &&
       finding.status !== "resolved",
   );
-  return {
-    valid: true,
-    automatedChecksPassed: unresolvedBlockingFindings.length === 0,
-    errors: unresolvedBlockingFindings.map(
+  errors.push(
+    ...unresolvedBlockingFindings.map(
       (finding) => `${finding.id}: ${finding.severity} finding is not resolved`,
     ),
+  );
+  return {
+    valid: result.data.reviewedCommit === FROZEN_PULSE_EVIDENCE_COMMIT,
+    automatedChecksPassed: errors.length === 0,
+    errors,
   };
 }
 

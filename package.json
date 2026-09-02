@@ -25,6 +25,7 @@
   "files": [
     "dist",
     "fixtures",
+    "evidence/public-evm-base-sepolia.json",
     "docs",
     "README.md",
     "referent-table-public-conformance-implementation.md",

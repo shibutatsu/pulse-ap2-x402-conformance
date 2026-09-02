@@ -175,6 +175,6 @@ jobs:
           retention-days: 30
 ```
 
-The automated validator checks record shape, raw fixture hash, all 80 IDs, decisions, and ordered
-failure codes. It cannot establish the publisher's identity, independence, implementation quality,
-or absence of oracle use; those remain human evidence checks.
+The automated validator checks record shape, the frozen Pulse repository commit and raw fixture
+hash, all 80 IDs, decisions, and ordered failure codes. It cannot establish the publisher's identity,
+independence, implementation quality, or absence of oracle use; those remain human evidence checks.

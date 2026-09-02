@@ -87,9 +87,10 @@ Validate the published record from the frozen checkout:
 npm run evidence:review -- /absolute/path/to/security-review.json
 ```
 
-The command checks the strict record schema and exits unsuccessfully while a critical or high finding
-is not `resolved`. It does not authenticate the reviewer, prove independence, judge review depth, or
-turn the report into a formal audit. Those are human release decisions.
+The command checks the strict record schema, requires the frozen reviewed commit above, and exits
+unsuccessfully while a critical or high finding is not `resolved`. It does not authenticate the
+reviewer, prove independence, judge review depth, or turn the report into a formal audit. Those are
+human release decisions.
 
 ## Not established by this review
 
