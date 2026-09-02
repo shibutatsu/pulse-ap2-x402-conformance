@@ -81,10 +81,15 @@ Report exploitable details through the repository's
 before public disclosure, then publish a safe summary. Do not request or use production secrets,
 customer data, funded wallets, transaction submission, or write-enabled RPC credentials.
 
-Validate the published record from the frozen checkout:
+Validate the published record with the fixed evidence validator revision. Keep this checkout
+separate from the frozen review checkout above so that the review scope remains unchanged:
 
 ```bash
-npm run evidence:review -- /absolute/path/to/security-review.json
+git clone https://github.com/shibutatsu/pulse-ap2-x402-conformance.git pulse-evidence-validator
+git -C pulse-evidence-validator checkout --detach fe24b304735c8ab1f38118a89d0a204bc7d00fe8
+npm --prefix pulse-evidence-validator ci
+npm --prefix pulse-evidence-validator run evidence:review -- \
+  /absolute/path/to/security-review.json
 ```
 
 The command checks the strict record schema, requires the frozen reviewed commit above, and exits

@@ -10,6 +10,9 @@ The current reproduction and security-review targets are fixed to Pulse commit
 version-specific repository commit, path, and raw SHA-256 tuple. It retains the v0.2 tuple expressly
 grandfathered in issue #16 for work already underway. Supplying a modified bundle and repeating its
 new hash in the record, or mixing values from accepted tuples, does not create qualifying evidence.
+Run the evidence commands from the separately fixed validator revision
+`fe24b304735c8ab1f38118a89d0a204bc7d00fe8`; the older frozen target remains the bytes under review,
+not the checker used to validate newly published records.
 
 ## Record an independent reproduction
 
@@ -55,7 +58,8 @@ has this shape:
 ```
 
 `results` must contain each of the 80 fixture IDs exactly once. For rejected cases, record the
-failure codes in fixture order. Validate the published record against the exact fixture checkout:
+failure codes in fixture order. From the fixed validator checkout, validate the published record
+against a fixture file downloaded from its exact frozen checkout:
 
 ```bash
 npm run evidence:reproduction -- fixtures/v0.3/cases.json path/to/reproduction.json
@@ -71,8 +75,8 @@ retained only so already-published records can still be checked against their or
 
 ## Record an independent security review
 
-Use [`security-review-record.example.json`](evidence/security-review-record.example.json) as the
-field reference. The stable public report should cover the scope in issue
+Use [`security-review-record.example.json`](evidence/security-review-record.example.json) from the
+fixed validator checkout as the field reference. The stable public report should cover the scope in issue
 [#18](https://github.com/shibutatsu/pulse-ap2-x402-conformance/issues/18). The frozen scope, threat
 model, review commands, and required deliverables are collected in
 [`security-review-packet.md`](security-review-packet.md).
