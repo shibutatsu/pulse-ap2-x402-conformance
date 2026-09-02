@@ -1,7 +1,7 @@
 {
   "recordVersion": "pulse-independent-security-review/0.1",
-  "reviewedCommit": "3333333333333333333333333333333333333333",
-  "reviewedAt": "2026-08-13T11:00:00Z",
+  "reviewedCommit": "e06a6cbfe3ddb965c8fc70f50838f5014ec2038e",
+  "reviewedAt": "2026-08-28T11:00:00Z",
   "reviewer": {
     "name": "A. Reviewer",
     "organization": "Example Security Lab",

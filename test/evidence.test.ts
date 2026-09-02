@@ -16,6 +16,7 @@ const fixtureUrl = new URL("../fixtures/v0.3/cases.json", import.meta.url);
 const publicEvmCaseUrl = new URL("../fixtures/public-evm/case.json", import.meta.url);
 const publicEvmEvidenceUrl = new URL("../evidence/public-evm-base-sepolia.json", import.meta.url);
 const publicEvmEvidenceSha256 = "7abaec474f7d7ccecc39049aa1519189cc977571b1b234bf95add55ebf03b977";
+const frozenPulseEvidenceCommit = "e06a6cbfe3ddb965c8fc70f50838f5014ec2038e";
 const TRANSFER_TOPIC = keccak256(stringToHex("Transfer(address,address,uint256)"));
 const AUTHORIZATION_USED_TOPIC = keccak256(stringToHex("AuthorizationUsed(address,bytes32)"));
 
@@ -27,7 +28,7 @@ async function fixture(): Promise<{ raw: string; bundle: ConformanceBundle }> {
 function reproductionRecord(raw: string, bundle: ConformanceBundle): Record<string, unknown> {
   return {
     recordVersion: "pulse-independent-reproduction/0.1",
-    performedAt: "2026-08-13T10:00:00Z",
+    performedAt: "2026-08-28T10:00:00Z",
     implementation: {
       repositoryUrl: "https://github.com/example/independent-verifier",
       commit: "1".repeat(40),
@@ -38,7 +39,7 @@ function reproductionRecord(raw: string, bundle: ConformanceBundle): Record<stri
       independentOfPrimeBeat: true,
     },
     fixture: {
-      repositoryCommit: "2".repeat(40),
+      repositoryCommit: frozenPulseEvidenceCommit,
       path: "fixtures/v0.3/cases.json",
       sha256: createHash("sha256").update(raw, "utf8").digest("hex"),
       caseCount: 80,
@@ -74,8 +75,8 @@ function cloneReproductionRecord(
 
 const validReviewRecord = {
   recordVersion: "pulse-independent-security-review/0.1",
-  reviewedCommit: "3".repeat(40),
-  reviewedAt: "2026-08-13T11:00:00Z",
+  reviewedCommit: frozenPulseEvidenceCommit,
+  reviewedAt: "2026-08-28T11:00:00Z",
   reviewer: {
     name: "A. Reviewer",
     organization: "Example Security Lab",
@@ -106,6 +107,76 @@ describe("independent evidence records", () => {
       valid: true,
       automatedChecksPassed: true,
       errors: [],
+    });
+  });
+
+  it.each([
+    ["v0.1", "fixtures/v0.1/cases.json"],
+    ["v0.2", "fixtures/v0.2/cases.json"],
+  ])("matches the archived %s reproduction target", async (version, fixturePath) => {
+    const raw = await readFile(
+      fileURLToPath(new URL(`../fixtures/${version}/cases.json`, import.meta.url)),
+      "utf8",
+    );
+    const bundle = JSON.parse(raw) as ConformanceBundle;
+    const record = reproductionRecord(raw, bundle) as {
+      fixture: { path: string };
+    } & Record<string, unknown>;
+    record.fixture.path = fixturePath;
+
+    expect(verifyIndependentReproductionRecord(raw, record)).toEqual({
+      valid: true,
+      automatedChecksPassed: true,
+      errors: [],
+    });
+  });
+
+  it("rejects a reproduction record that names a different Pulse commit", async () => {
+    const { raw, bundle } = await fixture();
+    const record = reproductionRecord(raw, bundle) as {
+      fixture: { repositoryCommit: string };
+    } & Record<string, unknown>;
+    record.fixture.repositoryCommit = "0".repeat(40);
+
+    expect(verifyIndependentReproductionRecord(raw, record)).toMatchObject({
+      valid: false,
+      automatedChecksPassed: false,
+      errors: [expect.stringContaining("Expected frozen Pulse commit")],
+    });
+  });
+
+  it("rejects a repository commit mixed with another accepted v0.2 fixture hash", async () => {
+    const raw = await readFile(
+      fileURLToPath(new URL("../fixtures/v0.2/cases.json", import.meta.url)),
+      "utf8",
+    );
+    const bundle = JSON.parse(raw) as ConformanceBundle;
+    const record = reproductionRecord(raw, bundle) as {
+      fixture: { path: string; repositoryCommit: string };
+    } & Record<string, unknown>;
+    record.fixture.path = "fixtures/v0.2/cases.json";
+    record.fixture.repositoryCommit = "3ae75963462cd7daf66fac9bba13184d0b036152";
+
+    expect(verifyIndependentReproductionRecord(raw, record)).toMatchObject({
+      valid: false,
+      automatedChecksPassed: false,
+      errors: [
+        expect.stringContaining(`Expected frozen Pulse commit ${frozenPulseEvidenceCommit}`),
+      ],
+    });
+  });
+
+  it("rejects self-consistent reproduction metadata over modified fixture bytes", async () => {
+    const { bundle } = await fixture();
+    const changedBundle = structuredClone(bundle);
+    changedBundle.generatedAt = "2026-08-13T10:00:01Z";
+    const changedRaw = JSON.stringify(changedBundle);
+    const record = reproductionRecord(changedRaw, changedBundle);
+
+    expect(verifyIndependentReproductionRecord(changedRaw, record)).toMatchObject({
+      valid: false,
+      automatedChecksPassed: false,
+      errors: [expect.stringContaining("Does not match the frozen")],
     });
   });
 
@@ -222,6 +293,17 @@ describe("independent evidence records", () => {
     expect(report.valid).toBe(true);
     expect(report.automatedChecksPassed).toBe(false);
     expect(report.errors[0]).toContain("high finding is not resolved");
+  });
+
+  it("rejects a security review record for a different Pulse commit", () => {
+    const changed = structuredClone(validReviewRecord);
+    changed.reviewedCommit = "0".repeat(40);
+
+    expect(verifyIndependentSecurityReviewRecord(changed)).toMatchObject({
+      valid: false,
+      automatedChecksPassed: false,
+      errors: [expect.stringContaining("Expected frozen Pulse commit")],
+    });
   });
 
   it("rejects an incomplete security review record", () => {

@@ -11,6 +11,17 @@ bundle versions changed because every case-level `inputHash` covers its source p
 package version without changing the fixture version would make the recorded provenance ambiguous,
 even if the protocol payload bytes happened to remain compatible.
 
+External reproduction records for the retained bytes in the table use the canonical evidence
+checkout `e06a6cbfe3ddb965c8fc70f50838f5014ec2038e`. The validator also accepts the v0.2 tuple expressly
+grandfathered in issue #16: commit `3ae75963462cd7daf66fac9bba13184d0b036152` and raw SHA-256
+`326de97fde74636bf4c2b8c6838548cb5f091f754189af2c1a9d25aae92c1ec0`. It never permits a commit,
+path, or hash from one tuple to be mixed with another. The active release-evidence target is v0.3;
+the older tuples remain accepted only for validating historical work.
+
+Run new evidence checks from validator commit
+`fe24b304735c8ab1f38118a89d0a204bc7d00fe8`. That revision is intentionally separate from the
+retained fixture commits and binds each accepted commit, path, and raw SHA-256 value as one tuple.
+
 The verifier accepts any complete bundle. It rejects a case copied across versions, and the
 external-reproduction checker rejects a record whose fixture path does not match the supplied
 bundle version. Fixture generation writes v0.3 only and checks the x402 versions in `package.json`

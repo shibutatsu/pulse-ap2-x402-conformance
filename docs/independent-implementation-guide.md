@@ -9,7 +9,8 @@ published by a party independent of Prime Beat.
 
 | Item | Required value |
 | --- | --- |
-| Repository commit | `e06a6cbfe3ddb965c8fc70f50838f5014ec2038e` |
+| Frozen fixture commit | `e06a6cbfe3ddb965c8fc70f50838f5014ec2038e` |
+| Evidence validator commit | `fe24b304735c8ab1f38118a89d0a204bc7d00fe8` |
 | Fixture | `fixtures/v0.3/cases.json` |
 | Raw fixture SHA-256 | `8f40be1bdc3d4458f758100e91b418b6a335c5d8d358723f118e2d3e1ad84ee0` |
 | Bundle and case versions | `ap2-x402-conformance-bundle/0.3` and `ap2-x402-conformance/0.3` |
@@ -118,7 +119,8 @@ permissions:
   contents: read
 
 env:
-  PULSE_COMMIT: e06a6cbfe3ddb965c8fc70f50838f5014ec2038e
+  PULSE_FIXTURE_COMMIT: e06a6cbfe3ddb965c8fc70f50838f5014ec2038e
+  PULSE_VALIDATOR_COMMIT: fe24b304735c8ab1f38118a89d0a204bc7d00fe8
   FIXTURE_SHA256: 8f40be1bdc3d4458f758100e91b418b6a335c5d8d358723f118e2d3e1ad84ee0
 
 jobs:
@@ -136,7 +138,7 @@ jobs:
         run: |
           set -euo pipefail
           curl --fail --location --silent --show-error \
-            "https://raw.githubusercontent.com/shibutatsu/pulse-ap2-x402-conformance/${PULSE_COMMIT}/fixtures/v0.3/cases.json" \
+            "https://raw.githubusercontent.com/shibutatsu/pulse-ap2-x402-conformance/${PULSE_FIXTURE_COMMIT}/fixtures/v0.3/cases.json" \
             --output frozen-cases.json
           echo "${FIXTURE_SHA256}  frozen-cases.json" | sha256sum --check --strict
           jq 'del(.cases[].expected)' frozen-cases.json > evaluator-input.json
@@ -148,7 +150,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: shibutatsu/pulse-ap2-x402-conformance
-          ref: ${{ env.PULSE_COMMIT }}
+          ref: ${{ env.PULSE_VALIDATOR_COMMIT }}
           path: pulse-reference
           persist-credentials: false
 
@@ -175,6 +177,8 @@ jobs:
           retention-days: 30
 ```
 
-The automated validator checks record shape, raw fixture hash, all 80 IDs, decisions, and ordered
-failure codes. It cannot establish the publisher's identity, independence, implementation quality,
-or absence of oracle use; those remain human evidence checks.
+The fixed validator revision checks record shape, the frozen Pulse repository commit and raw fixture
+hash, all 80 IDs, decisions, and ordered failure codes. Keeping it separate from the frozen fixture
+commit prevents an older checker from accepting self-consistent but unapproved evidence metadata. It
+cannot establish the publisher's identity, independence, implementation quality, or absence of
+oracle use; those remain human evidence checks.
