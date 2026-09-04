@@ -48,6 +48,8 @@
     "evidence:reproduction": "tsx src/evidence-cli.ts reproduction",
     "evidence:review": "tsx src/evidence-cli.ts review",
     "evidence:evm": "tsx src/evidence-cli.ts evm",
+    "evidence:evm-v0.2": "tsx src/evidence-cli.ts evm-v0.2",
+    "evidence:evm-assess": "tsx src/evidence-cli.ts evm-assess",
     "evidence:evm-record": "tsx src/evidence-cli.ts evm-record",
     "public-evm:compose": "tsx scripts/compose-public-evm-case.ts",
     "mutation": "stryker run",

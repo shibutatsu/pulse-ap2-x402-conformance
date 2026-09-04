@@ -105,7 +105,9 @@ npx tsx src/cli.ts path/to/cases.json
 Validate an independent reproduction or review record, or compare an accepted case with a public
 EVM receipt, using the separate evidence commands in
 [`docs/external-evidence.md`](docs/external-evidence.md). The online command is read-only and does
-not change the offline verifier's no-network boundary.
+not change the offline verifier's no-network boundary. New 0.2 observations separate offline case
+agreement from the timestamped chain view, bind the selected head and verifier revision, and expose
+an explicit consumer freshness and re-read assessment.
 
 Outside implementers can start with the
 [`independent implementation guide`](docs/independent-implementation-guide.md). Independent payment

@@ -2,13 +2,14 @@ import { createHash } from "node:crypto";
 import type { Address, Hex } from "viem";
 import { keccak256, stringToHex } from "viem";
 import { z } from "zod";
-import { canonicalValuesEqual } from "./canonical.js";
+import { canonicalSha256Base64Url, canonicalValuesEqual } from "./canonical.js";
 import { CONFORMANCE_FAILURE_CODES } from "./failures.js";
 import {
   ConformanceBundleSchema,
   type ConformanceCase,
   ConformanceCaseSchema,
   ExpectedResultSchema,
+  SourcePinsSchema,
 } from "./types.js";
 import { verifyConformanceCase } from "./verifier.js";
 
@@ -18,12 +19,33 @@ const address = z.string().regex(/^0x[0-9a-fA-F]{40}$/);
 const hex32 = z.string().regex(/^0x[0-9a-fA-F]{64}$/);
 const unsignedDecimal = z.string().regex(/^(0|[1-9][0-9]*)$/);
 const positiveDecimal = z.string().regex(/^[1-9][0-9]*$/);
+const base64UrlSha256 = z
+  .string()
+  .regex(/^[A-Za-z0-9_-]{43}$/)
+  .refine(
+    (value) => {
+      const decoded = Buffer.from(value, "base64url");
+      return decoded.length === 32 && decoded.toString("base64url") === value;
+    },
+    { message: "Expected a canonical unpadded base64url-encoded SHA-256 value" },
+  );
 const httpsUrl = z
   .string()
   .url()
   .refine((value) => value.startsWith("https://"), {
     message: "Expected an HTTPS URL",
   });
+const credentialFreeHttpsUrl = httpsUrl.refine(
+  (value) => {
+    try {
+      const parsed = new URL(value);
+      return parsed.username.length === 0 && parsed.password.length === 0;
+    } catch {
+      return false;
+    }
+  },
+  { message: "URL credentials are not allowed" },
+);
 
 const FROZEN_PULSE_EVIDENCE_COMMIT = "e06a6cbfe3ddb965c8fc70f50838f5014ec2038e";
 
@@ -281,7 +303,10 @@ interface PublicEvmLog {
   logIndex: number | null;
 }
 
-export interface PublicEvmReader {
+export const PublicEvmHeadTagSchema = z.enum(["latest", "safe", "finalized"]);
+export type PublicEvmHeadTag = z.infer<typeof PublicEvmHeadTagSchema>;
+
+interface PublicEvmTransactionReader {
   getChainId(): Promise<number>;
   getTransaction(parameters: { hash: Hex }): Promise<{
     hash: Hex;
@@ -294,7 +319,17 @@ export interface PublicEvmReader {
     status: "success" | "reverted";
     logs: readonly PublicEvmLog[];
   }>;
+}
+
+export interface PublicEvmReader extends PublicEvmTransactionReader {
   getBlockNumber(): Promise<bigint>;
+}
+
+export interface PublicEvmV02Reader extends PublicEvmTransactionReader {
+  getBlock(parameters: { blockTag: PublicEvmHeadTag } | { blockNumber: bigint }): Promise<{
+    number: bigint | null;
+    hash: Hex | null;
+  }>;
 }
 
 export class PublicEvmEvidenceError extends Error {
@@ -327,7 +362,7 @@ export function selectPublicEvmCase(input: unknown, caseId: string): Conformance
   return ConformanceCaseSchema.parse(selected);
 }
 
-export interface PublicEvmSettlementEvidence {
+export interface PublicEvmSettlementEvidenceV01 {
   evidenceVersion: "pulse-public-evm-settlement/0.1";
   caseId: string;
   caseInputHash: string;
@@ -353,7 +388,7 @@ export interface PublicEvmSettlementEvidence {
   verifiedAt: string;
 }
 
-export const PublicEvmSettlementEvidenceSchema = z.strictObject({
+export const PublicEvmSettlementEvidenceV01Schema = z.strictObject({
   evidenceVersion: z.literal("pulse-public-evm-settlement/0.1"),
   caseId: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
   caseInputHash: z.string().min(1),
@@ -378,6 +413,196 @@ export const PublicEvmSettlementEvidenceSchema = z.strictObject({
   }),
   verifiedAt: z.string().datetime({ offset: true }),
 });
+
+export interface PublicEvmVerifierProvenance {
+  operator: string;
+  repositoryUrl: string;
+  commit: string;
+  command: "pulse-ap2-x402-evidence evm-v0.2";
+}
+
+export interface PublicEvmSettlementEvidenceV02Body {
+  evidenceVersion: "pulse-public-evm-settlement/0.2";
+  verifierProvenance: PublicEvmVerifierProvenance;
+  offlineArtifactAgreement: {
+    consistent: true;
+    caseId: string;
+    caseVersion: ConformanceCase["caseVersion"];
+    caseInputHash: string;
+    sourcePins: ConformanceCase["sourcePins"];
+  };
+  settlementObservation: {
+    network: string;
+    chainId: number;
+    transactionHash: Hex;
+    receipt: {
+      blockNumber: string;
+      blockHash: Hex;
+      status: "success";
+    };
+    observedHead: {
+      blockNumber: string;
+      blockHash: Hex;
+    };
+    confirmations: string;
+    asset: Address;
+    transfer: {
+      from: Address;
+      to: Address;
+      value: string;
+      logIndex: number;
+    };
+    authorizationUsed: {
+      authorizer: Address;
+      nonce: Hex;
+      logIndex: number;
+    };
+    observedAt: string;
+  };
+  confirmationPolicy: {
+    type: "minimum-confirmations";
+    headTag: PublicEvmHeadTag;
+    minimumConfirmations: string;
+  };
+}
+
+export interface PublicEvmSettlementEvidenceV02 extends PublicEvmSettlementEvidenceV02Body {
+  recordDigest: {
+    algorithm: "sha-256";
+    canonicalization: "RFC8785";
+    value: string;
+  };
+}
+
+// Keep the original public name bound to the 0.1 shape for existing TypeScript consumers.
+export type PublicEvmSettlementEvidence = PublicEvmSettlementEvidenceV01;
+export type AnyPublicEvmSettlementEvidence =
+  | PublicEvmSettlementEvidenceV01
+  | PublicEvmSettlementEvidenceV02;
+
+export const PublicEvmVerifierProvenanceSchema = z.strictObject({
+  operator: z.string().refine((value) => value.trim().length > 0, {
+    message: "Expected a non-blank verifier operator",
+  }),
+  repositoryUrl: credentialFreeHttpsUrl,
+  commit: gitCommit,
+  command: z.literal("pulse-ap2-x402-evidence evm-v0.2"),
+});
+
+export const PublicEvmSettlementEvidenceV02BodySchema = z.strictObject({
+  evidenceVersion: z.literal("pulse-public-evm-settlement/0.2"),
+  verifierProvenance: PublicEvmVerifierProvenanceSchema,
+  offlineArtifactAgreement: z.strictObject({
+    consistent: z.literal(true),
+    caseId: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
+    caseVersion: z.enum([
+      "ap2-x402-conformance/0.1",
+      "ap2-x402-conformance/0.2",
+      "ap2-x402-conformance/0.3",
+    ]),
+    caseInputHash: base64UrlSha256,
+    sourcePins: SourcePinsSchema,
+  }),
+  settlementObservation: z.strictObject({
+    network: z.string().regex(/^eip155:[1-9][0-9]*$/),
+    chainId: z.number().int().positive().safe(),
+    transactionHash: hex32,
+    receipt: z.strictObject({
+      blockNumber: unsignedDecimal,
+      blockHash: hex32,
+      status: z.literal("success"),
+    }),
+    observedHead: z.strictObject({
+      blockNumber: unsignedDecimal,
+      blockHash: hex32,
+    }),
+    confirmations: positiveDecimal,
+    asset: address,
+    transfer: z.strictObject({
+      from: address,
+      to: address,
+      value: unsignedDecimal,
+      logIndex: z.number().int().nonnegative().safe(),
+    }),
+    authorizationUsed: z.strictObject({
+      authorizer: address,
+      nonce: hex32,
+      logIndex: z.number().int().nonnegative().safe(),
+    }),
+    observedAt: z.string().datetime({ offset: true }),
+  }),
+  confirmationPolicy: z.strictObject({
+    type: z.literal("minimum-confirmations"),
+    headTag: PublicEvmHeadTagSchema,
+    minimumConfirmations: positiveDecimal,
+  }),
+});
+
+export const PublicEvmSettlementEvidenceV02Schema = PublicEvmSettlementEvidenceV02BodySchema.extend(
+  {
+    recordDigest: z.strictObject({
+      algorithm: z.literal("sha-256"),
+      canonicalization: z.literal("RFC8785"),
+      value: base64UrlSha256,
+    }),
+  },
+);
+
+export const AnyPublicEvmSettlementEvidenceSchema = z.discriminatedUnion("evidenceVersion", [
+  PublicEvmSettlementEvidenceV01Schema,
+  PublicEvmSettlementEvidenceV02Schema,
+]);
+
+// Preserve the 0.1 schema export; use AnyPublicEvmSettlementEvidenceSchema for version dispatch.
+export const PublicEvmSettlementEvidenceSchema = PublicEvmSettlementEvidenceV01Schema;
+
+export interface PublicEvmSettlementVerificationOptions {
+  verifierProvenance: PublicEvmVerifierProvenance;
+  headTag?: PublicEvmHeadTag;
+  minimumConfirmations?: bigint;
+}
+
+export interface PublicEvmConsumerPolicy {
+  maximumObservationAgeSeconds: bigint;
+  minimumConfirmations: bigint;
+  allowedHeadTags: readonly PublicEvmHeadTag[];
+  trustedVerifierProvenance: Pick<
+    PublicEvmVerifierProvenance,
+    "operator" | "repositoryUrl" | "commit"
+  >;
+  reread: "always" | "if-policy-unsatisfied" | "never";
+}
+
+export type PublicEvmRecordAcceptancePolicy = PublicEvmConsumerPolicy;
+
+export interface PublicEvmConsumerAssessmentContext {
+  evidenceRecordDigest: string;
+  evaluatedAt: string;
+  policy: {
+    maximumObservationAgeSeconds: string;
+    minimumConfirmations: string;
+    allowedHeadTags: PublicEvmHeadTag[];
+    trustedVerifierProvenance: Pick<
+      PublicEvmVerifierProvenance,
+      "operator" | "repositoryUrl" | "commit"
+    >;
+    reread: "always" | "if-policy-unsatisfied" | "never";
+  };
+}
+
+export interface PublicEvmConsumerAssessment {
+  assessmentVersion: "pulse-public-evm-consumer-assessment/0.1";
+  context: PublicEvmConsumerAssessmentContext | null;
+  accepted: boolean;
+  rereadRequired: boolean;
+  errors: string[];
+}
+
+export function publicEvmSettlementEvidenceDigest(
+  evidence: PublicEvmSettlementEvidenceV02Body,
+): string {
+  return canonicalSha256Base64Url(evidence);
+}
 
 function topicAddress(topic: Hex | undefined): Address | undefined {
   if (topic === undefined || !/^0x[0-9a-fA-F]{64}$/.test(topic)) return undefined;
@@ -414,7 +639,7 @@ export async function verifyPublicEvmSettlementRecord(
       errors: issueMessages(caseResult.error).map((message) => `case.${message}`),
     };
   }
-  const evidenceResult = PublicEvmSettlementEvidenceSchema.safeParse(evidenceInput);
+  const evidenceResult = AnyPublicEvmSettlementEvidenceSchema.safeParse(evidenceInput);
   if (!evidenceResult.success) {
     return {
       valid: false,
@@ -433,44 +658,252 @@ export async function verifyPublicEvmSettlementRecord(
 
   const requirements = conformanceCase.x402.requirements;
   const authorization = conformanceCase.x402.payload.payload.authorization;
-  requireEqual(errors, "caseId", evidence.caseId, conformanceCase.id);
-  requireEqual(errors, "caseInputHash", evidence.caseInputHash, conformanceCase.inputHash);
-  requireEqual(errors, "network", evidence.network, requirements.network);
-  requireEqual(
-    errors,
-    "chainId",
-    evidence.chainId,
-    Number(requirements.network.slice("eip155:".length)),
-  );
-  requireEqual(
-    errors,
-    "transactionHash",
-    evidence.transactionHash,
-    conformanceCase.x402.settlement.transaction,
-    true,
-  );
-  requireEqual(errors, "asset", evidence.asset, requirements.asset, true);
-  requireEqual(errors, "transfer.from", evidence.transfer.from, authorization.from, true);
-  requireEqual(errors, "transfer.to", evidence.transfer.to, authorization.to, true);
-  requireEqual(errors, "transfer.value", evidence.transfer.value, authorization.value);
-  requireEqual(
-    errors,
-    "authorizationUsed.authorizer",
-    evidence.authorizationUsed.authorizer,
-    authorization.from,
-    true,
-  );
-  requireEqual(
-    errors,
-    "authorizationUsed.nonce",
-    evidence.authorizationUsed.nonce,
-    authorization.nonce,
-    true,
-  );
+  const expectedChainId = Number(requirements.network.slice("eip155:".length));
+  if (evidence.evidenceVersion === "pulse-public-evm-settlement/0.1") {
+    requireEqual(errors, "caseId", evidence.caseId, conformanceCase.id);
+    requireEqual(errors, "caseInputHash", evidence.caseInputHash, conformanceCase.inputHash);
+    requireEqual(errors, "network", evidence.network, requirements.network);
+    requireEqual(errors, "chainId", evidence.chainId, expectedChainId);
+    requireEqual(
+      errors,
+      "transactionHash",
+      evidence.transactionHash,
+      conformanceCase.x402.settlement.transaction,
+      true,
+    );
+    requireEqual(errors, "asset", evidence.asset, requirements.asset, true);
+    requireEqual(errors, "transfer.from", evidence.transfer.from, authorization.from, true);
+    requireEqual(errors, "transfer.to", evidence.transfer.to, authorization.to, true);
+    requireEqual(errors, "transfer.value", evidence.transfer.value, authorization.value);
+    requireEqual(
+      errors,
+      "authorizationUsed.authorizer",
+      evidence.authorizationUsed.authorizer,
+      authorization.from,
+      true,
+    );
+    requireEqual(
+      errors,
+      "authorizationUsed.nonce",
+      evidence.authorizationUsed.nonce,
+      authorization.nonce,
+      true,
+    );
+  } else {
+    const agreement = evidence.offlineArtifactAgreement;
+    const observation = evidence.settlementObservation;
+    requireEqual(errors, "offlineArtifactAgreement.caseId", agreement.caseId, conformanceCase.id);
+    requireEqual(
+      errors,
+      "offlineArtifactAgreement.caseVersion",
+      agreement.caseVersion,
+      conformanceCase.caseVersion,
+    );
+    requireEqual(
+      errors,
+      "offlineArtifactAgreement.caseInputHash",
+      agreement.caseInputHash,
+      conformanceCase.inputHash,
+    );
+    if (!canonicalValuesEqual(agreement.sourcePins, conformanceCase.sourcePins)) {
+      errors.push(
+        "offlineArtifactAgreement.sourcePins: Does not match the supplied conformance case",
+      );
+    }
+    requireEqual(
+      errors,
+      "settlementObservation.network",
+      observation.network,
+      requirements.network,
+    );
+    requireEqual(errors, "settlementObservation.chainId", observation.chainId, expectedChainId);
+    requireEqual(
+      errors,
+      "settlementObservation.transactionHash",
+      observation.transactionHash,
+      conformanceCase.x402.settlement.transaction,
+      true,
+    );
+    requireEqual(
+      errors,
+      "settlementObservation.asset",
+      observation.asset,
+      requirements.asset,
+      true,
+    );
+    requireEqual(
+      errors,
+      "settlementObservation.transfer.from",
+      observation.transfer.from,
+      authorization.from,
+      true,
+    );
+    requireEqual(
+      errors,
+      "settlementObservation.transfer.to",
+      observation.transfer.to,
+      authorization.to,
+      true,
+    );
+    requireEqual(
+      errors,
+      "settlementObservation.transfer.value",
+      observation.transfer.value,
+      authorization.value,
+    );
+    requireEqual(
+      errors,
+      "settlementObservation.authorizationUsed.authorizer",
+      observation.authorizationUsed.authorizer,
+      authorization.from,
+      true,
+    );
+    requireEqual(
+      errors,
+      "settlementObservation.authorizationUsed.nonce",
+      observation.authorizationUsed.nonce,
+      authorization.nonce,
+      true,
+    );
+
+    const receiptBlockNumber = BigInt(observation.receipt.blockNumber);
+    const observedHeadNumber = BigInt(observation.observedHead.blockNumber);
+    const confirmations = BigInt(observation.confirmations);
+    const minimumConfirmations = BigInt(evidence.confirmationPolicy.minimumConfirmations);
+    if (observedHeadNumber < receiptBlockNumber) {
+      errors.push("settlementObservation.observedHead.blockNumber: Precedes the receipt block");
+    } else if (confirmations !== observedHeadNumber - receiptBlockNumber + 1n) {
+      errors.push(
+        "settlementObservation.confirmations: Does not equal observed head minus receipt block plus one",
+      );
+    }
+    if (confirmations < minimumConfirmations) {
+      errors.push(
+        "settlementObservation.confirmations: Does not satisfy confirmationPolicy.minimumConfirmations",
+      );
+    }
+    if (observation.transfer.logIndex === observation.authorizationUsed.logIndex) {
+      errors.push("settlementObservation: Transfer and AuthorizationUsed log indexes must differ");
+    }
+
+    const { recordDigest, ...digestInput } = evidence;
+    const expectedDigest = publicEvmSettlementEvidenceDigest(
+      digestInput as PublicEvmSettlementEvidenceV02Body,
+    );
+    if (recordDigest.value !== expectedDigest) {
+      errors.push("recordDigest.value: Does not match the canonical evidence body");
+    }
+  }
 
   return {
     valid: errors.length === 0,
     automatedChecksPassed: errors.length === 0,
+    errors,
+  };
+}
+
+const PublicEvmConsumerPolicySchema = z.strictObject({
+  maximumObservationAgeSeconds: z.bigint().nonnegative(),
+  minimumConfirmations: z.bigint().positive(),
+  allowedHeadTags: z.array(PublicEvmHeadTagSchema).min(1),
+  trustedVerifierProvenance: z.strictObject({
+    operator: z.string().refine((value) => value.trim().length > 0),
+    repositoryUrl: credentialFreeHttpsUrl,
+    commit: gitCommit,
+  }),
+  reread: z.enum(["always", "if-policy-unsatisfied", "never"]),
+});
+
+export async function assessPublicEvmSettlementV02(
+  caseInput: unknown,
+  evidenceInput: unknown,
+  policyInput: PublicEvmConsumerPolicy,
+  evaluatedAt = new Date(),
+): Promise<PublicEvmConsumerAssessment> {
+  const recordReport = await verifyPublicEvmSettlementRecord(caseInput, evidenceInput);
+  if (!recordReport.automatedChecksPassed) {
+    return {
+      assessmentVersion: "pulse-public-evm-consumer-assessment/0.1",
+      context: null,
+      accepted: false,
+      rereadRequired: false,
+      errors: recordReport.errors,
+    };
+  }
+  const evidenceResult = PublicEvmSettlementEvidenceV02Schema.safeParse(evidenceInput);
+  if (!evidenceResult.success) {
+    return {
+      assessmentVersion: "pulse-public-evm-consumer-assessment/0.1",
+      context: null,
+      accepted: false,
+      rereadRequired: false,
+      errors: ["evidenceVersion: Consumer assessment requires a 0.2 evidence record"],
+    };
+  }
+  const policyResult = PublicEvmConsumerPolicySchema.safeParse(policyInput);
+  if (!policyResult.success) {
+    return {
+      assessmentVersion: "pulse-public-evm-consumer-assessment/0.1",
+      context: null,
+      accepted: false,
+      rereadRequired: false,
+      errors: issueMessages(policyResult.error).map((message) => `policy.${message}`),
+    };
+  }
+  if (!Number.isFinite(evaluatedAt.getTime())) {
+    return {
+      assessmentVersion: "pulse-public-evm-consumer-assessment/0.1",
+      context: null,
+      accepted: false,
+      rereadRequired: false,
+      errors: ["evaluatedAt: Expected a valid date"],
+    };
+  }
+
+  const evidence = evidenceResult.data;
+  const policy = policyResult.data;
+  const context: PublicEvmConsumerAssessmentContext = {
+    evidenceRecordDigest: evidence.recordDigest.value,
+    evaluatedAt: evaluatedAt.toISOString(),
+    policy: {
+      maximumObservationAgeSeconds: policy.maximumObservationAgeSeconds.toString(),
+      minimumConfirmations: policy.minimumConfirmations.toString(),
+      allowedHeadTags: [...policy.allowedHeadTags],
+      trustedVerifierProvenance: policy.trustedVerifierProvenance,
+      reread: policy.reread,
+    },
+  };
+  const observation = evidence.settlementObservation;
+  const errors: string[] = [];
+  const observedAtMilliseconds = BigInt(Date.parse(observation.observedAt));
+  const evaluatedAtMilliseconds = BigInt(evaluatedAt.getTime());
+  if (observedAtMilliseconds > evaluatedAtMilliseconds) {
+    errors.push("settlementObservation.observedAt: Is later than the policy evaluation time");
+  } else if (
+    evaluatedAtMilliseconds - observedAtMilliseconds >
+    policy.maximumObservationAgeSeconds * 1000n
+  ) {
+    errors.push("settlementObservation.observedAt: Exceeds the maximum observation age");
+  }
+  if (BigInt(observation.confirmations) < policy.minimumConfirmations) {
+    errors.push("settlementObservation.confirmations: Does not satisfy the consumer policy");
+  }
+  if (!policy.allowedHeadTags.includes(evidence.confirmationPolicy.headTag)) {
+    errors.push("confirmationPolicy.headTag: Is not allowed by the consumer policy");
+  }
+  for (const key of ["operator", "repositoryUrl", "commit"] as const) {
+    if (evidence.verifierProvenance[key] !== policy.trustedVerifierProvenance[key]) {
+      errors.push(`verifierProvenance.${key}: Does not match the trusted verifier policy`);
+    }
+  }
+
+  const rereadRequired =
+    policy.reread === "always" || (policy.reread === "if-policy-unsatisfied" && errors.length > 0);
+  return {
+    assessmentVersion: "pulse-public-evm-consumer-assessment/0.1",
+    context,
+    accepted: errors.length === 0 && !rereadRequired,
+    rereadRequired,
     errors,
   };
 }
@@ -597,4 +1030,200 @@ export async function verifyPublicEvmSettlement(
     },
     verifiedAt: new Date().toISOString(),
   };
+}
+
+export async function verifyPublicEvmSettlementV02(
+  caseInput: unknown,
+  reader: PublicEvmV02Reader,
+  options: PublicEvmSettlementVerificationOptions,
+): Promise<PublicEvmSettlementEvidenceV02> {
+  const minimumConfirmations = options.minimumConfirmations ?? 1n;
+  if (minimumConfirmations < 1n) {
+    throw new PublicEvmEvidenceError("Minimum confirmations must be at least one.");
+  }
+  const headTagResult = PublicEvmHeadTagSchema.safeParse(options.headTag ?? "latest");
+  if (!headTagResult.success) {
+    throw new PublicEvmEvidenceError("The selected EVM head tag is not supported.");
+  }
+  const provenanceResult = PublicEvmVerifierProvenanceSchema.safeParse(options.verifierProvenance);
+  if (!provenanceResult.success) {
+    throw new PublicEvmEvidenceError("The verifier provenance is not well formed.");
+  }
+  const parsedCase = ConformanceCaseSchema.safeParse(caseInput);
+  if (!parsedCase.success) {
+    throw new PublicEvmEvidenceError("The selected conformance case is not well formed.");
+  }
+  const conformanceCase: ConformanceCase = parsedCase.data;
+  const offlineReport = await verifyConformanceCase(conformanceCase);
+  if (!offlineReport.consistent || !conformanceCase.expected.consistent) {
+    throw new PublicEvmEvidenceError(
+      "Public settlement evidence requires an accepted offline case.",
+    );
+  }
+
+  const transactionHash = conformanceCase.x402.settlement.transaction as Hex;
+  let chainId: number;
+  let transaction: Awaited<ReturnType<PublicEvmV02Reader["getTransaction"]>>;
+  let receipt: Awaited<ReturnType<PublicEvmV02Reader["getTransactionReceipt"]>>;
+  try {
+    [chainId, transaction, receipt] = await Promise.all([
+      reader.getChainId(),
+      reader.getTransaction({ hash: transactionHash }),
+      reader.getTransactionReceipt({ hash: transactionHash }),
+    ]);
+  } catch {
+    throw new PublicEvmEvidenceError("Unable to read the public transaction and receipt.");
+  }
+
+  const expectedChainId = Number(conformanceCase.x402.requirements.network.slice("eip155:".length));
+  if (chainId !== expectedChainId) {
+    throw new PublicEvmEvidenceError("The RPC chain does not match the case network.");
+  }
+  if (
+    !sameHex(transaction.hash, transactionHash) ||
+    !sameHex(receipt.transactionHash, transactionHash)
+  ) {
+    throw new PublicEvmEvidenceError(
+      "The returned transaction identifier does not match the case.",
+    );
+  }
+  if (transaction.blockNumber === null || transaction.blockNumber !== receipt.blockNumber) {
+    throw new PublicEvmEvidenceError("The transaction and receipt block numbers do not match.");
+  }
+  if (receipt.status !== "success") {
+    throw new PublicEvmEvidenceError("The public transaction receipt is not successful.");
+  }
+
+  let observedHead: Awaited<ReturnType<PublicEvmV02Reader["getBlock"]>>;
+  try {
+    observedHead = await reader.getBlock({ blockTag: headTagResult.data });
+  } catch {
+    throw new PublicEvmEvidenceError("Unable to read the selected public EVM head.");
+  }
+  const observedAt = new Date().toISOString();
+  if (observedHead.number === null || observedHead.hash === null) {
+    throw new PublicEvmEvidenceError("The selected public EVM head is incomplete.");
+  }
+  if (observedHead.number < receipt.blockNumber) {
+    throw new PublicEvmEvidenceError("The selected EVM head precedes the receipt block.");
+  }
+
+  let canonicalReceiptBlock: Awaited<ReturnType<PublicEvmV02Reader["getBlock"]>>;
+  try {
+    canonicalReceiptBlock = await reader.getBlock({ blockNumber: receipt.blockNumber });
+  } catch {
+    throw new PublicEvmEvidenceError("Unable to re-read the canonical receipt block.");
+  }
+  if (canonicalReceiptBlock.number === null || canonicalReceiptBlock.hash === null) {
+    throw new PublicEvmEvidenceError("The canonical receipt block is incomplete.");
+  }
+  if (
+    canonicalReceiptBlock.number !== receipt.blockNumber ||
+    !sameHex(canonicalReceiptBlock.hash, receipt.blockHash)
+  ) {
+    throw new PublicEvmEvidenceError(
+      "The receipt block hash does not match the current canonical block.",
+    );
+  }
+  const confirmations = observedHead.number - receipt.blockNumber + 1n;
+  if (confirmations < minimumConfirmations) {
+    throw new PublicEvmEvidenceError("The public transaction does not have enough confirmations.");
+  }
+
+  const requirements = conformanceCase.x402.requirements;
+  const authorization = conformanceCase.x402.payload.payload.authorization;
+  const assetLogs = receipt.logs.filter((log) => sameHex(log.address, requirements.asset));
+  const transferLog = assetLogs.find((log) => {
+    if (!sameHex(log.topics[0] ?? "", TRANSFER_TOPIC)) return false;
+    const from = topicAddress(log.topics[1]);
+    const to = topicAddress(log.topics[2]);
+    if (from === undefined || to === undefined || !/^0x[0-9a-fA-F]{64}$/.test(log.data)) {
+      return false;
+    }
+    return (
+      sameHex(from, authorization.from) &&
+      sameHex(to, authorization.to) &&
+      BigInt(log.data) === BigInt(authorization.value)
+    );
+  });
+  if (transferLog === undefined || transferLog.logIndex === null) {
+    throw new PublicEvmEvidenceError("No matching ERC-20 Transfer event was found.");
+  }
+
+  const authorizationUsedLog = assetLogs.find((log) => {
+    if (!sameHex(log.topics[0] ?? "", AUTHORIZATION_USED_TOPIC)) return false;
+    const authorizer = topicAddress(log.topics[1]);
+    const nonce = log.topics[2];
+    return (
+      authorizer !== undefined &&
+      nonce !== undefined &&
+      sameHex(authorizer, authorization.from) &&
+      sameHex(nonce, authorization.nonce)
+    );
+  });
+  if (authorizationUsedLog === undefined || authorizationUsedLog.logIndex === null) {
+    throw new PublicEvmEvidenceError("No matching EIP-3009 AuthorizationUsed event was found.");
+  }
+  if (transferLog.logIndex === authorizationUsedLog.logIndex) {
+    throw new PublicEvmEvidenceError(
+      "The Transfer and AuthorizationUsed events cannot share a log index.",
+    );
+  }
+
+  const body: PublicEvmSettlementEvidenceV02Body = {
+    evidenceVersion: "pulse-public-evm-settlement/0.2",
+    verifierProvenance: provenanceResult.data,
+    offlineArtifactAgreement: {
+      consistent: true,
+      caseId: conformanceCase.id,
+      caseVersion: conformanceCase.caseVersion,
+      caseInputHash: conformanceCase.inputHash,
+      sourcePins: conformanceCase.sourcePins,
+    },
+    settlementObservation: {
+      network: requirements.network,
+      chainId,
+      transactionHash,
+      receipt: {
+        blockNumber: receipt.blockNumber.toString(),
+        blockHash: receipt.blockHash,
+        status: "success",
+      },
+      observedHead: {
+        blockNumber: observedHead.number.toString(),
+        blockHash: observedHead.hash,
+      },
+      confirmations: confirmations.toString(),
+      asset: requirements.asset as Address,
+      transfer: {
+        from: authorization.from as Address,
+        to: authorization.to as Address,
+        value: authorization.value,
+        logIndex: transferLog.logIndex,
+      },
+      authorizationUsed: {
+        authorizer: authorization.from as Address,
+        nonce: authorization.nonce as Hex,
+        logIndex: authorizationUsedLog.logIndex,
+      },
+      observedAt,
+    },
+    confirmationPolicy: {
+      type: "minimum-confirmations",
+      headTag: headTagResult.data,
+      minimumConfirmations: minimumConfirmations.toString(),
+    },
+  };
+  const result: PublicEvmSettlementEvidenceV02 = {
+    ...body,
+    recordDigest: {
+      algorithm: "sha-256",
+      canonicalization: "RFC8785",
+      value: publicEvmSettlementEvidenceDigest(body),
+    },
+  };
+  if (!PublicEvmSettlementEvidenceV02Schema.safeParse(result).success) {
+    throw new PublicEvmEvidenceError("The public RPC returned malformed settlement evidence.");
+  }
+  return result;
 }
