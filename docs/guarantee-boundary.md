@@ -28,6 +28,12 @@ offline boundary. It performs read-only public RPC calls and matches a successfu
 `Transfer` and `AuthorizationUsed` events to one accepted case. It does not sign or submit a
 transaction, and it does not make the other cases live-chain evidence.
 
+The 0.2 evidence envelope additionally records the tagged head, source pins, confirmation rule,
+operator-provided verifier provenance, and a canonical digest. The digest detects record changes;
+it does not authenticate the operator or prove that the receipt block is an ancestor of the
+observed head. Freshness, trusted-provider selection, authenticated digest publication, and any
+required online re-read remain consumer responsibilities.
+
 Fixture-generation tests exercise the pinned `@x402/core` `x402Client` and `@x402/evm`
 `ExactEvmScheme`. A registered client extension replaces the standard producer's random nonce and
 time window with the AP2-derived nonce and deterministic fixture times, then re-signs the modified

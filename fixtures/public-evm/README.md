@@ -12,7 +12,7 @@ This directory contains one standalone AP2-to-x402 case tied to a successful pub
 - Authorization hash: `jVLFesDqVtTfEm69TddjR-YI1D33SNLhnOk1RQygg-s`
 - Evidence SHA-256: `7abaec474f7d7ccecc39049aa1519189cc977571b1b234bf95add55ebf03b977`
 
-[`case.json`](case.json) is the standalone conformance input. [`authorization.json`](authorization.json) records the exact EIP-3009 arguments and signature used by the transaction. The read-only receipt verification result is stored in [`../../evidence/public-evm-base-sepolia.json`](../../evidence/public-evm-base-sepolia.json).
+[`case.json`](case.json) is the standalone conformance input. [`authorization.json`](authorization.json) records the exact EIP-3009 arguments and signature used by the transaction. The historical `pulse-public-evm-settlement/0.1` read-only receipt verification result is stored in [`../../evidence/public-evm-base-sepolia.json`](../../evidence/public-evm-base-sepolia.json). New observations should use the provenance-bound 0.2 command documented in [`../../docs/external-evidence.md`](../../docs/external-evidence.md).
 
 ## Reproduce the generated case
 

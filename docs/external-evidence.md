@@ -1,6 +1,6 @@
 # How to record external evidence without overstating what it proves
 
-The repository provides three checks for evidence required by issue
+The repository provides validators and read-only observation commands for evidence required by issue
 [#17](https://github.com/shibutatsu/pulse-ap2-x402-conformance/issues/17). They validate a record
 and its fixture-bound fields. They do not establish who performed the work, make an implementation
 independent, turn a review into an audit, or satisfy the other release gates.
@@ -178,8 +178,76 @@ transaction. Do not commit an RPC credential, private key, customer record, or f
 The resulting JSON proves the listed receipt facts at its observation time; it is not perpetual
 finality, token-issuer identity, legal authorization, or production-readiness evidence.
 
+### Create a provenance-bound 0.2 observation
+
+The original `evm` command and `pulse-public-evm-settlement/0.1` shape remain available for
+compatibility. For a new observation, use `evm-v0.2` and identify the public verifier revision and
+the operator making the observation:
+
+```bash
+PULSE_EVM_RPC_URL="<read-only endpoint>" \
+  npm run evidence:evm-v0.2 -- build/public-evm-recorded/public-case.json \
+  --case <case-id> \
+  --verifier-operator "<person, organization, service, or stable pseudonym>" \
+  --verifier-repository-url "https://github.com/example/verifier" \
+  --verifier-commit <40-character-commit> \
+  --head-tag latest \
+  --min-confirmations 12 \
+  --output path/to/public-evm-evidence-v0.2.json
+```
+
+Version 0.2 keeps two results separate. `offlineArtifactAgreement` identifies the accepted case,
+case format, input hash, and source pins. `settlementObservation` records the chain, receipt block,
+matched log indexes, observed head number and hash, and observation time. `confirmationPolicy`
+records both the selected `latest`, `safe`, or `finalized` head and the minimum depth required at
+that head. The command reads the transaction and receipt before the tagged head, rejects a head
+that precedes the receipt, then re-reads the receipt-height canonical block and requires its hash to
+match the receipt. It calculates inclusive confirmations as `tagged head - receipt block + 1`.
+
+`recordDigest` is a base64url SHA-256 of the RFC 8785 canonical record body, excluding the digest
+field itself. It detects changes after generation; it does not authenticate the self-reported
+`verifierProvenance`. Before trusting a saved record, obtain its digest and provenance from a
+signature or an authenticated channel controlled by the stated operator. The fixed logical command
+name intentionally excludes RPC URLs, credentials, and local paths.
+
+Validate either record version structurally and against its case without an RPC request:
+
+```bash
+npm run evidence:evm-record -- path/to/case.json path/to/public-evm-evidence.json
+```
+
+For a 0.2 record whose digest and provenance were authenticated separately, apply an explicit
+consumer policy:
+
+```bash
+npm run evidence:evm-assess -- path/to/case.json path/to/public-evm-evidence-v0.2.json \
+  --max-observation-age-seconds 900 \
+  --min-confirmations 12 \
+  --allowed-head-tags safe,finalized \
+  --trusted-verifier-operator "<authenticated operator>" \
+  --trusted-verifier-repository-url "https://github.com/example/verifier" \
+  --trusted-verifier-commit <40-character-commit> \
+  --reread if-policy-unsatisfied
+```
+
+`always` requires an online re-read even when every saved field meets policy.
+`if-policy-unsatisfied` requests one when freshness, confirmation depth, head tag, or provenance
+does not meet policy. `never` only assesses the saved observation. An assessment can therefore
+return `rereadRequired: true` with no validation errors. Perform the requested re-read with
+`evm-v0.2` and a provider the consumer trusts; the assessment command never contacts an RPC.
+Every assessment includes the target record digest, evaluation time, and JSON-safe copy of the
+applied policy. Do not detach `accepted` from that context or reuse it as a perpetual settlement
+status.
+
+A tagged head number and hash record what one provider returned. Re-reading the receipt-height
+canonical block narrows the reorganization window, but the saved values do not cryptographically
+prove ancestry and cannot eliminate a provider inconsistency or a reorganization between reads.
+Consumers that need current finality must re-read the receipt and selected head under their own
+provider and chain policy.
+
 The repository includes one completed Base Sepolia example in
 [`fixtures/public-evm`](../fixtures/public-evm/README.md). Its receipt verification result is
+the historical 0.1 record
 [`evidence/public-evm-base-sepolia.json`](../evidence/public-evm-base-sepolia.json).
 
 Validate a saved receipt result against its standalone case without making an RPC request:
@@ -191,8 +259,9 @@ npm run evidence:evm-record -- \
 ```
 
 This offline check verifies the case first, then binds the saved case ID, input hash, network,
-transaction, asset, transfer, and authorization event back to that case. It detects drift between
-the two committed JSON files. It does not reread the receipt or refresh its confirmation count.
+transaction, asset, transfer, and authorization event back to that case. For 0.2 it also validates
+the source pins, confirmation arithmetic, distinct log indexes, and canonical record digest. It
+does not reread the receipt or refresh its confirmation count.
 
 ## Release decision
 
