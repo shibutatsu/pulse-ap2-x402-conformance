@@ -118,7 +118,8 @@ an explicit consumer freshness and re-read assessment.
 
 Outside implementers can start with the
 [`independent implementation guide`](docs/independent-implementation-guide.md). Independent payment
-and EVM reviewers can use the frozen [`security review packet`](docs/security-review-packet.md).
+and EVM reviewers can use the frozen [`security review packet`](docs/security-review-packet.md) and
+the optional [`report template`](docs/security-review-report-template.md).
 
 The current corpus under `fixtures/v0.3` contains 20 cryptographically consistent cases and 60
 fail-closed mutation cases spanning Base Sepolia and a local EVM fixture. The archived
