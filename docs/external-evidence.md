@@ -246,9 +246,11 @@ Consumers that need current finality must re-read the receipt and selected head 
 provider and chain policy.
 
 The repository includes one completed Base Sepolia example in
-[`fixtures/public-evm`](../fixtures/public-evm/README.md). Its receipt verification result is
-the historical 0.1 record
-[`evidence/public-evm-base-sepolia.json`](../evidence/public-evm-base-sepolia.json).
+[`fixtures/public-evm`](../fixtures/public-evm/README.md). Its receipt verification results are the
+historical 0.1 record
+[`evidence/public-evm-base-sepolia.json`](../evidence/public-evm-base-sepolia.json) and a 0.2
+observation against a finalized head in
+[`evidence/public-evm-base-sepolia-v0.2.json`](../evidence/public-evm-base-sepolia-v0.2.json).
 
 Validate a saved receipt result against its standalone case without making an RPC request:
 
@@ -256,6 +258,10 @@ Validate a saved receipt result against its standalone case without making an RP
 npm run evidence:evm-record -- \
   fixtures/public-evm/case.json \
   evidence/public-evm-base-sepolia.json
+
+npm run evidence:evm-record -- \
+  fixtures/public-evm/case.json \
+  evidence/public-evm-base-sepolia-v0.2.json
 ```
 
 This offline check verifies the case first, then binds the saved case ID, input hash, network,

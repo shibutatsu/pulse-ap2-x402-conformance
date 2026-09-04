@@ -1,0 +1,58 @@
+{
+  "evidenceVersion": "pulse-public-evm-settlement/0.2",
+  "verifierProvenance": {
+    "operator": "shibutatsu",
+    "repositoryUrl": "https://github.com/shibutatsu/pulse-ap2-x402-conformance",
+    "commit": "5e6c5c4b6be85c517be12d662f5438f3ab041b61",
+    "command": "pulse-ap2-x402-evidence evm-v0.2"
+  },
+  "offlineArtifactAgreement": {
+    "consistent": true,
+    "caseId": "public-base-sepolia-usdc-01",
+    "caseVersion": "ap2-x402-conformance/0.2",
+    "caseInputHash": "Er3NyDsyinLooKHl5DE6uw9g4l3ICVT2UWpCsDXXT60",
+    "sourcePins": {
+      "ap2Commit": "e1ea56db72a6385bce3e5c1112b3a56ce60acb43",
+      "x402Commit": "c8247c4cd15f29498474404d94636e7dbb894e86",
+      "x402PackageVersion": "2.22.0"
+    }
+  },
+  "settlementObservation": {
+    "network": "eip155:84532",
+    "chainId": 84532,
+    "transactionHash": "0xb6a16b58ea994c4db07582cbbc590ffdbec0befffd055b1405f6482d966f2cb1",
+    "receipt": {
+      "blockNumber": "45545081",
+      "blockHash": "0xb26c660f2be2ebb8561d84f3c742038c10f96b271e173320bdf875bb6274c5ce",
+      "status": "success"
+    },
+    "observedHead": {
+      "blockNumber": "46384074",
+      "blockHash": "0xa9f0d903750a12085afcefcf28cd5a40f813a9d75bd0ad6f9298dfbde5dbe1be"
+    },
+    "confirmations": "838994",
+    "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+    "transfer": {
+      "from": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+      "to": "0xA9D201e692Ef4D28f7AE8c7fb4CDd80aaf9E171e",
+      "value": "1000",
+      "logIndex": 1
+    },
+    "authorizationUsed": {
+      "authorizer": "0xA3ACaC31a63387e041CB6aC7A5cE8a92554Ef4C7",
+      "nonce": "0xc0eb803ece2b411866ce87ee3b80e7a05a5446f3956f831120399e45a1845a35",
+      "logIndex": 0
+    },
+    "observedAt": "2026-09-04T15:56:14.035Z"
+  },
+  "confirmationPolicy": {
+    "type": "minimum-confirmations",
+    "headTag": "finalized",
+    "minimumConfirmations": "12"
+  },
+  "recordDigest": {
+    "algorithm": "sha-256",
+    "canonicalization": "RFC8785",
+    "value": "tF8j-nz6h-PDkqOzVl97pYX_8hXZKHrQls1NkCNU4ls"
+  }
+}

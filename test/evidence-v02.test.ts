@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { type Address, type Hex, keccak256, numberToHex, padHex, stringToHex } from "viem";
@@ -17,6 +18,12 @@ import {
 import type { ConformanceBundle, ConformanceCase } from "../src/types.js";
 
 const publicEvmCaseUrl = new URL("../fixtures/public-evm/case.json", import.meta.url);
+const committedV02EvidenceUrl = new URL(
+  "../evidence/public-evm-base-sepolia-v0.2.json",
+  import.meta.url,
+);
+const committedV02EvidenceSha256 =
+  "e210447c7d09906393f8beb8e49cb41b037fc0ad725880144d6a0b2138c59f25";
 const fixtureUrl = new URL("../fixtures/v0.3/cases.json", import.meta.url);
 const TRANSFER_TOPIC = keccak256(stringToHex("Transfer(address,address,uint256)"));
 const AUTHORIZATION_USED_TOPIC = keccak256(stringToHex("AuthorizationUsed(address,bytes32)"));
@@ -229,6 +236,34 @@ describe("public EVM settlement evidence v0.2", () => {
 
   afterEach(() => {
     vi.useRealTimers();
+  });
+
+  it("keeps the committed 0.2 observation byte-pinned and bound to its case", async () => {
+    const [conformanceCase, evidenceRaw] = await Promise.all([
+      publicEvmCase(),
+      readFile(fileURLToPath(committedV02EvidenceUrl), "utf8"),
+    ]);
+    expect(createHash("sha256").update(evidenceRaw).digest("hex")).toBe(committedV02EvidenceSha256);
+    const evidence = JSON.parse(evidenceRaw) as PublicEvmSettlementEvidenceV02;
+    expect(evidence).toMatchObject({
+      verifierProvenance: {
+        operator: "shibutatsu",
+        repositoryUrl: "https://github.com/shibutatsu/pulse-ap2-x402-conformance",
+        commit: "5e6c5c4b6be85c517be12d662f5438f3ab041b61",
+      },
+      confirmationPolicy: {
+        headTag: "finalized",
+        minimumConfirmations: "12",
+      },
+      recordDigest: {
+        value: "tF8j-nz6h-PDkqOzVl97pYX_8hXZKHrQls1NkCNU4ls",
+      },
+    });
+    await expect(verifyPublicEvmSettlementRecord(conformanceCase, evidence)).resolves.toEqual({
+      valid: true,
+      automatedChecksPassed: true,
+      errors: [],
+    });
   });
 
   it("creates and revalidates a provenance-, head-, and case-bound record", async () => {
