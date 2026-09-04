@@ -11,8 +11,10 @@ This directory contains one standalone AP2-to-x402 case tied to a successful pub
 - Transfer: `1000` atomic units (`0.001 USDC`)
 - Authorization hash: `jVLFesDqVtTfEm69TddjR-YI1D33SNLhnOk1RQygg-s`
 - Evidence SHA-256: `7abaec474f7d7ccecc39049aa1519189cc977571b1b234bf95add55ebf03b977`
+- Evidence v0.2 SHA-256: `e210447c7d09906393f8beb8e49cb41b037fc0ad725880144d6a0b2138c59f25`
+- Evidence v0.2 record digest: `tF8j-nz6h-PDkqOzVl97pYX_8hXZKHrQls1NkCNU4ls`
 
-[`case.json`](case.json) is the standalone conformance input. [`authorization.json`](authorization.json) records the exact EIP-3009 arguments and signature used by the transaction. The historical `pulse-public-evm-settlement/0.1` read-only receipt verification result is stored in [`../../evidence/public-evm-base-sepolia.json`](../../evidence/public-evm-base-sepolia.json). New observations should use the provenance-bound 0.2 command documented in [`../../docs/external-evidence.md`](../../docs/external-evidence.md).
+[`case.json`](case.json) is the standalone conformance input. [`authorization.json`](authorization.json) records the exact EIP-3009 arguments and signature used by the transaction. The historical `pulse-public-evm-settlement/0.1` result is stored in [`../../evidence/public-evm-base-sepolia.json`](../../evidence/public-evm-base-sepolia.json). The provenance-bound observation made against a finalized head is stored in [`../../evidence/public-evm-base-sepolia-v0.2.json`](../../evidence/public-evm-base-sepolia-v0.2.json).
 
 ## Reproduce the generated case
 
@@ -59,7 +61,11 @@ Check the committed receipt record against the committed case without using an R
 npm run evidence:evm-record -- \
   fixtures/public-evm/case.json \
   evidence/public-evm-base-sepolia.json
+
+npm run evidence:evm-record -- \
+  fixtures/public-evm/case.json \
+  evidence/public-evm-base-sepolia-v0.2.json
 ```
 
 The evidence establishes the transaction, successful receipt, matching token transfer, and matching EIP-3009 authorization event at the recorded observation time. It does not satisfy the separate external-implementation, independent-review, or sustained-CI gates in issue #17.
-The test suite pins the complete evidence-file SHA-256 so block metadata, log indexes, confirmation count, and verification time cannot drift unnoticed. The offline check still does not re-query the chain or prove current finality.
+The test suite pins each complete evidence-file SHA-256 so block metadata, log indexes, confirmation count, and observation time cannot drift unnoticed. The offline check still does not re-query the chain or prove current finality.

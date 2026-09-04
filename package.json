@@ -26,6 +26,7 @@
     "dist",
     "fixtures",
     "evidence/public-evm-base-sepolia.json",
+    "evidence/public-evm-base-sepolia-v0.2.json",
     "docs",
     "README.md",
     "referent-table-public-conformance-implementation.md",
@@ -55,7 +56,7 @@
     "mutation": "stryker run",
     "audit:dependencies": "npm audit --audit-level=high",
     "check:pack": "npm pack --dry-run",
-    "ci": "npm run typecheck && npm run lint && npm run test:x402-producer && npm run test && npm run build && npm run fixtures:verify && npm run evidence:evm-record -- fixtures/public-evm/case.json evidence/public-evm-base-sepolia.json && npm run audit:dependencies && npm run check:pack"
+    "ci": "npm run typecheck && npm run lint && npm run test:x402-producer && npm run test && npm run build && npm run fixtures:verify && npm run evidence:evm-record -- fixtures/public-evm/case.json evidence/public-evm-base-sepolia.json && npm run evidence:evm-record -- fixtures/public-evm/case.json evidence/public-evm-base-sepolia-v0.2.json && npm run audit:dependencies && npm run check:pack"
   },
   "dependencies": {
     "@x402/core": "2.23.0",
