@@ -3,6 +3,13 @@
 [![CI](https://github.com/shibutatsu/pulse-ap2-x402-conformance/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/shibutatsu/pulse-ap2-x402-conformance/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/shibutatsu/pulse-ap2-x402-conformance/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/shibutatsu/pulse-ap2-x402-conformance/actions/workflows/codeql.yml)
 
+Community help is currently needed for one more
+[independent 80-case implementation](https://github.com/shibutatsu/pulse-ap2-x402-conformance/issues/16)
+and one
+[full independent security review](https://github.com/shibutatsu/pulse-ap2-x402-conformance/issues/18).
+Both are optional, unpaid community work. The complete pre-release evidence checklist is
+tracked in [issue #17](https://github.com/shibutatsu/pulse-ap2-x402-conformance/issues/17).
+
 This repository contains an experimental, non-normative conformance profile for checking whether
 a verified AP2 v0.2 Payment Mandate still describes the same payment that an x402 v2 EVM payload
 authorized and a facilitator reported as settled.
