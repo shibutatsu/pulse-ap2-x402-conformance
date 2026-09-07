@@ -908,14 +908,7 @@ export async function assessPublicEvmSettlementV02(
   };
 }
 
-export async function verifyPublicEvmSettlement(
-  caseInput: unknown,
-  reader: PublicEvmReader,
-  minConfirmations = 1n,
-): Promise<PublicEvmSettlementEvidence> {
-  if (minConfirmations < 1n) {
-    throw new PublicEvmEvidenceError("Minimum confirmations must be at least one.");
-  }
+async function requireAcceptedPublicEvmCase(caseInput: unknown): Promise<ConformanceCase> {
   const parsedCase = ConformanceCaseSchema.safeParse(caseInput);
   if (!parsedCase.success) {
     throw new PublicEvmEvidenceError("The selected conformance case is not well formed.");
@@ -927,6 +920,62 @@ export async function verifyPublicEvmSettlement(
       "Public settlement evidence requires an accepted offline case.",
     );
   }
+  return conformanceCase;
+}
+
+function findSettlementEventIndexes(
+  conformanceCase: ConformanceCase,
+  logs: readonly PublicEvmLog[],
+): { transferLogIndex: number; authorizationUsedLogIndex: number } {
+  const requirements = conformanceCase.x402.requirements;
+  const authorization = conformanceCase.x402.payload.payload.authorization;
+  const assetLogs = logs.filter((log) => sameHex(log.address, requirements.asset));
+  const transferLog = assetLogs.find((log) => {
+    if (!sameHex(log.topics[0] ?? "", TRANSFER_TOPIC)) return false;
+    const from = topicAddress(log.topics[1]);
+    const to = topicAddress(log.topics[2]);
+    if (from === undefined || to === undefined || !/^0x[0-9a-fA-F]{64}$/.test(log.data)) {
+      return false;
+    }
+    return (
+      sameHex(from, authorization.from) &&
+      sameHex(to, authorization.to) &&
+      BigInt(log.data) === BigInt(authorization.value)
+    );
+  });
+  if (transferLog === undefined || transferLog.logIndex === null) {
+    throw new PublicEvmEvidenceError("No matching ERC-20 Transfer event was found.");
+  }
+
+  const authorizationUsedLog = assetLogs.find((log) => {
+    if (!sameHex(log.topics[0] ?? "", AUTHORIZATION_USED_TOPIC)) return false;
+    const authorizer = topicAddress(log.topics[1]);
+    const nonce = log.topics[2];
+    return (
+      authorizer !== undefined &&
+      nonce !== undefined &&
+      sameHex(authorizer, authorization.from) &&
+      sameHex(nonce, authorization.nonce)
+    );
+  });
+  if (authorizationUsedLog === undefined || authorizationUsedLog.logIndex === null) {
+    throw new PublicEvmEvidenceError("No matching EIP-3009 AuthorizationUsed event was found.");
+  }
+  return {
+    transferLogIndex: transferLog.logIndex,
+    authorizationUsedLogIndex: authorizationUsedLog.logIndex,
+  };
+}
+
+export async function verifyPublicEvmSettlement(
+  caseInput: unknown,
+  reader: PublicEvmReader,
+  minConfirmations = 1n,
+): Promise<PublicEvmSettlementEvidence> {
+  if (minConfirmations < 1n) {
+    throw new PublicEvmEvidenceError("Minimum confirmations must be at least one.");
+  }
+  const conformanceCase = await requireAcceptedPublicEvmCase(caseInput);
 
   const transactionHash = conformanceCase.x402.settlement.transaction as Hex;
   let chainId: number;
@@ -972,38 +1021,10 @@ export async function verifyPublicEvmSettlement(
 
   const requirements = conformanceCase.x402.requirements;
   const authorization = conformanceCase.x402.payload.payload.authorization;
-  const assetLogs = receipt.logs.filter((log) => sameHex(log.address, requirements.asset));
-  const transferLog = assetLogs.find((log) => {
-    if (!sameHex(log.topics[0] ?? "", TRANSFER_TOPIC)) return false;
-    const from = topicAddress(log.topics[1]);
-    const to = topicAddress(log.topics[2]);
-    if (from === undefined || to === undefined || !/^0x[0-9a-fA-F]{64}$/.test(log.data)) {
-      return false;
-    }
-    return (
-      sameHex(from, authorization.from) &&
-      sameHex(to, authorization.to) &&
-      BigInt(log.data) === BigInt(authorization.value)
-    );
-  });
-  if (transferLog === undefined || transferLog.logIndex === null) {
-    throw new PublicEvmEvidenceError("No matching ERC-20 Transfer event was found.");
-  }
-
-  const authorizationUsedLog = assetLogs.find((log) => {
-    if (!sameHex(log.topics[0] ?? "", AUTHORIZATION_USED_TOPIC)) return false;
-    const authorizer = topicAddress(log.topics[1]);
-    const nonce = log.topics[2];
-    return (
-      authorizer !== undefined &&
-      nonce !== undefined &&
-      sameHex(authorizer, authorization.from) &&
-      sameHex(nonce, authorization.nonce)
-    );
-  });
-  if (authorizationUsedLog === undefined || authorizationUsedLog.logIndex === null) {
-    throw new PublicEvmEvidenceError("No matching EIP-3009 AuthorizationUsed event was found.");
-  }
+  const { transferLogIndex, authorizationUsedLogIndex } = findSettlementEventIndexes(
+    conformanceCase,
+    receipt.logs,
+  );
 
   return {
     evidenceVersion: "pulse-public-evm-settlement/0.1",
@@ -1021,12 +1042,12 @@ export async function verifyPublicEvmSettlement(
       from: authorization.from as Address,
       to: authorization.to as Address,
       value: authorization.value,
-      logIndex: transferLog.logIndex,
+      logIndex: transferLogIndex,
     },
     authorizationUsed: {
       authorizer: authorization.from as Address,
       nonce: authorization.nonce as Hex,
-      logIndex: authorizationUsedLog.logIndex,
+      logIndex: authorizationUsedLogIndex,
     },
     verifiedAt: new Date().toISOString(),
   };
@@ -1049,17 +1070,7 @@ export async function verifyPublicEvmSettlementV02(
   if (!provenanceResult.success) {
     throw new PublicEvmEvidenceError("The verifier provenance is not well formed.");
   }
-  const parsedCase = ConformanceCaseSchema.safeParse(caseInput);
-  if (!parsedCase.success) {
-    throw new PublicEvmEvidenceError("The selected conformance case is not well formed.");
-  }
-  const conformanceCase: ConformanceCase = parsedCase.data;
-  const offlineReport = await verifyConformanceCase(conformanceCase);
-  if (!offlineReport.consistent || !conformanceCase.expected.consistent) {
-    throw new PublicEvmEvidenceError(
-      "Public settlement evidence requires an accepted offline case.",
-    );
-  }
+  const conformanceCase = await requireAcceptedPublicEvmCase(caseInput);
 
   const transactionHash = conformanceCase.x402.settlement.transaction as Hex;
   let chainId: number;
@@ -1132,39 +1143,11 @@ export async function verifyPublicEvmSettlementV02(
 
   const requirements = conformanceCase.x402.requirements;
   const authorization = conformanceCase.x402.payload.payload.authorization;
-  const assetLogs = receipt.logs.filter((log) => sameHex(log.address, requirements.asset));
-  const transferLog = assetLogs.find((log) => {
-    if (!sameHex(log.topics[0] ?? "", TRANSFER_TOPIC)) return false;
-    const from = topicAddress(log.topics[1]);
-    const to = topicAddress(log.topics[2]);
-    if (from === undefined || to === undefined || !/^0x[0-9a-fA-F]{64}$/.test(log.data)) {
-      return false;
-    }
-    return (
-      sameHex(from, authorization.from) &&
-      sameHex(to, authorization.to) &&
-      BigInt(log.data) === BigInt(authorization.value)
-    );
-  });
-  if (transferLog === undefined || transferLog.logIndex === null) {
-    throw new PublicEvmEvidenceError("No matching ERC-20 Transfer event was found.");
-  }
-
-  const authorizationUsedLog = assetLogs.find((log) => {
-    if (!sameHex(log.topics[0] ?? "", AUTHORIZATION_USED_TOPIC)) return false;
-    const authorizer = topicAddress(log.topics[1]);
-    const nonce = log.topics[2];
-    return (
-      authorizer !== undefined &&
-      nonce !== undefined &&
-      sameHex(authorizer, authorization.from) &&
-      sameHex(nonce, authorization.nonce)
-    );
-  });
-  if (authorizationUsedLog === undefined || authorizationUsedLog.logIndex === null) {
-    throw new PublicEvmEvidenceError("No matching EIP-3009 AuthorizationUsed event was found.");
-  }
-  if (transferLog.logIndex === authorizationUsedLog.logIndex) {
+  const { transferLogIndex, authorizationUsedLogIndex } = findSettlementEventIndexes(
+    conformanceCase,
+    receipt.logs,
+  );
+  if (transferLogIndex === authorizationUsedLogIndex) {
     throw new PublicEvmEvidenceError(
       "The Transfer and AuthorizationUsed events cannot share a log index.",
     );
@@ -1199,12 +1182,12 @@ export async function verifyPublicEvmSettlementV02(
         from: authorization.from as Address,
         to: authorization.to as Address,
         value: authorization.value,
-        logIndex: transferLog.logIndex,
+        logIndex: transferLogIndex,
       },
       authorizationUsed: {
         authorizer: authorization.from as Address,
         nonce: authorization.nonce as Hex,
-        logIndex: authorizationUsedLog.logIndex,
+        logIndex: authorizationUsedLogIndex,
       },
       observedAt,
     },

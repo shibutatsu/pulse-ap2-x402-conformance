@@ -12,6 +12,7 @@ import {
   type PublicEvmVerifierProvenance,
   assessPublicEvmSettlementV02,
   publicEvmSettlementEvidenceDigest,
+  verifyPublicEvmSettlement,
   verifyPublicEvmSettlementRecord,
   verifyPublicEvmSettlementV02,
 } from "../src/evidence.js";
@@ -265,6 +266,36 @@ describe("public EVM settlement evidence v0.2", () => {
       errors: [],
     });
   });
+
+  it.each([
+    [0, "No matching ERC-20 Transfer event was found."],
+    [1, "No matching EIP-3009 AuthorizationUsed event was found."],
+  ] as const)(
+    "rejects the first matching event with a null index in both versions (%i)",
+    async (eventIndex, message) => {
+      const conformanceCase = await publicEvmCase();
+      const reader = readerFor(conformanceCase);
+      const receipt = await reader.getTransactionReceipt({
+        hash: conformanceCase.x402.settlement.transaction as Hex,
+      });
+      const logs = [...receipt.logs];
+      const event = logs[eventIndex];
+      if (event === undefined) throw new Error("Expected a settlement event in the test receipt");
+      // A later valid duplicate must not hide an incomplete first match.
+      logs.splice(eventIndex, 0, { ...event, logIndex: null });
+      vi.mocked(reader.getTransactionReceipt).mockResolvedValue({ ...receipt, logs });
+
+      await expect(
+        verifyPublicEvmSettlement(conformanceCase, {
+          ...reader,
+          getBlockNumber: async () => OBSERVED_HEAD,
+        }),
+      ).rejects.toThrow(message);
+      await expect(
+        verifyPublicEvmSettlementV02(conformanceCase, reader, verificationOptions),
+      ).rejects.toThrow(message);
+    },
+  );
 
   it("creates and revalidates a provenance-, head-, and case-bound record", async () => {
     const { conformanceCase, evidence, reader } = await validEvidence();
