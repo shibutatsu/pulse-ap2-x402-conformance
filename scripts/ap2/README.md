@@ -19,17 +19,31 @@ sh scripts/ap2/run-pinned.sh
 ```
 
 The wrapper requires exactly `uv 0.10.11`, clones the official AP2 repository
-into a temporary cache when no source directory is supplied, checks out the
+into a fresh private directory when no source directory is supplied, checks out the
 exact commit, rejects a dirty source tree, and creates a CPython 3.12
 environment. It then synchronizes every dependency from the hash-locked
 `requirements.lock.txt`, builds AP2 with the pinned build backend, generates
 the signed artifacts, and independently re-verifies and extracts them.
+
+Each invocation creates a new mode-0700 directory for both the checkout and
+Python environment, then removes it on exit. Existing pipeline caches are
+never reused. `AP2_PIPELINE_CACHE_DIR`, when set, is a directory-name prefix:
+the wrapper appends a random suffix rather than using that exact path. Its
+parent must already exist and be trusted; relative prefixes are resolved from
+the caller's working directory. Trailing slashes are removed; a root path or
+a final `.` or `..` component is rejected. Without an override, the wrapper uses `TMPDIR`
+or the system `/tmp` directory. uv's own download cache can still avoid repeated
+downloads.
 
 To use an already checked-out copy of the exact AP2 commit:
 
 ```sh
 AP2_SOURCE_DIR=/absolute/path/to/AP2 sh scripts/ap2/run-pinned.sh
 ```
+
+`AP2_SOURCE_DIR` must be a checkout you trust to execute as build code. The
+commit and cleanliness checks ensure reproducibility, not trust in its local
+Git configuration or ownership.
 
 The two committed outputs are:
 
