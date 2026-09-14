@@ -63,9 +63,9 @@
     "@x402/evm": "2.23.0",
     "canonicalize": "2.1.0",
     "commander": "12.1.0",
-    "jose": "6.2.10",
-    "viem": "2.56.0",
-    "zod": "4.4.3"
+    "jose": "6.2.12",
+    "viem": "2.56.3",
+    "zod": "4.6.2"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
