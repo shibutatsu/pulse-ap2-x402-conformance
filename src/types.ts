@@ -359,10 +359,17 @@ export const SourcePinsV03Schema = z.strictObject({
   x402PackageVersion: z.literal("2.23.0"),
 });
 
+export const SourcePinsV04Schema = z.strictObject({
+  ap2Commit: Ap2SourcePinSchema,
+  x402Commit: z.literal("e4a086819f419e9395acbbdc1679fe6627029ff7"),
+  x402PackageVersion: z.literal("2.29.0"),
+});
+
 export const SourcePinsSchema = z.union([
   SourcePinsV01Schema,
   SourcePinsV02Schema,
   SourcePinsV03Schema,
+  SourcePinsV04Schema,
 ]);
 
 const ConformanceCaseFields = {
@@ -393,10 +400,17 @@ const ConformanceCaseV03Schema = z.strictObject({
   ...ConformanceCaseFields,
 });
 
+const ConformanceCaseV04Schema = z.strictObject({
+  caseVersion: z.literal("ap2-x402-conformance/0.4"),
+  sourcePins: SourcePinsV04Schema,
+  ...ConformanceCaseFields,
+});
+
 export const ConformanceCaseSchema = z.discriminatedUnion("caseVersion", [
   ConformanceCaseV01Schema,
   ConformanceCaseV02Schema,
   ConformanceCaseV03Schema,
+  ConformanceCaseV04Schema,
 ]);
 
 const ConformanceBundleFields = {
@@ -422,11 +436,18 @@ const ConformanceBundleV03Schema = z.strictObject({
   ...ConformanceBundleFields,
 });
 
+const ConformanceBundleV04Schema = z.strictObject({
+  bundleVersion: z.literal("ap2-x402-conformance-bundle/0.4"),
+  sourcePins: SourcePinsV04Schema,
+  ...ConformanceBundleFields,
+});
+
 export const ConformanceBundleSchema = z
   .discriminatedUnion("bundleVersion", [
     ConformanceBundleV01Schema,
     ConformanceBundleV02Schema,
     ConformanceBundleV03Schema,
+    ConformanceBundleV04Schema,
   ])
   .superRefine((bundle, context) => {
     const expectedCaseVersion =
@@ -434,7 +455,9 @@ export const ConformanceBundleSchema = z
         ? "ap2-x402-conformance/0.1"
         : bundle.bundleVersion === "ap2-x402-conformance-bundle/0.2"
           ? "ap2-x402-conformance/0.2"
-          : "ap2-x402-conformance/0.3";
+          : bundle.bundleVersion === "ap2-x402-conformance-bundle/0.3"
+            ? "ap2-x402-conformance/0.3"
+            : "ap2-x402-conformance/0.4";
     for (const [index, rawCase] of bundle.cases.entries()) {
       const parsedCase = ConformanceCaseSchema.safeParse(rawCase);
       if (parsedCase.success && parsedCase.data.caseVersion !== expectedCaseVersion) {

@@ -3,7 +3,8 @@
 | Source | Pinned version | Used for |
 | --- | --- | --- |
 | [AP2](https://github.com/google-agentic-commerce/AP2/tree/e1ea56db72a6385bce3e5c1112b3a56ce60acb43) | commit `e1ea56db72a6385bce3e5c1112b3a56ce60acb43`, v0.2-era schemas | Payment Mandate, Open Payment Mandate constraints, Payment Receipt |
-| [x402 Foundation, current v0.3 corpus](https://github.com/x402-foundation/x402/tree/17d319fab5c17a6b4873eb41197894db924f59ed) | commit `17d319fab5c17a6b4873eb41197894db924f59ed`, `@x402/core` and `@x402/evm` 2.23.0 | v2 `x402Client`, client extension API, `ExactEvmScheme`, resource-bearing payload schema, standard settlement fields, and EIP-3009 typed data |
+| [x402 Foundation, current v0.4 SDK corpus](https://github.com/x402-foundation/x402/tree/e4a086819f419e9395acbbdc1679fe6627029ff7) | commit `e4a086819f419e9395acbbdc1679fe6627029ff7`, `@x402/core` and `@x402/evm` 2.29.0 | v2 `x402Client`, client extension API, `ExactEvmScheme`, resource-bearing payload schema, standard settlement fields, and EIP-3009 typed data |
+| [x402 Foundation, frozen v0.3 evidence corpus](https://github.com/x402-foundation/x402/tree/17d319fab5c17a6b4873eb41197894db924f59ed) | commit `17d319fab5c17a6b4873eb41197894db924f59ed`, `@x402/core` and `@x402/evm` 2.23.0 | Read-only verification of the independent reproduction target `fixtures/v0.3/cases.json` |
 | [x402 Foundation, archived v0.2 corpus](https://github.com/x402-foundation/x402/tree/c8247c4cd15f29498474404d94636e7dbb894e86) | commit `c8247c4cd15f29498474404d94636e7dbb894e86`, `@x402/core` and `@x402/evm` 2.22.0 | Read-only verification of `fixtures/v0.2/cases.json` |
 | [x402 Foundation, archived v0.1 corpus](https://github.com/x402-foundation/x402/tree/67b1ba0a7abbd7907a28fa624670872532e0eae9) | commit `67b1ba0a7abbd7907a28fa624670872532e0eae9`, `@x402/core` and `@x402/evm` 2.19.0 | Read-only verification of `fixtures/v0.1/cases.json` |
 | [AP2 issue #299](https://github.com/google-agentic-commerce/AP2/issues/299) | open issue observed 2026-07-21 | Extension-field loss and ID-only instrument matching regression cases |
@@ -17,6 +18,9 @@ implementation code; field names and semantics are recorded for interoperability
 either pin requires a new fixture version and a compatibility record in
 [`fixture-versions.md`](fixture-versions.md). Generation also checks that the installed x402 package
 versions exactly match the current corpus source pin.
+
+The v0.4 SDK update does not change the frozen v0.3 target or validator used in issue #16.
+Both published 2.29.0 packages identify the v0.4 upstream commit in their npm provenance statements.
 
 Fixture generation calls the pinned `@x402/core` `x402Client` with the pinned `@x402/evm`
 `ExactEvmScheme`; it does not hand-assemble the successful producer output. Before generation, the

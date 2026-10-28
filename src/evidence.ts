@@ -191,6 +191,13 @@ export function verifyIndependentReproductionRecord(
   }
 
   const record = recordResult.data;
+  if (bundleResult.data.bundleVersion === "ap2-x402-conformance-bundle/0.4") {
+    return {
+      valid: false,
+      automatedChecksPassed: false,
+      errors: ["bundle.bundleVersion: v0.4 is not an approved independent reproduction target"],
+    };
+  }
   const frozenTargets = FROZEN_REPRODUCTION_TARGETS[bundleResult.data.bundleVersion];
   const expectedFixturePath = frozenTargets[0].path;
   if (record.fixture.path !== expectedFixturePath) {

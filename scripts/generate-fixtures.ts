@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { PaymentRequiredV2Schema } from "@x402/core/schemas";
 import { type Address, type Hex, keccak256, stringToHex } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { z } from "zod";
@@ -29,8 +30,8 @@ const BASE_SEPOLIA_NETWORK = "eip155:84532";
 const LOCAL_NETWORK = "eip155:31337";
 const SOURCE_PINS = {
   ap2Commit: "e1ea56db72a6385bce3e5c1112b3a56ce60acb43",
-  x402Commit: "17d319fab5c17a6b4873eb41197894db924f59ed",
-  x402PackageVersion: "2.23.0",
+  x402Commit: "e4a086819f419e9395acbbdc1679fe6627029ff7",
+  x402PackageVersion: "2.29.0",
 } as const;
 
 const PackageManifestSchema = z.object({
@@ -285,7 +286,7 @@ export async function createValidCase(
   );
   const payload = X402PaymentPayloadSchema.parse(
     await createAp2BoundX402PaymentPayload({
-      paymentRequired: {
+      paymentRequired: PaymentRequiredV2Schema.parse({
         x402Version: 2,
         resource: {
           url: options.resourceUrl ?? `https://fixtures.example/pulse-ap2-x402/${normalized.id}`,
@@ -294,7 +295,7 @@ export async function createValidCase(
           mimeType: "application/json",
         },
         accepts: [requirements],
-      },
+      }),
       fixtureSigner: fixturePayer,
       closedMandateReference,
       validAfter: options.validAfter ?? String(signed.nowEpochSeconds - 30),
@@ -303,7 +304,7 @@ export async function createValidCase(
   );
 
   const conformanceCase: ConformanceCase = {
-    caseVersion: "ap2-x402-conformance/0.3",
+    caseVersion: "ap2-x402-conformance/0.4",
     sourcePins: SOURCE_PINS,
     id: normalized.id,
     description:
@@ -868,7 +869,7 @@ async function main(): Promise<void> {
   }
 
   const bundle: ConformanceBundle = ConformanceBundleSchema.parse({
-    bundleVersion: "ap2-x402-conformance-bundle/0.3",
+    bundleVersion: "ap2-x402-conformance-bundle/0.4",
     generatedAt: GENERATED_AT,
     sourcePins: SOURCE_PINS,
     cases,
@@ -880,7 +881,7 @@ async function main(): Promise<void> {
     );
   }
 
-  const outputPath = resolve(scriptDirectory, "../fixtures/v0.3/cases.json");
+  const outputPath = resolve(scriptDirectory, "../fixtures/v0.4/cases.json");
   await mkdir(dirname(outputPath), { recursive: true });
   await writeFile(outputPath, `${JSON.stringify(bundle, null, 2)}\n`, "utf8");
   process.stdout.write(

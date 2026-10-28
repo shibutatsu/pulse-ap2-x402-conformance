@@ -6,7 +6,7 @@ import { canonicalSha256Base64Url, conformanceInputHash } from "../src/canonical
 import type { ConformanceBundle, ConformanceCase } from "../src/types.js";
 import { verifyConformanceBundle, verifyConformanceCase } from "../src/verifier.js";
 
-const fixtureUrl = new URL("../fixtures/v0.3/cases.json", import.meta.url);
+const fixtureUrl = new URL("../fixtures/v0.4/cases.json", import.meta.url);
 const archivedFixtureUrl = new URL("../fixtures/v0.1/cases.json", import.meta.url);
 const archivedV02FixtureUrl = new URL("../fixtures/v0.2/cases.json", import.meta.url);
 const fixturePayer = privateKeyToAccount(
@@ -52,6 +52,24 @@ async function resignAuthorization(conformanceCase: ConformanceCase): Promise<vo
 }
 
 describe("the committed conformance corpus", () => {
+  it("preserves all v0.3 decisions and rejects v0.3 cases inside a v0.4 bundle", async () => {
+    const archived = JSON.parse(
+      await readFile(new URL("../fixtures/v0.3/cases.json", import.meta.url), "utf8"),
+    ) as ConformanceBundle;
+    const current = await readBundle();
+    const oldReport = await verifyConformanceBundle(archived);
+    const newReport = await verifyConformanceBundle(current);
+    expect(oldReport.allExpectationsMatched).toBe(true);
+    expect(canonicalSha256Base64Url(oldReport)).toBe("4fzsljbB2dr7MzMoOohMi76QJGmgtTGPQru2c76sKyY");
+    expect(newReport.allExpectationsMatched).toBe(true);
+    const withoutProvenance = (item: unknown) => {
+      const { caseVersion, sourcePins, inputHash, ...content } = item as ConformanceCase;
+      return content;
+    };
+    expect(current.cases.map(withoutProvenance)).toEqual(archived.cases.map(withoutProvenance));
+    current.cases[0] = archived.cases[0];
+    await expect(verifyConformanceBundle(current)).rejects.toThrow();
+  });
   it("keeps the archived v0.1 corpus verifiable under its original source pins", async () => {
     const archived = JSON.parse(
       await readFile(fileURLToPath(archivedFixtureUrl), "utf8"),
@@ -92,7 +110,7 @@ describe("the committed conformance corpus", () => {
       passedExpectations: 80,
       failedExpectations: 0,
     });
-    expect(canonicalSha256Base64Url(report)).toBe("4fzsljbB2dr7MzMoOohMi76QJGmgtTGPQru2c76sKyY");
+    expect(canonicalSha256Base64Url(report)).toBe("orAtJZ30zA4Gj4-dnKvqu_Ect5RESpE18EXMlQhm4ps");
   });
 
   it("recovers the payer for every accepted ECDSA fixture", async () => {
