@@ -44,8 +44,8 @@
     "test:unit": "vitest run --config vitest.mutation.config.ts",
     "test:x402-producer": "vitest run --config vitest.mutation.config.ts test/x402-producer.test.ts",
     "fixtures:generate": "tsx scripts/generate-fixtures.ts",
-    "fixtures:verify": "tsx src/cli.ts fixtures/v0.3/cases.json",
-    "fixtures:hash": "shasum -a 256 fixtures/v0.3/cases.json",
+    "fixtures:verify": "tsx src/cli.ts fixtures/v0.4/cases.json",
+    "fixtures:hash": "shasum -a 256 fixtures/v0.4/cases.json",
     "evidence:reproduction": "tsx src/evidence-cli.ts reproduction",
     "evidence:review": "tsx src/evidence-cli.ts review",
     "evidence:evm": "tsx src/evidence-cli.ts evm",
@@ -59,13 +59,13 @@
     "ci": "npm run typecheck && npm run lint && npm run test:x402-producer && npm run test && npm run build && npm run fixtures:verify && npm run evidence:evm-record -- fixtures/public-evm/case.json evidence/public-evm-base-sepolia.json && npm run evidence:evm-record -- fixtures/public-evm/case.json evidence/public-evm-base-sepolia-v0.2.json && npm run audit:dependencies && npm run check:pack"
   },
   "dependencies": {
-    "@x402/core": "2.23.0",
-    "@x402/evm": "2.23.0",
+    "@x402/core": "2.29.0",
+    "@x402/evm": "2.29.0",
     "canonicalize": "2.1.0",
     "commander": "12.1.0",
     "jose": "6.2.10",
     "viem": "2.56.0",
-    "zod": "4.4.3"
+    "zod": "4.6.6"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -73,12 +73,12 @@
     "@stryker-mutator/typescript-checker": "9.6.1",
     "@stryker-mutator/vitest-runner": "9.6.1",
     "@types/node": "22.20.1",
-    "@vitest/coverage-v8": "3.2.7",
+    "@vitest/coverage-v8": "4.1.12",
     "tsx": "4.23.12",
     "typescript": "5.9.3",
-    "vitest": "3.2.7"
+    "vitest": "4.1.12"
   },
   "overrides": {
-    "qs": "6.16.0"
+    "qs": "6.16.1"
   }
 }

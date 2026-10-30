@@ -101,6 +101,15 @@ const validReviewRecord = {
 };
 
 describe("independent evidence records", () => {
+  it("rejects the SDK migration corpus as an unapproved reproduction target", async () => {
+    const raw = await readFile(new URL("../fixtures/v0.4/cases.json", import.meta.url), "utf8");
+    const bundle = JSON.parse(raw) as ConformanceBundle;
+    expect(verifyIndependentReproductionRecord(raw, reproductionRecord(raw, bundle))).toEqual({
+      valid: false,
+      automatedChecksPassed: false,
+      errors: ["bundle.bundleVersion: v0.4 is not an approved independent reproduction target"],
+    });
+  });
   it("matches an 80-case reproduction record to the exact fixture bytes", async () => {
     const { raw, bundle } = await fixture();
     expect(verifyIndependentReproductionRecord(raw, reproductionRecord(raw, bundle))).toEqual({

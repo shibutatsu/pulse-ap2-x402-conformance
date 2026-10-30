@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { PaymentPayloadV2Schema, type PaymentRequiredV2 } from "@x402/core/schemas";
+import { PaymentPayloadV2Schema, PaymentRequiredV2Schema } from "@x402/core/schemas";
 import {
   type Address,
   type Hex,
@@ -35,7 +35,7 @@ const TRANSFER_WITH_AUTHORIZATION_TYPES = {
   ],
 } as const;
 
-const paymentRequired: PaymentRequiredV2 = {
+const paymentRequired = PaymentRequiredV2Schema.parse({
   x402Version: 2,
   resource: {
     url: "https://example.org/pulse/conformance/resource",
@@ -67,7 +67,7 @@ const paymentRequired: PaymentRequiredV2 = {
       closedMandateReference: CLOSED_MANDATE_REFERENCE,
     },
   },
-};
+});
 
 interface ProducedAuthorization {
   authorization: {
