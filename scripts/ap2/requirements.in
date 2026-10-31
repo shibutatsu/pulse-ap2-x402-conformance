@@ -8,4 +8,4 @@ py==1.11.0
 
 # Pinned PEP 517 backend used to build the exact clean AP2 checkout without
 # downloading an unpinned build dependency into an isolated environment.
-setuptools==83.0.0
+setuptools==84.1.0
