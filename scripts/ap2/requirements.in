@@ -1,9 +1,9 @@
 # Direct runtime and test dependencies declared by the pinned AP2 Python SDK.
-cryptography==50.0.1
-jwcrypto==1.5.9
-pydantic==2.13.4
+cryptography==50.0.2
+jwcrypto==1.6.1
+pydantic==2.14.2
 sd-jwt==0.10.4
-pytest==9.1.1
+pytest==9.2.0
 py==1.11.0
 
 # Pinned PEP 517 backend used to build the exact clean AP2 checkout without
